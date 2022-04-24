@@ -18,11 +18,16 @@ INPUT_FILE = assets/test.rt
 
 LIBS := $(LIBS_DIR)/LibFT/libft.a \
 		$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
+		$(LIBS_DIR)/mlx/libmlx.a \
 
-LIBS_HEADERS := -I $(LIBS_DIR)/LibFT/include/ \
+LIBS_HEADERS := -I $(INCLUDE_DIR) \
+				-I $(LIBS_DIR)/LibFT/include/ \
 				-I $(LIBS_DIR)/Get-Next-Line/include/ \
+				-I $(LIBS_DIR)/mlx/ \
 
-INC := -I $(INCLUDE_DIR) $(LIBS_HEADERS)
+MLX := -framework OpenGL -framework AppKit
+
+INC := $(LIBS_HEADERS)
 
 SRCS := main.c \
 
@@ -48,8 +53,11 @@ objs/%.o:src/%.c
 all: $(NAME)
 
 $(NAME):$(OBJS) $(LIBS)
-	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) -o $(NAME)
+	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(MLX) -o $(NAME)
 	@echo "✅ Built $(NAME)"
+
+$(LIBS_DIR)/mlx/libmlx.a:
+	@make -C $(LIBS_DIR)/mlx
 
 $(LIBS_DIR)/LibFT/libft.a:
 	@make -C $(LIBS_DIR)/LibFT
@@ -71,6 +79,7 @@ clean:
 fclean: clean
 	@make fclean -C $(LIBS_DIR)/Get-Next-Line
 	@make fclean -C $(LIBS_DIR)/LibFT
+	@make clean -C $(LIBS_DIR)/mlx
 	@rm -f $(PROGRAM_LOCATION)
 
 re: fclean all

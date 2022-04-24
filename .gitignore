@@ -2,3 +2,5 @@
 *.o
 *.a
 *.out
+.vscode/
+/objects
