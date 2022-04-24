@@ -4,6 +4,3 @@
 [submodule "libs/Get-Next-Line"]
 	path = libs/Get-Next-Line
 	url = https://github.com/rubennijhuis/Get-Next-Line
-[submodule "libs/PrintFT"]
-	path = libs/PrintFT
-	url = https://github.com/rubennijhuis/PrintFT
