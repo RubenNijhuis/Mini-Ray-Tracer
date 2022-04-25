@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/24 19:39:32 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/25 22:24:39 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,22 @@ char	*get_file_contents(int fd)
 // 	}
 // }
 
+void	convert_strings_to_objects(t_object *objects_array, char **objects);
+
+
 t_object	*get_objects_from_file(int fd)
 {
 	t_object		*objects_array;
 	char			*file_contents;
 	char			**objects_from_file;
-	char			**object_settings;
 	int				amount_objects;
 
 	file_contents = get_file_contents(fd);
 	objects_from_file = ft_split(file_contents, '\n');
 	amount_objects = ft_2d_arrlen(objects_from_file);
 	objects_array = ft_calloc(amount_objects, sizeof(t_object));
-	object_settings = ft_split(objects_from_file[0], ' ');
-	convert_strings_to_objects(objects_array, object_settings);
+	convert_strings_to_objects(objects_array, objects_from_file);
 	free(file_contents);
 	ft_free_2d_array(&objects_from_file, ft_2d_arrlen(objects_from_file));
-	ft_free_2d_array(&object_settings, ft_2d_arrlen(object_settings));
 	return (objects_array);
 }

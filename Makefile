@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
+#                                                    +#+                       #
+#    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
+#    Updated: 2022/04/24 20:14:43 by rubennijhui   ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
 #=====================================#
 #========= General variables =========#
 #=====================================#
@@ -11,7 +23,7 @@ BIN_DIR := bin
 PROGRAM_LOCATION := $(BIN_DIR)/$(NAME)
 
 #=====================================#
-#============ Input files ============#
+#=============== Input ===============#
 #=====================================#
 
 INPUT_FILE = assets/test.rt
@@ -30,6 +42,8 @@ MLX := -framework OpenGL -framework AppKit
 INC := $(LIBS_HEADERS)
 
 SRCS := main.c \
+		\
+		file_parse/get_objs_from_file.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
@@ -39,7 +53,6 @@ OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g $(INC)
-LDFLAGS =
 
 #=====================================#
 #=============== Rules ===============#
@@ -55,15 +68,6 @@ all: $(NAME)
 $(NAME):$(OBJS) $(LIBS)
 	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(MLX) -o $(NAME)
 	@echo "✅ Built $(NAME)"
-
-$(LIBS_DIR)/mlx/libmlx.a:
-	@make -C $(LIBS_DIR)/mlx
-
-$(LIBS_DIR)/LibFT/libft.a:
-	@make -C $(LIBS_DIR)/LibFT
-
-$(LIBS_DIR)/Get-Next-Line/get-next-line.a:
-	@make -C $(LIBS_DIR)/Get-Next-Line
 
 submodules:
 	@git submodule update --init --recursive
@@ -83,5 +87,22 @@ fclean: clean
 	@rm -f $(PROGRAM_LOCATION)
 
 re: fclean all
+
+#=====================================#
+#========== Lib compilation ==========#
+#=====================================#
+
+$(LIBS_DIR)/mlx/libmlx.a:
+	@make -C $(LIBS_DIR)/mlx
+
+$(LIBS_DIR)/LibFT/libft.a:
+	@make -C $(LIBS_DIR)/LibFT
+
+$(LIBS_DIR)/Get-Next-Line/get-next-line.a:
+	@make -C $(LIBS_DIR)/Get-Next-Line
+
+#=====================================#
+#================ Misc ===============#
+#=====================================#
 
 .PHONY: all re run clean fclean
