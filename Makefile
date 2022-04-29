@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/04/29 18:04:43 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/04/29 20:59:34 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,9 +74,9 @@ $(NAME):$(OBJS) $(LIBS)
 
 submodules:
 	@git submodule update --init --recursive
-	@cd $(LIBS_DIR)/LibFt/ && git pull
-	@cd $(LIBS_DIR)/Get-Next-Line/ && git pull
-	@cd $(LIBS_DIR)/Lib-Vec/ && git pull
+	@cd $(LIBS_DIR)/LibFt/ && git pull origin main
+	@cd $(LIBS_DIR)/Get-Next-Line/ && git pull origin main
+	@cd $(LIBS_DIR)/Lib-Vec/ && git pull origin main
 
 run: $(NAME)
 	@./$(NAME) $(INPUT_FILE)
@@ -85,8 +85,11 @@ test:
 	@make run -C $(TEST_DIR)/
 
 norm:
-	norminette $(SRC_DIR)
-	norminette $(INCLUDE_DIR)
+	-norminette $(INCLUDE_DIR)
+	-norminette $(LIBS_DIR)/Get-Next-Line
+	-norminette $(LIBS_DIR)/LibFT
+	-norminette $(LIBS_DIR)/Lib-Vec
+	-norminette $(SRC_DIR)
 
 clean:
 	@rm -rf $(OBJS_DIR)
