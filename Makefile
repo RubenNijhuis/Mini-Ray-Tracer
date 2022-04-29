@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/04/24 20:14:43 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/04/29 11:42:15 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,21 +20,24 @@ SRC_DIR := src
 LIBS_DIR := libs
 OBJS_DIR := objs
 BIN_DIR := bin
-PROGRAM_LOCATION := $(BIN_DIR)/$(NAME)
+TEST_DIR := test
+ASSETS_DIR := assets
 
 #=====================================#
 #=============== Input ===============#
 #=====================================#
 
-INPUT_FILE = assets/test.rt
+INPUT_FILE = $(ASSETS_DIR)/testcopy.rt
 
 LIBS := $(LIBS_DIR)/LibFT/libft.a \
 		$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
+		$(LIBS_DIR)/Lib-Vec/libvec.a \
 		$(LIBS_DIR)/mlx/libmlx.a \
 
 LIBS_HEADERS := -I $(INCLUDE_DIR) \
 				-I $(LIBS_DIR)/LibFT/include/ \
 				-I $(LIBS_DIR)/Get-Next-Line/include/ \
+				-I $(LIBS_DIR)/Lib-Vec/include/ \
 				-I $(LIBS_DIR)/mlx/ \
 
 MLX := -framework OpenGL -framework AppKit
@@ -73,18 +76,27 @@ submodules:
 	@git submodule update --init --recursive
 	@cd $(LIBS_DIR)/LibFt/ && git pull
 	@cd $(LIBS_DIR)/Get-Next-Line/ && git pull
+	@cd $(LIBS_DIR)/Lib-Vec/ && git pull
 
 run: $(NAME)
 	@./$(NAME) $(INPUT_FILE)
+
+test:
+	@make run -C $(TEST_DIR)/
+
+norm:
+	norminette $(SRC_DIR)
+	norminette $(INCLUDE_DIR)
 
 clean:
 	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	@make fclean -C $(LIBS_DIR)/Get-Next-Line
+	@make fclean -C $(LIBS_DIR)/Lib-Vec
 	@make fclean -C $(LIBS_DIR)/LibFT
-	@make clean -C $(LIBS_DIR)/mlx
-	@rm -f $(PROGRAM_LOCATION)
+	@make  clean -C $(LIBS_DIR)/mlx
+	@rm -f $(NAME)
 
 re: fclean all
 
@@ -99,6 +111,9 @@ $(LIBS_DIR)/LibFT/libft.a:
 	@make -C $(LIBS_DIR)/LibFT
 
 $(LIBS_DIR)/Get-Next-Line/get-next-line.a:
+	@make -C $(LIBS_DIR)/Get-Next-Line
+
+$(LIBS_DIR)/Lib-Vec/lib-vec.a:
 	@make -C $(LIBS_DIR)/Get-Next-Line
 
 #=====================================#

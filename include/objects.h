@@ -6,12 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/24 19:25:25 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/29 11:34:03 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
+
+# include "lib_vec.h"
 
 // Special chars
 # define CAMERA "A"
@@ -20,6 +22,7 @@
 # define PLANE "pl"
 # define SPHERE "sp"
 # define CYLINDER "cy"
+# define CUBE "cu"
 
 // Token definitions
 typedef enum e_object_type {
@@ -31,25 +34,70 @@ typedef enum e_object_type {
 	cylinder,
 }	t_object_type;
 
-typedef struct s_vector
+// Base object
+typedef struct s_base
 {
-	long		values[3];
-}t_vector;
+	t_object_type	obj_type;
+	t_vec			position;
+	t_vec			orientation;
+	t_vec			color;
+}t_base;
 
-typedef struct s_object
-{
-	t_object_type	type;
-	t_vector		*position;
-	t_vector		*orientation;
-	t_vector		*colors;
-	t_vector		*scale;
-}t_object;
-
+// Scene elements
 typedef struct s_camera
 {
-	t_vector	*position;
-	t_vector	*orientation;
-	int			fov;
+	t_vec	position;
+	t_vec	orientation;
+	int		fov;
 }t_camera;
+
+typedef struct s_ambient_light
+{
+	t_vec	color;
+	int		range;
+}t_ambient_light;
+
+typedef struct s_light
+{
+	t_vec	position;
+	t_vec	color;
+	int		brightness;
+}t_light;
+
+// Scene objects
+typedef struct s_sphere
+{
+	t_base	base;
+	long	diameter;
+}t_sphere;
+
+typedef struct s_plane
+{
+	t_base	base;
+}t_plane;
+
+typedef struct s_cylinder
+{
+	t_base	base;
+	int		diameter;
+	int		height;
+}t_cylinder;
+
+typedef struct s_cube
+{
+	t_base	base;
+	int		diameter;
+	int		height;
+}t_cube;
+
+typedef union u_object {
+	t_base			base;
+	t_sphere		sphere;
+	t_plane			plane;
+	t_cylinder		cylinder;
+	t_cube			cube;
+}	t_object;
+
+// Create object functions
 
 #endif

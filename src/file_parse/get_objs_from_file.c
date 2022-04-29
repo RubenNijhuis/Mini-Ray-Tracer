@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/25 22:24:39 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/29 11:43:15 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,8 @@
 #include "get_next_line.h"
 #include "objects.h"
 
-t_vector	*vec3_from_array(char **values)
-{
-	t_vector	*vec;
-	int			i;
-
-	i = 0;
-	vec = ft_calloc(1, sizeof(vec));
-	while (values[i] != NULL)
-	{
-		vec->values[i] = ft_atoi(values[i]);
-		i++;
-	}
-	return (vec);
-}
+#include <fcntl.h>  // open
+#include <stdio.h> // printf
 
 char	*get_file_contents(int fd)
 {
@@ -53,56 +41,33 @@ char	*get_file_contents(int fd)
 	return (total_string);
 }
 
-// t_object	make_model_object(char **object_settings)
-// {
+// objects_array[0].type = ambient_light;
+// colors = ft_split(object_settings[2], ',');
+// objects_array[0].colors = vec3_from_array(colors);
 
-// }
-
-// t_object	make_scene_object(char **object_settings)
-// {
-// 	char	*obj_type;
-// 	char	**colors
-
-// 	obj_type = object_settings[0];
-// 	if (!ft_strncmp(obj_type, AMBIENT_LIGHT, ft_strlen(obj_type)))
-// 	{
-// 		objects_array[0].type = ambient_light;
-// 		colors = ft_split(object_settings[2], ',');
-// 		objects_array[0].colors = vec3_from_array(colors);
-// 	}
-// }
-
-// t_object	object_from_settings(char **object_settings)
-// {
-// 	/*
-// 		if (object.type != A || C || L) -> make model object
-// 		else make scene object
-// 	*/
-// 	char **colors;
-// 	if (!ft_strncmp(object_settings[0], CAMERA, ft_strlen(object_settings[0])))
-// 	{
-// 		objects_array[0].type = ambient_light;
-// 		colors = ft_split(object_settings[2], ',');
-// 		objects_array[0].colors = vec3_from_array(colors);
-// 	}
-// }
+t_object	create_object_from_type(char *settings)
+{
+	
+}
 
 void	convert_strings_to_objects(t_object *objects_array, char **objects);
 
-
-t_object	*get_objects_from_file(int fd)
+t_object	*get_objects_from_file(char *file_name)
 {
 	t_object		*objects_array;
 	char			*file_contents;
 	char			**objects_from_file;
 	int				amount_objects;
 
+	int fd = open(file_name, O_RDONLY);
+
 	file_contents = get_file_contents(fd);
 	objects_from_file = ft_split(file_contents, '\n');
 	amount_objects = ft_2d_arrlen(objects_from_file);
 	objects_array = ft_calloc(amount_objects, sizeof(t_object));
-	convert_strings_to_objects(objects_array, objects_from_file);
-	free(file_contents);
-	ft_free_2d_array(&objects_from_file, ft_2d_arrlen(objects_from_file));
+	printf("%s", objects_from_file[0]);
+	// convert_strings_to_objects(objects_array, objects_from_file);
+	// free(file_contents);
+	// ft_free_2d_array(&objects_from_file, ft_2d_arrlen(objects_from_file));
 	return (objects_array);
 }

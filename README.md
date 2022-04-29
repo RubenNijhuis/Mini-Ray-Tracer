@@ -1,17 +1,22 @@
 # Mini Ray Tracer
 🌈 A small ray tracing project for the exercise "MiniRT"
 
+[ Display nice img here]
+
 ## Quick Start 
 ```
 $ git clone --recursive git@github.com:RubenNijhuis/Mini-Ray-Tracer.git
 $ make run
 ```
 
-Some of the next steps could be changing the name of the project. Which you can do in the `General Variables` section of the Makefile.
+## Testing
+Dependent on Criterion lib, install via brew and run make with the `CODAM=1` variable.
 
-## Notes
+## Todo
+[ ] - Setup a vector math lib  
+[x] - Research unions  
+[x] - Get objs from file  
+    [x] - Setup object structs  
 
-#### Submodules:
-This project uses my personal libraries, in case you want to use your own I recommend learning some stuff about git submodules [here](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
-
-However the `Makefile` specifically supports my project/library structure. This WILL be an issue if your library structure differs. Mine works like this.
+How do I fix?
+File where order of elements is messy. It's easier to read the file if the order is "scene objects" "shapes" vs mix and match
