@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/29 11:34:03 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/29 20:33:42 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 # include "lib_vec.h"
 
 // Special chars
-# define CAMERA "A"
+# define CAMERA "C"
 # define AMBIENT_LIGHT "A"
 # define LIGHT "L"
 # define PLANE "pl"
 # define SPHERE "sp"
 # define CYLINDER "cy"
 # define CUBE "cu"
+
+# define SCENE_ELEMENTS "C A L"
+# define SCENE_SHAPES "pl sp cy cu"
 
 // Token definitions
 typedef enum e_object_type {
@@ -32,12 +35,12 @@ typedef enum e_object_type {
 	sphere,
 	plane,
 	cylinder,
-}	t_object_type;
+}	e_object_type;
 
 // Base object
 typedef struct s_base
 {
-	t_object_type	obj_type;
+	e_object_type	obj_type;
 	t_vec			position;
 	t_vec			orientation;
 	t_vec			color;
@@ -68,7 +71,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_base	base;
-	long	diameter;
+	int		diameter;
 }t_sphere;
 
 typedef struct s_plane
@@ -87,7 +90,8 @@ typedef struct s_cube
 {
 	t_base	base;
 	int		diameter;
-	int		height;
+	int		height2;
+	int		whatev;
 }t_cube;
 
 typedef union u_object {

@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/04/29 11:42:15 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/04/29 18:04:43 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ ASSETS_DIR := assets
 #=============== Input ===============#
 #=====================================#
 
-INPUT_FILE = $(ASSETS_DIR)/testcopy.rt
+INPUT_FILE = $(ASSETS_DIR)/test.rt
 
 LIBS := $(LIBS_DIR)/LibFT/libft.a \
 		$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
@@ -113,8 +113,8 @@ $(LIBS_DIR)/LibFT/libft.a:
 $(LIBS_DIR)/Get-Next-Line/get-next-line.a:
 	@make -C $(LIBS_DIR)/Get-Next-Line
 
-$(LIBS_DIR)/Lib-Vec/lib-vec.a:
-	@make -C $(LIBS_DIR)/Get-Next-Line
+$(LIBS_DIR)/Lib-Vec/libvec.a:
+	@make -C $(LIBS_DIR)/Lib-Vec
 
 #=====================================#
 #================ Misc ===============#
