@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 10:50:32 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/30 21:01:43 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 22:23:29 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ t_vec3f	get_vec3f_from_string(char *str)
 	char		**split_vec;
 
 	split_vec = ft_split(str, ',');
-	vec.x = strtof(split_vec[0], NULL);
-	vec.y = strtof(split_vec[1], NULL);
-	vec.z = strtof(split_vec[2], NULL);
+	vec.x = ft_atof(split_vec[0]);
+	vec.y = ft_atof(split_vec[1]);
+	vec.z = ft_atof(split_vec[2]);
 	ft_free_2d_array(&split_vec, 3);
 	return (vec);
 }

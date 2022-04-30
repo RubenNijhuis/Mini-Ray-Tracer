@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/04/30 20:17:30 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/04/30 23:28:44 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRCS := main.c \
 		file_parse/get_objs_from_file.c \
 		file_parse/create_obj_from_str.c \
 		\
-		utils/print_objs.c \
+		utils/ft_atof.c \
+		utils/print_scene.c \
 		utils/get_file_contents.c
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
@@ -90,9 +91,13 @@ test:
 
 norm:
 	-norminette $(INCLUDE_DIR)
+	@echo
 	-norminette $(LIBS_DIR)/Get-Next-Line
+	@echo
 	-norminette $(LIBS_DIR)/LibFT
+	@echo
 	-norminette $(LIBS_DIR)/Lib-Vec
+	@echo
 	-norminette $(SRC_DIR)
 
 clean:

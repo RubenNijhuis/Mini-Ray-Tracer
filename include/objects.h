@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/30 20:49:59 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 23:17:11 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,5 @@ typedef union u_object {
 void	make_plane(t_object *obj, char *settings);
 void	make_cylinder(t_object *obj, char *settings);
 void	make_sphere(t_object *obj, char *settings);
-
-// Utils
-void	print_shapes(t_object *shapes, uint32_t amount_shapes);
 
 #endif
