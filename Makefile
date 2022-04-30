@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/04/29 20:59:34 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/04/30 11:07:33 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ INC := $(LIBS_HEADERS)
 SRCS := main.c \
 		\
 		file_parse/get_objs_from_file.c \
+		file_parse/create_obj_from_str.c
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
@@ -123,4 +124,4 @@ $(LIBS_DIR)/Lib-Vec/libvec.a:
 #================ Misc ===============#
 #=====================================#
 
-.PHONY: all re run clean fclean
+.PHONY: all re run clean fclean test

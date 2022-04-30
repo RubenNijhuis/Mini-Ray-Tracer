@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   file_parsing.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/30 10:26:50 by rubennijhui   ########   odam.nl         */
+/*   Created: 2022/04/25 22:42:56 by rubennijhui   #+#    #+#                 */
+/*   Updated: 2022/04/30 10:49:05 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+// Lib to be tested
 #include "minirt.h"
 #include "objects.h"
 
-#include <stdio.h>	// printf
+// Testing lib
+#include <criterion/criterion.h>
 
-void	setup_scene(t_program_data *pd, char *file_name)
-{
-	get_objects_from_file(pd, file_name);
+Test(Make_obj_from_string, basic) {
+	
 }
 
-int	main(int argc, char **argv)
-{
-	t_program_data	pd;
-
-	if (argc != 2)
-		return (-1);
-	setup_scene(&pd, argv[1]);
-	printf("Value of x in xyz in first object in file is -> [%i]\n", pd.shapes[0].base.color.values[0]);
-	return (0);
+Test(ft_itoa, basic) {
+	cr_expect(strcmp(ft_itoa(100), "100") == 0, "Expected '100'");
+	cr_expect(strcmp(ft_itoa(-1231), "-1231") == 0, "Expected '-1231'");
+	cr_expect(strcmp(ft_itoa(-1), "-1") == 0, "Expected '-1'");
+	cr_expect(strcmp(ft_itoa(54857483), "54857483") == 0, "Expected '54857483'");
 }
