@@ -6,51 +6,16 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/30 11:04:08 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 20:33:55 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "get_next_line.h"
 #include "objects.h"
 #include "minirt.h"
 
 #include <stdbool.h>// true false
-#include <fcntl.h>  // open
-#include <stdio.h> 	// printf
 #include <stdlib.h> // uint32_t
-
-char	*get_file_contents(int fd)
-{
-	char	*total_string;
-	char	*new_str;
-	char	*tmp;
-
-	total_string = ft_calloc(1, sizeof(char));
-	tmp = ft_calloc(1, sizeof(char));
-	while (1)
-	{
-		new_str = get_next_line(fd);
-		if (new_str == NULL)
-			break ;
-		free(total_string);
-		total_string = ft_strjoin(tmp, new_str);
-		free(tmp);
-		free(new_str);
-		tmp = ft_strdup(total_string);
-	}
-	free(tmp);
-	free(new_str);
-	return (total_string);
-}
-
-// objects_array[0].type = ambient_light;
-// colors = ft_split(object_settings[2], ',');
-// objects_array[0].colors = vec3_from_array(colors);
-
-// t_object	create_object_from_type(char *settings)
-// {
-// }
 
 /*
 	Checks wether a char of a string is in another string
@@ -110,17 +75,9 @@ void	convert_strings_to_objects(t_object *shapes, char **objects)
 	}
 }
 
-void	get_objects_from_file(t_program_data *pd, char *file_name)
+void	set_shapes(t_program_data *pd, char **file_content)
 {
-	char	*file_contents;
-	char	**items_from_file;
-	int		fd;
-
-	fd = open(file_name, O_RDONLY);
-	file_contents = get_file_contents(fd);
-	items_from_file = ft_split(file_contents, '\n');
-	pd->amount_shapes = get_amount_objects(items_from_file, SCENE_SHAPES);
+	pd->amount_shapes = get_amount_objects(file_content, SCENE_SHAPES);
 	pd->shapes = ft_calloc(pd->amount_shapes, sizeof(t_object));
-	convert_strings_to_objects(pd->shapes, items_from_file);
-	ft_free_2d_array(&items_from_file, ft_2d_arrlen(items_from_file));
+	convert_strings_to_objects(pd->shapes, file_content);
 }

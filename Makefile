@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/04/30 11:07:33 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/04/30 20:17:30 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,10 @@ INC := $(LIBS_HEADERS)
 SRCS := main.c \
 		\
 		file_parse/get_objs_from_file.c \
-		file_parse/create_obj_from_str.c
+		file_parse/create_obj_from_str.c \
+		\
+		utils/print_objs.c \
+		utils/get_file_contents.c
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
