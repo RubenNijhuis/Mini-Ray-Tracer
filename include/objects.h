@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/30 23:17:11 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/01 11:31:48 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,27 @@ typedef union u_object {
 	t_cylinder	cylinder;
 }	t_object;
 
+typedef struct t_scene {
+	t_camera		camera;
+
+	t_ambient_light	amb_light;
+
+	t_light			*lights;
+	uint32_t		amount_lights;
+
+	t_object		*shapes;
+	uint32_t		amount_shapes;
+}t_scene;
+
 // Create objects
 void	make_plane(t_object *obj, char *settings);
 void	make_cylinder(t_object *obj, char *settings);
 void	make_sphere(t_object *obj, char *settings);
+
+// Util
+void	print_shapes(t_object *shapes, uint32_t amount_shapes);
+void	print_lights(t_light *lights, uint32_t amount_lights);
+void	print_camera(t_camera camera);
+void	print_scene_elements(t_scene *scene);
 
 #endif

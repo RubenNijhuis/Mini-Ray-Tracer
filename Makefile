@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/04/30 23:28:44 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/01 11:34:21 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,10 +48,14 @@ SRCS := main.c \
 		\
 		file_parse/get_objs_from_file.c \
 		file_parse/create_obj_from_str.c \
+		file_parse/is_correctly_formatted.c \
+		file_parse/setup_scene.c \
 		\
 		utils/ft_atof.c \
 		utils/print_scene.c \
-		utils/get_file_contents.c
+		utils/exit_error.c \
+		utils/get_file_contents.c \
+		utils/get_shape_type_string.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
@@ -61,6 +65,7 @@ OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g $(INC)
+NO_DEAD_CODE := -O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip
 
 #=====================================#
 #=============== Rules ===============#
@@ -74,7 +79,7 @@ objs/%.o:src/%.c
 all: $(NAME)
 
 $(NAME):$(OBJS) $(LIBS)
-	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(MLX) -o $(NAME)
+	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(MLX) $(NO_DEAD_CODE) -o $(NAME)
 	@echo "✅ Built $(NAME)"
 
 submodules:
@@ -91,14 +96,13 @@ test:
 
 norm:
 	-norminette $(INCLUDE_DIR)
-	@echo
-	-norminette $(LIBS_DIR)/Get-Next-Line
-	@echo
-	-norminette $(LIBS_DIR)/LibFT
-	@echo
-	-norminette $(LIBS_DIR)/Lib-Vec
-	@echo
 	-norminette $(SRC_DIR)
+	@echo
+	@make norm -C $(LIBS_DIR)/Get-Next-Line
+	@echo
+	@make norm -C $(LIBS_DIR)/Lib-Vec
+	@echo
+	@make norm -C $(LIBS_DIR)/LibFT
 
 clean:
 	@rm -rf $(OBJS_DIR)

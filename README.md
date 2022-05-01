@@ -14,9 +14,4 @@ Dependent on Criterion lib, install via brew and run make with the `CODAM=1` var
 
 ## Todo
 [ ] - Setup a vector math lib  
-[x] - Research unions  
-[x] - Get objs from file  
-    [x] - Setup object structs  
-
-How do I fix?
-File where order of elements is messy. It's easier to read the file if the order is "scene objects" "shapes" vs mix and match
+[ ] - Incorrect file formatting checker
