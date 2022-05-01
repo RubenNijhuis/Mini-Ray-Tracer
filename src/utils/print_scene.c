@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 11:48:07 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/01 22:21:07 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	print_shapes(t_object *shapes, uint32_t amount_shapes)
 			shape_base.orientation.z);
 		printf("Color       • %6.2d %6.2d %6.2d\n", shape_base.color.r, \
 			shape_base.color.g, shape_base.color.b);
-		printf("\n");
 		current_shape++;
 	}
 }

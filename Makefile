@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/01 11:46:50 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/01 23:13:30 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,8 +111,11 @@ test:
 	@make run -C $(TEST_DIR)/
 
 norm:
-	-norminette $(INCLUDE_DIR)
-	-norminette $(SRC_DIR)
+	@echo "\033[92m========= $(NAME) norm ========\033[0m"
+	@-norminette $(INCLUDE_DIR)
+	@-norminette $(SRC_DIR)
+	@echo "\033[92m========= $(NAME) norm ========\033[0m"
+	
 	@echo
 	@make norm -C $(LIBS_DIR)/Get-Next-Line
 	@echo
