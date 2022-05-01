@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/01 11:34:21 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/01 11:46:50 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,19 +15,21 @@
 #=====================================#
 
 NAME := bin/minirt
+ASSETS_DIR := assets
+BIN_DIR := bin
 INCLUDE_DIR := include
-SRC_DIR := src
 LIBS_DIR := libs
 OBJS_DIR := objs
-BIN_DIR := bin
+SRC_DIR := src
 TEST_DIR := test
-ASSETS_DIR := assets
 
 #=====================================#
 #=============== Input ===============#
 #=====================================#
 
 INPUT_FILE = $(ASSETS_DIR)/test.rt
+
+MLX := -framework OpenGL -framework AppKit
 
 LIBS := $(LIBS_DIR)/LibFT/libft.a \
 		$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
@@ -39,8 +41,6 @@ LIBS_HEADERS := -I $(INCLUDE_DIR) \
 				-I $(LIBS_DIR)/Get-Next-Line/include/ \
 				-I $(LIBS_DIR)/Lib-Vec/include/ \
 				-I $(LIBS_DIR)/mlx/ \
-
-MLX := -framework OpenGL -framework AppKit
 
 INC := $(LIBS_HEADERS)
 
@@ -82,12 +82,28 @@ $(NAME):$(OBJS) $(LIBS)
 	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(MLX) $(NO_DEAD_CODE) -o $(NAME)
 	@echo "✅ Built $(NAME)"
 
+clean:
+	@rm -rf $(OBJS_DIR)
+
+fclean: clean
+	@make fclean -C $(LIBS_DIR)/Get-Next-Line
+	@make fclean -C $(LIBS_DIR)/Lib-Vec
+	@make fclean -C $(LIBS_DIR)/LibFT
+	@make  clean -C $(LIBS_DIR)/mlx
+	@rm -f $(NAME)
+
+re: fclean all
+
+#=====================================#
+#=========== Special Rules ===========#
+#=====================================#
+
 submodules:
 	@git submodule update --init --recursive
 	@cd $(LIBS_DIR)/LibFt/ && git pull origin main
 	@cd $(LIBS_DIR)/Get-Next-Line/ && git pull origin main
 	@cd $(LIBS_DIR)/Lib-Vec/ && git pull origin main
-
+	
 run: $(NAME)
 	@./$(NAME) $(INPUT_FILE)
 
@@ -103,18 +119,6 @@ norm:
 	@make norm -C $(LIBS_DIR)/Lib-Vec
 	@echo
 	@make norm -C $(LIBS_DIR)/LibFT
-
-clean:
-	@rm -rf $(OBJS_DIR)
-
-fclean: clean
-	@make fclean -C $(LIBS_DIR)/Get-Next-Line
-	@make fclean -C $(LIBS_DIR)/Lib-Vec
-	@make fclean -C $(LIBS_DIR)/LibFT
-	@make  clean -C $(LIBS_DIR)/mlx
-	@rm -f $(NAME)
-
-re: fclean all
 
 #=====================================#
 #========== Lib compilation ==========#

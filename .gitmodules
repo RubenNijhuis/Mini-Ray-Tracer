@@ -1,9 +1,11 @@
 [submodule "libs/LibFT"]
 	path = libs/LibFT
-	url = https://github.com/rubennijhuis/LibFT
+	url = git@github.com:RubenNijhuis/LibFT
+
 [submodule "libs/Get-Next-Line"]
 	path = libs/Get-Next-Line
-	url = https://github.com/rubennijhuis/Get-Next-Line
+	url = git@github.com:RubenNijhuis/Get-Next-Line
+
 [submodule "libs/Lib-Vec"]
 	path = libs/Lib-Vec
 	url = git@github.com:RubenNijhuis/Lib-Vec.git

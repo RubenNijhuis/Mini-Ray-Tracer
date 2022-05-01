@@ -6,13 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 11:31:16 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/01 11:48:07 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "objects.h"
-#include <stdio.h>
+
+#include <stdio.h>	// printf
 
 void	print_camera(t_camera camera)
 {

@@ -6,14 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 11:16:36 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/01 11:48:21 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "objects.h"
 #include "libft.h"	// free_2d_array 2d_arr_len
-#include <stdio.h>
+#include <stdio.h>	// debug printf
 
 void	setup_scene(t_scene *scene, char *file_name)
 {
