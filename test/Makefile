@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/02 14:46:40 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/05/02 14:59:31 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,13 @@
 #========== Setup variables ==========#
 #=====================================#
 
-# ifdef CODAM
+ifdef CODAM
 	CRITERION_DIR = -L /Users/$(USER)/.brew/Cellar/criterion/2.4.0_1/lib/
 	CRITERION_INC = -I /Users/$(USER)/.brew/Cellar/criterion/2.4.0_1/include 
-# else
-# 	CRITERION_DIR = -L /usr/local/Cellar/criterion/2.4.0_1/lib/
-# 	CRITERION_INC = -I /usr/local/Cellar/criterion/2.4.0_1/include
-# endif
+else
+	CRITERION_DIR = -L /usr/local/Cellar/criterion/2.4.0_1/lib/
+	CRITERION_INC = -I /usr/local/Cellar/criterion/2.4.0_1/include
+endif
 
 #=====================================#
 #========= General variables =========#
