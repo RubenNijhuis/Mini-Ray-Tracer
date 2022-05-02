@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/01 23:13:30 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/02 14:47:42 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ LIBS_HEADERS := -I $(INCLUDE_DIR) \
 INC := $(LIBS_HEADERS)
 
 SRCS := main.c \
+		misc.c \
 		\
 		file_parse/get_objs_from_file.c \
 		file_parse/create_obj_from_str.c \
@@ -90,7 +91,9 @@ fclean: clean
 	@make fclean -C $(LIBS_DIR)/Lib-Vec
 	@make fclean -C $(LIBS_DIR)/LibFT
 	@make  clean -C $(LIBS_DIR)/mlx
+	@make fclean -C $(TEST_DIR)
 	@rm -f $(NAME)
+	@rm -f $(NAME).a
 
 re: fclean all
 
@@ -109,6 +112,10 @@ run: $(NAME)
 
 test:
 	@make run -C $(TEST_DIR)/
+
+test_binary: $(NAME)
+	@ar -cr $(NAME).a $(OBJS)
+	@echo "✅ Built test binary $(NAME) \n"
 
 norm:
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"

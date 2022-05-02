@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 11:31:48 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/02 14:43:44 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_base	base;
-	int32_t	diameter;
+	float	diameter;
 }t_sphere;
 
 typedef struct s_plane
@@ -82,8 +82,8 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
 	t_base	base;
-	int32_t	diameter;
-	int32_t	height;
+	float	diameter;
+	float	height;
 }t_cylinder;
 
 typedef union u_object {
@@ -109,6 +109,9 @@ typedef struct t_scene {
 void	make_plane(t_object *obj, char *settings);
 void	make_cylinder(t_object *obj, char *settings);
 void	make_sphere(t_object *obj, char *settings);
+
+// Create scene objects
+void	make_light(t_light *light, char *settings);
 
 // Util
 void	print_shapes(t_object *shapes, uint32_t amount_shapes);

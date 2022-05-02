@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 23:02:15 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/02 13:33:18 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void		set_camera(t_scene *scene, char **file_content);
 void		set_lights(t_scene *scene, char **file_content);
 void		set_shapes(t_scene *scene, char **file_content);
 void		set_ambient_light(t_scene *scene, char **file_content);
+void		setup_scene(t_scene *scene, char *file_name);
+
+// Setup mlx
+void		start_mlx(t_mlx *mlx);
+int			key_hook(int keycode);
 
 // Vec from string
 t_vec3i		get_vec3i_from_string(char *str);

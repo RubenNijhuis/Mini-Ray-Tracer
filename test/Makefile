@@ -6,16 +6,27 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/04/30 11:15:54 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/02 14:46:40 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
+#=====================================#
+#========== Setup variables ==========#
+#=====================================#
+
+# ifdef CODAM
+	CRITERION_DIR = -L /Users/$(USER)/.brew/Cellar/criterion/2.4.0_1/lib/
+	CRITERION_INC = -I /Users/$(USER)/.brew/Cellar/criterion/2.4.0_1/include 
+# else
+# 	CRITERION_DIR = -L /usr/local/Cellar/criterion/2.4.0_1/lib/
+# 	CRITERION_INC = -I /usr/local/Cellar/criterion/2.4.0_1/include
+# endif
 
 #=====================================#
 #========= General variables =========#
 #=====================================#
 
 NAME := bin/tester
-INCLUDE_DIR := ../include
 SRC_DIR := src
 OBJS_DIR := objs
 
@@ -23,15 +34,21 @@ OBJS_DIR := objs
 #============ Input files ============#
 #=====================================#
 
-CRITERION_DIR = -L/usr/local/Cellar/criterion/2.4.0_1/lib/
+LIBS :=	../bin/minirt.a \
+		../libs/LibFT/libft.a \
+		../libs/Get-Next-Line/get-next-line.a \
+		../libs/Lib-Vec/libvec.a \
+		../libs/mlx/libmlx.a \
 
-LIBS := ../
+LIBS_HEADERS :=	-I ../libs/LibFT/include/ \
+				-I ../libs/Get-Next-Line/include/ \
+				-I ../libs/Lib-Vec/include/ \
+				-I ../libs/mlx/ \
+				$(CRITERION_INC)
 
-LIBS_HEADERS := -I /usr/local/Cellar/criterion/2.4.0_1/include
+INC := -I ../include/ $(LIBS_HEADERS)
 
-INC := -I $(INCLUDE_DIR) $(LIBS_HEADERS)
-
-SRCS :=	file_parsing.c
+SRCS :=	make_objects.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
@@ -47,7 +64,7 @@ LDFLAGS = $(CRITERION_DIR) -lcriterion
 #=============== Rules ===============#
 #=====================================#
 
-objs/%.o:src/%.c
+objs/%.o:src/*%.c
 	@mkdir -p $(dir $@)
 	@$(CC) -c $(CFLAGS) -o $@ $^
 	@echo "🔨 Compiling: $^"
@@ -61,8 +78,8 @@ $(NAME):$(OBJS) $(LIBS)
 run: $(NAME) $(LIBS)
 	@./$(NAME)
 
-../bin/minirt:
-	@make -C ../
+../bin/minirt.a:
+	@make test_binary -C ../
 
 clean:
 	@rm -rf $(OBJS_DIR)

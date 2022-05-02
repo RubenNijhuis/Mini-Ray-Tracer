@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 11:25:19 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/02 13:34:17 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,22 @@ void	set_ambient_light(t_scene *scene, char **file_content)
 	}
 }
 
+void	make_light(t_light *light, char *settings)
+{
+	char	**split_settings;
+
+	split_settings = ft_split(settings, ' ');
+	light->position = get_vec3f_from_string(split_settings[1]);
+	light->brightness = ft_atof(split_settings[2]);
+	light->color = get_vec3i_from_string(split_settings[3]);
+	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
+}
+
 void	set_lights(t_scene *scene, char **file_content)
 {
 	uint32_t	amount_lights;
 	uint32_t	current_light;
 	uint32_t	i;
-	char		**settings;
 
 	i = 0;
 	amount_lights = get_amount_objects(file_content, "L");
@@ -72,13 +82,7 @@ void	set_lights(t_scene *scene, char **file_content)
 	{
 		if (ft_strncmp(&file_content[i][0], LIGHT, 1) == 0)
 		{
-			settings = ft_split(file_content[i], ' ');
-			scene->lights[current_light].position = \
-				get_vec3f_from_string(settings[1]);
-			scene->lights[current_light].brightness = ft_atof(settings[2]);
-			scene->lights[current_light].color = \
-				get_vec3i_from_string(settings[3]);
-			ft_free_2d_array(&settings, ft_2d_arrlen(settings));
+			make_light(&scene->lights[current_light], file_content[i]);
 			current_light++;
 		}
 		i++;
