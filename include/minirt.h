@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/02 13:33:18 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/02 15:52:19 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,6 @@ typedef struct s_program_data
 	t_scene	scene;
 	t_mlx	mlx;
 }t_program_data;
-
-// Setup components
-void		set_camera(t_scene *scene, char **file_content);
-void		set_lights(t_scene *scene, char **file_content);
-void		set_shapes(t_scene *scene, char **file_content);
-void		set_ambient_light(t_scene *scene, char **file_content);
-void		setup_scene(t_scene *scene, char *file_name);
 
 // Setup mlx
 void		start_mlx(t_mlx *mlx);

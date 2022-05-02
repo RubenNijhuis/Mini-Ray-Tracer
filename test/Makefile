@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/02 14:59:31 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/05/02 16:08:08 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ LIBS_HEADERS :=	-I ../libs/LibFT/include/ \
 INC := -I ../include/ $(LIBS_HEADERS)
 
 SRCS :=	make_objects.c \
+		vector_utils.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 

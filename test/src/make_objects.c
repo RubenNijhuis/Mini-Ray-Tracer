@@ -6,13 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/25 22:42:56 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/02 14:45:49 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/02 16:03:02 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Lib to be tested
 #include "minirt.h"
 #include "objects.h"
+#include "libft.h"
 
 // Testing lib
 #include <criterion/criterion.h>
@@ -28,6 +29,17 @@ Test(make_sphere_from_string, passing) {
 	cr_expect(sphere_obj.base.color.r == 255, "Expected sphere color r to be 255");
 }
 
+Test(make_cylinder_from_string, passing) {
+	t_object	cylinder_obj;
+	char		*cylinder_string = "cy  50.0,0.0,20.6  0,0,1.0  14.2  21.42  10,0,255";
+	make_cylinder(&cylinder_obj, cylinder_string);
+
+	cr_expect(cylinder_obj.base.obj_type == cylinder, "Expected object type to be cylinder");
+	cr_expect(cylinder_obj.cylinder.height == 21.42f, "Expected cylinder height to be 21.42");
+	cr_expect(cylinder_obj.base.position.z == 20.6f, "Expected position z to be 20");
+	cr_expect(cylinder_obj.base.color.r == 10, "Expected cylinder color r to be 255");
+}
+
 Test(make_light_from_string, passing) {
 	t_light		light;
 	char		*light_settings = "L  -40,0,30  0.7  255,255,255";
@@ -38,13 +50,13 @@ Test(make_light_from_string, passing) {
 	cr_expect(light.color.r == 255, "Expected light color r to be 255");
 }
 
-Test(make_cylinder_from_string, passing) {
-	t_object	cylinder_obj;
-	char		*cylinder_string = "cy  50.0,0.0,20.6  0,0,1.0  14.2  21.42  10,0,255";
-	make_cylinder(&cylinder_obj, cylinder_string);
-
-	cr_expect(cylinder_obj.base.obj_type == cylinder, "Expected object type to be cylinder");
-	cr_expect(cylinder_obj.cylinder.height == 21.42f, "Expected cylinder height to be 21.42");
-	cr_expect(cylinder_obj.base.position.z == 20.6f, "Expected position z to be 20");
-	cr_expect(cylinder_obj.base.color.r == 10, "Expected cylinder color r to be 255");
+Test(make_camera_from_string, passing) {
+	t_scene		scene;
+	char		*cam_settings = "C   -50,0,20         0,1,0      70";
+	char		**file_content = ft_split(cam_settings, '\n');
+	set_camera(&scene, file_content);
+	
+	cr_expect(scene.camera.position.x == -50, "Expected camera position x to be -50");
+	cr_expect(scene.camera.orientation.y == 1, "Expected camera orientation y to be 1");
+	cr_expect(scene.camera.fov == 70, "Expected camera fov tobe 70");
 }

@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/02 14:47:42 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/05/02 15:51:39 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS := main.c \
 		utils/exit_error.c \
 		utils/get_file_contents.c \
 		utils/get_shape_type_string.c \
+		utils/get_vec_from_string.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 

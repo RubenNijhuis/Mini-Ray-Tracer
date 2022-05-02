@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 10:50:32 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/02 14:44:10 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/02 15:50:22 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,6 @@
 #include "libft.h"
 #include "libvec.h"
 #include "minirt.h"
-
-t_vec3i	get_vec3i_from_string(char *str)
-{
-	t_vec3i		vec;
-	char		**split_vec;
-
-	split_vec = ft_split(str, ',');
-	vec.x = ft_atoi(split_vec[0]);
-	vec.y = ft_atoi(split_vec[1]);
-	vec.z = ft_atoi(split_vec[2]);
-	ft_free_2d_array(&split_vec, 3);
-	return (vec);
-}
-
-t_vec3f	get_vec3f_from_string(char *str)
-{
-	t_vec3f		vec;
-	char		**split_vec;
-
-	split_vec = ft_split(str, ',');
-	vec.x = ft_atof(split_vec[0]);
-	vec.y = ft_atof(split_vec[1]);
-	vec.z = ft_atof(split_vec[2]);
-	ft_free_2d_array(&split_vec, 3);
-	return (vec);
-}
 
 void	make_sphere(t_object *obj, char *settings)
 {

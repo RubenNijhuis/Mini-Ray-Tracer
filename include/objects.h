@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/02 14:43:44 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/02 15:49:08 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,14 @@ typedef struct t_scene {
 	t_object		*shapes;
 	uint32_t		amount_shapes;
 }t_scene;
+
+// Setup components
+void		set_camera(t_scene *scene, char **file_content);
+void		set_lights(t_scene *scene, char **file_content);
+void		set_shapes(t_scene *scene, char **file_content);
+void		set_ambient_light(t_scene *scene, char **file_content);
+void		setup_scene(t_scene *scene, char *file_name);
+
 
 // Create objects
 void	make_plane(t_object *obj, char *settings);
