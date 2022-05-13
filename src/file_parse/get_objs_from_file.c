@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 22:52:27 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/13 15:59:16 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 	Loops through string one and compares if a char in 
 	string two is equal to the current char in string one
  */
-bool	ft_char_of_str_n_str(char *h, char *n)
+bool	ft_anychar_n_str(char *h, char *n)
 {
 	int	i;
 
@@ -46,7 +46,7 @@ uint32_t	get_amount_objects(char **file_content, char *type)
 	amount_objects = 0;
 	while (file_content[i] != NULL)
 	{
-		if (ft_char_of_str_n_str(type, file_content[i]) == true)
+		if (ft_anychar_n_str(type, file_content[i]) == true)
 			amount_objects++;
 		i++;
 	}

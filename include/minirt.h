@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/02 15:52:19 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/13 15:59:16 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_vec3f		get_vec3f_from_string(char *str);
 void		exit_error(char *str);
 double		ft_atof(const char *str);
 char		*get_file_content(char *file_name);
-bool		ft_char_of_str_n_str(char *h, char *n);
+bool		ft_anychar_n_str(char *h, char *n);
 void		is_correctly_formatted(char **file_content);
 char		*get_shape_type_string(t_object_type obj_type);
 uint32_t	get_amount_objects(char **file_contents, char *type);

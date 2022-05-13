@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 23:03:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/13 15:59:16 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	amount_shapes(char **file_content)
 	current_line = 0;
 	while (file_content[current_line] != NULL)
 	{
-		if (ft_char_of_str_n_str(SCENE_SHAPES, \
+		if (ft_anychar_n_str(SCENE_SHAPES, \
 			file_content[current_line]) == true)
 		{
 			amount_shapes++;

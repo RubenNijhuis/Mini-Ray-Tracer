@@ -27,6 +27,10 @@ Pulls the most recent versions of the submodules !! BEWARE !! this could import 
 ## Testing
 Dependent on Criterion lib, install via brew and run make with the `CODAM=1` variable.
 
+
+## Notes
+[Scratchapixel](https://www.scratchapixel.com/)
+
 ## Todo
 [ ] - Setup a vector math lib  
 [ ] - Incorrect file formatting checker
