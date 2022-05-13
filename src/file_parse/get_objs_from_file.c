@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/13 15:59:16 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/13 17:42:54 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,25 @@
 #include <stdio.h>		// printf
 
 /*
-	Checks wether a char of a string is in another string
-	Loops through string one and compares if a char in 
-	string two is equal to the current char in string one
+	Returns true if any character in needle is present in haystack.
+	If needle "", returns false.
  */
-bool	ft_anychar_n_str(char *h, char *n)
+bool	ft_anychar_n_str(const char *haystack, const char *needle)
 {
-	int	i;
+	size_t	i;
 
-	i = 0;
-	while (h[i] != '\0')
+	while (*haystack != '\0')
 	{
-		if (ft_strncmp(&h[i], n, 1) == 0)
-			return (true);
-		i++;
+		i = 0;
+		while (needle[i] != '\0')
+		{
+			if (*haystack == needle[i])
+			{
+				return (true);
+			}
+			i++;
+		}
+		haystack++;
 	}
 	return (false);
 }
