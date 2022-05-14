@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/14 19:03:25 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/14 19:27:35 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ typedef struct s_plane
 {
 	t_base	base;
 }t_plane;
+
+
+// 19
 
 typedef struct s_cylinder
 {

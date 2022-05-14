@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/14 18:41:42 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/14 19:27:59 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,31 @@ void	print_lights(t_light *lights, uint32_t amount_lights)
 	}
 }
 
+void	print_shape_base(t_base base)
+{
+	t_vec3i	color;
+	t_vec3f	position;
+	t_vec3f	orientation;
+
+	color = base.color;
+	position = base.position;
+	orientation = base.orientation;
+	printf("Position    • %6.2f %6.2f %6.2f\n", position.x, position.y, position.z);
+	printf("Orientation • %6.2f %6.2f %6.2f\n", orientation.x, orientation.y, orientation.z);
+	printf("Color       • %6.2d %6.2d %6.2d\n", color.r, color.g, color.b);
+}
+
+void	print_shape_dimensions(t_object_type type, t_object shape)
+{
+	if (type == sphere)
+		printf("Diameter    • %6.2f\n", shape.sphere.diameter);
+	else if (type == cylinder)
+	{
+		printf("Diameter    • %6.2f\n", shape.cylinder.diameter);
+		printf("Height      • %6.2f\n", shape.cylinder.height);
+	}
+}
+
 void	print_shapes(t_object *shapes, uint32_t amount_shapes)
 {
 	uint32_t	current_shape;
@@ -73,15 +98,10 @@ void	print_shapes(t_object *shapes, uint32_t amount_shapes)
 	while (current_shape < amount_shapes)
 	{
 		shape_base = shapes[current_shape].base;
-		printf(GRN "%s\n" RESET, get_shape_type_string(shape_base.obj_type));
+		printf(BLU "%s\n" RESET, get_shape_type_string(shape_base.obj_type));
 		printf("--------\n");
-		printf("Position    • %6.2f %6.2f %6.2f\n", shape_base.position.x, \
-			shape_base.position.y, shape_base.position.z);
-		printf("Orientation • %6.2f %6.2f %6.2f\n", \
-			shape_base.orientation.x, shape_base.orientation.y, \
-			shape_base.orientation.z);
-		printf("Color       • %6.2d %6.2d %6.2d\n", shape_base.color.r, \
-			shape_base.color.g, shape_base.color.b);
+		print_shape_base(shape_base);
+		print_shape_dimensions(shape_base.obj_type, shapes[current_shape]);
 		printf("\n");
 		current_shape++;
 	}
