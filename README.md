@@ -9,6 +9,28 @@ $ git clone --recursive git@github.com:RubenNijhuis/Mini-Ray-Tracer.git
 $ make run
 ```
 
+## Project structure
+```
+Mini-Ray-Tracer -/
+	- assets -/		# All types of assets, output img
+	- bin -/		# Mini-Ray-Tracer output
+	- include -/		# The .h files of the project
+	- libs -/		# Our custom and vendor libraries
+
+	- src -/			# Source files
+		- file_parse -/		# File parsing module
+		- mlx_utils -/		# Utilities for MLX
+		- utils -/		# Regular utils
+		main.c			# Starting points
+
+	- test -/		# Testing directory
+	- .gitignore		# To ignore files
+	- .gitmodules		# Describes what submodules are installed
+	- LICENSE		# Regular MIT license
+	- Makefile		# Compiling && linking magic happens here
+	- README.md		# Our point of setup, notes and API
+```
+
 ## Command list
 ```
 $ make norm

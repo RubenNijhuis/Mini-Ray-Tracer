@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/13 15:59:16 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/14 19:00:48 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static void	convert_strings_to_shapes(t_object *shapes, char **objects)
 	amount_objects = 0;
 	while (objects[i] != NULL)
 	{
-		if (ft_anychar_n_str(SCENE_SHAPES, objects[i]))
+		if (ft_is_object(SCENE_SHAPES, objects[i]))
 		{
 			if (ft_strncmp(objects[i], SPHERE, 2) == 0)
 				make_sphere(&shapes[amount_objects], objects[i]);

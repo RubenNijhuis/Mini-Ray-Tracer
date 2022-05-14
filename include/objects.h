@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/13 17:47:36 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/14 19:03:25 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define CAMERA "C"
 # define AMBIENT_LIGHT "A"
 # define LIGHT "L"
+
 # define PLANE "pl"
 # define SPHERE "sp"
 # define CYLINDER "cy"

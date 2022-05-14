@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/13 17:42:54 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/14 19:04:24 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,22 @@
 	Returns true if any character in needle is present in haystack.
 	If needle "", returns false.
  */
-bool	ft_anychar_n_str(const char *haystack, const char *needle)
+bool	ft_is_object(const char *haystack, const char *needle)
 {
 	size_t	i;
+	size_t	j;
 
-	while (*haystack != '\0')
+	j = 0;
+	while (haystack[j] != '\0')
 	{
 		i = 0;
 		while (needle[i] != '\0')
 		{
-			if (*haystack == needle[i])
-			{
+			if (haystack[j] == needle[i] && haystack[j + 1] == needle[i + 1])
 				return (true);
-			}
 			i++;
 		}
-		haystack++;
+		j++;
 	}
 	return (false);
 }
@@ -51,7 +51,7 @@ uint32_t	get_amount_objects(char **file_content, char *type)
 	amount_objects = 0;
 	while (file_content[i] != NULL)
 	{
-		if (ft_anychar_n_str(type, file_content[i]) == true)
+		if (ft_is_object(type, file_content[i]) == true)
 			amount_objects++;
 		i++;
 	}

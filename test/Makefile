@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/13 17:38:47 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/05/14 08:16:14 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,12 +77,6 @@ $(NAME):$(OBJS) $(LIBS)
 	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) -o $(NAME)
 	@echo "✅ Built $(NAME)"
 
-run: $(NAME) $(LIBS)
-	@./$(NAME)
-
-../bin/minirt.a:
-	@make test_binary -C ../
-
 clean:
 	@rm -rf $(OBJS_DIR)
 
@@ -90,5 +84,15 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all run
+
+#=====================================#
+#=========== Special Rules ===========#
+#=====================================#
+
+../bin/minirt.a:
+	@make test_binary -C ../
+
+run: $(NAME) $(LIBS)
+	@./$(NAME)
 
 .PHONY: all re run clean fclean

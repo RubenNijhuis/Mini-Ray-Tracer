@@ -6,18 +6,19 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 22:21:07 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/14 18:41:42 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "objects.h"
+#include "colors.h"
 
 #include <stdio.h>	// printf
 
 void	print_camera(t_camera camera)
 {
-	printf("============= CAMERA =============\n\n");
+	printf(RED "============= CAMERA =============\n\n" RESET);
 	printf("Position    • %6.2f %6.2f %6.2f\n", camera.position.x, \
 		camera.position.y, camera.position.z);
 	printf("Orientation • %6.2f %6.2f %6.2f\n", camera.orientation.x, \
@@ -28,7 +29,7 @@ void	print_camera(t_camera camera)
 
 void	print_ambient_light(t_ambient_light ambient_light)
 {
-	printf("========== AMBIENT LIGHT ==========\n\n");
+	printf("========= AMBIENT LIGHT ==========\n\n");
 	printf("Color       • %6.2d %6.2d %6.2d\n", ambient_light.color.r, \
 		ambient_light.color.g, ambient_light.color.b);
 	printf("Range       • %6.2f\n", ambient_light.range);
@@ -42,9 +43,9 @@ void	print_lights(t_light *lights, uint32_t amount_lights)
 
 	current_light = 0;
 	if (amount_lights == 1)
-		printf("============= LIGHT ==============\n\n");
+		printf(YEL "============= LIGHT ==============\n\n" RESET);
 	else
-		printf("============= LIGHTS =============\n\n");
+		printf(YEL "============= LIGHTS =============\n\n" RESET);
 	while (current_light < amount_lights)
 	{
 		light = &lights[current_light];
@@ -66,13 +67,13 @@ void	print_shapes(t_object *shapes, uint32_t amount_shapes)
 
 	current_shape = 0;
 	if (amount_shapes == 1)
-		printf("============= SHAPE ==============\n\n");
+		printf(CYN "============= SHAPE ==============\n\n" RESET);
 	else
-		printf("============= SHAPES =============\n\n");
+		printf(CYN "============= SHAPES =============\n\n" RESET);
 	while (current_shape < amount_shapes)
 	{
 		shape_base = shapes[current_shape].base;
-		printf("%s\n", get_shape_type_string(shape_base.obj_type));
+		printf(GRN "%s\n" RESET, get_shape_type_string(shape_base.obj_type));
 		printf("--------\n");
 		printf("Position    • %6.2f %6.2f %6.2f\n", shape_base.position.x, \
 			shape_base.position.y, shape_base.position.z);
@@ -81,6 +82,7 @@ void	print_shapes(t_object *shapes, uint32_t amount_shapes)
 			shape_base.orientation.z);
 		printf("Color       • %6.2d %6.2d %6.2d\n", shape_base.color.r, \
 			shape_base.color.g, shape_base.color.b);
+		printf("\n");
 		current_shape++;
 	}
 }
