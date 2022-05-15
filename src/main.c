@@ -6,14 +6,12 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/02 11:26:46 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/14 19:38:49 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "objects.h"
-#include "libft.h"	// free_2d_array 2d_arr_len
-#include "mlx.h"
+#include "libft.h"
 #include <stdio.h> // debug printf
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/14 19:00:48 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/14 19:51:46 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # endif
 
 // The program can only handle so much ;)
-# define MAX_SHAPES 100
+# define MAX_SHAPES 200
 # define MAX_LIGHTS 100
 
 // MLX Stuff

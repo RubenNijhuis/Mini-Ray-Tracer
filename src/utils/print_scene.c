@@ -6,23 +6,27 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/14 19:27:59 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/15 11:07:07 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "objects.h"
-#include "colors.h"
+#include "libft.h"	// ft_strlen
 
+#include "colors.h"
 #include <stdio.h>	// printf
 
 void	print_camera(t_camera camera)
 {
+	t_vec3f	pos;
+	t_vec3f	orient;
+
+	pos = camera.position;
+	orient = camera.orientation;
 	printf(RED "============= CAMERA =============\n\n" RESET);
-	printf("Position    • %6.2f %6.2f %6.2f\n", camera.position.x, \
-		camera.position.y, camera.position.z);
-	printf("Orientation • %6.2f %6.2f %6.2f\n", camera.orientation.x, \
-		camera.orientation.y, camera.orientation.z);
+	printf("Position    • %6.2f %6.2f %6.2f\n", pos.x, pos.y, pos.z);
+	printf("Orientation • %6.2f %6.2f %6.2f\n", orient.x, orient.y, orient.z);
 	printf("Fov         • %6.2u\n", camera.fov);
 	printf("\n");
 }
@@ -63,14 +67,14 @@ void	print_lights(t_light *lights, uint32_t amount_lights)
 void	print_shape_base(t_base base)
 {
 	t_vec3i	color;
-	t_vec3f	position;
-	t_vec3f	orientation;
+	t_vec3f	pos;
+	t_vec3f	orient;
 
 	color = base.color;
-	position = base.position;
-	orientation = base.orientation;
-	printf("Position    • %6.2f %6.2f %6.2f\n", position.x, position.y, position.z);
-	printf("Orientation • %6.2f %6.2f %6.2f\n", orientation.x, orientation.y, orientation.z);
+	pos = base.position;
+	orient = base.orientation;
+	printf("Position    • %6.2f %6.2f %6.2f\n", pos.x, pos.y, pos.z);
+	printf("Orientation • %6.2f %6.2f %6.2f\n", orient.x, orient.y, orient.z);
 	printf("Color       • %6.2d %6.2d %6.2d\n", color.r, color.g, color.b);
 }
 
@@ -83,6 +87,28 @@ void	print_shape_dimensions(t_object_type type, t_object shape)
 		printf("Diameter    • %6.2f\n", shape.cylinder.diameter);
 		printf("Height      • %6.2f\n", shape.cylinder.height);
 	}
+}
+
+void	print_shape_type(t_object_type type, t_object shape)
+{
+	uint32_t	amount_underline;
+	uint32_t	current_line;
+
+	current_line = 0;
+	amount_underline = 0;
+	if (type == sphere)
+		amount_underline = ft_strlen("sphere");
+	else if (type == plane)
+		amount_underline = ft_strlen("plane");
+	else if (type == cylinder)
+		amount_underline = ft_strlen("cylinder");
+	printf(BLU "%s\n" RESET, get_shape_type_string(shape.base.obj_type));
+	while (current_line < amount_underline)
+	{
+		printf("-");
+		current_line++;
+	}
+	printf("\n");
 }
 
 void	print_shapes(t_object *shapes, uint32_t amount_shapes)
@@ -98,11 +124,11 @@ void	print_shapes(t_object *shapes, uint32_t amount_shapes)
 	while (current_shape < amount_shapes)
 	{
 		shape_base = shapes[current_shape].base;
-		printf(BLU "%s\n" RESET, get_shape_type_string(shape_base.obj_type));
-		printf("--------\n");
+		print_shape_type(shape_base.obj_type, shapes[current_shape]);
 		print_shape_base(shape_base);
 		print_shape_dimensions(shape_base.obj_type, shapes[current_shape]);
-		printf("\n");
+		if (current_shape != amount_shapes - 1)
+			printf("\n");
 		current_shape++;
 	}
 }
