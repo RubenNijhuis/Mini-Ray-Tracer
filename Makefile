@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/02 15:51:39 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/05/16 12:38:24 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,9 @@ run: $(NAME)
 
 test:
 	@make run -C $(TEST_DIR)/
+
+bonus:
+	@make -C -D BONUS=1
 
 test_binary: $(NAME)
 	@ar -cr $(NAME).a $(OBJS)
