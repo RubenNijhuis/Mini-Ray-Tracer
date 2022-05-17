@@ -58,4 +58,8 @@ Dependent on Criterion lib, install via brew and run make with the `CODAM=1` var
 [ ] - Setup a vector math lib  
 [ ] - Incorrect file formatting checker
 [ ] - Program close on [ x ] button click
-[ ] - Render image based on input file
+[ ] - Render image based on input file (linearly)
+    [ ] - Shoot rays from camera
+    [ ] - Calculate if ray intersects with any objects
+    [ ] - Calculate light/color value of ray
+    [ ] - Add to img object
