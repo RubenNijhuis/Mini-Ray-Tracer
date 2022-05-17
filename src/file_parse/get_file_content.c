@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_file_contents.c                                :+:    :+:            */
+/*   get_file_content.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/04/30 20:15:56 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 22:28:49 by rubennijhui   ########   odam.nl         */
+/*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
+/*   Updated: 2022/05/17 11:44:54 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

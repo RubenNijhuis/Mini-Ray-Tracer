@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/16 12:38:24 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/17 11:51:51 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,60 +14,62 @@
 #========= General variables =========#
 #=====================================#
 
-NAME := bin/minirt
-ASSETS_DIR := assets
-BIN_DIR := bin
-INCLUDE_DIR := include
-LIBS_DIR := libs
-OBJS_DIR := objs
-SRC_DIR := src
-TEST_DIR := test
+NAME :=			bin/minirt
+ASSETS_DIR :=	assets
+BIN_DIR :=		bin
+INCLUDE_DIR :=	include
+LIBS_DIR :=		libs
+OBJS_DIR := 	objs
+SRC_DIR :=		src
+TEST_DIR :=		test
 
 #=====================================#
 #=============== Input ===============#
 #=====================================#
 
-INPUT_FILE = $(ASSETS_DIR)/test.rt
+INPUT_FILE = 	$(ASSETS_DIR)/mandatory/test.rt
 
-MLX := -framework OpenGL -framework AppKit
+MLX := 			-framework OpenGL -framework AppKit
 
-LIBS := $(LIBS_DIR)/LibFT/libft.a \
-		$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
-		$(LIBS_DIR)/Lib-Vec/libvec.a \
-		$(LIBS_DIR)/mlx/libmlx.a \
+LIBS :=			$(LIBS_DIR)/mlx/libmlx.a \
+				$(LIBS_DIR)/LibFT/libft.a \
+				$(LIBS_DIR)/Lib-Vec/libvec.a \
+				$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
 
-LIBS_HEADERS := -I $(INCLUDE_DIR) \
-				-I $(LIBS_DIR)/LibFT/include/ \
-				-I $(LIBS_DIR)/Get-Next-Line/include/ \
-				-I $(LIBS_DIR)/Lib-Vec/include/ \
+LIBS_HEADERS :=	-I $(INCLUDE_DIR) \
 				-I $(LIBS_DIR)/mlx/ \
+				-I $(LIBS_DIR)/LibFT/include/ \
+				-I $(LIBS_DIR)/Lib-Vec/include/ \
+				-I $(LIBS_DIR)/Get-Next-Line/include/ \
 
-INC := $(LIBS_HEADERS)
+INC :=			$(LIBS_HEADERS)
 
-SRCS := main.c \
-		misc.c \
-		\
-		file_parse/get_objs_from_file.c \
-		file_parse/create_obj_from_str.c \
-		file_parse/is_correctly_formatted.c \
-		file_parse/setup_scene.c \
-		\
-		utils/ft_atof.c \
-		utils/print_scene.c \
-		utils/exit_error.c \
-		utils/get_file_contents.c \
-		utils/get_shape_type_string.c \
-		utils/get_vec_from_string.c \
+SRCS :=			main.c \
+				misc.c \
+				\
+				file_parse/setup_scene.c \
+				file_parse/get_file_content.c \
+				file_parse/create_obj_from_str.c \
+				file_parse/get_vec_from_string.c \
+				file_parse/get_objs_from_string.c \
+				file_parse/get_shape_type_string.c \
+				file_parse/is_file_correctly_formatted.c \
+				\
+				utils/ft_atof.c \
+				utils/exit_error.c \
+				\
+				utils/print_scene/print_scene.c \
+				utils/print_scene/print_shapes.c \
 
-OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+OBJS =			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 #=====================================#
 #========= Command arguments =========#
 #=====================================#
 
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g $(INC)
-NO_DEAD_CODE := -O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip
+CC = 			gcc
+CFLAGS =		-Wall -Werror -Wextra -g $(INC)
+NO_DEAD_CODE :=	-O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip
 
 #=====================================#
 #=============== Rules ===============#
@@ -86,6 +88,7 @@ $(NAME):$(OBJS) $(LIBS)
 
 clean:
 	@rm -rf $(OBJS_DIR)
+	@echo "🧹 Cleaning $(NAME) objects"
 
 fclean: clean
 	@make fclean -C $(LIBS_DIR)/Get-Next-Line
@@ -93,8 +96,10 @@ fclean: clean
 	@make fclean -C $(LIBS_DIR)/LibFT
 	@make  clean -C $(LIBS_DIR)/mlx
 	@make fclean -C $(TEST_DIR)
+	@echo "Cleaning up $(NAME)"
 	@rm -f $(NAME)
 	@rm -f $(NAME).a
+	@echo "🧹 Cleaning $(NAME) binary"
 
 re: fclean all
 

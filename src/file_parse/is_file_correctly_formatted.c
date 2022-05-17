@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   is_correctly_formatted.c                           :+:    :+:            */
+/*   is_file_correctly_formatted.c                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/14 19:00:48 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/17 11:45:50 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void	amount_shapes(char **file_content)
 }
 
 // object_have_settings(file_content);
-void	is_correctly_formatted(char **file_content)
+void	is_file_correctly_formatted(char **file_content)
 {
 	one_camera(file_content);
 	one_ambient_light(file_content);

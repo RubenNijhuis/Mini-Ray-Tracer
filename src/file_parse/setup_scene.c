@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/14 19:00:48 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/17 12:08:15 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	set_lights(t_scene *scene, char **file_content)
 	uint32_t	i;
 
 	i = 0;
-	amount_lights = get_amount_objects(file_content, "L");
+	amount_lights = get_amount_objects(file_content, "L ");
 	scene->lights = ft_calloc(amount_lights, sizeof(t_light));
 	current_light = 0;
 	while (file_content[i] != NULL)
 	{
-		if (ft_strncmp(&file_content[i][0], LIGHT, 1) == 0)
+		if (file_content[i][0] == 'L')
 		{
 			make_light(&scene->lights[current_light], file_content[i]);
 			current_light++;
@@ -90,23 +90,32 @@ void	set_lights(t_scene *scene, char **file_content)
 	scene->amount_lights = amount_lights;
 }
 
-static void	convert_strings_to_shapes(t_object *shapes, char **objects)
+/**
+ * @brief 
+ * Goes through the strings of a file and checks weather 
+ * a string is a type of shape. If so create an object 
+ * based on the object function.
+ * 
+ * @param shapes 
+ * @param objects 
+ */
+static void	convert_strings_to_shapes(t_object *shapes, char **object_strings)
 {
 	uint32_t	i;
 	uint32_t	amount_objects;
 
 	i = 0;
 	amount_objects = 0;
-	while (objects[i] != NULL)
+	while (object_strings[i] != NULL)
 	{
-		if (ft_is_object(SCENE_SHAPES, objects[i]))
+		if (ft_is_object(SCENE_SHAPES, object_strings[i]))
 		{
-			if (ft_strncmp(objects[i], SPHERE, 2) == 0)
-				make_sphere(&shapes[amount_objects], objects[i]);
-			else if (ft_strncmp(objects[i], PLANE, 2) == 0)
-				make_plane(&shapes[amount_objects], objects[i]);
-			else if (ft_strncmp(objects[i], CYLINDER, 2) == 0)
-				make_cylinder(&shapes[amount_objects], objects[i]);
+			if (ft_strncmp(object_strings[i], SPHERE, 2) == 0)
+				make_sphere(&shapes[amount_objects], object_strings[i]);
+			else if (ft_strncmp(object_strings[i], PLANE, 2) == 0)
+				make_plane(&shapes[amount_objects], object_strings[i]);
+			else if (ft_strncmp(object_strings[i], CYLINDER, 2) == 0)
+				make_cylinder(&shapes[amount_objects], object_strings[i]);
 			amount_objects++;
 		}
 		i++;
