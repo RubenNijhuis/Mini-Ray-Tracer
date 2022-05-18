@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/14 19:00:48 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/18 17:46:29 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,26 +90,47 @@ void	set_lights(t_scene *scene, char **file_content)
 	scene->amount_lights = amount_lights;
 }
 
-static void	convert_strings_to_shapes(t_object *shapes, char **objects)
+typedef struct s_make_func
 {
-	uint32_t	i;
-	uint32_t	amount_objects;
+	const char	*name;
+	void		(*obj_func)(t_object *, char *);
+}	t_make_func;
+
+static uint32_t	lookup_shape_function(t_object *shape, char *name)
+{
+	size_t				i;
+	const t_make_func	funcs[] = {
+	{SPHERE, &make_sphere},
+	{PLANE, &make_plane},
+	{CYLINDER, &make_cylinder}
+	};
 
 	i = 0;
-	amount_objects = 0;
-	while (objects[i] != NULL)
+	while (i < sizeof(funcs) / sizeof(t_make_func))
 	{
-		if (ft_is_object(SCENE_SHAPES, objects[i]))
+		if (ft_strncmp(name, funcs[i].name, 2) == 0)
 		{
-			if (ft_strncmp(objects[i], SPHERE, 2) == 0)
-				make_sphere(&shapes[amount_objects], objects[i]);
-			else if (ft_strncmp(objects[i], PLANE, 2) == 0)
-				make_plane(&shapes[amount_objects], objects[i]);
-			else if (ft_strncmp(objects[i], CYLINDER, 2) == 0)
-				make_cylinder(&shapes[amount_objects], objects[i]);
-			amount_objects++;
+			(*funcs[i].obj_func)(shape, name);
+			return (1);
 		}
 		i++;
+	}
+	return (0);
+}
+
+static void	convert_strings_to_shapes(t_object *shapes, char **objects)
+{
+	uint32_t			amount_objects;
+
+	amount_objects = 0;
+	while (*objects != NULL)
+	{
+		if (ft_is_object(SCENE_SHAPES, *objects))
+		{
+			amount_objects += lookup_shape_function(&shapes[amount_objects],
+					*objects);
+		}
+		objects++;
 	}
 }
 
