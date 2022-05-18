@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_scene.c                                      :+:    :+:            */
+/*   print_shapes.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/15 11:07:07 by rubennijhui   ########   odam.nl         */
+/*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
+/*   Updated: 2022/05/17 12:01:11 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,16 @@
 #include "colors.h"
 #include <stdio.h>	// printf
 
-void	print_camera(t_camera camera)
+void	print_object_color(t_vec3i color)
 {
-	t_vec3f	pos;
-	t_vec3f	orient;
-
-	pos = camera.position;
-	orient = camera.orientation;
-	printf(RED "============= CAMERA =============\n\n" RESET);
-	printf("Position    • %6.2f %6.2f %6.2f\n", pos.x, pos.y, pos.z);
-	printf("Orientation • %6.2f %6.2f %6.2f\n", orient.x, orient.y, orient.z);
-	printf("Fov         • %6.2u\n", camera.fov);
+	printf("Color       • ");
+	printf(RED "%6.2d " RESET, color.r);
+	printf(GRN "%6.2d " RESET, color.g);
+	printf(CYN "%6.2d " RESET, color.b);
 	printf("\n");
 }
 
-void	print_ambient_light(t_ambient_light ambient_light)
-{
-	printf("========= AMBIENT LIGHT ==========\n\n");
-	printf("Color       • %6.2d %6.2d %6.2d\n", ambient_light.color.r, \
-		ambient_light.color.g, ambient_light.color.b);
-	printf("Range       • %6.2f\n", ambient_light.range);
-	printf("\n");
-}
-
-void	print_lights(t_light *lights, uint32_t amount_lights)
-{
-	uint32_t	current_light;
-	t_light		*light;
-
-	current_light = 0;
-	if (amount_lights == 1)
-		printf(YEL "============= LIGHT ==============\n\n" RESET);
-	else
-		printf(YEL "============= LIGHTS =============\n\n" RESET);
-	while (current_light < amount_lights)
-	{
-		light = &lights[current_light];
-		printf("ID          • %2u\n", current_light);
-		printf("Position    • %6.2f %6.2f %6.2f\n", light->position.x, \
-			light->position.y, light->position.z);
-		printf("Color       • %6.2i %6.2i %6.2i\n", light->color.r, \
-			light->color.g, light->color.b);
-		printf("Brightness  • %6.2f\n", light->brightness);
-		printf("\n");
-		current_light++;
-	}
-}
-
-void	print_shape_base(t_base base)
+static void	print_shape_base(t_base base)
 {
 	t_vec3i	color;
 	t_vec3f	pos;
@@ -73,12 +35,13 @@ void	print_shape_base(t_base base)
 	color = base.color;
 	pos = base.position;
 	orient = base.orientation;
+	printf("Value type  •   X      Y      Z\n");
 	printf("Position    • %6.2f %6.2f %6.2f\n", pos.x, pos.y, pos.z);
 	printf("Orientation • %6.2f %6.2f %6.2f\n", orient.x, orient.y, orient.z);
-	printf("Color       • %6.2d %6.2d %6.2d\n", color.r, color.g, color.b);
+	print_object_color(color);
 }
 
-void	print_shape_dimensions(t_object_type type, t_object shape)
+static void	print_shape_dimensions(t_object_type type, t_object shape)
 {
 	if (type == sphere)
 		printf("Diameter    • %6.2f\n", shape.sphere.diameter);
@@ -89,7 +52,7 @@ void	print_shape_dimensions(t_object_type type, t_object shape)
 	}
 }
 
-void	print_shape_type(t_object_type type, t_object shape)
+static void	print_shape_type(t_object_type type, t_object shape)
 {
 	uint32_t	amount_underline;
 	uint32_t	current_line;
@@ -131,14 +94,4 @@ void	print_shapes(t_object *shapes, uint32_t amount_shapes)
 			printf("\n");
 		current_shape++;
 	}
-}
-
-void	print_scene_elements(t_scene *scene)
-{
-	print_camera(scene->camera);
-	print_ambient_light(scene->amb_light);
-	if (scene->amount_lights > 0)
-		print_lights(scene->lights, scene->amount_lights);
-	if (scene->amount_shapes > 0)
-		print_shapes(scene->shapes, scene->amount_shapes);
 }

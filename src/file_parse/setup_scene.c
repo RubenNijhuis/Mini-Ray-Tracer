@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/18 17:46:29 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/18 17:49:33 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	set_lights(t_scene *scene, char **file_content)
 	uint32_t	i;
 
 	i = 0;
-	amount_lights = get_amount_objects(file_content, "L");
+	amount_lights = get_amount_objects(file_content, "L ");
 	scene->lights = ft_calloc(amount_lights, sizeof(t_light));
 	current_light = 0;
 	while (file_content[i] != NULL)
 	{
-		if (ft_strncmp(&file_content[i][0], LIGHT, 1) == 0)
+		if (file_content[i][0] == 'L')
 		{
 			make_light(&scene->lights[current_light], file_content[i]);
 			current_light++;
@@ -118,19 +118,28 @@ static uint32_t	lookup_shape_function(t_object *shape, char *name)
 	return (0);
 }
 
-static void	convert_strings_to_shapes(t_object *shapes, char **objects)
+/**
+ * @brief 
+ * Goes through the strings of a file and checks weather 
+ * a string is a type of shape. If so create an object 
+ * based on the object function.
+ * 
+ * @param shapes 
+ * @param objects 
+ */
+static void	convert_strings_to_shapes(t_object *shapes, char **object_strings)
 {
 	uint32_t			amount_objects;
 
 	amount_objects = 0;
-	while (*objects != NULL)
+	while (*object_strings != NULL)
 	{
-		if (ft_is_object(SCENE_SHAPES, *objects))
+		if (ft_is_object(SCENE_SHAPES, *object_strings))
 		{
 			amount_objects += lookup_shape_function(&shapes[amount_objects],
-					*objects);
+					*object_strings);
 		}
-		objects++;
+		object_strings++;
 	}
 }
 

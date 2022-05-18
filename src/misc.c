@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/13 17:45:04 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/17 11:48:42 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	setup_scene(t_scene *scene, char *file_name)
 	file_content = ft_split(file_content_string, '\n');
 	if (!file_content)
 		exit_error("couldn't allocate split file content");
-	is_correctly_formatted(file_content);
+	is_file_correctly_formatted(file_content);
 	set_camera(scene, file_content);
 	set_lights(scene, file_content);
 	set_ambient_light(scene, file_content);

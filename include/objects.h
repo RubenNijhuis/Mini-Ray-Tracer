@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/15 11:06:06 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/17 11:57:27 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ void	make_light(t_light *light, char *settings);
 // Util
 void	print_shapes(t_object *shapes, uint32_t amount_shapes);
 void	print_lights(t_light *lights, uint32_t amount_lights);
-void	print_camera(t_camera camera);
+void	print_camera(t_camera camvec3iera);
 void	print_scene_elements(t_scene *scene);
+void	print_object_color(t_vec3i color);
 
 #endif

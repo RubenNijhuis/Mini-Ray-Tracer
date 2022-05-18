@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/14 19:51:46 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/17 11:48:37 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void		exit_error(char *str);
 double		ft_atof(const char *str);
 char		*get_file_content(char *file_name);
 bool		ft_is_object(const char *haystack, const char *needle);
-void		is_correctly_formatted(char **file_content);
+void		is_file_correctly_formatted(char **file_content);
 char		*get_shape_type_string(t_object_type obj_type);
-uint32_t	get_amount_objects(char **file_contents, char *type);
+uint32_t	get_amount_objects(char **file_content, char *type);
 
 #endif

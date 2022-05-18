@@ -12,23 +12,25 @@ $ make run
 ## Project structure
 ```
 Mini-Ray-Tracer -/
-	- assets -/		# All types of assets, output img
-	- bin -/		# Mini-Ray-Tracer output
-	- include -/		# The .h files of the project
-	- libs -/		# Our custom and vendor libraries
+	- 🖼 assets -/	# All types of assets, output img
+	- 📦 bin -/	# Mini-Ray-Tracer output
+	- 👀 include -/	# The .h files of the project
+	- 📚 libs -/	# Our custom and vendor libraries
+	- ⛲️ src -/	# Source files
+	- 🧪 test -/	# Testing directory
+	- .gitignore	# To ignore files
+	- .gitmodules	# Describes what submodules are installed
+	- LICENSE	# Regular MIT license
+	- Makefile	# Compiling && linking magic happens here
+	- README.md	# Our point of setup, notes and API
+```
 
-	- src -/			# Source files
-		- file_parse -/		# File parsing module
-		- mlx_utils -/		# Utilities for MLX
-		- utils -/		# Regular utils
-		main.c			# Starting points
-
-	- test -/		# Testing directory
-	- .gitignore		# To ignore files
-	- .gitmodules		# Describes what submodules are installed
-	- LICENSE		# Regular MIT license
-	- Makefile		# Compiling && linking magic happens here
-	- README.md		# Our point of setup, notes and API
+## Module folder structure
+```
+📁 Folder name
+    - File with that same folder name (this is the module entry point)
+    - ...supporting files
+    - Potential README explaining the setup
 ```
 
 ## Command list
@@ -49,7 +51,6 @@ Pulls the most recent versions of the submodules !! BEWARE !! this could import 
 ## Testing
 Dependent on Criterion lib, install via brew and run make with the `CODAM=1` variable.
 
-
 ## Notes
 [Scratchapixel](https://www.scratchapixel.com/)
 
@@ -57,4 +58,8 @@ Dependent on Criterion lib, install via brew and run make with the `CODAM=1` var
 [ ] - Setup a vector math lib  
 [ ] - Incorrect file formatting checker
 [ ] - Program close on [ x ] button click
-[ ] - Render image based on input file
+[ ] - Render image based on input file (linearly)
+    [ ] - Shoot rays from camera
+    [ ] - Calculate if ray intersects with any objects
+    [ ] - Calculate light/color value of ray
+    [ ] - Add to img object
