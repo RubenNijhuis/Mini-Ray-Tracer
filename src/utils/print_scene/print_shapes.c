@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/17 12:01:11 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/18 13:29:09 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 void	print_object_color(t_vec3i color)
 {
-	printf("Color       • ");
-	printf(RED "%6.2d " RESET, color.r);
-	printf(GRN "%6.2d " RESET, color.g);
-	printf(CYN "%6.2d " RESET, color.b);
+	printf("Color       •");
+	printf(RED "%4d " RESET, color.r);
+	printf(GRN "%6d " RESET, color.g);
+	printf(CYN "%6d " RESET, color.b);
 	printf("\n");
 }
 

@@ -12,25 +12,29 @@ $ make run
 ## Project structure
 ```
 Mini-Ray-Tracer -/
-	- 🖼 assets -/	# All types of assets, output img
-	- 📦 bin -/	# Mini-Ray-Tracer output
-	- 👀 include -/	# The .h files of the project
-	- 📚 libs -/	# Our custom and vendor libraries
-	- ⛲️ src -/	# Source files
-	- 🧪 test -/	# Testing directory
-	- .gitignore	# To ignore files
-	- .gitmodules	# Describes what submodules are installed
-	- LICENSE	# Regular MIT license
-	- Makefile	# Compiling && linking magic happens here
-	- README.md	# Our point of setup, notes and API
+  - 🖼 assets -/	# All types of assets, output img
+  - 📦 bin -/		# Mini-Ray-Tracer output
+  - 👀 include -/	# The .h files of the project
+  - 📚 libs -/		# Our custom and vendor libraries
+  - ⛲️ src -/		# Source files
+  - 🧪 test -/		# Testing directory
+
+  - .gitmodules		# Describes what submodules are installed
+  - Makefile		# Compiling && linking magic happens here
+  ...
 ```
 
 ## Module folder structure
+
+In this project we tried to adhere to a more modular structure of our project. Creating components that have one entry point and abstract the inner-workings.
+
+Each module has a folder and file that match name-wise. Every other file can be seen as a part of that bigger module. In some cases some functions might be exposed to the larger project as it follows the DRY principle more.
+
 ```
 📁 Folder name
-    - File with that same folder name (this is the module entry point)
-    - ...supporting files
-    - Potential README explaining the setup
+	- File with that same folder name (this is the module entry point)
+	- ...supporting files
+	- Potential README explaining the setup
 ```
 
 ## Command list
@@ -59,7 +63,7 @@ Dependent on Criterion lib, install via brew and run make with the `CODAM=1` var
 [ ] - Incorrect file formatting checker
 [ ] - Program close on [ x ] button click
 [ ] - Render image based on input file (linearly)
-    [ ] - Shoot rays from camera
-    [ ] - Calculate if ray intersects with any objects
-    [ ] - Calculate light/color value of ray
-    [ ] - Add to img object
+	[ ] - Shoot rays from camera
+	[ ] - Calculate if ray intersects with any objects
+	[ ] - Calculate light/color value of ray
+	[ ] - Add to img object

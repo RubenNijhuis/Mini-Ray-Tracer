@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/17 12:09:46 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/18 12:47:46 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_lights(t_light *lights, uint32_t amount_lights)
 	while (current_light < amount_lights)
 	{
 		light = &lights[current_light];
-		printf("ID          • %2u\n", current_light);
+		printf("ID          •  %2u\n", current_light);
 		printf("Value type  •   X      Y      Z\n");
 		printf("Position    • %6.2f %6.2f %6.2f\n", light->position.x, \
 			light->position.y, light->position.z);
