@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/17 11:48:37 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/22 10:57:14 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "objects.h"
 
-# include <stdlib.h>	// uint32_t
+# include <stdint.h>	// uint32_t
 # include <stdbool.h>	// bool
 
 // If rendering in bonus mode
@@ -66,7 +66,7 @@ t_vec3f		get_vec3f_from_string(char *str);
 // Utils
 void		exit_error(char *str);
 double		ft_atof(const char *str);
-char		*get_file_content(char *file_name);
+char		**get_file_content(char *file_name);
 bool		ft_is_object(const char *haystack, const char *needle);
 void		is_file_correctly_formatted(char **file_content);
 char		*get_shape_type_string(t_object_type obj_type);

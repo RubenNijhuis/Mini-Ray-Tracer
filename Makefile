@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/17 11:51:51 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/22 10:34:24 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,18 +42,25 @@ LIBS_HEADERS :=	-I $(INCLUDE_DIR) \
 				-I $(LIBS_DIR)/Lib-Vec/include/ \
 				-I $(LIBS_DIR)/Get-Next-Line/include/ \
 
+PROJECT_HEADERS :=	$(LIBS_DIR)/colors.h \
+					$(LIBS_DIR)/minirt.h \
+					$(LIBS_DIR)/objects.h \
+
+OBJS =			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+
 INC :=			$(LIBS_HEADERS)
 
 SRCS :=			main.c \
 				misc.c \
 				\
-				file_parse/setup_scene.c \
 				file_parse/get_file_content.c \
-				file_parse/create_obj_from_str.c \
-				file_parse/get_vec_from_string.c \
-				file_parse/get_objs_from_string.c \
-				file_parse/get_shape_type_string.c \
 				file_parse/is_file_correctly_formatted.c \
+				\
+				create_objects/setup_scene.c \
+				create_objects/create_obj_from_str.c \
+				create_objects/get_vec_from_string.c \
+				create_objects/get_objs_from_string.c \
+				create_objects/get_shape_type_string.c \
 				\
 				utils/ft_atof.c \
 				utils/exit_error.c \

@@ -6,37 +6,70 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/17 11:44:54 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/22 10:57:33 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft.h"
+#include "minirt.h"
 
-#include <fcntl.h> // Open
+#include <stdlib.h>	// free
+#include <fcntl.h>	// Open
 
-char	*get_file_content(char *file_name)
+static uint32_t	get_amount_lines(int32_t fd)
 {
-	char	*total_string;
-	char	*new_str;
-	char	*tmp;
-	int		fd;
+	uint32_t	amount_lines;
+	char		*new_line;
 
-	fd = open(file_name, O_RDONLY);
-	total_string = ft_calloc(1, sizeof(char));
-	tmp = ft_calloc(1, sizeof(char));
+	amount_lines = 0;
 	while (1)
 	{
-		new_str = get_next_line(fd);
-		if (new_str == NULL)
+		new_line = get_next_line(fd);
+		if (new_line == NULL)
 			break ;
-		free(total_string);
-		total_string = ft_strjoin(tmp, new_str);
-		free(tmp);
-		free(new_str);
-		tmp = ft_strdup(total_string);
+		amount_lines++;
 	}
-	free(tmp);
-	free(new_str);
-	return (total_string);
+	return (amount_lines);
+}
+
+static char	**fill_string_array(uint32_t fd, uint32_t amount_lines_in_file)
+{
+	char		**total_file;
+	uint32_t	current_line;
+
+	current_line = 0;
+	total_file = ft_calloc(amount_lines_in_file, sizeof(char *));
+	if (total_file == NULL)
+		exit(1);
+	total_file[amount_lines_in_file] = NULL;
+	while (current_line < amount_lines_in_file)
+	{
+		total_file[current_line] = get_next_line(fd);
+		if (total_file[current_line] == NULL)
+			exit(1);
+		current_line++;
+	}
+	return (total_file);
+}
+
+char	**get_file_content(char *file_name)
+{
+	int32_t		fd;
+	uint32_t	amount_lines_in_file;
+	char		**full_file_string;
+
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+		exit_error("Error: Couldn't find or open file\n");
+	amount_lines_in_file = get_amount_lines(fd);
+	if (close(fd) == -1)
+		exit_error("Error: Couldn't close file\n");
+	fd = open(file_name, O_RDONLY);
+	full_file_string = fill_string_array(fd, amount_lines_in_file);
+	if (full_file_string == NULL)
+		exit_error("Error: Malloc of file went wrong\n");
+	if (close(fd) == -1)
+		exit_error("Error: Couldn't close file\n");
+	return (full_file_string);
 }

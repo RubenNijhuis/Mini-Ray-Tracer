@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/18 13:29:09 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/22 10:19:29 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 void	print_object_color(t_vec3i color)
 {
-	printf("Color       •");
-	printf(RED "%4d " RESET, color.r);
-	printf(GRN "%6d " RESET, color.g);
-	printf(CYN "%6d " RESET, color.b);
+	printf("Color       • ");
+	printf(RED "%3d" RESET, color.r);
+	printf(GRN "%7d" RESET, color.g);
+	printf(CYN "%7d" RESET, color.b);
 	printf("\n");
 }
 
@@ -36,19 +36,19 @@ static void	print_shape_base(t_base base)
 	pos = base.position;
 	orient = base.orientation;
 	printf("Value type  •   X      Y      Z\n");
-	printf("Position    • %6.2f %6.2f %6.2f\n", pos.x, pos.y, pos.z);
-	printf("Orientation • %6.2f %6.2f %6.2f\n", orient.x, orient.y, orient.z);
+	printf("Position    • %05.2f  %05.2f  %05.2f\n", pos.x, pos.y, pos.z);
+	printf("Orientation • %05.2f  %05.2f  %05.2f\n", orient.x, orient.y, orient.z);
 	print_object_color(color);
 }
 
 static void	print_shape_dimensions(t_object_type type, t_object shape)
 {
 	if (type == sphere)
-		printf("Diameter    • %6.2f\n", shape.sphere.diameter);
+		printf("Diameter    • %5.2f\n", shape.sphere.diameter);
 	else if (type == cylinder)
 	{
-		printf("Diameter    • %6.2f\n", shape.cylinder.diameter);
-		printf("Height      • %6.2f\n", shape.cylinder.height);
+		printf("Diameter    • %5.2f\n", shape.cylinder.diameter);
+		printf("Height      • %5.2f\n", shape.cylinder.height);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/17 11:48:42 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/22 10:58:44 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,13 @@ void	start_mlx(t_mlx *mlx)
 
 void	setup_scene(t_scene *scene, char *file_name)
 {
-	char	*file_content_string;
 	char	**file_content;
 
-	file_content_string = get_file_content(file_name);
-	file_content = ft_split(file_content_string, '\n');
-	if (!file_content)
-		exit_error("couldn't allocate split file content");
+	file_content = get_file_content(file_name);
 	is_file_correctly_formatted(file_content);
 	set_camera(scene, file_content);
 	set_lights(scene, file_content);
 	set_ambient_light(scene, file_content);
 	set_shapes(scene, file_content);
 	ft_free_2d_array(&file_content, ft_2d_arrlen(file_content));
-	free(file_content_string);
 }
