@@ -11,4 +11,4 @@
 	url = git@github.com:RubenNijhuis/Lib-Vec.git
 [submodule "libs/MLX42"]
 	path = libs/MLX42
-	url = https://github.com/codam-coding-college/MLX42
+	url = git@github.com:codam-coding-college/MLX42.git
