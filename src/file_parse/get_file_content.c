@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/22 10:57:33 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/24 15:01:57 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static uint32_t	get_amount_lines(int32_t fd)
 	while (1)
 	{
 		new_line = get_next_line(fd);
+		free(new_line);
 		if (new_line == NULL)
 			break ;
 		amount_lines++;
