@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/24 14:16:34 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/24 18:03:38 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@
 # if HEADLESS
 #  define WIN_WIDTH 10
 # else
-#  define WIN_WIDTH 800
+#  define WIN_WIDTH 1080
 # endif
 
-# define WIN_HEIGHT (400)
+# define WIN_HEIGHT (1080)
 
 typedef struct s_program_data
 {

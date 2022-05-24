@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/24 16:14:35 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/24 18:01:38 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,33 @@ bool	intersects_sphere(t_ray *ray, t_sphere *sphere)
 	return (isinsphere);
 }
 
+float mapx(int input)
+{
+	return ((input - 0) * (0.1 - -0.1) / (WIN_WIDTH - 1 -  0) + -0.1);
+}
+
+float mapy(int input)
+{
+	return ((input - 0) * (0.1 - -0.1) / (WIN_HEIGHT - 1 - 0) + -0.1);
+}
+
 void	render(t_program_data *pd)
 {
 	int			xpixel;
 	int			ypixel;
 	t_ray		ray;
-	t_sphere	sphere;
 
+	t_sphere	sphere1;
+	t_sphere	sphere2;
+ 
 	ray.direction = vec3f(0, 0, 1);
-	vec3f_normalize(&ray.direction);
 
-	ft_memset(&sphere, 0, sizeof(sphere));
-	sphere.base.position = vec3f(200, -6, 100);
-	sphere.diameter = WIN_HEIGHT / 3 * 2;
+	ft_memset(&sphere1, 0, sizeof(sphere));
+	ft_memset(&sphere2, 0, sizeof(sphere));
+	sphere1.base.position = vec3f(5, 0, 100);
+	sphere2.base.position = vec3f(0, 0, 300);
+	sphere1.diameter = 10;
+	sphere2.diameter = 10;
 
 	ypixel = 0;
 	while (ypixel < WIN_HEIGHT)
@@ -93,8 +107,16 @@ void	render(t_program_data *pd)
 		xpixel = 0;
 		while (xpixel < WIN_WIDTH)
 		{
-			ray.origin = vec3f(xpixel - WIN_WIDTH / 2, ypixel - WIN_HEIGHT / 2, 0);
-			if (intersects_sphere(&ray, &sphere))
+			// ray.origin = vec3f(xpixel - WIN_WIDTH / 2, ypixel - WIN_HEIGHT / 2, 0);
+			ray.origin = vec3f(0, 0, 0);
+
+			ray.direction = vec3f(mapx(xpixel), mapy(ypixel), 1);
+			vec3f_normalize(&ray.direction);
+			if (intersects_sphere(&ray, &sphere2))
+			{
+				mlx_put_pixel(pd->img, xpixel, ypixel, 0xffffffff);
+			}
+			if (intersects_sphere(&ray, &sphere1))
 			{
 				mlx_put_pixel(pd->img, xpixel, ypixel, 0xff00ffff);
 			}
