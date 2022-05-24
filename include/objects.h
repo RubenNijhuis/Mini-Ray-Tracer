@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/17 11:57:27 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/24 20:52:08 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libvec.h"
 # include <stdlib.h>
+# include <stdint.h>	// uint32_t
 
 // Special chars
 # define CAMERA "C"

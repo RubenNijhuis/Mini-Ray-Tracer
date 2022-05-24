@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/24 18:01:38 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/24 21:40:26 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,12 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_memset(&pd, 0, sizeof(t_program_data));
-	setup_scene(&pd.scene, argv[1]);
+
+	// setup scene contains a bug. (free: not a pointer).
+	// TODO: compile with -fsanitize=address and fix.
+	//setup_scene(&pd.scene, argv[1]);
+	(void)argv;
+
 	init_mlx(&pd);
 
 	render(&pd);

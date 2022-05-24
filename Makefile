@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/24 15:36:18 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/05/24 21:38:55 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #========= General variables =========#
 #=====================================#
 
-NAME :=			bin/minirt
+EXEC_NAME :=	minirt
 ASSETS_DIR :=	assets
 BIN_DIR :=		bin
 INCLUDE_DIR :=	include
@@ -22,6 +22,7 @@ LIBS_DIR :=		libs
 OBJS_DIR := 	objs
 SRC_DIR :=		src
 TEST_DIR :=		test
+NAME := $(BIN_DIR)/$(EXEC_NAME)
 
 # TODO: HEADER watching
 
@@ -34,7 +35,6 @@ MLX_A =			$(LIBS_DIR)/MLX42/libmlx42.a
 
 INPUT_FILE = 	$(ASSETS_DIR)/mandatory/test.rt
 
-MLX := 			-lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 
 LIBS :=			$(MLX_A) \
 				$(LIBS_DIR)/LibFT/libft.a \
@@ -80,22 +80,35 @@ OBJS =			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 #=====================================#
 
 CC = 			gcc
-CFLAGS =		-Wall -Werror -Wextra -g $(INC)
-NO_DEAD_CODE :=	-O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip
+CFLAGS =		-Wall -Werror -Wextra -g # -fsanitize=address
+
+# TODO: CLEAN UP THIS MAKEFILE
+
+# stolen from MLX42
+# TODO: Add NO_DEAD_CODE for linux
+UNAME_S = $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+	MLX = -ldl -lglfw -lm
+else ifeq ($(UNAME_S), Darwin)
+	NO_DEAD_CODE :=	-O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip
+	MLX = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+else
+	$(error OS is not supported(uname -s: $(UNAME_S))!)
+endif
 
 #=====================================#
 #=============== Rules ===============#
 #=====================================#
 
-objs/%.o:src/%.c
+$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) -c $(CFLAGS) -o $@ $^
+	@$(CC) -c $(CFLAGS) $(INC) -o $@ $^
 	@echo "🔨 Compiling: $^"
 	
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBS)
-	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(MLX) $(NO_DEAD_CODE) -o $@
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(NO_DEAD_CODE) $^ -o $@ $(MLX)
 	@echo "✅ Built $(NAME)"
 
 clean:
@@ -103,11 +116,11 @@ clean:
 	@echo "🧹 Cleaning $(NAME) objects"
 
 fclean: clean
-	@make fclean -C $(LIBS_DIR)/Get-Next-Line
-	@make fclean -C $(LIBS_DIR)/Lib-Vec
-	@make fclean -C $(LIBS_DIR)/LibFT
-	@make  clean -C $(LIBS_DIR)/MLX42
-	@make fclean -C $(TEST_DIR)
+	@$(MAKE) fclean -C $(LIBS_DIR)/Get-Next-Line
+	@$(MAKE) fclean -C $(LIBS_DIR)/Lib-Vec
+	@$(MAKE) fclean -C $(LIBS_DIR)/LibFT
+	@$(MAKE)  clean -C $(LIBS_DIR)/MLX42
+	@$(MAKE) fclean -C $(TEST_DIR)
 	@echo "Cleaning up $(NAME)"
 	@rm -f $(NAME)
 	@rm -f $(NAME).a
@@ -127,17 +140,19 @@ submodules:
 	@cd $(LIBS_DIR)/MLX42/ && git pull origin master
 	
 run: $(NAME)
-	@./$(NAME) $(INPUT_FILE)
+	@./$< $(INPUT_FILE)
 
 test:
-	@make run -C $(TEST_DIR)/
+	@$(MAKE) run -C $(TEST_DIR)/
 
 bonus:
-	@make -C -D BONUS=1
+	@$(MAKE) -C -D BONUS=1
 
-test_binary: $(NAME)
-	@ar -cr $(NAME).a $(OBJS)
-	@echo "✅ Built test binary $(NAME) \n"
+$(NAME).a: $(NAME)
+	@ar -cr $@ $(OBJS)
+	@echo "✅ Built test binary $@ \n"
+
+test_binary: $(NAME).a
 
 norm:
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"
@@ -146,30 +161,30 @@ norm:
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"
 	
 	@echo
-	@make norm -C $(LIBS_DIR)/Get-Next-Line
+	@$(MAKE) norm -C $(LIBS_DIR)/Get-Next-Line
 	@echo
-	@make norm -C $(LIBS_DIR)/Lib-Vec
+	@$(MAKE) norm -C $(LIBS_DIR)/Lib-Vec
 	@echo
-	@make norm -C $(LIBS_DIR)/LibFT
+	@$(MAKE) norm -C $(LIBS_DIR)/LibFT
 
 #=====================================#
 #========== Lib compilation ==========#
 #=====================================#
 
 $(MLX_A):
-	@make -C $(LIBS_DIR)/MLX42
+	@$(MAKE) -C $(LIBS_DIR)/MLX42
 
 $(LIBS_DIR)/LibFT/libft.a:
-	@make -C $(LIBS_DIR)/LibFT
+	@$(MAKE) -C $(LIBS_DIR)/LibFT
 
 $(LIBS_DIR)/Get-Next-Line/get-next-line.a:
-	@make -C $(LIBS_DIR)/Get-Next-Line
+	@$(MAKE) -C $(LIBS_DIR)/Get-Next-Line
 
 $(LIBS_DIR)/Lib-Vec/libvec.a: $(LIBS_DIR)/Lib-Vec/include/libvec.h
-	@make -C $(LIBS_DIR)/Lib-Vec
+	@$(MAKE) -C $(LIBS_DIR)/Lib-Vec
 
 #=====================================#
 #================ Misc ===============#
 #=====================================#
 
-.PHONY: all re run clean fclean test
+.PHONY: all re run clean fclean test test_binary submodules norm
