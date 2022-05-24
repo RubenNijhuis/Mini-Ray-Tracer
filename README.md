@@ -12,15 +12,14 @@ $ make run
 ## Project structure
 ```
 Mini-Ray-Tracer -/
-  - 🖼 assets -/	# All types of assets, output img
-  - 📦 bin -/		# Mini-Ray-Tracer output
-  - 👀 include -/	# The .h files of the project
-  - 📚 libs -/		# Our custom and vendor libraries
-  - ⛲️ src -/		# Source files
-  - 🧪 test -/		# Testing directory
-
-  - .gitmodules		# Describes what submodules are installed
-  - Makefile		# Compiling && linking magic happens here
+  - 🖼 assets -/    # All types of assets, output img
+  - 📦 bin -/       # Mini-Ray-Tracer output
+  - 👀 include -/   # The .h files of the project
+  - 📚 libs -/      # Our custom and vendor libraries
+  - ⛲️ src -/       # Source files
+  - 🧪 test -/      # Testing directory
+  - .gitmodules    # Describes what submodules are installed
+  - Makefile        # Compiling && linking magic happens here
   ...
 ```
 
@@ -32,9 +31,9 @@ Each module has a folder and file that match name-wise. Every other file can be 
 
 ```
 📁 Folder name
-	- File with that same folder name (this is the module entry point)
-	- ...supporting files
-	- Potential README explaining the setup
+  - File with that same folder name (this is the module entry point)
+  - ...supporting files
+  - Potential README explaining the setup and usage
 ```
 
 ## Command list
@@ -57,13 +56,14 @@ Dependent on Criterion lib, install via brew and run make with the `CODAM=1` var
 
 ## Notes
 [Scratchapixel](https://www.scratchapixel.com/)
+[Rotation Matrix](https://en.wikipedia.org/wiki/Rotation_matrix)
 
 ## Todo
 [ ] - Setup a vector math lib  
-[ ] - Incorrect file formatting checker
-[ ] - Program close on [ x ] button click
-[ ] - Render image based on input file (linearly)
-	[ ] - Shoot rays from camera
-	[ ] - Calculate if ray intersects with any objects
-	[ ] - Calculate light/color value of ray
-	[ ] - Add to img object
+[ ] - Incorrect file formatting checker  
+[ ] - Program close on [ x ] button click  
+[ ] - Render image based on input file (linearly)  
+  [ ] - Shoot rays from camera  
+  [ ] - Calculate if ray intersects with any objects  
+  [ ] - Calculate light/color value of ray  
+  [ ] - Add to img object  

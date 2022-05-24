@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/23 22:21:03 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/24 14:21:11 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 #include <math.h>
 
 #include "libvec.h"
-
-float	vec3f_dot_prod(const t_vec3f a, const t_vec3f b)
-{
-	return (a.x * b.x + a.y * b.y + a.z * b.z);
-}
 
 int	main(int argc, char **argv)
 {
@@ -42,7 +37,7 @@ int	main(int argc, char **argv)
 	t_vec3f so;
 	so.x = 0;
 	so.y = 0;
-	so.z = 100;
+	so.z = 10;
 	float r = 1;
 
 	// Camera origin
@@ -54,17 +49,19 @@ int	main(int argc, char **argv)
 	// Direction vector
 	t_vec3f v;
 	v.x = 0;
-	v.y = 0.01;
+	v.y = 0;
 	v.z = 1;
 
 	vec3f_normalize(&v);
 	printf("%f %f %f normalized vec\n", v.x, v.y, v.z);
 
 	// t
+	// lengte van vector tot aan parallel van sphere origin
 	t_vec3f temp = vec3f_subtract(so, ro);
-	float t = vec3f_dot_prod(temp, v);
+	float t = vec3f_dot(temp, v);
 
 	// p
+	// length
 	vec3f_multiply_scalar(&v, t);
 	t_vec3f p = vec3f_sum(ro, v);
 
