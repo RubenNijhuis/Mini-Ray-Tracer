@@ -4,9 +4,14 @@
 [ Display a really cool img or gif here 🤤 ]
 
 ## Quick Start 
-```
+```sh
 $ git clone --recursive git@github.com:RubenNijhuis/Mini-Ray-Tracer.git
 $ make run
+```
+
+If you're on Linux(Debian-like), you have to install the prerequisites for [MLX42](https://github.com/codam-coding-college/MLX42/) first:
+```sh
+sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
 ```
 
 ## Project structure
