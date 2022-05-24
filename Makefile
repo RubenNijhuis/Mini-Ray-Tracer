@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/22 10:34:24 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/24 14:22:20 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,21 +23,26 @@ OBJS_DIR := 	objs
 SRC_DIR :=		src
 TEST_DIR :=		test
 
+# TODO: HEADER watching
+
+
+MLX_A =			$(LIBS_DIR)/MLX42/libmlx42.a
+
 #=====================================#
 #=============== Input ===============#
 #=====================================#
 
 INPUT_FILE = 	$(ASSETS_DIR)/mandatory/test.rt
 
-MLX := 			-framework OpenGL -framework AppKit
+MLX := 			-lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 
-LIBS :=			$(LIBS_DIR)/mlx/libmlx.a \
+LIBS :=			$(MLX_A) \
 				$(LIBS_DIR)/LibFT/libft.a \
 				$(LIBS_DIR)/Lib-Vec/libvec.a \
 				$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
 
 LIBS_HEADERS :=	-I $(INCLUDE_DIR) \
-				-I $(LIBS_DIR)/mlx/ \
+				-I $(LIBS_DIR)/MLX42/include/ \
 				-I $(LIBS_DIR)/LibFT/include/ \
 				-I $(LIBS_DIR)/Lib-Vec/include/ \
 				-I $(LIBS_DIR)/Get-Next-Line/include/ \
@@ -89,8 +94,8 @@ objs/%.o:src/%.c
 	
 all: $(NAME)
 
-$(NAME):$(OBJS) $(LIBS)
-	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(MLX) $(NO_DEAD_CODE) -o $(NAME)
+$(NAME): $(OBJS) $(LIBS)
+	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(MLX) $(NO_DEAD_CODE) -o $@
 	@echo "✅ Built $(NAME)"
 
 clean:
@@ -101,7 +106,7 @@ fclean: clean
 	@make fclean -C $(LIBS_DIR)/Get-Next-Line
 	@make fclean -C $(LIBS_DIR)/Lib-Vec
 	@make fclean -C $(LIBS_DIR)/LibFT
-	@make  clean -C $(LIBS_DIR)/mlx
+	@make  clean -C $(LIBS_DIR)/MLX42
 	@make fclean -C $(TEST_DIR)
 	@echo "Cleaning up $(NAME)"
 	@rm -f $(NAME)
@@ -119,6 +124,7 @@ submodules:
 	@cd $(LIBS_DIR)/LibFt/ && git pull origin main
 	@cd $(LIBS_DIR)/Get-Next-Line/ && git pull origin main
 	@cd $(LIBS_DIR)/Lib-Vec/ && git pull origin main
+	@cd $(LIBS_DIR)/MLX42/ && git pull origin master
 	
 run: $(NAME)
 	@./$(NAME) $(INPUT_FILE)
@@ -150,8 +156,8 @@ norm:
 #========== Lib compilation ==========#
 #=====================================#
 
-$(LIBS_DIR)/mlx/libmlx.a:
-	@make -C $(LIBS_DIR)/mlx
+$(MLX_A):
+	@make -C $(LIBS_DIR)/MLX42
 
 $(LIBS_DIR)/LibFT/libft.a:
 	@make -C $(LIBS_DIR)/LibFT

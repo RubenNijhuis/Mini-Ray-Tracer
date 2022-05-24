@@ -6,7 +6,11 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
+<<<<<<< Updated upstream
 /*   Updated: 2022/05/24 14:21:11 by rnijhuis      ########   odam.nl         */
+=======
+/*   Updated: 2022/05/24 14:22:41 by jobvan-d      ########   odam.nl         */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +21,43 @@
 #include <stdbool.h>
 #include <math.h>
 
+#include <stdlib.h> // exit
+
 #include "libvec.h"
+
+void	init_mlx(t_program_data *pd)
+{
+	pd->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);
+	if (!pd->mlx)
+	{
+		// TODO: stderr
+		printf("mlx init failed!\n");
+		exit(1);
+	}
+	pd->img = mlx_new_image(pd->mlx, WIN_WIDTH, WIN_HEIGHT);
+	ft_memset(pd->img->pixels, 128, pd->img->width * pd->img->height * sizeof(int));
+}
+
+void	start_mlx(t_program_data *pd)
+{
+	//mlx_loop_hook(pd->mlx, &key_hook, pd->mlx);
+	mlx_image_to_window(pd->mlx, pd->img, 0, 0);
+	mlx_loop(pd->mlx);
+}
 
 int	main(int argc, char **argv)
 {
-	t_program_data	*pd;
+	t_program_data	pd;
 
 	if (argc != 2)
 	{
+		// TODO: stderr
 		printf("Usage: minirt [path-to-file]\n");
 		return (1);
 	}
-	pd = ft_calloc(1, sizeof(t_program_data));
-	if (!pd)
-		exit_error("couldn't allocate program data struct");
-	setup_scene(&pd->scene, argv[1]);
+	ft_memset(&pd, 0, sizeof(t_program_data));
+	setup_scene(&pd.scene, argv[1]);
+	init_mlx(&pd);
 
 	// Sphere origin + radius
 	t_vec3f so;
@@ -81,7 +107,7 @@ int	main(int argc, char **argv)
 		printf("%f intersection point back\n", ip2);
 	}
 
+	start_mlx(&pd);
 	// print_scene_elements(&pd->scene);
-	start_mlx(&pd->mlx);
 	return (0);
 }

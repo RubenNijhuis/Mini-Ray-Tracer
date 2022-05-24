@@ -9,3 +9,6 @@
 [submodule "libs/Lib-Vec"]
 	path = libs/Lib-Vec
 	url = git@github.com:RubenNijhuis/Lib-Vec.git
+[submodule "libs/MLX42"]
+	path = libs/MLX42
+	url = https://github.com/codam-coding-college/MLX42

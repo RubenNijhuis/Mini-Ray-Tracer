@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/22 10:57:14 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/24 14:16:34 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINIRT_H
 
 # include "objects.h"
+
+# include "MLX42/MLX42.h"
 
 # include <stdint.h>	// uint32_t
 # include <stdbool.h>	// bool
@@ -31,32 +33,27 @@
 # define WIN_RATIO 0.5625
 
 # ifndef HEADLESS
-#  define HEADLESS 1
+#  define HEADLESS 0
 # endif
 
 // If rendering without window
 # if HEADLESS
 #  define WIN_WIDTH 10
 # else
-#  define WIN_WIDTH 1920
+#  define WIN_WIDTH 800
 # endif
 
-typedef struct s_mlx
-{
-	void	*instance;
-	void	*win;
-	int		width;
-	int		height;
-}t_mlx;
+# define WIN_HEIGHT (400)
 
 typedef struct s_program_data
 {
-	t_scene	scene;
-	t_mlx	mlx;
+	t_scene		scene;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 }t_program_data;
 
 // Setup mlx
-void		start_mlx(t_mlx *mlx);
+void		init_mlx(t_program_data *pd);
 int			key_hook(int keycode);
 
 // Vec from string
