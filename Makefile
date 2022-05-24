@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/24 14:22:20 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/05/24 15:36:18 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -165,7 +165,7 @@ $(LIBS_DIR)/LibFT/libft.a:
 $(LIBS_DIR)/Get-Next-Line/get-next-line.a:
 	@make -C $(LIBS_DIR)/Get-Next-Line
 
-$(LIBS_DIR)/Lib-Vec/libvec.a:
+$(LIBS_DIR)/Lib-Vec/libvec.a: $(LIBS_DIR)/Lib-Vec/include/libvec.h
 	@make -C $(LIBS_DIR)/Lib-Vec
 
 #=====================================#
