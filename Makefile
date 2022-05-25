@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/25 19:41:13 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/05/25 19:47:21 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,9 @@ SRCS :=			main.c \
 				file_parse/get_file_content.c \
 				file_parse/is_file_correctly_formatted.c \
 				\
-				create_objects/setup_scene.c \
+				create_objects/setup_scene/setup_scene.c \
+				create_objects/setup_scene/setup_objects.c \
+				\
 				create_objects/create_obj_from_str.c \
 				create_objects/get_vec_from_string.c \
 				create_objects/get_objs_from_string.c \

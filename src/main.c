@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 18:55:20 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/25 20:00:58 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #include "minirt.h"
 #include "libft.h"
 
+// TODO: stderr
 int	main(int argc, char **argv)
 {
 	t_program_data	pd;
 
 	if (argc != 2)
 	{
-		// TODO: stderr
 		printf("Usage: minirt [path-to-file]\n");
 		return (1);
 	}

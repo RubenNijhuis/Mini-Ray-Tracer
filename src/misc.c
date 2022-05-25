@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 18:03:54 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 20:01:06 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		exit(0);
 }
 
+// TODO: stderr
 void	init_mlx(t_program_data *pd)
 {
 	pd->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);
 	if (!pd->mlx)
 	{
-		// TODO: stderr
 		printf("mlx init failed!\n");
 		exit(1);
 	}
