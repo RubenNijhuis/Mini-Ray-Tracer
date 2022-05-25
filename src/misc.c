@@ -6,20 +6,20 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 16:28:49 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/25 17:25:01 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "libft.h"
 #include "MLX42/MLX42.h"
-#include <stdlib.h>
+#include "MLX42/MLX42_Input.h"
 
-int	key_hook(int keycode)
+void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	if (keycode == 53)
+	(void)param;
+	if (keydata.key == MLX_KEY_ESCAPE)
 		exit(0);
-	return (0);
 }
 
 // void	init_mlx(t_mlx *mlx)

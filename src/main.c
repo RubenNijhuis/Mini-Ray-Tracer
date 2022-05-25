@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 17:22:30 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/25 17:26:14 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_mlx(t_program_data *pd)
 
 void	start_mlx(t_program_data *pd)
 {
-	//mlx_loop_hook(pd->mlx, &key_hook, pd->mlx);
+	mlx_key_hook(pd->mlx, &key_hook, NULL);
 	mlx_image_to_window(pd->mlx, pd->img, 0, 0);
 	mlx_loop(pd->mlx);
 }

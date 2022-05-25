@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 13:29:58 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 17:22:32 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_program_data
 
 // Setup mlx
 void		init_mlx(t_program_data *pd);
-int			key_hook(int keycode);
+void		key_hook(mlx_key_data_t keydata, void *param);
 
 // Vec from string
 t_vec3i		get_vec3i_from_string(char *str);
