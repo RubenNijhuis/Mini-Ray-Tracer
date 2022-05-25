@@ -6,10 +6,9 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:36:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 18:44:19 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/25 19:19:13 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "objects.h"
 #include "libvec.h"
@@ -33,20 +32,20 @@ static float	get_intersection_point(float radius, float y, float t)
 float	intersects_sphere(t_ray *ray, t_object *shape)
 {
 	t_sphere	*sphere;
-	t_vec3f		v;
-	t_vec3f		temp;
-	t_vec3f		p;
-	float		y;
-	float		t;
+	t_vec3f		relpos;
+	t_vec3f		closest_point;
+	float		distance_to_so;
+	float		distance_to_closest_point;
 
 	sphere = &shape->sphere;
-	v = ray->direction;
-	temp = vec3f_subtract(sphere->base.position, ray->origin);
-	t = vec3f_dot(temp, ray->direction);
-	vec3f_multiply_scalar(&v, t);
-	p = vec3f_sum(ray->origin, v);
-	y = vec3f_length(vec3f_subtract(sphere->base.position, p));
-	if (y <= sphere->diameter / 2)
-		return (get_intersection_point(sphere->diameter / 2, y, t));
+	relpos = sphere->base.position - ray->origin;
+	distance_to_closest_point = vec3f_dot(relpos, ray->direction);
+	closest_point = ray_at(ray, distance_to_closest_point);
+	distance_to_so = vec3f_length(sphere->base.position - closest_point);
+	if (distance_to_so <= sphere->diameter / 2)
+	{
+		return (get_intersection_point(sphere->diameter / 2,
+				distance_to_so, distance_to_closest_point));
+	}
 	return (-1);
 }
