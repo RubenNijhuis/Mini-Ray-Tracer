@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 17:57:06 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 18:03:54 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "MLX42/MLX42_Input.h"
 
 #include <stdlib.h> // exit
+#include <stdio.h> // printf
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
