@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/25 13:39:01 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/05/25 15:37:40 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC_DIR :=		src
 TEST_DIR :=		test
 NAME := $(BIN_DIR)/$(EXEC_NAME)
 
-# TODO: HEADER watching
+# TODO: More header watching
+HEADERS = $(LIBS_DIR)/Lib-Vec/include/libvec.h
 
 
 MLX_A =			$(LIBS_DIR)/MLX42/libmlx42.a
@@ -100,10 +101,10 @@ endif
 #=============== Rules ===============#
 #=====================================#
 
-$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@mkdir -p $(dir $@)
-	@$(CC) -c $(CFLAGS) $(INC) -o $@ $^
-	@echo "🔨 Compiling: $^"
+	@$(CC) -c $(CFLAGS) $(INC) -o $@ $<
+	@echo "🔨 Compiling: $<"
 	
 all: $(NAME)
 

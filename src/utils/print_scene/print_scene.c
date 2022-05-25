@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/18 12:47:46 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/25 15:42:24 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	print_camera(t_camera camera)
 	orient = camera.orientation;
 	printf(RED "============= CAMERA =============\n\n" RESET);
 	printf("Value type  •   X      Y      Z\n");
-	printf("Position    • %6.2f %6.2f %6.2f\n", pos.x, pos.y, pos.z);
-	printf("Orientation • %6.2f %6.2f %6.2f\n", orient.x, orient.y, orient.z);
+	printf("Position    • %6.2f %6.2f %6.2f\n", pos[0], pos[1], pos[2]);
+	printf("Orientation • %6.2f %6.2f %6.2f\n", orient[0], orient[1], orient[2]);
 	printf("Fov         • %6.2u\n", camera.fov);
 	printf("\n");
 }
@@ -55,8 +55,8 @@ void	print_lights(t_light *lights, uint32_t amount_lights)
 		light = &lights[current_light];
 		printf("ID          •  %2u\n", current_light);
 		printf("Value type  •   X      Y      Z\n");
-		printf("Position    • %6.2f %6.2f %6.2f\n", light->position.x, \
-			light->position.y, light->position.z);
+		printf("Position    • %6.2f %6.2f %6.2f\n", light->position[0], \
+			light->position[1], light->position[2]);
 		print_object_color(light->color);
 		printf("Brightness  • %6.2f\n", light->brightness);
 		printf("\n");
