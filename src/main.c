@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 15:08:23 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/25 17:22:30 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ void	start_mlx(t_program_data *pd)
 	mlx_loop(pd->mlx);
 }
 
-float	intersects_sphere(t_ray *ray, t_sphere *sphere)
+float	intersects_sphere(t_ray *ray, t_object *shape)
 {
+	t_sphere *sphere = &shape->sphere;
 	t_vec3f	v = ray->direction;
 	float	r = sphere->diameter / 2;
 	// t
@@ -74,6 +75,15 @@ float	intersects_sphere(t_ray *ray, t_sphere *sphere)
 	return (-1);
 }
 
+float	intersects_plane(t_ray *ray, t_object *shape)
+{
+	(void)ray;
+	t_plane *plane = &shape->plane;
+	(void)plane;
+
+	return (-1);
+}
+
 float mapx(int input)
 {
 	return ((input - 0) * (0.1 - -0.1) / (WIN_WIDTH - 1 -  0) + -0.1);
@@ -95,10 +105,55 @@ t_vec3i	get_default_color(t_program_data *pd)
 	return (default_color);
 }
 
+/**
+ * Checks if the distance from origin to the current object is smaller
+ * than the current record. If so -> update the record and update the color
+*/
+void	update_color_from_dist(float *hit_dist_record, float cur_hit_dist, \
+	t_vec3i *color, t_vec3i new_color)
+{
+	if (cur_hit_dist != -1 && cur_hit_dist < *hit_dist_record)
+	{
+		*hit_dist_record = cur_hit_dist;
+		*color = new_color;
+	}
+}
+
+typedef float (*t_intersect_func_ptr)(t_ray *, t_object *);
+
+typedef struct s_intersect_func
+{
+	t_object_type type;
+	t_intersect_func_ptr	func;
+}	t_intersect_func;
+
+static t_intersect_func_ptr	lookup_intersect_function(t_object *shape)
+{
+	size_t					i;
+	const t_intersect_func	funcs[] = {
+	{sphere, &intersects_sphere},
+	{plane, &intersects_plane},
+	};
+
+	i = 0;
+	while (i < sizeof(funcs) / sizeof(t_intersect_func))
+	{
+		if (funcs[i].type == shape->base.obj_type)
+			return (funcs[i].func);
+		i++;
+	}
+	return (NULL);
+}
+
+/*
+ * Loops through the shapes array and checks if the ray intersects
+ * If it intersects it returns the current hit distance and applies color if needed
+ * NOTE: Uses a function roulette to acces the correct intersection func
+*/
 t_vec3i	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 {
 	uint32_t	current_shape;
-	t_object	*current_shape_struct;
+	t_object	*cur_shape_struct;
 	float		hit_dist_record;
 	float		cur_hit_dist;
 	t_vec3i		color;
@@ -110,16 +165,9 @@ t_vec3i	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 	hit_dist_record = 100000; // Set to infinity
 	while (current_shape < pd->scene.amount_shapes)
 	{
-		current_shape_struct = &pd->scene.shapes[current_shape];
-		if (current_shape_struct->base.obj_type == sphere)
-		{
-			cur_hit_dist = intersects_sphere(ray, &current_shape_struct->sphere);
-			if (cur_hit_dist != -1 && cur_hit_dist < hit_dist_record)
-			{
-				hit_dist_record = cur_hit_dist;
-				color = current_shape_struct->base.color;
-			}
-		}
+		cur_shape_struct = &pd->scene.shapes[current_shape];
+		cur_hit_dist = (*lookup_intersect_function(cur_shape_struct))(ray, cur_shape_struct);
+		update_color_from_dist(&hit_dist_record, cur_hit_dist, &color, cur_shape_struct->base.color);
 		current_shape++;
 	}
 	return (color);

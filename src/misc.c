@@ -6,13 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/24 14:16:34 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 16:28:49 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "libft.h"
 #include "MLX42/MLX42.h"
+#include <stdlib.h>
 
 int	key_hook(int keycode)
 {

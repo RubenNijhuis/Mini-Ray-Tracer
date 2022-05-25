@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/24 20:52:08 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 16:28:31 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define OBJECTS_H
 
 # include "libvec.h"
-# include <stdlib.h>
-# include <stdint.h>	// uint32_t
+# include <stdint.h>
 
 // Special chars
 # define CAMERA "C"
@@ -30,7 +29,8 @@
 # define SCENE_SHAPES "pl sp cy"
 
 // Token definitions
-typedef enum e_object_type {
+typedef enum e_object_type
+{
 	ambient_light,
 	camera,
 	light,
@@ -46,7 +46,7 @@ typedef struct s_base
 	t_vec3f			position;
 	t_vec3f			orientation;
 	t_vec3i			color;
-}t_base;
+}	t_base;
 
 // Scene elements
 typedef struct s_camera
@@ -54,48 +54,50 @@ typedef struct s_camera
 	t_vec3f		position;
 	t_vec3f		orientation;
 	uint32_t	fov;
-}t_camera;
+}	t_camera;
 
 typedef struct s_ambient_light
 {
 	t_vec3i	color;
 	float	range;
-}t_ambient_light;
+}	t_ambient_light;
 
 typedef struct s_light
 {
 	t_vec3f	position;
 	t_vec3i	color;
 	float	brightness;
-}t_light;
+}	t_light;
 
 // Scene objects
 typedef struct s_sphere
 {
 	t_base	base;
 	float	diameter;
-}t_sphere;
+}	t_sphere;
 
 typedef struct s_plane
 {
 	t_base	base;
-}t_plane;
+}	t_plane;
 
 typedef struct s_cylinder
 {
 	t_base	base;
 	float	diameter;
 	float	height;
-}t_cylinder;
+}	t_cylinder;
 
-typedef union u_object {
+typedef union u_object
+{
 	t_base		base;
 	t_sphere	sphere;
 	t_plane		plane;
 	t_cylinder	cylinder;
 }	t_object;
 
-typedef struct t_scene {
+typedef struct t_scene
+{
 	t_camera		camera;
 
 	t_ambient_light	amb_light;
@@ -105,7 +107,7 @@ typedef struct t_scene {
 
 	t_object		*shapes;
 	uint32_t		amount_shapes;
-}t_scene;
+}	t_scene;
 
 // Setup components
 void	set_camera(t_scene *scene, char **file_content);

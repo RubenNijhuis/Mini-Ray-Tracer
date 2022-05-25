@@ -6,11 +6,12 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:27:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/01 11:27:51 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/25 16:29:03 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
+#include <stdlib.h>
 
 char	*get_shape_type_string(t_object_type obj_type)
 {
