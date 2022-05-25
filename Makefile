@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/24 21:38:55 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/05/25 13:39:01 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,7 @@ MLX_A =			$(LIBS_DIR)/MLX42/libmlx42.a
 #=============== Input ===============#
 #=====================================#
 
-INPUT_FILE = 	$(ASSETS_DIR)/mandatory/test.rt
-
+INPUT_FILE = 	$(ASSETS_DIR)/mandatory/sphere_test.rt
 
 LIBS :=			$(MLX_A) \
 				$(LIBS_DIR)/LibFT/libft.a \
@@ -69,6 +68,7 @@ SRCS :=			main.c \
 				\
 				utils/ft_atof.c \
 				utils/exit_error.c \
+				utils/color_util.c \
 				\
 				utils/print_scene/print_scene.c \
 				utils/print_scene/print_shapes.c \
@@ -80,7 +80,7 @@ OBJS =			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 #=====================================#
 
 CC = 			gcc
-CFLAGS =		-Wall -Werror -Wextra -g # -fsanitize=address
+CFLAGS =		-Wall -Werror -Wextra -g -fsanitize=address
 
 # TODO: CLEAN UP THIS MAKEFILE
 

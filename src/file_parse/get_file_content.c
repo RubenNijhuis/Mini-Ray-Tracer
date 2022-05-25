@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 12:59:02 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/25 13:39:45 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	**fill_string_array(uint32_t fd, uint32_t amount_lines_in_file)
 	uint32_t	current_line;
 
 	current_line = 0;
-	total_file = ft_calloc(amount_lines_in_file, sizeof(char *));
+	total_file = ft_calloc(amount_lines_in_file + 1, sizeof(char *));
 	if (total_file == NULL)
 		exit(1);
 	total_file[amount_lines_in_file] = NULL;
