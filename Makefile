@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/25 19:13:58 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/05/25 19:41:13 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ SRCS :=			main.c \
 				utils/print_scene/print_scene.c \
 				utils/print_scene/print_shapes.c \
 				\
-				ray/ray.c \
+				ray/ray.c
 
 OBJS =			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
