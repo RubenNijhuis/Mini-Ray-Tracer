@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/25 15:37:40 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/05/25 18:56:11 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ TEST_DIR :=		test
 NAME := $(BIN_DIR)/$(EXEC_NAME)
 
 # TODO: More header watching
-HEADERS = $(LIBS_DIR)/Lib-Vec/include/libvec.h
+HEADERS =		$(LIBS_DIR)/Lib-Vec/include/libvec.h
 
 
 MLX_A =			$(LIBS_DIR)/MLX42/libmlx42.a
@@ -66,6 +66,15 @@ SRCS :=			main.c \
 				create_objects/get_vec_from_string.c \
 				create_objects/get_objs_from_string.c \
 				create_objects/get_shape_type_string.c \
+				\
+				render/render.c \
+				\
+				calculate_intersections/sphere/sphere.c \
+				calculate_intersections/plane/plane.c \
+				\
+				color/get_default_color.c \
+				color/get_ray_color.c \
+				color/render_pixel_color.c \
 				\
 				utils/ft_atof.c \
 				utils/exit_error.c \
@@ -120,7 +129,7 @@ fclean: clean
 	@$(MAKE) fclean -C $(LIBS_DIR)/Get-Next-Line
 	@$(MAKE) fclean -C $(LIBS_DIR)/Lib-Vec
 	@$(MAKE) fclean -C $(LIBS_DIR)/LibFT
-	@$(MAKE)  clean -C $(LIBS_DIR)/MLX42
+	@$(MAKE) fclean -C $(LIBS_DIR)/MLX42
 	@$(MAKE) fclean -C $(TEST_DIR)
 	@echo "Cleaning up $(NAME)"
 	@rm -f $(NAME)

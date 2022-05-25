@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 17:55:24 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 18:56:34 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define MINIRT_H
 
 # include "objects.h"
-
+# include "ray.h"
 # include "MLX42/MLX42.h"
 
-# include <stdint.h>	// uint32_t
-# include <stdbool.h>	// bool
+# include <stdint.h>
+# include <stdbool.h>
 
 // If rendering in bonus mode
 # ifndef BONUS
@@ -60,6 +60,20 @@ void		key_hook(mlx_key_data_t keydata, void *param);
 // Vec from string
 t_vec3i		get_vec3i_from_string(char *str);
 t_vec3f		get_vec3f_from_string(char *str);
+
+// Render
+void		render(t_program_data *pd);
+
+// Intersections
+float		intersects_sphere(t_ray *ray, t_object *shape);
+float		intersects_plane(t_ray *ray, t_object *shape);
+
+// Colors
+t_vec3i		get_default_color(t_program_data *pd);
+t_vec3i		get_ray_color(t_ray *ray, uint32_t x, \
+				uint32_t y, t_program_data *pd);
+void		render_pixel_color(uint32_t x, uint32_t y, \
+				t_vec3i color, t_program_data *pd);
 
 // Utils
 void		exit_error(char *str);

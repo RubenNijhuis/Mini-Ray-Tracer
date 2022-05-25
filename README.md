@@ -64,6 +64,7 @@ Dependent on Criterion lib, install via brew and run make with the `CODAM=1` var
 [Rotation Matrix](https://en.wikipedia.org/wiki/Rotation_matrix)
 
 ## Todo
+[ ] - Make wayyy more tests
 [ ] - Setup a vector math lib  
 [ ] - Incorrect file formatting checker  
 [ ] - Program close on [ x ] button click  

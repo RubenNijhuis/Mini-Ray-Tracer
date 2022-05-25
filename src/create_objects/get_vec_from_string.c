@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 15:51:11 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 15:40:30 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 18:19:33 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ t_vec3f	get_vec3f_from_string(char *str)
 
 	split_vec = ft_split(str, ',');
 	vec = vec3f(
-		ft_atof(split_vec[0]),
-		ft_atof(split_vec[1]),
-		ft_atof(split_vec[2])
-	);
+			ft_atof(split_vec[0]),
+			ft_atof(split_vec[1]),
+			ft_atof(split_vec[2])
+			);
 	ft_free_2d_array(&split_vec, 3);
 	return (vec);
 }
