@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 17:26:14 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 17:54:37 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,6 @@
 
 #include "libvec.h"
 #include "ray.h"
-
-void	init_mlx(t_program_data *pd)
-{
-	pd->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);
-	if (!pd->mlx)
-	{
-		// TODO: stderr
-		printf("mlx init failed!\n");
-		exit(1);
-	}
-	pd->img = mlx_new_image(pd->mlx, WIN_WIDTH, WIN_HEIGHT);
-	ft_memset(pd->img->pixels, 0, pd->img->width * pd->img->height * sizeof(int));
-}
-
-void	start_mlx(t_program_data *pd)
-{
-	mlx_key_hook(pd->mlx, &key_hook, NULL);
-	mlx_image_to_window(pd->mlx, pd->img, 0, 0);
-	mlx_loop(pd->mlx);
-}
 
 float	intersects_sphere(t_ray *ray, t_object *shape)
 {

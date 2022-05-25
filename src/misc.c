@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 17:31:49 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 17:57:06 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,27 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		exit(0);
 }
 
-// void	init_mlx(t_mlx *mlx)
-// {
-// 	mlx->width = WIN_WIDTH;
-// 	mlx->height = WIN_WIDTH * WIN_RATIO;
-// 	mlx->instance = mlx_init();
-// 	mlx->win = mlx_new_window(mlx->instance, mlx->width, mlx->height, "MiniRT");
-// 	mlx_key_hook(mlx->win, key_hook, mlx);
-// 	if (!HEADLESS)
-// 	{
-// 		mlx_loop_hook(mlx->instance, NULL, mlx);
-// 		mlx_loop(mlx->instance);
-// 	}
-// }
+void	init_mlx(t_program_data *pd)
+{
+	pd->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);
+	if (!pd->mlx)
+	{
+		// TODO: stderr
+		printf("mlx init failed!\n");
+		exit(1);
+	}
+	pd->img = mlx_new_image(pd->mlx, WIN_WIDTH, WIN_HEIGHT);
+	ft_memset(pd->img->pixels, 0,
+		pd->img->width * pd->img->height * sizeof(int));
+}
+
+/* starts rendering of the window and such */
+void	start_mlx(t_program_data *pd)
+{
+	mlx_key_hook(pd->mlx, &key_hook, NULL);
+	mlx_image_to_window(pd->mlx, pd->img, 0, 0);
+	mlx_loop(pd->mlx);
+}
 
 void	setup_scene(t_scene *scene, char *file_name)
 {
