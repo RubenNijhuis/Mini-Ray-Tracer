@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 16:28:31 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/25 19:22:26 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_base	base;
-	float	diameter;
+	float	radius;
 }	t_sphere;
 
 typedef struct s_plane

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:36:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 19:19:13 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 19:32:15 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,23 @@
 #include <math.h>
 #include <stdbool.h>
 
-static float	get_intersection_point(float radius, float y, float t)
+static float	get_intersection_point(float radius, float distance_to_so, \
+	float distance_to_closest_point)
 {
-	float	intersection_point;
+	float	intersect_point;
 	float	distance_from_origin_to_ray;
+	float	distance_to_so_sq;
+	float	radius_sq;
 
-	distance_from_origin_to_ray = sqrt((radius * radius) - (y * y));
-	intersection_point = t - distance_from_origin_to_ray;
-	return (intersection_point);
+	radius_sq = radius * radius;
+	distance_to_so_sq = distance_to_so * distance_to_so;
+	distance_from_origin_to_ray = sqrt(radius_sq - distance_to_so_sq);
+	intersect_point = distance_to_closest_point - distance_from_origin_to_ray;
+	return (intersect_point);
 }
 
 // float ip2 = t + x;
-// TODO: return closest value but only if not negative
+// TODO: return closest value but only if not negatives
 float	intersects_sphere(t_ray *ray, t_object *shape)
 {
 	t_sphere	*sphere;
@@ -42,9 +47,9 @@ float	intersects_sphere(t_ray *ray, t_object *shape)
 	distance_to_closest_point = vec3f_dot(relpos, ray->direction);
 	closest_point = ray_at(ray, distance_to_closest_point);
 	distance_to_so = vec3f_length(sphere->base.position - closest_point);
-	if (distance_to_so <= sphere->diameter / 2)
+	if (distance_to_so <= sphere->radius)
 	{
-		return (get_intersection_point(sphere->diameter / 2,
+		return (get_intersection_point(sphere->radius,
 				distance_to_so, distance_to_closest_point));
 	}
 	return (-1);

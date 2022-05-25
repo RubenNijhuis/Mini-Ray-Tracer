@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 18:51:14 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/25 19:21:33 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static t_intersect_func_ptr	lookup_intersect_function(t_object *shape)
  * color if needed
  * NOTE: Uses a function roulette to acces the correct intersection func
 */
+/* TODO: set hit_dist_record to infinity */
 t_vec3i	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 {
 	uint32_t	current_shape;
@@ -73,7 +74,7 @@ t_vec3i	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 	(void)y;
 	current_shape = 0;
 	color = get_default_color(pd);
-	hit_dist_record = 100000; // Set to infinity
+	hit_dist_record = 100000;
 	while (current_shape < pd->scene.amount_shapes)
 	{
 		cur_shape_struct = &pd->scene.shapes[current_shape];
