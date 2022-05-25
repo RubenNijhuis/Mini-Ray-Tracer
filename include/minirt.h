@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/24 18:03:38 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/25 13:29:58 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ bool		ft_is_object(const char *haystack, const char *needle);
 void		is_file_correctly_formatted(char **file_content);
 char		*get_shape_type_string(t_object_type obj_type);
 uint32_t	get_amount_objects(char **file_content, char *type);
+
+uint32_t	col_to_hex(const t_vec3i col);
 
 #endif
