@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 17:25:01 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/25 17:31:49 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "libft.h"
 #include "MLX42/MLX42.h"
 #include "MLX42/MLX42_Input.h"
+
+#include <stdlib.h> // exit
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
