@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/25 20:01:06 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/26 08:58:04 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void	init_mlx(t_program_data *pd)
 {
 	pd->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);
 	if (!pd->mlx)
-	{
-		printf("mlx init failed!\n");
-		exit(1);
-	}
+		exit_error("Error: couldn't start mlx");
 	pd->img = mlx_new_image(pd->mlx, WIN_WIDTH, WIN_HEIGHT);
 	ft_memset(pd->img->pixels, 0,
 		pd->img->width * pd->img->height * sizeof(int));

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 10:50:32 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 20:00:22 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/26 09:00:33 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	make_sphere(t_object *obj, char *settings)
 	char	**split_settings;
 
 	split_settings = ft_split(settings, ' ');
+	if (split_settings == NULL)
+		exit_error("Error: couldn't allocate memory");
 	obj->sphere.base.obj_type = sphere;
 	obj->sphere.base.position = get_vec3f_from_string(split_settings[1]);
 	obj->sphere.base.color = get_vec3i_from_string(split_settings[3]);
@@ -32,6 +34,8 @@ void	make_cylinder(t_object *obj, char *settings)
 	char	**split_settings;
 
 	split_settings = ft_split(settings, ' ');
+	if (split_settings == NULL)
+		exit_error("Error: couldn't allocate memory");
 	obj->cylinder.base.obj_type = cylinder;
 	obj->cylinder.base.position = get_vec3f_from_string(split_settings[1]);
 	obj->cylinder.base.orientation = get_vec3f_from_string(split_settings[2]);
@@ -46,6 +50,8 @@ void	make_plane(t_object *obj, char *settings)
 	char	**split_settings;
 
 	split_settings = ft_split(settings, ' ');
+	if (split_settings == NULL)
+		exit_error("Error: couldn't allocate memory");
 	obj->plane.base.obj_type = plane;
 	obj->plane.base.position = get_vec3f_from_string(split_settings[1]);
 	obj->plane.base.orientation = get_vec3f_from_string(split_settings[2]);

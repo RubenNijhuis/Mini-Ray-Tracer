@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/25 19:47:21 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/05/26 09:18:33 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,16 +25,16 @@ TEST_DIR :=		test
 NAME := $(BIN_DIR)/$(EXEC_NAME)
 
 # TODO: More header watching
-HEADERS =		$(LIBS_DIR)/Lib-Vec/include/libvec.h
+HEADERS :=		$(LIBS_DIR)/Lib-Vec/include/libvec.h
 
 
-MLX_A =			$(LIBS_DIR)/MLX42/libmlx42.a
+MLX_A :=			$(LIBS_DIR)/MLX42/libmlx42.a
 
 #=====================================#
 #=============== Input ===============#
 #=====================================#
 
-INPUT_FILE = 	$(ASSETS_DIR)/mandatory/sphere_test.rt
+INPUT_FILE := 	$(ASSETS_DIR)/mandatory/sphere_test.rt
 
 LIBS :=			$(MLX_A) \
 				$(LIBS_DIR)/LibFT/libft.a \
@@ -50,8 +50,6 @@ LIBS_HEADERS :=	-I $(INCLUDE_DIR) \
 PROJECT_HEADERS :=	$(LIBS_DIR)/colors.h \
 					$(LIBS_DIR)/minirt.h \
 					$(LIBS_DIR)/objects.h \
-
-OBJS =			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 INC :=			$(LIBS_HEADERS)
 
@@ -87,7 +85,7 @@ SRCS :=			main.c \
 				\
 				ray/ray.c
 
-OBJS =			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+OBJS :=			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 #=====================================#
 #========= Command arguments =========#
@@ -95,17 +93,17 @@ OBJS =			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 CC = 			gcc
 CFLAGS =		-Wall -Werror -Wextra -g -fsanitize=address
-
+LDFLAGS=		-L /usr/local/Cellar/glawfw/3.3.7/lib
 # TODO: CLEAN UP THIS MAKEFILE
 
-# stolen from MLX42
+# Credits -> https://github.com/codam-coding-college/MLX42
 # TODO: Add NO_DEAD_CODE for linux
 UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	MLX = -ldl -lglfw -lm
 else ifeq ($(UNAME_S), Darwin)
 	NO_DEAD_CODE :=	-O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip
-	MLX = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+	MLX = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 else
 	$(error OS is not supported(uname -s: $(UNAME_S))!)
 endif
@@ -134,7 +132,9 @@ fclean: clean
 	@$(MAKE) fclean -C $(LIBS_DIR)/Lib-Vec
 	@$(MAKE) fclean -C $(LIBS_DIR)/LibFT
 	@$(MAKE) fclean -C $(LIBS_DIR)/MLX42
+	
 	@$(MAKE) fclean -C $(TEST_DIR)
+
 	@echo "Cleaning up $(NAME)"
 	@rm -f $(NAME)
 	@rm -f $(NAME).a
