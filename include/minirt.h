@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/26 09:26:40 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/26 10:08:46 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,10 @@ char		*get_shape_type_string(t_object_type obj_type);
 uint32_t	get_amount_objects(char **file_content, char *type);
 
 uint32_t	col_to_hex(const t_vec3i col);
+
+// File parsing
+void		check_amount_lights(char **file_content);
+void		check_amount_cameras(char **file_content);
+void		check_amount_ambient_lights(char **file_content);
 
 #endif
