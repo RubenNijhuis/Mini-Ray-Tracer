@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/26 09:54:01 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/26 13:15:44 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,6 @@ OBJS :=			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 CC = 			gcc
 CFLAGS =		-Wall -Werror -Wextra -g -fsanitize=address
-LDFLAGS=		-L /usr/local/Cellar/glawfw/3.3.7/lib
 # TODO: CLEAN UP THIS MAKEFILE
 
 # Credits -> https://github.com/codam-coding-college/MLX42
@@ -103,8 +102,15 @@ UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	MLX = -ldl -lglfw -lm
 else ifeq ($(UNAME_S), Darwin)
+	# TODO: change to ifdef RUBEN_LAPTOP or something like that
+	ifdef CODAM
+		MLX = -lglfw3
+	else
+		LDFLAGS += -L /usr/local/Cellar/glawfw/3.3.7/lib
+		MLX = -lglfw
+	endif
 	NO_DEAD_CODE :=	-O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip
-	MLX = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+	MLX += -framework Cocoa -framework OpenGL -framework IOKit
 else
 	$(error OS is not supported(uname -s: $(UNAME_S))!)
 endif
