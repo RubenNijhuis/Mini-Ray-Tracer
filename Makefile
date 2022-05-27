@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/26 13:15:44 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/05/27 15:47:10 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ TEST_DIR :=		test
 NAME := $(BIN_DIR)/$(EXEC_NAME)
 
 # TODO: More header watching
-HEADERS :=		$(LIBS_DIR)/Lib-Vec/include/libvec.h
+HEADERS :=		$(LIBS_DIR)/Lib-Vec/include/libvec.h \
+				$(wildcard $(INCLUDE_DIR)/*.h)
 
 
 MLX_A :=			$(LIBS_DIR)/MLX42/libmlx42.a
@@ -53,38 +54,7 @@ PROJECT_HEADERS :=	$(LIBS_DIR)/colors.h \
 
 INC :=			$(LIBS_HEADERS)
 
-SRCS :=			main.c \
-				misc.c \
-				\
-				file_parse/get_file_content.c \
-				file_parse/is_file_correctly_formatted/is_file_correctly_formatted.c \
-				file_parse/is_file_correctly_formatted/check_scene_objects.c \
-				\
-				create_objects/setup_scene/setup_scene.c \
-				create_objects/setup_scene/setup_objects.c \
-				\
-				create_objects/create_obj_from_str.c \
-				create_objects/get_vec_from_string.c \
-				create_objects/get_objs_from_string.c \
-				create_objects/get_shape_type_string.c \
-				\
-				render/render.c \
-				\
-				calculate_intersections/sphere/sphere.c \
-				calculate_intersections/plane/plane.c \
-				\
-				color/get_default_color.c \
-				color/get_ray_color.c \
-				color/render_pixel_color.c \
-				\
-				utils/ft_atof.c \
-				utils/exit_error.c \
-				utils/color_util.c \
-				\
-				utils/print_scene/print_scene.c \
-				utils/print_scene/print_shapes.c \
-				\
-				ray/ray.c
+SRCS :=			 $(shell find $(SRC_DIR) -type f -name "*.c")
 
 OBJS :=			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
@@ -119,7 +89,7 @@ endif
 #=============== Rules ===============#
 #=====================================#
 
-$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+$(OBJS_DIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(CC) -c $(CFLAGS) $(INC) -o $@ $<
 	@echo "🔨 Compiling: $<"

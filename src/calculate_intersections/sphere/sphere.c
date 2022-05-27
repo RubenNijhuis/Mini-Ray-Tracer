@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:36:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/26 13:07:42 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/27 12:49:21 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ static float	get_intersection_point(float radius, float distance_to_so_sq, \
 {
 	float	intersect_point;
 	float	distance_from_origin_to_ray;
-	float	radius_sq;
 
-	radius_sq = radius * radius;
-	distance_from_origin_to_ray = sqrt(radius_sq - distance_to_so_sq);
+	distance_from_origin_to_ray = sqrt(radius * radius - distance_to_so_sq);
 	intersect_point = distance_to_closest_point - distance_from_origin_to_ray;
 	return (intersect_point);
 }

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 19:22:26 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/27 13:26:46 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 # define SCENE_ELEMENTS "C A L"
 # define SCENE_SHAPES "pl sp cy"
 
+typedef struct s_color
+{
+	double r;
+	double g;
+	double b;
+}	t_color;
+
 // Token definitions
 typedef enum e_object_type
 {
@@ -45,7 +52,7 @@ typedef struct s_base
 	t_object_type	obj_type;
 	t_vec3f			position;
 	t_vec3f			orientation;
-	t_vec3i			color;
+	t_color			color;
 }	t_base;
 
 // Scene elements
@@ -58,14 +65,14 @@ typedef struct s_camera
 
 typedef struct s_ambient_light
 {
-	t_vec3i	color;
+	t_color	color;
 	float	range;
 }	t_ambient_light;
 
 typedef struct s_light
 {
 	t_vec3f	position;
-	t_vec3i	color;
+	t_color	color;
 	float	brightness;
 }	t_light;
 
@@ -129,6 +136,6 @@ void	print_shapes(t_object *shapes, uint32_t amount_shapes);
 void	print_lights(t_light *lights, uint32_t amount_lights);
 void	print_camera(t_camera camvec3iera);
 void	print_scene_elements(t_scene *scene);
-void	print_object_color(t_vec3i color);
+void	print_object_color(t_color color);
 
 #endif

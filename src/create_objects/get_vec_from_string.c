@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 15:51:11 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/26 08:52:19 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/27 13:31:31 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 #include "libvec.h"
 #include "minirt.h"
 
-t_vec3i	get_vec3i_from_string(char *str)
+t_color	get_color_from_string(char *str)
 {
-	t_vec3i		vec;
+	t_color		col;
 	char		**split_vec;
 
 	split_vec = ft_split(str, ',');
 	if (split_vec == NULL)
 		exit_error("Error: couldn't allocate memory");
-	vec.x = ft_atoi(split_vec[0]);
-	vec.y = ft_atoi(split_vec[1]);
-	vec.z = ft_atoi(split_vec[2]);
+	col.r = (double)ft_atoi(split_vec[0]) / 255.0;
+	col.g = (double)ft_atoi(split_vec[1]) / 255.0;
+	col.b = (double)ft_atoi(split_vec[2]) / 255.0;
 	ft_free_2d_array(&split_vec, 3);
-	return (vec);
+	return (col);
 }
 
 t_vec3f	get_vec3f_from_string(char *str)

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/26 10:08:46 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/27 13:32:43 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,24 @@ typedef struct s_program_data
 	mlx_image_t	*img;
 }t_program_data;
 
+// typedef union u_color
+// {
+// 	struct s_color
+// 	{
+// 		double r;
+// 		double g;
+// 		double b;
+// 	}	c;
+// 	double arr[3];
+// }	t_color;
+
 // Setup mlx
 void		init_mlx(t_program_data *pd);
 void		start_mlx(t_program_data *pd);
 void		key_hook(mlx_key_data_t keydata, void *param);
 
 // Vec from string
-t_vec3i		get_vec3i_from_string(char *str);
+t_color		get_color_from_string(char *str);
 t_vec3f		get_vec3f_from_string(char *str);
 
 // Render
@@ -69,11 +80,11 @@ float		intersects_sphere(t_ray *ray, t_object *shape);
 float		intersects_plane(t_ray *ray, t_object *shape);
 
 // Colors
-t_vec3i		get_default_color(t_program_data *pd);
-t_vec3i		get_ray_color(t_ray *ray, uint32_t x, \
+t_color		get_default_color(t_program_data *pd);
+t_color		get_ray_color(t_ray *ray, uint32_t x, \
 				uint32_t y, t_program_data *pd);
 void		render_pixel_color(uint32_t x, uint32_t y, \
-				t_vec3i color, t_program_data *pd);
+				t_color color, t_program_data *pd);
 
 // Utils
 void		exit_error(char *str);
@@ -84,7 +95,7 @@ void		is_file_correctly_formatted(char **file_content);
 char		*get_shape_type_string(t_object_type obj_type);
 uint32_t	get_amount_objects(char **file_content, char *type);
 
-uint32_t	col_to_hex(const t_vec3i col);
+uint32_t	col_to_hex(const t_color col);
 
 // File parsing
 void		check_amount_lights(char **file_content);

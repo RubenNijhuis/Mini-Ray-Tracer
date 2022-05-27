@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 19:40:02 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/27 15:46:46 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,17 @@
 #include "colors.h"
 #include <stdio.h>	// printf
 
-void	print_object_color(t_vec3i color)
+void	print_object_color(t_color color)
 {
 	printf("Color       • ");
-	printf(RED "%3d" RESET, color.r);
-	printf(GRN "%7d" RESET, color.g);
-	printf(CYN "%7d" RESET, color.b);
-	printf("\n");
+	printf(RED "%5.2f" RESET, color.r);
+	printf(GRN "%7.2f" RESET, color.g);
+	printf(CYN "%7.2f" RESET "\n", color.b);
 }
 
 static void	print_shape_base(t_base base)
 {
-	t_vec3i	color;
+	t_color	color;
 	t_vec3f	pos;
 	t_vec3f	orient;
 

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 19:46:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/26 08:53:58 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/27 13:25:48 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	set_ambient_light(t_scene *scene, char **file_content)
 			if (settings == NULL)
 				exit_error("Error: couldn't allocate memory");
 			scene->amb_light.range = ft_atof(settings[1]);
-			scene->amb_light.color = get_vec3i_from_string(settings[2]);
+			scene->amb_light.color = get_color_from_string(settings[2]);
 			ft_free_2d_array(&settings, ft_2d_arrlen(settings));
 			return ;
 		}
@@ -70,7 +70,7 @@ void	make_light(t_light *light, char *settings)
 		exit_error("Error: couldn't allocate memory");
 	light->position = get_vec3f_from_string(split_settings[1]);
 	light->brightness = ft_atof(split_settings[2]);
-	light->color = get_vec3i_from_string(split_settings[3]);
+	light->color = get_color_from_string(split_settings[3]);
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
 
