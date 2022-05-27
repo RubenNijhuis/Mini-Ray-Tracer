@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/27 13:26:46 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/28 01:46:22 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libvec.h"
 # include <stdint.h>
+# include <stdbool.h>
 
 // Special chars
 # define CAMERA "C"
@@ -30,10 +31,33 @@
 
 typedef struct s_color
 {
-	double r;
-	double g;
-	double b;
+	double	r;
+	double	g;
+	double	b;
 }	t_color;
+
+/* Object element types */
+/**
+ * Defining the "shape" of an object we
+ * can check if the input settings contain
+ * all those settings. The program will run 
+ * a checker function per component to determin
+ * whether it was formatted correctly in the file
+ */
+typedef enum e_element_component
+{
+	position,
+	rotation,
+	color,
+	radius,
+	height,
+	fov,
+	range,
+	brightness,
+	bmp_map,
+	material,
+	amount_components
+}	t_element_component;
 
 // Token definitions
 typedef enum e_object_type
@@ -44,9 +68,24 @@ typedef enum e_object_type
 	sphere,
 	plane,
 	cylinder,
+	amount_objects
 }	t_object_type;
 
-// Base object
+typedef struct s_component_list
+{
+	t_object_type		obj_type;
+	uint32_t			amount_obj_components;
+	t_element_component	components[10];
+}	t_component_list;
+
+typedef bool	(*t_comp_checker_func)(char *str);
+
+typedef struct s_component_checker
+{
+	t_element_component	type;
+	t_comp_checker_func	func;
+}	t_component_checker;
+// Base objec3t
 typedef struct s_base
 {
 	t_object_type	obj_type;
@@ -130,6 +169,14 @@ void	make_sphere(t_object *obj, char *settings);
 
 // Create scene objects
 void	make_light(t_light *light, char *settings);
+
+bool	check_position(char *str);
+bool	check_rotation(char *str);
+bool	check_color(char *str);
+
+void	run_object_checks(t_object_type obj_type, char *obj_settings,
+			const t_component_list *object_components, \
+			const t_component_checker *component_checkers);
 
 // Util
 void	print_shapes(t_object *shapes, uint32_t amount_shapes);

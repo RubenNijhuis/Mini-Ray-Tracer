@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/27 15:56:13 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/27 20:47:34 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 		cur_shape = &pd->scene.shapes[current_shape];
 		cur_hit_dist = (*lookup_intersect_function(cur_shape)) \
 			(ray, cur_shape);
+		
+		// == fix
 		t_color newcol = cur_shape->base.color;
 		if (cur_hit_dist != -1)
 		{
@@ -92,6 +94,8 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 			newcol.g = (0.5f * (pos[1] + 1.0f));
 			newcol.b = (0.5f * (pos[2] + 1.0f));
 		}
+		// == fix
+		
 		update_color_from_dist(&hit_dist_record, cur_hit_dist, \
 			&color, newcol);
 
