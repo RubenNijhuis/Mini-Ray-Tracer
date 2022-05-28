@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/28 02:10:21 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/28 02:11:14 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ void	run_object_checks(t_object_type obj_type, char *obj_settings, \
 	// printf("%i", amount_checks);
 	for (int i = 0; i < 3; i++)
 		(*component_checkers[i].func) \
-			("WHT,HELLO,BONJOUR");
+			("WELL,HELLO,BONJOUR");
 }
