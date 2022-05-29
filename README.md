@@ -1,7 +1,7 @@
 # Mini Ray Tracer
 🌈 A small ray tracing project for the exercise "MiniRT"
 
-[ Display a really cool img or gif here 🤤 ]
+<img src="./assets/threeblobs.png">
 
 ## Quick Start 
 ```sh
