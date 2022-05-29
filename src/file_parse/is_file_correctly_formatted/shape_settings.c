@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/29 12:48:21 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/29 12:58:20 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minirt.h"
 #include "objects.h"
 
+#include <stdlib.h>
 #include <float.h>
 #include <stdio.h>
 
@@ -23,7 +24,11 @@ bool	check_rotation(char *settings)
 
 	split_settings = ft_split(settings, ',');
 	if (ft_2d_arrlen(split_settings) != 3)
+	{
 		printf("Error: rotation vec formatted incorrectly\n");
+		ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
+		return (false);
+	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 	return (true);
 }
@@ -34,7 +39,11 @@ bool	check_position(char *settings)
 
 	split_settings = ft_split(settings, ',');
 	if (ft_2d_arrlen(split_settings) != 3)
+	{
 		printf("Error: position vec formatted incorrectly\n");
+		ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
+		return (false);
+	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 	return (true);
 }
@@ -45,7 +54,11 @@ bool	check_color(char *settings)
 
 	split_settings = ft_split(settings, ',');
 	if (ft_2d_arrlen(split_settings) != 3)
+	{
 		printf("Error: color vec formatted incorrectly\n");
+		ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
+		return (false);
+	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 	return (true);
 }
@@ -55,7 +68,10 @@ bool	check_color(char *settings)
 bool	check_radius(char *settings)
 {
 	if (ft_atof(settings) > FLT_MAX)
+	{
 		printf("Error: radius variable formatted incorrectly\n");
+		return (false);
+	}
 	return (true);
 }
 
@@ -64,7 +80,10 @@ bool	check_radius(char *settings)
 bool	check_height(char *settings)
 {
 	if (ft_atof(settings) > FLT_MAX)
+	{
 		printf("Error: height variable formatted incorrectly\n");
+		return (false);
+	}
 	return (true);
 }
 
@@ -74,7 +93,10 @@ bool	check_fov(char *settings)
 {
 	(void)settings;
 	if (ft_atof(settings) > FLT_MAX)
+	{
 		printf("Error: fov variable formatted incorrectly\n");
+		return (false);
+	}
 	return (true);
 }
 
@@ -141,8 +163,9 @@ void	run_object_checks(t_object_type obj_type, char *obj_settings)
 		exit_error("Error: object line doesn't contain all mandatory settings");
 	while (current_check < amount_checks)
 	{
-		(get_object_checker_func(comps.components[current_check])) \
-			(split_settings[current_check + 1]);
+		if((get_object_checker_func(comps.components[current_check])) \
+			(split_settings[current_check + 1]) == false)
+			exit(-1);
 		current_check++;
 	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));

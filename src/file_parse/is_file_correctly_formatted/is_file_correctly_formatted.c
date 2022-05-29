@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/29 12:43:15 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/29 12:56:58 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	check_amount_shapes(char **file_content)
 		{
 			amount_shapes++;
 			if (amount_shapes > MAX_SHAPES)
-				exit_error("Erro: max shapes is 200");
+			exit_error("Erro: max shapes is 200");
 		}
 		current_line++;
 	}
