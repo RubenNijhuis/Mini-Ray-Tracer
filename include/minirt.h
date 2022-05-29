@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/28 00:49:19 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/28 22:13:08 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,9 @@
 
 typedef struct s_program_data
 {
-	t_scene						scene;
-	mlx_t						*mlx;
-	mlx_image_t					*img;
-
-	const t_component_list		*components_check;
-	const t_component_checker	*components_checker;
+	t_scene		scene;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 }	t_program_data;
 
 // typedef union u_color

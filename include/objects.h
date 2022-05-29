@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/28 01:46:22 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/29 12:31:04 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdbool.h>
 
 // Special chars
-# define CAMERA "C"
-# define AMBIENT_LIGHT "A"
-# define LIGHT "L"
+# define CAMERA "C "
+# define AMBIENT_LIGHT "A "
+# define LIGHT "L "
 
 # define PLANE "pl"
 # define SPHERE "sp"
@@ -59,7 +59,6 @@ typedef enum e_element_component
 	amount_components
 }	t_element_component;
 
-// Token definitions
 typedef enum e_object_type
 {
 	ambient_light,
@@ -74,7 +73,7 @@ typedef enum e_object_type
 typedef struct s_component_list
 {
 	t_object_type		obj_type;
-	uint32_t			amount_obj_components;
+	int32_t				amount_obj_components;
 	t_element_component	components[10];
 }	t_component_list;
 
@@ -156,33 +155,34 @@ typedef struct t_scene
 }	t_scene;
 
 // Setup components
-void	set_camera(t_scene *scene, char **file_content);
-void	set_lights(t_scene *scene, char **file_content);
-void	set_shapes(t_scene *scene, char **file_content);
-void	set_ambient_light(t_scene *scene, char **file_content);
-void	setup_scene(t_scene *scene, char *file_name);
+void			set_camera(t_scene *scene, char **file_content);
+void			set_lights(t_scene *scene, char **file_content);
+void			set_shapes(t_scene *scene, char **file_content);
+void			set_ambient_light(t_scene *scene, char **file_content);
+void			setup_scene(t_scene *scene, char *file_name);
 
 // Create objects
-void	make_plane(t_object *obj, char *settings);
-void	make_cylinder(t_object *obj, char *settings);
-void	make_sphere(t_object *obj, char *settings);
+void			make_plane(t_object *obj, char *settings);
+void			make_cylinder(t_object *obj, char *settings);
+void			make_sphere(t_object *obj, char *settings);
 
 // Create scene objects
-void	make_light(t_light *light, char *settings);
+void			make_light(t_light *light, char *settings);
 
-bool	check_position(char *str);
-bool	check_rotation(char *str);
-bool	check_color(char *str);
+bool			check_position(char *str);
+bool			check_rotation(char *str);
+bool			check_color(char *str);
+bool			check_radius(char *str);
 
-void	run_object_checks(t_object_type obj_type, char *obj_settings,
-			const t_component_list *object_components, \
-			const t_component_checker *component_checkers);
+void			run_object_checks(t_object_type obj_type, char *obj_settings);
 
 // Util
-void	print_shapes(t_object *shapes, uint32_t amount_shapes);
-void	print_lights(t_light *lights, uint32_t amount_lights);
-void	print_camera(t_camera camvec3iera);
-void	print_scene_elements(t_scene *scene);
-void	print_object_color(t_color color);
+int	get_obj_type(char *str);
+
+void			print_shapes(t_object *shapes, uint32_t amount_shapes);
+void			print_lights(t_light *lights, uint32_t amount_lights);
+void			print_camera(t_camera camvec3iera);
+void			print_scene_elements(t_scene *scene);
+void			print_object_color(t_color color);
 
 #endif
