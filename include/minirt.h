@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/28 22:13:08 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/29 16:25:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,14 @@ typedef struct s_program_data
 // 	}	c;
 // 	double arr[3];
 // }	t_color;
+
+typedef float	(*t_intersect_func_ptr)(t_ray *, t_object *);
+
+typedef struct s_intersect_func
+{
+	t_object_type			type;
+	t_intersect_func_ptr	func;
+}	t_intersect_func;
 
 // Setup mlx
 void		init_mlx(t_program_data *pd);

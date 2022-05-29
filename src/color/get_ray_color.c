@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/27 20:47:34 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/29 16:25:32 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,6 @@ static void	update_color_from_dist(float *hit_dist_record, float cur_hit_dist, \
 		*color = new_color;
 	}
 }
-
-typedef float	(*t_intersect_func_ptr)(t_ray *, t_object *);
-
-typedef struct s_intersect_func
-{
-	t_object_type			type;
-	t_intersect_func_ptr	func;
-}	t_intersect_func;
 
 static t_intersect_func_ptr	lookup_intersect_function(t_object *shape)
 {
@@ -81,24 +73,21 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 		cur_shape = &pd->scene.shapes[current_shape];
 		cur_hit_dist = (*lookup_intersect_function(cur_shape)) \
 			(ray, cur_shape);
-		
 		// == fix
-		t_color newcol = cur_shape->base.color;
+		t_color	newcol = cur_shape->base.color;
 		if (cur_hit_dist != -1)
 		{
 			// surface normal
 			// TODO: verify and move etc. this is temporary
-			t_vec3f pos = ray_at(ray, cur_hit_dist) - cur_shape->base.position;
+			t_vec3f	pos = ray_at(ray, cur_hit_dist) - cur_shape->base.position;
 			vec3f_normalize(&pos);
 			newcol.r = (0.5f * (pos[0] + 1.0f));
 			newcol.g = (0.5f * (pos[1] + 1.0f));
 			newcol.b = (0.5f * (pos[2] + 1.0f));
 		}
 		// == fix
-		
 		update_color_from_dist(&hit_dist_record, cur_hit_dist, \
 			&color, newcol);
-
 		current_shape++;
 	}
 	return (color);

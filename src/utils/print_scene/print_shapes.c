@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/27 15:46:46 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/29 16:00:03 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 void	print_object_color(t_color color)
 {
 	printf("Color       • ");
-	printf(RED "%5.2f" RESET, color.r);
-	printf(GRN "%7.2f" RESET, color.g);
-	printf(CYN "%7.2f" RESET "\n", color.b);
+	printf(RED "%6.2f" RESET, color.r);
+	printf(GRN "%8.2f" RESET, color.g);
+	printf(CYN "%8.2f" RESET "\n", color.b);
 }
 
 static void	print_shape_base(t_base base)
@@ -34,9 +34,9 @@ static void	print_shape_base(t_base base)
 	color = base.color;
 	pos = base.position;
 	orient = base.orientation;
-	printf("Value type  •   X      Y      Z\n");
-	printf("Position    • %05.2f  %05.2f  %05.2f\n", pos[0], pos[1], pos[2]);
-	printf("Orientation • %05.2f  %05.2f  %05.2f\n", \
+	printf("Value type  •    X       Y       Z\n");
+	printf("Position    • %6.2f  %6.2f  %6.2f\n", pos[0], pos[1], pos[2]);
+	printf("Orientation • %6.2f  %6.2f  %6.2f\n", \
 		orient[0], orient[1], orient[2]);
 	print_object_color(color);
 }
@@ -44,11 +44,11 @@ static void	print_shape_base(t_base base)
 static void	print_shape_dimensions(t_object_type type, t_object shape)
 {
 	if (type == sphere)
-		printf("Diameter    • %5.2f\n", shape.sphere.radius * 2);
+		printf("Diameter    • %6.2f\n", shape.sphere.radius * 2);
 	else if (type == cylinder)
 	{
-		printf("Diameter    • %5.2f\n", shape.cylinder.diameter);
-		printf("Height      • %5.2f\n", shape.cylinder.height);
+		printf("Diameter    • %6.2f\n", shape.cylinder.diameter);
+		printf("Height      • %6.2f\n", shape.cylinder.height);
 	}
 }
 
