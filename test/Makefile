@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/14 08:16:14 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/30 13:11:03 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@
 #=====================================#
 
 ifdef CODAM
-	CRITERION_DIR = -L /Users/$(USER)/.brew/Cellar/criterion/2.4.0_1/lib/
-	CRITERION_INC = -I /Users/$(USER)/.brew/Cellar/criterion/2.4.0_1/include 
+	CRITERION_DIR = -L /Users/jobvan-d/.brew/Cellar/criterion/2.4.1/lib
+	CRITERION_INC = -I /Users/jobvan-d/.brew/Cellar/criterion/2.4.1/include 
 else
 	CRITERION_DIR = -L /usr/local/Cellar/criterion/2.4.0_1/lib/
 	CRITERION_INC = -I /usr/local/Cellar/criterion/2.4.0_1/include
@@ -38,12 +38,12 @@ LIBS :=	../bin/minirt.a \
 		../libs/LibFT/libft.a \
 		../libs/Get-Next-Line/get-next-line.a \
 		../libs/Lib-Vec/libvec.a \
-		../libs/mlx/libmlx.a \
+		../libs/MLX42/libmlx42.a \
 
 LIBS_HEADERS :=	-I ../libs/LibFT/include/ \
 				-I ../libs/Get-Next-Line/include/ \
 				-I ../libs/Lib-Vec/include/ \
-				-I ../libs/mlx/ \
+				-I ../libs/MLX42/include/ \
 				$(CRITERION_INC)
 
 INC := -I ../include/ $(LIBS_HEADERS)
@@ -59,22 +59,22 @@ OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 #=====================================#
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra $(INC)
-LDFLAGS = $(CRITERION_DIR) -lcriterion
+CFLAGS = -Wall -Wextra $(INC) -fsanitize=address -g
+LDFLAGS = $(CRITERION_DIR) -lcriterion -lm
 
 #=====================================#
 #=============== Rules ===============#
 #=====================================#
 
-objs/%.o:src/*%.c
+objs/%.o: src/*%.c
 	@mkdir -p $(dir $@)
 	@$(CC) -c $(CFLAGS) -o $@ $^
 	@echo "🔨 Compiling: $^"
 	
 all: $(NAME)
 
-$(NAME):$(OBJS) $(LIBS)
-	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -o $(NAME)
 	@echo "✅ Built $(NAME)"
 
 clean:

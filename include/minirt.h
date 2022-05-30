@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/29 16:25:41 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/30 13:00:35 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ char		*get_shape_type_string(t_object_type obj_type);
 uint32_t	get_amount_objects(char **file_content, char *type);
 
 uint32_t	col_to_hex(const t_color col);
+
+float		deg_to_rad(const float a);
+float		rad_to_deg(const float a);
 
 // File parsing
 void		check_amount_lights(char **file_content);
