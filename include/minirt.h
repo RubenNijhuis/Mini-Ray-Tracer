@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/30 13:00:35 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/30 14:27:10 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ t_vec3f		get_vec3f_from_string(char *str);
 
 // Render
 void		render(t_program_data *pd);
+
+t_ray		get_camera_ray(uint32_t xpixel, uint32_t ypixel, t_camera *cam);
 
 // Intersections
 float		intersects_sphere(t_ray *ray, t_object *shape);

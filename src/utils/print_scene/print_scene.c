@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/29 16:01:38 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/30 14:15:09 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_camera(t_camera camera)
 	printf("Value type  •    X      Y      Z\n");
 	printf("Position    • %6.2f %6.2f %6.2f\n", pos[0], pos[1], pos[2]);
 	printf("Orientation • %6.2f %6.2f %6.2f\n", orient[0], orient[1], orient[2]);
-	printf("Fov         • %6.2u\n", camera.fov);
+	printf("Fov         • %6.2f\n", camera.fov);
 	printf("\n");
 }
 
