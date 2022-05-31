@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:36:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/27 12:49:21 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/31 15:30:03 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static float	get_intersection_point(float radius, float distance_to_so_sq, \
 	return (intersect_point);
 }
 
-// float ip2 = t + x;
 // TODO: return closest value but only if not negatives
+// see also: https://www.khanacademy.org/computer-programming/circle-intersect-test/5311392656179200
 float	intersects_sphere(t_ray *ray, t_object *shape)
 {
 	t_sphere	*sphere;

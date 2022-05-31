@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/29 16:25:32 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/31 15:29:04 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,8 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 		cur_shape = &pd->scene.shapes[current_shape];
 		cur_hit_dist = (*lookup_intersect_function(cur_shape)) \
 			(ray, cur_shape);
-		// == fix
 		t_color	newcol = cur_shape->base.color;
-		if (cur_hit_dist != -1)
+		if (cur_hit_dist != -1 && cur_shape->base.obj_type == sphere)
 		{
 			// surface normal
 			// TODO: verify and move etc. this is temporary
