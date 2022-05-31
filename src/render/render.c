@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:55:24 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/30 14:23:42 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/31 16:45:31 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	render(t_program_data *pd)
 		xpixel = 0;
 		while (xpixel < WIN_WIDTH)
 		{
-			ray = get_camera_ray(xpixel, ypixel, &pd->scene.camera);
+			ray = get_camera_ray(xpixel, ypixel , &pd->scene.camera);
 			color = get_ray_color(&ray, xpixel, ypixel, pd);
-			mlx_put_pixel(pd->img, xpixel, ypixel, col_to_hex(color));
+			mlx_put_pixel(pd->img, xpixel, WIN_HEIGHT - ypixel, col_to_hex(color));
 			xpixel++;
 		}
 		ypixel++;

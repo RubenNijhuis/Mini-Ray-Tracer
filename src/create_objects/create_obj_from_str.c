@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 10:50:32 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/27 13:25:44 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/31 16:31:13 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	make_plane(t_object *obj, char *settings)
 	obj->plane.base.obj_type = plane;
 	obj->plane.base.position = get_vec3f_from_string(split_settings[1]);
 	obj->plane.base.orientation = get_vec3f_from_string(split_settings[2]);
+	vec3f_normalize(&obj->plane.base.orientation);
 	obj->plane.base.color = get_color_from_string(split_settings[3]);
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
