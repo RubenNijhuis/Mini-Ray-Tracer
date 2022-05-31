@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/31 15:29:04 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/05/31 18:37:34 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,12 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 			newcol.g = (0.5f * (pos[1] + 1.0f));
 			newcol.b = (0.5f * (pos[2] + 1.0f));
 		}
-		// == fix
+		else if (cur_hit_dist != -1 && cur_shape->base.obj_type == plane)
+		{
+			newcol.r = (cur_hit_dist / 100);
+			newcol.g = sin(cur_hit_dist / 100);
+			newcol.b = cos((cur_hit_dist) / 100 + M_PI) / 1.1f;
+		}
 		update_color_from_dist(&hit_dist_record, cur_hit_dist, \
 			&color, newcol);
 		current_shape++;
