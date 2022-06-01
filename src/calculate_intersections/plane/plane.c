@@ -6,18 +6,21 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:44:59 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/31 18:24:40 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/01 14:31:40 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
-#include "minirt.h"
 #include "libvec.h"
 #include "ray.h"
 
-#include <stdio.h>
+#include <math.h> /* fabs */
 
-#define THRES (0.00001f)
+// cutoff threshold for when the ray is roughly parallel to the plane
+#define PARALLEL_THRES (0.0001f)
+
+// Maximum render distance of the plane.
+#define MAX_DISTANCE (10000.0f)
 
 float	intersects_plane(t_ray *ray, t_object *shape)
 {
@@ -27,13 +30,14 @@ float	intersects_plane(t_ray *ray, t_object *shape)
 
 	plane = &shape->plane;
 	divisor = vec3f_dot(plane->base.orientation, ray->direction);
-	if (divisor * divisor < THRES)
+	if (fabs(divisor) < PARALLEL_THRES)
 	{
-		return -1;
+		return (-1);
 	}
-	t = vec3f_dot(vec3f_subtract(plane->base.position, ray->origin), plane->base.orientation);
+	t = vec3f_dot(vec3f_subtract(plane->base.position, ray->origin),
+			plane->base.orientation);
 	t /= divisor;
-	if (t < 0.0f || t > 10000.0f)
+	if (t < 0.0f || t > MAX_DISTANCE)
 	{
 		t = -1;
 	}
