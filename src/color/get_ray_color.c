@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/02 15:53:38 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/02 18:05:24 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 			newcol.g = sin(cur_hit_dist / 100);
 			newcol.b = cos((cur_hit_dist) / 100 + M_PI) / 1.1f;
 		}
+		ambient_mixin(&newcol, &pd->scene);
 		update_color_from_dist(&hit_dist_record, cur_hit_dist, \
 			&color, newcol);
 		current_shape++;

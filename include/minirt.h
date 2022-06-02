@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/01 14:40:02 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/02 18:02:59 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,14 @@ float		intersects_plane(t_ray *ray, t_object *shape);
 t_color		get_default_color(t_program_data *pd);
 t_color		get_ray_color(t_ray *ray, uint32_t x, \
 				uint32_t y, t_program_data *pd);
+void		color_multiply(t_color *color, const t_color *rhs);
+void		color_multiply_scalar(t_color *color, const double scalar);
+uint32_t	col_to_hex(const t_color col);
+
 void		render_pixel_color(uint32_t x, uint32_t y, \
 				t_color color, t_program_data *pd);
+
+void		ambient_mixin(t_color* col, t_scene *scene);
 
 // Utils
 void		exit_error(char *str);
@@ -98,8 +104,6 @@ bool		ft_is_object(const char *haystack, const char *needle);
 void		is_file_correctly_formatted(char **file_content);
 char		*get_shape_type_string(t_object_type obj_type);
 uint32_t	get_amount_objects(char **file_content, char *type);
-
-uint32_t	col_to_hex(const t_color col);
 
 float		deg_to_rad(const float a);
 float		rad_to_deg(const float a);
