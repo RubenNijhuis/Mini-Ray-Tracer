@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/01 14:41:12 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/02 15:53:38 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,9 @@ static void	update_color_from_dist(float *hit_dist_record, float cur_hit_dist, \
 // see e_objects_type in objects.h
 static t_intersect_func_ptr	lookup_intersect_function(t_object *shape)
 {
-	const t_intersect_func_ptr	funcs[] = {
-	NULL,
-	NULL,
-	NULL,
-	&intersects_sphere,
-	&intersects_plane,
-	NULL,
-	NULL,
+	static const t_intersect_func_ptr	funcs[] = {
+	[sphere] = &intersects_sphere,
+	[plane] = &intersects_plane,
 	};
 
 	return (funcs[shape->base.obj_type]);
