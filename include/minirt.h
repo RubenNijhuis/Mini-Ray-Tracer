@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/03 14:20:22 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/03 17:03:53 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_program_data
 typedef float	(*t_intersect_func_ptr)(t_ray *, t_object *);
 typedef t_vec3f	(*t_normal_func_ptr)(const t_ray *, const float, t_object *);
 
+t_intersect_func_ptr	lookup_intersect_function(t_object *shape);
+
 // Setup mlx
 void		init_mlx(t_program_data *pd);
 void		start_mlx(t_program_data *pd);
@@ -90,9 +92,11 @@ t_vec3f		get_plane_normal(const t_ray *ray, const float dist,
 				t_object *shape);
 
 // Colors
+t_color		make_color(double r, double g, double b);
 t_color		get_default_color(t_program_data *pd);
 t_color		get_ray_color(t_ray *ray, uint32_t x, \
 				uint32_t y, t_program_data *pd);
+void		color_add(t_color *color, const t_color *rhs);
 void		color_multiply(t_color *color, const t_color *rhs);
 void		color_multiply_scalar(t_color *color, const double scalar);
 uint32_t	col_to_hex(const t_color col);
@@ -101,6 +105,7 @@ void		render_pixel_color(uint32_t x, uint32_t y, \
 				t_color color, t_program_data *pd);
 
 void		ambient_mixin(t_color *col, t_scene *scene);
+t_color		lights_mixin(t_scene *scene, t_vec3f p, t_object *shape);
 
 // Utils
 void		exit_error(char *str);

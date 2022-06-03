@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/27 13:36:57 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/02 18:00:52 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/03 16:46:10 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ t_color	get_default_color(t_program_data *pd)
 {
 	(void)pd;
 	return (make_color(0, 0, 0));
+}
+
+void	color_add(t_color *color, const t_color *rhs)
+{
+	color->r += rhs->r;
+	color->g += rhs->g;
+	color->b += rhs->b;
 }
 
 void	color_multiply(t_color *color, const t_color *rhs)

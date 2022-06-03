@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/03 14:15:38 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/03 17:20:46 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,8 @@
 #include <stddef.h>
 #include <math.h>
 
-/**
- * Checks if the distance from origin to the current object is smaller
- * than the current record. If so -> update the record and update the color
-*/
-static void	update_color_from_dist(float *hit_dist_record, float cur_hit_dist, \
-	t_color *color, t_color new_color)
-{
-	if (cur_hit_dist != -1 && cur_hit_dist < *hit_dist_record)
-	{
-		*hit_dist_record = cur_hit_dist;
-		*color = new_color;
-	}
-}
-
 // see e_objects_type in objects.h
-static t_intersect_func_ptr	lookup_intersect_function(t_object *shape)
+t_intersect_func_ptr	lookup_intersect_function(t_object *shape)
 {
 	static const t_intersect_func_ptr	funcs[] = {
 	[sphere] = &intersects_sphere,
@@ -43,7 +29,7 @@ static t_intersect_func_ptr	lookup_intersect_function(t_object *shape)
 }
 
 // see e_objects_type in objects.h
-static t_normal_func_ptr	lookup_normal_function(t_object *shape)
+t_normal_func_ptr	lookup_normal_function(t_object *shape)
 {
 	static const t_normal_func_ptr	funcs[] = {
 	[sphere] = &get_sphere_normal,
@@ -77,26 +63,35 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 		cur_shape = &pd->scene.shapes[current_shape];
 		cur_hit_dist = (lookup_intersect_function(cur_shape)) \
 			(ray, cur_shape);
+		if (cur_hit_dist == -1 || cur_hit_dist >= hit_dist_record)
+		{
+			current_shape++;
+			continue;
+		}
+		hit_dist_record = cur_hit_dist;
 		t_color	newcol = cur_shape->base.color;
-		t_vec3f	normal = (lookup_normal_function(cur_shape))(ray,
-			cur_hit_dist, cur_shape);
-		if (cur_hit_dist != -1 && cur_shape->base.obj_type == sphere)
-		{
-			// surface normal
-			// TODO: verify and move etc. this is temporary
-			newcol.r = (0.5f * (normal[0] + 1.0f));
-			newcol.g = (0.5f * (normal[1] + 1.0f));
-			newcol.b = (0.5f * (normal[2] + 1.0f));
-		}
-		else if (cur_hit_dist != -1 && cur_shape->base.obj_type == plane)
-		{
-			newcol.r = (cur_hit_dist / 100);
-			newcol.g = sin(cur_hit_dist / 100);
-			newcol.b = cos((cur_hit_dist) / 100 + M_PI) / 1.1f;
-		}
+		// t_vec3f	normal = (lookup_normal_function(cur_shape))(ray,
+		// 	cur_hit_dist, cur_shape);
+		// if (cur_hit_dist != -1)
+		// {
+		// 	// surface normal
+		// 	// TODO: verify and move etc. this is temporary
+		// 	newcol.r = (0.5f * (normal[0] + 1.0f));
+		// 	newcol.g = (0.5f * (normal[1] + 1.0f));
+		// 	newcol.b = (0.5f * (normal[2] + 1.0f));
+		// }
+		// else if (cur_hit_dist != -1 && cur_shape->base.obj_type == plane)
+		// {
+		// 	newcol.r = (cur_hit_dist / 100);
+		// 	newcol.g = sin(cur_hit_dist / 100);
+		// 	newcol.b = cos((cur_hit_dist) / 100 + M_PI) / 1.1f;
+		// }
 		ambient_mixin(&newcol, &pd->scene);
-		update_color_from_dist(&hit_dist_record, cur_hit_dist, \
-			&color, newcol);
+		t_color	yeet = lights_mixin(&pd->scene,
+			ray_at(ray, cur_hit_dist),
+			cur_shape);
+		color_add(&newcol, &yeet);
+		color = newcol;
 		current_shape++;
 	}
 	return (color);
