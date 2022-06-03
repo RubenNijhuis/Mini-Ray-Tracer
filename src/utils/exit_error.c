@@ -6,17 +6,17 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:46:29 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/26 09:33:23 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/03 13:36:53 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>	// exit
-#include <stdio.h>	// printf
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
  * @brief 
- * Exits the program displaying the error and returning 
- * exit code 1
+ * Exits the program displaying the error and 
+ * exits with status code 1
  * @param str 
  */
 void	exit_error(char *str)

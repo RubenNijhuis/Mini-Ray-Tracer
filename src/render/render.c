@@ -6,13 +6,20 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:55:24 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/31 16:45:31 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/03 13:35:55 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "minirt.h"
 
+/**
+ * @brief 
+ * Renders the scene. It shoots a ray for each pixel which will in turn
+ * make calculations to determine the pixel color
+ * 
+ * @param pd 
+ */
 void	render(t_program_data *pd)
 {
 	uint32_t	xpixel;

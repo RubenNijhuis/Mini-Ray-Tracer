@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   checks.c                                           :+:    :+:            */
+/*   element_checks.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/03 12:23:44 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/03 13:34:59 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,14 @@ bool	check_arr_values_range_int(char **items, int64_t min, int64_t max)
 	return (status);
 }
 
+/**
+ * @brief 
+ * Checks if the position is formatted correctly.
+ * Returns a bool - true if correct, false otherwise
+ * 
+ * @param settings 
+ * @return bool
+ */
 bool	check_position(char *settings)
 {
 	char	**split_settings;
@@ -89,6 +97,14 @@ bool	check_position(char *settings)
 	return (status);
 }
 
+/**
+ * @brief 
+ * Checks if the rotation vector is formatted correctly.
+ * Returns a bool - true if correct, false otherwise
+ * 
+ * @param settings 
+ * @return bool
+ */
 bool	check_rotation(char *settings)
 {
 	char	**split_settings;

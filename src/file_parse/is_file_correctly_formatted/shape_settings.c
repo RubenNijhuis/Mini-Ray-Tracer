@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/03 12:52:29 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/03 13:32:45 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 #include <float.h>
 #include <stdio.h>
 
+/**
+ * @brief 
+ * Returns a struct that describes the components/elements of an object
+ * based on the corresponding object type
+ * 
+ * @param type 
+ * @return t_component_list 
+ */
 t_component_list	get_object_component_list(t_object_type type)
 {
 	static const t_component_list	components_check[] = {
@@ -34,6 +42,15 @@ t_component_list	get_object_component_list(t_object_type type)
 
 // { bmp_map,    &check_bpm_map},
 // { material,   &check_material},
+/**
+ * @brief 
+ * Returns a function pointer that will check whether the settings
+ * are formatted correctly. Requires the corresponding element
+ * component
+ * 
+ * @param comp 
+ * @return t_comp_checker_func 
+ */
 t_comp_checker_func	get_elem_checker_func(t_element_component comp)
 {
 	static const t_comp_checker_func	funcs[] = {
@@ -49,6 +66,15 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
 	return (funcs[comp]);
 }
 
+/**
+ * @brief 
+ * Goes through each objects elements and runs the corresponding
+ * function on the setting to check if it's formatted correctly
+ * Will exit with an error message upon incorrect formatting
+ * 
+ * @param obj_type 
+ * @param obj_settings 
+ */
 void	run_object_checks(t_object_type obj_type, char *obj_settings)
 {
 	t_component_list	comps;
