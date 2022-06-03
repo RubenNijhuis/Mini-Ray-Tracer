@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/02 18:02:59 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/03 14:20:22 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_program_data
 // }	t_color;
 
 typedef float	(*t_intersect_func_ptr)(t_ray *, t_object *);
+typedef t_vec3f	(*t_normal_func_ptr)(const t_ray *, const float, t_object *);
 
 // Setup mlx
 void		init_mlx(t_program_data *pd);
@@ -83,6 +84,11 @@ t_ray		get_camera_ray(uint32_t xpixel, uint32_t ypixel, t_camera *cam);
 float		intersects_sphere(t_ray *ray, t_object *shape);
 float		intersects_plane(t_ray *ray, t_object *shape);
 
+t_vec3f		get_sphere_normal(const t_ray *ray, const float dist,
+				t_object *shape);
+t_vec3f		get_plane_normal(const t_ray *ray, const float dist,
+				t_object *shape);
+
 // Colors
 t_color		get_default_color(t_program_data *pd);
 t_color		get_ray_color(t_ray *ray, uint32_t x, \
@@ -94,7 +100,7 @@ uint32_t	col_to_hex(const t_color col);
 void		render_pixel_color(uint32_t x, uint32_t y, \
 				t_color color, t_program_data *pd);
 
-void		ambient_mixin(t_color* col, t_scene *scene);
+void		ambient_mixin(t_color *col, t_scene *scene);
 
 // Utils
 void		exit_error(char *str);

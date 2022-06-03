@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:36:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/31 15:30:03 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/03 14:20:57 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,35 @@
 #include "libvec.h"
 #include "ray.h"
 
-#include <math.h>
+#include <math.h> // sqrt
 #include <stdbool.h>
 
-static float	get_intersection_point(float radius, float distance_to_so_sq, \
+/* gets the surface normal of a sphere.
+ * TODO: verify if correct. */
+t_vec3f	get_sphere_normal(const t_ray *ray, const float dist, t_object *shape)
+{
+	t_vec3f	intersect_point;
+	t_vec3f	normal;
+
+	intersect_point = ray_at(ray, dist);
+	normal = intersect_point - shape->base.position;
+	vec3f_normalize(&normal);
+	return (normal);
+}
+
+static float	get_sphere_intersection(float radius, float distance_to_so_sq, \
 	float distance_to_closest_point)
 {
-	float	intersect_point;
+	float	intersect_dist;
 	float	distance_from_origin_to_ray;
 
 	distance_from_origin_to_ray = sqrt(radius * radius - distance_to_so_sq);
-	intersect_point = distance_to_closest_point - distance_from_origin_to_ray;
-	return (intersect_point);
+	intersect_dist = distance_to_closest_point - distance_from_origin_to_ray;
+	return (intersect_dist);
 }
 
 // TODO: return closest value but only if not negatives
-// see also: https://www.khanacademy.org/computer-programming/circle-intersect-test/5311392656179200
+// see also: https://www.khanacademy.org/computer-programming/c/5311392656179200
 float	intersects_sphere(t_ray *ray, t_object *shape)
 {
 	t_sphere	*sphere;
@@ -45,7 +58,7 @@ float	intersects_sphere(t_ray *ray, t_object *shape)
 	distance_to_so_sq = vec3f_len_sq(sphere->base.position - closest_point);
 	if (distance_to_so_sq <= sphere->radius * sphere->radius)
 	{
-		return (get_intersection_point(sphere->radius,
+		return (get_sphere_intersection(sphere->radius,
 				distance_to_so_sq, distance_to_closest_point));
 	}
 	return (-1);

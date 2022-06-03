@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:44:59 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/01 14:31:40 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/03 14:19:42 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@
 
 // Maximum render distance of the plane.
 #define MAX_DISTANCE (10000.0f)
+
+/* returns the surface normal of a plane, which is actually the orientation. */
+t_vec3f	get_plane_normal(const t_ray *ray, const float dist, t_object *shape)
+{
+	(void)ray;
+	(void)dist;
+	return (shape->base.orientation);
+}
 
 float	intersects_plane(t_ray *ray, t_object *shape)
 {
