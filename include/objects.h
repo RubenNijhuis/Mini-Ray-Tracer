@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/30 14:14:21 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/03 12:54:07 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,12 @@ typedef enum e_object_type
 
 typedef struct s_component_list
 {
-	t_object_type		obj_type;
-	int32_t				amount_obj_components;
+	uint32_t			amount_obj_components;
 	t_element_component	components[10];
 }	t_component_list;
 
 typedef bool	(*t_comp_checker_func)(char *str);
 
-typedef struct s_component_checker
-{
-	t_element_component	type;
-	t_comp_checker_func	func;
-}	t_component_checker;
 // Base objec3t
 typedef struct s_base
 {
