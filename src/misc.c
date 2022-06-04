@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/26 08:58:04 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/04 21:00:04 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@
 #include "MLX42/MLX42_Input.h"
 
 #include <stdlib.h> // exit
-#include <stdio.h> // printf
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	(void)param;
+	t_program_data	*pd;
+
+	pd = (t_program_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
+	{
+		mlx_terminate(pd->mlx);
 		exit(0);
+	}
 }
 
 // TODO: stderr
@@ -39,7 +43,7 @@ void	init_mlx(t_program_data *pd)
 /* starts rendering of the window and such */
 void	start_mlx(t_program_data *pd)
 {
-	mlx_key_hook(pd->mlx, &key_hook, NULL);
+	mlx_key_hook(pd->mlx, &key_hook, pd);
 	mlx_image_to_window(pd->mlx, pd->img, 0, 0);
 	mlx_loop(pd->mlx);
 }
