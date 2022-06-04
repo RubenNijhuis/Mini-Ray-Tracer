@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/03 12:54:07 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/04 16:16:12 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ bool	check_brightness(char *settings);
 void	run_object_checks(t_object_type obj_type, char *obj_settings);
 
 // Util
-int		get_obj_type(char *str);
+int		get_obj_type(const char *str);
 
 void	print_shapes(t_object *shapes, uint32_t amount_shapes);
 void	print_lights(t_light *lights, uint32_t amount_lights);

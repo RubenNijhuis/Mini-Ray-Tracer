@@ -6,19 +6,16 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/29 16:22:29 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/04 16:37:06 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minirt.h"
 #include "objects.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <stdio.h>
 
 static void	check_amount_shapes(char **file_content)
 {
@@ -34,32 +31,42 @@ static void	check_amount_shapes(char **file_content)
 		{
 			amount_shapes++;
 			if (amount_shapes > MAX_SHAPES)
-				exit_error("Erro: max shapes is 200");
+			{
+				ft_putstr_fd("Error: too many shapes(max ", 2);
+				ft_putnbr_fd(MAX_SHAPES, 2);
+				exit_error(")");
+			}
 		}
 		current_line++;
 	}
 }
 
-int	get_obj_type(char *str)
+typedef struct ss_obj_type_map
 {
-	char	*substr;
+	const char			*type_str;
+	const t_object_type	type;
+}	t_obj_type_map;
 
-	if (ft_strlen(str) > 2)
+int	get_obj_type(const char *str)
+{
+	static const t_obj_type_map	map[] = {
+	{SPHERE, sphere},
+	{PLANE, plane},
+	{CYLINDER, cylinder},
+	{CAMERA, camera},
+	{AMBIENT_LIGHT, ambient_light},
+	{LIGHT, light}
+	};
+	size_t						i;
+
+	i = 0;
+	while (i < sizeof(map) / sizeof(t_obj_type_map))
 	{
-		substr = ft_substr(str, 0, 2);
-		if (ft_strncmp(substr, SPHERE, 2) == 0)
-			return (sphere);
-		if (ft_strncmp(substr, PLANE, 2) == 0)
-			return (plane);
-		if (ft_strncmp(substr, CYLINDER, 2) == 0)
-			return (cylinder);
-		if (ft_strncmp(substr, CAMERA, 2) == 0)
-			return (camera);
-		if (ft_strncmp(substr, AMBIENT_LIGHT, 2) == 0)
-			return (ambient_light);
-		if (ft_strncmp(substr, LIGHT, 2) == 0)
-			return (light);
-		free(substr);
+		if (ft_strncmp(str, map[i].type_str, 2) == 0)
+		{
+			return (map[i].type);
+		}
+		i++;
 	}
 	return (-1);
 }
