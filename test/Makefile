@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/30 13:11:03 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/06/04 18:03:27 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ INC := -I ../include/ $(LIBS_HEADERS)
 SRCS :=	make_objects.c \
 		misc.c \
 		vector_utils.c \
+		parsing.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
