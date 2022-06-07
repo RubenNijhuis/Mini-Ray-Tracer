@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/07 16:02:42 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/07 16:15:47 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_normal_func_ptr	lookup_normal_function(t_object *shape)
 */
 static bool	update_closest_hit(float *hit_dist_record, float hit_dist)
 {
-	if (hit_dist > 0 && hit_dist < *hit_dist_record)
+	if (hit_dist > 0 && hit_dist <= *hit_dist_record)
 	{
 		*hit_dist_record = hit_dist;
 		return (true);
@@ -96,17 +96,19 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 		cur_shape = &pd->scene.shapes[current_shape];
 		hit_dist = (lookup_intersect_function(cur_shape)) \
 			(ray, cur_shape);
-		if (update_closest_hit(&hit_dist_record, hit_dist))
+		if (!update_closest_hit(&hit_dist_record, hit_dist))
 		{
 			current_shape++;
 			continue;
 		}
 
+		t_vec3f	normal = (lookup_normal_function(cur_shape))(ray, hit_dist, cur_shape);
+
 		t_color	newcol = cur_shape->base.color;
 		ambient_mixin(&newcol, &pd->scene);
 		t_color	yeet = lights_mixin(&pd->scene,
 			ray_at(ray, hit_dist),
-			cur_shape);
+			cur_shape, normal);
 		color_add(&newcol, &yeet);
 		color = newcol;
 		current_shape++;

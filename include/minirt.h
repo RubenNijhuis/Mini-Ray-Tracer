@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/03 17:03:53 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/07 16:15:33 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void		render_pixel_color(uint32_t x, uint32_t y, \
 				t_color color, t_program_data *pd);
 
 void		ambient_mixin(t_color *col, t_scene *scene);
-t_color		lights_mixin(t_scene *scene, t_vec3f p, t_object *shape);
+t_color		lights_mixin(t_scene *scene, t_vec3f p, t_object *shape, t_vec3f normal);
 
 // Utils
 void		exit_error(char *str);
