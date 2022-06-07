@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/03 17:20:46 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/07 16:02:42 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "ray.h"
 #include "minirt.h"
 
+
+#include <stdbool.h>
 #include <stddef.h>
 #include <math.h>
 
@@ -39,6 +41,37 @@ t_normal_func_ptr	lookup_normal_function(t_object *shape)
 	return (funcs[shape->base.obj_type]);
 }
 
+// t_vec3f	normal = (lookup_normal_function(cur_shape))(ray,
+// 	cur_hit_dist, cur_shape);
+// if (cur_hit_dist != -1)
+// {
+// 	// surface normal
+// 	// TODO: verify and move etc. this is temporary
+// 	newcol.r = (0.5f * (normal[0] + 1.0f));
+// 	newcol.g = (0.5f * (normal[1] + 1.0f));
+// 	newcol.b = (0.5f * (normal[2] + 1.0f));
+// }
+// else if (cur_hit_dist != -1 && cur_shape->base.obj_type == plane)
+// {
+// 	newcol.r = (cur_hit_dist / 100);
+// 	newcol.g = sin(cur_hit_dist / 100);
+// 	newcol.b = cos((cur_hit_dist) / 100 + M_PI) / 1.1f;
+// }
+
+/**
+ * Checks if the distance from origin to the current object is smaller
+ * than the current record. If so -> update the record and update the color
+*/
+static bool	update_closest_hit(float *hit_dist_record, float hit_dist)
+{
+	if (hit_dist > 0 && hit_dist < *hit_dist_record)
+	{
+		*hit_dist_record = hit_dist;
+		return (true);
+	}
+	return (false);
+}
+
 /*
  * Loops through the shapes array and checks if the ray intersects
  * If it intersects it returns the current hit distance and applies
@@ -50,7 +83,7 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 	uint32_t	current_shape;
 	t_object	*cur_shape;
 	float		hit_dist_record;
-	float		cur_hit_dist;
+	float		hit_dist;
 	t_color		color;
 
 	(void)x;
@@ -61,34 +94,18 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 	while (current_shape < pd->scene.amount_shapes)
 	{
 		cur_shape = &pd->scene.shapes[current_shape];
-		cur_hit_dist = (lookup_intersect_function(cur_shape)) \
+		hit_dist = (lookup_intersect_function(cur_shape)) \
 			(ray, cur_shape);
-		if (cur_hit_dist == -1 || cur_hit_dist >= hit_dist_record)
+		if (update_closest_hit(&hit_dist_record, hit_dist))
 		{
 			current_shape++;
 			continue;
 		}
-		hit_dist_record = cur_hit_dist;
+
 		t_color	newcol = cur_shape->base.color;
-		// t_vec3f	normal = (lookup_normal_function(cur_shape))(ray,
-		// 	cur_hit_dist, cur_shape);
-		// if (cur_hit_dist != -1)
-		// {
-		// 	// surface normal
-		// 	// TODO: verify and move etc. this is temporary
-		// 	newcol.r = (0.5f * (normal[0] + 1.0f));
-		// 	newcol.g = (0.5f * (normal[1] + 1.0f));
-		// 	newcol.b = (0.5f * (normal[2] + 1.0f));
-		// }
-		// else if (cur_hit_dist != -1 && cur_shape->base.obj_type == plane)
-		// {
-		// 	newcol.r = (cur_hit_dist / 100);
-		// 	newcol.g = sin(cur_hit_dist / 100);
-		// 	newcol.b = cos((cur_hit_dist) / 100 + M_PI) / 1.1f;
-		// }
 		ambient_mixin(&newcol, &pd->scene);
 		t_color	yeet = lights_mixin(&pd->scene,
-			ray_at(ray, cur_hit_dist),
+			ray_at(ray, hit_dist),
 			cur_shape);
 		color_add(&newcol, &yeet);
 		color = newcol;
