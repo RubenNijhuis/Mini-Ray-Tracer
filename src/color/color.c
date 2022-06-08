@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/27 13:36:57 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/03 16:46:10 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/08 13:39:06 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_color	make_color(double r, double g, double b)
 	return (col);
 }
 
-t_color	get_default_color(t_program_data *pd)
+t_color	get_default_color(t_scene *scene)
 {
-	(void)pd;
+	(void)scene;
 	return (make_color(0, 0, 0));
 }
 

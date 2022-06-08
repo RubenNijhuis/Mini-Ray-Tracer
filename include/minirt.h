@@ -6,24 +6,20 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/07 16:15:33 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/08 19:13:23 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include "bonus.h"
 # include "objects.h"
 # include "ray.h"
 # include "MLX42/MLX42.h"
 
 # include <stdint.h>
 # include <stdbool.h>
-
-// If rendering in bonus mode
-# ifndef BONUS
-#  define BONUS 1
-# endif
 
 // The program can only handle so much ;)
 # define MAX_SHAPES 200
@@ -93,9 +89,8 @@ t_vec3f		get_plane_normal(const t_ray *ray, const float dist,
 
 // Colors
 t_color		make_color(double r, double g, double b);
-t_color		get_default_color(t_program_data *pd);
-t_color		get_ray_color(t_ray *ray, uint32_t x, \
-				uint32_t y, t_program_data *pd);
+t_color		get_default_color(t_scene *scene);
+t_color		get_ray_color(t_ray *ray, t_scene *scene);
 void		color_add(t_color *color, const t_color *rhs);
 void		color_multiply(t_color *color, const t_color *rhs);
 void		color_multiply_scalar(t_color *color, const double scalar);
@@ -123,5 +118,9 @@ float		rad_to_deg(const float a);
 void		check_amount_lights(char **file_content);
 void		check_amount_cameras(char **file_content);
 void		check_amount_ambient_lights(char **file_content);
+
+t_color	get_pixel_color(uint32_t px, uint32_t py, t_scene *scene);
+void	render_pixel(t_program_data *pd, uint32_t px, uint32_t py);
+void	put_pixel(t_program_data *pd, uint32_t px, uint32_t py, uint32_t col);
 
 #endif

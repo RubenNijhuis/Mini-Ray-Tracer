@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/04 21:00:04 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/08 17:00:06 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	init_mlx(t_program_data *pd)
 	pd->img = mlx_new_image(pd->mlx, WIN_WIDTH, WIN_HEIGHT);
 	ft_memset(pd->img->pixels, 0,
 		pd->img->width * pd->img->height * sizeof(int));
+	mlx_key_hook(pd->mlx, &key_hook, pd);
+	mlx_image_to_window(pd->mlx, pd->img, 0, 0);
 }
 
 /* starts rendering of the window and such */
 void	start_mlx(t_program_data *pd)
 {
-	mlx_key_hook(pd->mlx, &key_hook, pd);
-	mlx_image_to_window(pd->mlx, pd->img, 0, 0);
 	mlx_loop(pd->mlx);
 }
 

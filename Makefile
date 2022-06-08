@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/05/27 15:47:10 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/06/08 17:42:21 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ HEADERS :=		$(LIBS_DIR)/Lib-Vec/include/libvec.h \
 				$(wildcard $(INCLUDE_DIR)/*.h)
 
 
-MLX_A :=			$(LIBS_DIR)/MLX42/libmlx42.a
+MLX_DIR			= $(LIBS_DIR)/MLX42
+MLX_H 			:=	$(MLX_DIR)/include/MLX42/MLX42.h
+MLX_A 			:=	$(MLX_DIR)/libmlx42.a
 
 #=====================================#
 #=============== Input ===============#
@@ -162,7 +164,7 @@ norm:
 #========== Lib compilation ==========#
 #=====================================#
 
-$(MLX_A):
+$(MLX_A): $(MLX_H)
 	@$(MAKE) -C $(LIBS_DIR)/MLX42
 
 $(LIBS_DIR)/LibFT/libft.a:

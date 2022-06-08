@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/07 16:15:47 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/08 13:54:34 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static bool	update_closest_hit(float *hit_dist_record, float hit_dist)
  * color if needed
  * NOTE: Uses a function roulette to acces the correct intersection func
 */
-t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
+t_color	get_ray_color(t_ray *ray, t_scene *scene)
 {
 	uint32_t	current_shape;
 	t_object	*cur_shape;
@@ -86,14 +86,12 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 	float		hit_dist;
 	t_color		color;
 
-	(void)x;
-	(void)y;
 	current_shape = 0;
-	color = get_default_color(pd);
+	color = get_default_color(scene);
 	hit_dist_record = INFINITY;
-	while (current_shape < pd->scene.amount_shapes)
+	while (current_shape < scene->amount_shapes)
 	{
-		cur_shape = &pd->scene.shapes[current_shape];
+		cur_shape = &scene->shapes[current_shape];
 		hit_dist = (lookup_intersect_function(cur_shape)) \
 			(ray, cur_shape);
 		if (!update_closest_hit(&hit_dist_record, hit_dist))
@@ -105,8 +103,8 @@ t_color	get_ray_color(t_ray *ray, uint32_t x, uint32_t y, t_program_data *pd)
 		t_vec3f	normal = (lookup_normal_function(cur_shape))(ray, hit_dist, cur_shape);
 
 		t_color	newcol = cur_shape->base.color;
-		ambient_mixin(&newcol, &pd->scene);
-		t_color	yeet = lights_mixin(&pd->scene,
+		ambient_mixin(&newcol, scene);
+		t_color	yeet = lights_mixin(scene,
 			ray_at(ray, hit_dist),
 			cur_shape, normal);
 		color_add(&newcol, &yeet);
