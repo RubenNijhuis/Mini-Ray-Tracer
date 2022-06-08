@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 19:46:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/30 14:09:34 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/02 14:10:40 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	set_camera(t_scene *scene, char **file_content)
 				exit_error("Error: couldn't allocate memory");
 			scene->camera.position = get_vec3f_from_string(settings[1]);
 			scene->camera.orientation = get_vec3f_from_string(settings[2]);
-			scene->camera.fov = deg_to_rad(ft_atoi(settings[3]));
+			scene->camera.fov = deg_to_rad(ft_atof(settings[3]));
 			ft_free_2d_array(&settings, ft_2d_arrlen(settings));
 		}
 		i++;

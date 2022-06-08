@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/25 22:42:56 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/02 14:21:12 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/03 19:00:51 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ Test(make_camera_from_string, passing) {
 	
 	cr_expect(scene.camera.position[0] == -50, "Expected camera position x to be -50");
 	cr_expect(scene.camera.orientation[1] == 1, "Expected camera orientation y to be 1");
-	cr_expect(scene.camera.fov == deg_to_rad(70), "Expected camera FOV to be 70, was %f", deg_to_rad(scene.camera.fov));
+	cr_expect(scene.camera.fov == deg_to_rad(70), "Expected camera FOV to be 70, was %f %f", deg_to_rad(scene.camera.fov), scene.camera.fov);
 	ft_free_2d_array(&file_content, ft_2d_arrlen(file_content));
 }
