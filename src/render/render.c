@@ -6,12 +6,18 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:55:24 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/08 19:15:03 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/09 17:44:44 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "minirt.h"
+
+#if BONUS == 0
+# include "threading.h" // render block
+
+# include <stdlib.h> // free
+#endif
 
 t_color	get_pixel_color(uint32_t px, uint32_t py, t_scene *scene)
 {
@@ -44,19 +50,26 @@ void	put_pixel(t_program_data *pd, uint32_t px, uint32_t py, uint32_t col)
 
 void	render(t_program_data *pd)
 {
-	uint32_t	xpixel;
-	uint32_t	ypixel;
+	t_block		block;
+	uint32_t	x;
+	uint32_t	y;
 
-	ypixel = 0;
-	while (ypixel < WIN_HEIGHT)
+	block.pixel_buf = create_block_buffer();
+	y = 0;
+	while (y < WIN_HEIGHT)
 	{
-		xpixel = 0;
-		while (xpixel < WIN_WIDTH)
+		x = 0;
+		while (x < WIN_WIDTH)
 		{
-			render_pixel(pd, xpixel, ypixel);
-			xpixel++;
+			update_block(&block, x, y);
+			render_block(&block, &pd->scene);
+			put_block(&block, pd);
+			mlx_force_draw(pd->mlx);
+			x += BLOCK_SIZE;
 		}
-		ypixel++;
+		y += BLOCK_SIZE;
 	}
+	free(block.pixel_buf);
 }
+
 #endif

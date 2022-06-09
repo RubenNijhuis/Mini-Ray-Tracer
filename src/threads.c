@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/08 12:50:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/08 19:15:47 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/09 17:40:43 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,85 +17,55 @@
 # include "threading.h"
 # include "minirt.h"
 
-# include <pthread.h>
-
-void	render_block(t_block *block, t_scene *scene)
+static void	render_init(t_renderer *ren, t_program_data *pd)
 {
-	uint32_t	x;
-	uint32_t	y;
-
-	y = 0;
-	while (y < block->height)
+	ren->x = 0;
+	ren->y = 0;
+	ren->pd = pd;
+	ren->id_finished = -1;
+	if (pthread_mutex_init(&ren->sched_mutex, NULL) == -1
+		|| pthread_mutex_init(&ren->mlx_mutex, NULL) == -1)
 	{
-		x = 0;
-		while (x < block->width)
-		{
-			block->pixel_buf[y * block->height + x] = col_to_hex(
-					get_pixel_color(x + block->x, y + block->y, scene)
-					);
-			x++;
-		}
-		y++;
+		exit_error("mutex init fail");
 	}
-}
-
-void	put_block(t_block *block, t_program_data *pd)
-{
-	uint32_t	x;
-	uint32_t	y;
-
-	y = 0;
-	while (y < block->height)
+	ren->render_trig_sem = sem_open(MSEM_NAME, O_CREAT | O_EXCL, 0600, 0);
+	if (ren->render_trig_sem == NULL)
 	{
-		x = 0;
-		while (x < block->width)
-		{
-			put_pixel(pd, x + block->x, y + block->y,
-				block->pixel_buf[y * block->height + x]);
-			x++;
-		}
-		y++;
+		exit_error("opening sem " MSEM_NAME " failed");
 	}
-}
-
-void	update_block(t_block *block, uint32_t px, uint32_t py)
-{
-	block->x = px;
-	block->y = py;
-	block->width = BLOCK_SIZE;
-	if (block->x + block->width > WIN_WIDTH)
+	if (sem_unlink(MSEM_NAME) == -1)
 	{
-		block->width = WIN_WIDTH - block->x;
-	}
-	block->height = BLOCK_SIZE;
-	if (block->y + block->height > WIN_HEIGHT)
-	{
-		block->height = WIN_HEIGHT - block->y;
+		exit_error("sem_unlink failed");
 	}
 }
 
 void	render(t_program_data *pd)
 {
-	uint32_t	buf[BLOCK_SIZE * BLOCK_SIZE];
-	t_block		block;
-	uint32_t	x;
-	uint32_t	y;
+	t_renderer		ren;
+	t_routine_args	r[N_THREADS];
+	int				i;
 
-	block.pixel_buf = buf;
-	y = 0;
-	while (y < WIN_HEIGHT)
+	render_init(&ren, pd);
+	i = 0;
+	while (i < N_THREADS)
 	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			update_block(&block, x, y);
-			render_block(&block, &pd->scene);
-			put_block(&block, pd);
-			mlx_force_draw(pd->mlx);
-			x += BLOCK_SIZE;
-		}
-		y += BLOCK_SIZE;
+		r[i].renderer = &ren;
+		r[i].index = i;
+		if (pthread_create(&ren.threads[i], NULL, &child_routine, &r[i]) == -1)
+			exit_error("pthread_create fail");
+		i++;
 	}
+	i = 0;
+	while (i < N_THREADS)
+	{
+		if (pthread_detach(ren.threads[i]) == -1)
+			exit_error("pthread_detach fail");
+		i++;
+	}
+	parent_loop(&ren, r);
+	if (pthread_mutex_destroy(&ren.sched_mutex) == -1
+		|| pthread_mutex_destroy(&ren.mlx_mutex) == -1)
+		exit_error("mutex destroy fail");
 }
 
 #endif
