@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/08 12:50:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/09 17:40:43 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 13:02:00 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static void	render_init(t_renderer *ren, t_program_data *pd)
 	ren->y = 0;
 	ren->pd = pd;
 	ren->id_finished = -1;
-	if (pthread_mutex_init(&ren->sched_mutex, NULL) == -1
-		|| pthread_mutex_init(&ren->mlx_mutex, NULL) == -1)
+	if (pthread_mutex_init(&ren->sched_mutex, NULL) == -1)
 	{
 		exit_error("mutex init fail");
 	}
@@ -63,8 +62,7 @@ void	render(t_program_data *pd)
 		i++;
 	}
 	parent_loop(&ren, r);
-	if (pthread_mutex_destroy(&ren.sched_mutex) == -1
-		|| pthread_mutex_destroy(&ren.mlx_mutex) == -1)
+	if (pthread_mutex_destroy(&ren.sched_mutex) == -1)
 		exit_error("mutex destroy fail");
 }
 

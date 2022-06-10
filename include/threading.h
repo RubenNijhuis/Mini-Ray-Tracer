@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/08 13:08:03 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/09 17:43:17 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 13:02:10 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_renderer
 	t_program_data	*pd;
 	pthread_t		threads[N_THREADS];
 	pthread_mutex_t	sched_mutex;
-	pthread_mutex_t	mlx_mutex;
 	sem_t			*render_trig_sem;
 	t_block			*block_to_render;
 	uint32_t		x;

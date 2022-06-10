@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/09 17:37:01 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/09 17:39:08 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 13:01:36 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ static bool	parent_loop_check_threads_finished(t_renderer *ren,
 		}
 		i++;
 	}
-	should_stop = (i == N_THREADS);
 	pthread_mutex_unlock(&ren->sched_mutex);
+	should_stop = (i == N_THREADS);
 	return (should_stop);
 }
 
@@ -94,11 +94,9 @@ void	parent_loop(t_renderer *ren, t_routine_args *r)
 		sem_wait(ren->render_trig_sem);
 		if (ren->id_finished == -1)
 		{
-			pthread_mutex_lock(&ren->mlx_mutex);
 			put_block(ren->block_to_render, ren->pd);
 			pthread_mutex_unlock(&ren->sched_mutex);
 			mlx_force_draw(ren->pd->mlx);
-			pthread_mutex_unlock(&ren->mlx_mutex);
 		}
 		else
 		{
