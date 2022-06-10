@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/09 17:37:01 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/10 13:01:36 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 13:21:56 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #if BONUS
 
 # include "threading.h"
-# include "minirt.h"
 
 # include <stdlib.h> // free
 
@@ -29,6 +28,8 @@ static void	update_render_coords(t_renderer *ren)
 	}
 }
 
+// the main loop. Gets a block to render, renders it, and signals the main
+// thread to display it on the screen.
 static void	child_inner(t_renderer *ren, t_block *block)
 {
 	bool	should_stop;
@@ -48,6 +49,8 @@ static void	child_inner(t_renderer *ren, t_block *block)
 	}
 }
 
+// a child routine, which renders blocks. At the end, it's signaled
+// to the parent it's done.
 void	*child_routine(void *arg)
 {
 	t_renderer	*ren;
@@ -65,6 +68,8 @@ void	*child_routine(void *arg)
 	return (NULL);
 }
 
+// checks wether all children are finished. Also sets which thread
+// is finished.
 static bool	parent_loop_check_threads_finished(t_renderer *ren,
 	t_routine_args *r)
 {
@@ -87,6 +92,11 @@ static bool	parent_loop_check_threads_finished(t_renderer *ren,
 	return (should_stop);
 }
 
+// loop of the parent/main thread. just waits for a signal(from sem) to
+// render a block. Exits when every thread is done.
+// it's kind of slow to have the main thread render one block at the time
+// it inhibits other blocks which are finishing from continuing to render
+// the next block. better would be some kind of queue.
 void	parent_loop(t_renderer *ren, t_routine_args *r)
 {
 	while (true)
