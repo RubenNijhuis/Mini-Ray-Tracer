@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/08 19:13:23 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 17:43:59 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 #  define WIN_WIDTH 1080
 # endif
 
-# define WIN_HEIGHT (1080)
+# define WIN_HEIGHT (WIN_WIDTH)
 
 typedef struct s_program_data
 {
@@ -103,7 +103,9 @@ void		ambient_mixin(t_color *col, t_scene *scene);
 t_color		lights_mixin(t_scene *scene, t_vec3f p, t_object *shape, t_vec3f normal);
 
 // Utils
-void		exit_error(char *str);
+void		exit_error(const char *msg);
+void		exit_perror(const char *msg);
+void		malloc_error(void);
 double		ft_atof(const char *str);
 char		**get_file_content(char *file_name);
 bool		ft_is_object(const char *haystack, const char *needle);

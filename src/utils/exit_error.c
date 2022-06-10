@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:46:29 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/03 13:36:53 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/10 17:43:46 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,23 @@
  * @brief 
  * Exits the program displaying the error and 
  * exits with status code 1
- * @param str 
+ * @param msg 
  */
-void	exit_error(char *str)
+// TODO: print to STDERR instead
+void	exit_error(const char *msg)
 {
-	printf("%s\n", str);
+	printf("%s\n", msg);
 	exit(1);
+}
+
+// perrors and exitst the program
+void	exit_perror(const char *msg)
+{
+	perror(msg);
+	exit(1);
+}
+
+void	malloc_error(void)
+{
+	exit_perror("malloc");
 }

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 19:46:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/02 14:10:40 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 17:44:23 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_camera(t_scene *scene, char **file_content)
 			amount_cameras++;
 			settings = ft_split(file_content[i], ' ');
 			if (settings == NULL)
-				exit_error("Error: couldn't allocate memory");
+				malloc_error();
 			scene->camera.position = get_vec3f_from_string(settings[1]);
 			scene->camera.orientation = get_vec3f_from_string(settings[2]);
 			scene->camera.fov = deg_to_rad(ft_atof(settings[3]));
@@ -51,7 +51,7 @@ void	set_ambient_light(t_scene *scene, char **file_content)
 		{
 			settings = ft_split(file_content[i], ' ');
 			if (settings == NULL)
-				exit_error("Error: couldn't allocate memory");
+				malloc_error();
 			scene->amb_light.range = ft_atof(settings[1]);
 			scene->amb_light.color = get_color_from_string(settings[2]);
 			ft_free_2d_array(&settings, ft_2d_arrlen(settings));
@@ -67,7 +67,7 @@ void	make_light(t_light *light, char *settings)
 
 	split_settings = ft_split(settings, ' ');
 	if (split_settings == NULL)
-		exit_error("Error: couldn't allocate memory");
+		malloc_error();
 	light->position = get_vec3f_from_string(split_settings[1]);
 	light->brightness = ft_atof(split_settings[2]);
 	light->color = get_color_from_string(split_settings[3]);
@@ -84,7 +84,7 @@ void	set_lights(t_scene *scene, char **file_content)
 	amount_lights = get_amount_objects(file_content, "L ");
 	scene->lights = ft_calloc(amount_lights, sizeof(t_light));
 	if (scene->lights == NULL)
-		exit_error("Error: couldn't allocate memory");
+		malloc_error();
 	current_light = 0;
 	while (file_content[i] != NULL)
 	{

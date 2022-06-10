@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 15:51:11 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/27 13:31:31 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 17:44:23 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_color	get_color_from_string(char *str)
 
 	split_vec = ft_split(str, ',');
 	if (split_vec == NULL)
-		exit_error("Error: couldn't allocate memory");
+		malloc_error();
 	col.r = (double)ft_atoi(split_vec[0]) / 255.0;
 	col.g = (double)ft_atoi(split_vec[1]) / 255.0;
 	col.b = (double)ft_atoi(split_vec[2]) / 255.0;
@@ -36,7 +36,7 @@ t_vec3f	get_vec3f_from_string(char *str)
 
 	split_vec = ft_split(str, ',');
 	if (split_vec == NULL)
-		exit_error("Error: couldn't allocate memory");
+		malloc_error();
 	vec = vec3f(
 			ft_atof(split_vec[0]),
 			ft_atof(split_vec[1]),

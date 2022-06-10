@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/08 19:44:55 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/09 17:44:10 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 17:51:08 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ uint32_t	*create_block_buffer(void)
 	buf = malloc(BLOCK_SIZE * BLOCK_SIZE * sizeof(uint32_t));
 	if (buf == NULL)
 	{
-		exit_error("failed to malloc block buffer");
+		malloc_error();
 	}
 	return (buf);
 }

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/26 08:54:26 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/10 17:44:23 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void	set_shapes(t_scene *scene, char **file_content)
 	scene->amount_shapes = get_amount_objects(file_content, SCENE_SHAPES);
 	scene->shapes = ft_calloc(scene->amount_shapes, sizeof(t_object));
 	if (scene->shapes == NULL)
-		exit_error("Error: couldn't allocate memory");
+		malloc_error();
 	convert_strings_to_shapes(scene->shapes, file_content);
 }
