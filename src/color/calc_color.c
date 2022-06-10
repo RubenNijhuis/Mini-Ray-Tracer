@@ -6,14 +6,12 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/08 12:44:22 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 14:48:19 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 #include "minirt.h"
-
-#include <stdio.h>
 
 void	ambient_mixin(t_color *col, t_scene *scene)
 {
@@ -23,8 +21,6 @@ void	ambient_mixin(t_color *col, t_scene *scene)
 	color_multiply_scalar(&amb, scene->amb_light.range);
 	color_multiply(col, &amb);
 }
-
-#include <stdio.h>
 
 bool	scene_intersects(t_scene *scene, t_ray *ray)
 {
@@ -37,17 +33,10 @@ bool	scene_intersects(t_scene *scene, t_ray *ray)
 	{
 		cur_shape = &scene->shapes[i];
 		dist = (lookup_intersect_function(cur_shape))(ray, cur_shape);
-		// if (ray->origin[1] >= 10)
-		// {
-		// 	printf("yeet %f\n", dist);
-		// }
-
-		// TODO: check shadow thingy
-		// why it is at y=10 when light y =10
-		if (dist > 0.0f)
+		if (dist > 0.0
+			&& dist * dist <= vec3f_len_sq(
+				ray->origin - cur_shape->base.position))
 		{
-			// if (cur_shape->base.obj_type == sphere && cur_shape->base.position[1] == 10.01f)
-			// 	printf("%f \n", dist);
 			return (true);
 		}
 		i++;
