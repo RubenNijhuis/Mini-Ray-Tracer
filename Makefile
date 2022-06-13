@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/08 17:42:21 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/06/13 17:27:17 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ MLX_A 			:=	$(MLX_DIR)/libmlx42.a
 #=============== Input ===============#
 #=====================================#
 
-INPUT_FILE := 	$(ASSETS_DIR)/mandatory/sphere_test.rt
+INPUT_FILE := 	$(ASSETS_DIR)/mandatory/test.rt
 
 LIBS :=			$(MLX_A) \
 				$(LIBS_DIR)/LibFT/libft.a \
