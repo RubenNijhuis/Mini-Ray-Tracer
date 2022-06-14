@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/10 17:43:59 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/14 19:16:22 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@
 
 // The program can only handle so much ;)
 # define MAX_SHAPES 200
-# define MAX_LIGHTS 100
+# if BONUS
+#  define MAX_LIGHTS 100
+# else
+#  define MAX_LIGHTS 1
+# endif
 
 // MLX Stuff
 # define WIN_RATIO 0.5625
@@ -109,14 +113,17 @@ void		malloc_error(void);
 double		ft_atof(const char *str);
 char		**get_file_content(char *file_name);
 bool		ft_is_object(const char *haystack, const char *needle);
-void		is_file_correctly_formatted(char **file_content);
+void		is_file_correctly_formatted(t_scene *scene, char **lines);
 char		*get_shape_type_string(t_object_type obj_type);
-uint32_t	get_amount_objects(char **file_content, char *type);
 
 float		deg_to_rad(const float a);
 float		rad_to_deg(const float a);
 
 // File parsing
+uint32_t	check_amount_generic(char **lines, char *obj_type,
+				uint32_t max, char *object_noun);
+uint32_t	check_amount_generic_mandatory(char **lines, char *obj_type,
+				uint32_t max, char *object_noun);
 void		check_amount_lights(char **file_content);
 void		check_amount_cameras(char **file_content);
 void		check_amount_ambient_lights(char **file_content);

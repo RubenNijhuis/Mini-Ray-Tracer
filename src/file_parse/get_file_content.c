@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/10 17:50:29 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 18:52:43 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static uint32_t	get_amount_lines(int fd)
 	return (amount_lines);
 }
 
+// TODO: maybe # comments?
 static char	**fill_string_array(int fd, uint32_t amount_lines_in_file)
 {
 	char		**total_file;

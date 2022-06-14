@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/10 17:44:23 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/14 19:22:52 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static uint32_t	lookup_shape_function(t_object *shape, char *name)
 
 /**
  * @brief 
- * Goes through the strings of a file and checks weather 
+ * Goes through the strings of a file and checks wether 
  * a string is a type of shape. If so create an object 
  * based on the object function.
  * 
@@ -69,7 +69,6 @@ static void	convert_strings_to_shapes(t_object *shapes, char **object_strings)
 
 void	set_shapes(t_scene *scene, char **file_content)
 {
-	scene->amount_shapes = get_amount_objects(file_content, SCENE_SHAPES);
 	scene->shapes = ft_calloc(scene->amount_shapes, sizeof(t_object));
 	if (scene->shapes == NULL)
 		malloc_error();

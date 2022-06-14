@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/17 12:07:32 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/14 19:27:51 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,46 @@
 #include "minirt.h"
 
 #include <stdbool.h>	// true false
-#include <stdlib.h>		// uint32_t
-#include <stdio.h>		// printf
+#include <stdint.h>		// uint32_t
 
-/*
-	Returns true if any character in needle is present in haystack.
-	If needle "", returns false.
- */
-bool	ft_is_object(const char *haystack, const char *needle)
+static uint32_t	get_len(const char *str)
 {
-	size_t	i;
-	size_t	j;
-
-	j = 0;
-	while (haystack[j] != '\0')
-	{
-		i = 0;
-		while (needle[i] != '\0')
-		{
-			if (haystack[j] == needle[i] && haystack[j + 1] == needle[i + 1])
-				return (true);
-			i++;
-		}
-		j++;
-	}
-	return (false);
-}
-
-uint32_t	get_amount_objects(char **file_content, char *type)
-{
-	uint32_t	amount_objects;
 	uint32_t	i;
 
 	i = 0;
-	amount_objects = 0;
-	while (file_content[i] != NULL)
+	while (str[i] && str[i] != ' ')
 	{
-		if (ft_is_object(type, file_content[i]) == true)
-			amount_objects++;
 		i++;
 	}
-	return (amount_objects);
+	return (i);
+}
+
+// returns wether the current line contains an object from the object string.
+// i.e. ft_is_object("sp cl pl", "pl 0,-1,0 (...)")
+bool	ft_is_object(const char *object_str, const char *line)
+{
+	uint32_t	len;
+
+	if (ft_strchr(object_str, ' ') == NULL)
+	{
+		return (rt_objstrcmp(object_str, line));
+	}
+	else
+	{
+		while (*object_str)
+		{
+			len = get_len(object_str);
+			if (ft_strncmp(object_str, line, len) == 0
+				&& (line[len] == ' ' || line[len] == '\0'))
+			{
+				return (true);
+			}
+			object_str += len;
+			while (*object_str == ' ')
+			{
+				object_str++;
+			}
+		}
+	}
+	return (false);
 }

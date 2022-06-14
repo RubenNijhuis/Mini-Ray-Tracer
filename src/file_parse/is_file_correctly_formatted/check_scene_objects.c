@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:43:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/26 10:15:53 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/14 19:15:41 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,70 +14,48 @@
 #include "objects.h"
 #include "libft.h"
 
-#include <stdlib.h>
-#include <stdint.h>
-
-void	check_amount_ambient_lights(char **file_content)
+// checks wether the file doesn't contain too many objects.
+// obj_type is the obj_type, i.e. SCENE_SHAPES or LIGHT.
+// max is the maximum allowed. object_noun is for the error message,
+// i.e. "light" for a light.
+uint32_t	check_amount_generic(char **lines, char *obj_type,
+	uint32_t max, char *object_noun)
 {
-	uint32_t	amount_amb_light;
-	uint32_t	current_line;
+	uint32_t	n;
 
-	amount_amb_light = 0;
-	current_line = 0;
-	while (file_content[current_line] != NULL)
+	n = 0;
+	while (*lines)
 	{
-		if (ft_strncmp(&file_content[current_line][0], AMBIENT_LIGHT, 1) == 0)
+		if (ft_is_object(obj_type, *lines))
 		{
-			amount_amb_light++;
-			if (amount_amb_light > 1)
-				exit_error("Error: redundant ambient light");
+			n++;
+			if (n > max)
+			{
+				ft_putstr_fd("Error: too many ", 2);
+				ft_putstr_fd(object_noun, 2);
+				ft_putstr_fd("s(max ", 2);
+				ft_putnbr_fd(max, 2);
+				exit_error(")");
+			}
 		}
-		current_line++;
+		lines++;
 	}
-	if (amount_amb_light == 0)
-		exit_error("Error: ambient light not set");
+	return (n);
 }
 
-void	check_amount_cameras(char **file_content)
+// same as check_amount_generic, except this one checks if at least
+// one object is present.
+uint32_t	check_amount_generic_mandatory(char **lines, char *obj_type,
+	uint32_t max, char *object_noun)
 {
-	uint32_t	amount_camera;
-	uint32_t	current_line;
+	uint32_t	n;
 
-	amount_camera = 0;
-	current_line = 0;
-	while (file_content[current_line] != NULL)
+	n = check_amount_generic(lines, obj_type, max, object_noun);
+	if (n == 0)
 	{
-		if (ft_strncmp(&file_content[current_line][0], CAMERA, 1) == 0)
-		{
-			amount_camera++;
-			if (amount_camera > 1)
-				exit_error("Error: redundant camera");
-		}
-		current_line++;
+		ft_putstr_fd("Error: missing ", 2);
+		ft_putstr_fd(object_noun, 2);
+		exit_error("");
 	}
-	if (amount_camera == 0)
-		exit_error("Error: camera not set");
-}
-
-void	check_amount_lights(char **file_content)
-{
-	uint32_t	amount_light;
-	uint32_t	current_line;
-
-	amount_light = 0;
-	current_line = 0;
-	while (file_content[current_line] != NULL)
-	{
-		if (ft_strncmp(&file_content[current_line][0], LIGHT, 1) == 0)
-		{
-			amount_light++;
-			if (BONUS != true && amount_light > 1)
-				exit_error("Error: redundant light source");
-		}
-		current_line++;
-	}
-	if (amount_light == 0)
-		exit_error("Error: no light(s) set");
-	if (amount_light > MAX_LIGHTS)
-		exit_error("Error: max shapes is 100");
+	return (n);
 }

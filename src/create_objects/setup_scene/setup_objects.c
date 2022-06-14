@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 19:46:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/10 17:44:23 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/14 19:12:57 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,11 @@ void	make_light(t_light *light, char *settings)
 
 void	set_lights(t_scene *scene, char **file_content)
 {
-	uint32_t	amount_lights;
 	uint32_t	current_light;
 	uint32_t	i;
 
 	i = 0;
-	amount_lights = get_amount_objects(file_content, "L ");
-	scene->lights = ft_calloc(amount_lights, sizeof(t_light));
+	scene->lights = ft_calloc(scene->amount_lights, sizeof(t_light));
 	if (scene->lights == NULL)
 		malloc_error();
 	current_light = 0;
@@ -95,5 +93,4 @@ void	set_lights(t_scene *scene, char **file_content)
 		}
 		i++;
 	}
-	scene->amount_lights = amount_lights;
 }

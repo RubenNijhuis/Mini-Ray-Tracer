@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/04 16:16:12 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/10 18:27:15 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdbool.h>
 
 // Special chars
-# define CAMERA "C "
-# define AMBIENT_LIGHT "A "
-# define LIGHT "L "
+# define CAMERA "C"
+# define AMBIENT_LIGHT "A"
+# define LIGHT "L"
 
 # define PLANE "pl"
 # define SPHERE "sp"
@@ -175,6 +175,7 @@ void	run_object_checks(t_object_type obj_type, char *obj_settings);
 
 // Util
 int		get_obj_type(const char *str);
+bool	rt_objstrcmp(const char *s1, const char *s2);
 
 void	print_shapes(t_object *shapes, uint32_t amount_shapes);
 void	print_lights(t_light *lights, uint32_t amount_lights);

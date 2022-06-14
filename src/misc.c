@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/08 17:00:06 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/14 19:16:13 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	setup_scene(t_scene *scene, char *file_name)
 	char	**file_content;
 
 	file_content = get_file_content(file_name);
-	is_file_correctly_formatted(file_content);
+	is_file_correctly_formatted(scene, file_content);
 	set_camera(scene, file_content);
 	set_lights(scene, file_content);
 	set_ambient_light(scene, file_content);

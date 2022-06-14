@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/04 16:37:06 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/14 19:17:13 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,6 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-
-static void	check_amount_shapes(char **file_content)
-{
-	uint32_t	amount_shapes;
-	uint32_t	current_line;
-
-	amount_shapes = 0;
-	current_line = 0;
-	while (file_content[current_line] != NULL)
-	{
-		if (ft_is_object(SCENE_SHAPES, \
-			file_content[current_line]) == true)
-		{
-			amount_shapes++;
-			if (amount_shapes > MAX_SHAPES)
-			{
-				ft_putstr_fd("Error: too many shapes(max ", 2);
-				ft_putnbr_fd(MAX_SHAPES, 2);
-				exit_error(")");
-			}
-		}
-		current_line++;
-	}
-}
 
 typedef struct ss_obj_type_map
 {
@@ -62,7 +38,7 @@ int	get_obj_type(const char *str)
 	i = 0;
 	while (i < sizeof(map) / sizeof(t_obj_type_map))
 	{
-		if (ft_strncmp(str, map[i].type_str, 2) == 0)
+		if (rt_objstrcmp(map[i].type_str, str))
 		{
 			return (map[i].type);
 		}
@@ -86,12 +62,13 @@ void	check_input_lines(char **lines)
 	}
 }
 
-// object_have_settings(file_content);
-void	is_file_correctly_formatted(char **file_content)
+// checks if the number of objects for each type are correct.
+// also sets the amount_lights and amount_shapes.
+void	is_file_correctly_formatted(t_scene *scene, char **lines)
 {
-	check_amount_cameras(file_content);
-	check_amount_ambient_lights(file_content);
-	check_amount_lights(file_content);
-	check_amount_shapes(file_content);
-	check_input_lines(file_content);
+	check_amount_generic_mandatory(lines, CAMERA, 1, "camera");
+	check_amount_generic_mandatory(lines, AMBIENT_LIGHT, 1, "ambient light");
+	scene->amount_lights = check_amount_generic_mandatory(lines, LIGHT, MAX_LIGHTS, "light");
+	scene->amount_shapes = check_amount_generic(lines, SCENE_SHAPES, MAX_SHAPES, "shape");
+	check_input_lines(lines);
 }
