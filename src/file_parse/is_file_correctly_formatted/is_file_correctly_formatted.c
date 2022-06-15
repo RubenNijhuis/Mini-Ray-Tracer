@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/14 19:17:13 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/15 14:48:10 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,14 @@ int	get_obj_type(const char *str)
 
 void	check_input_lines(char **lines)
 {
-	uint32_t		current_line;
 	int				obj_type;
 
-	current_line = 0;
-	while (lines[current_line] != NULL)
+	while (*lines != NULL)
 	{
-		obj_type = get_obj_type(lines[current_line]);
+		obj_type = get_obj_type(*lines);
 		if (obj_type != -1)
-			run_object_checks(obj_type, lines[current_line]);
-		current_line++;
+			run_object_checks(obj_type, *lines);
+		lines++;
 	}
 }
 
