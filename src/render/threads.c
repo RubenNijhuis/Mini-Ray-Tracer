@@ -6,13 +6,15 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/08 12:50:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/10 17:51:53 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/15 12:41:53 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus.h"
 
 #if BONUS
+
+# include <fcntl.h> // O_CREATE etc.
 
 # include "threading.h"
 # include "minirt.h"
