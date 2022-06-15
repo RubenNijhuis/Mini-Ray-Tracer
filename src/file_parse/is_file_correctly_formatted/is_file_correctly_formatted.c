@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/15 14:51:02 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/15 14:52:34 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "objects.h"
 
 #include <stdbool.h>
-#include <stdint.h>
 
 typedef struct ss_obj_type_map
 {
