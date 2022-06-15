@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/14 19:16:22 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/15 14:50:06 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ float		rad_to_deg(const float a);
 // File parsing
 uint32_t	check_amount_generic(char **lines, char *obj_type,
 				uint32_t max, char *object_noun);
-uint32_t	check_amount_generic_mandatory(char **lines, char *obj_type,
+uint32_t	check_amount_mandatory(char **lines, char *obj_type,
 				uint32_t max, char *object_noun);
 void		check_amount_lights(char **file_content);
 void		check_amount_cameras(char **file_content);

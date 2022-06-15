@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/15 14:48:10 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/15 14:51:02 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_obj_type(const char *str)
 
 void	check_input_lines(char **lines)
 {
-	int				obj_type;
+	int	obj_type;
 
 	while (*lines != NULL)
 	{
@@ -64,9 +64,11 @@ void	check_input_lines(char **lines)
 // also sets the amount_lights and amount_shapes.
 void	is_file_correctly_formatted(t_scene *scene, char **lines)
 {
-	check_amount_generic_mandatory(lines, CAMERA, 1, "camera");
-	check_amount_generic_mandatory(lines, AMBIENT_LIGHT, 1, "ambient light");
-	scene->amount_lights = check_amount_generic_mandatory(lines, LIGHT, MAX_LIGHTS, "light");
-	scene->amount_shapes = check_amount_generic(lines, SCENE_SHAPES, MAX_SHAPES, "shape");
+	check_amount_mandatory(lines, CAMERA, 1, "camera");
+	check_amount_mandatory(lines, AMBIENT_LIGHT, 1, "ambient light");
+	scene->amount_lights = check_amount_mandatory(lines, LIGHT,
+			MAX_LIGHTS, "light");
+	scene->amount_shapes = check_amount_generic(lines, SCENE_SHAPES,
+			MAX_SHAPES, "shape");
 	check_input_lines(lines);
 }

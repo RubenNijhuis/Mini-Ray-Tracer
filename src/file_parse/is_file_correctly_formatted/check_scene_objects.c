@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:43:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/14 19:15:41 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/15 14:50:07 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ uint32_t	check_amount_generic(char **lines, char *obj_type,
 
 // same as check_amount_generic, except this one checks if at least
 // one object is present.
-uint32_t	check_amount_generic_mandatory(char **lines, char *obj_type,
+uint32_t	check_amount_mandatory(char **lines, char *obj_type,
 	uint32_t max, char *object_noun)
 {
 	uint32_t	n;
