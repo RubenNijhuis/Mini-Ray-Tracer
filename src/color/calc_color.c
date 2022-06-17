@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/10 16:20:35 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/17 15:11:00 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_color	get_light(t_light *light, t_scene *scene, t_object *shape, t_vec3f p, t_
 	{
 		color = shape->base.color;
 		color_multiply_scalar(&color, light->brightness);
+		color_multiply_scalar(&color, vec3f_dot(ray.direction, normal));
 		color_multiply(&color, &light->color);
 	}
 	return (color);
