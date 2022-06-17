@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/13 17:27:17 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/06/15 12:55:10 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,10 @@ CFLAGS =		-Wall -Werror -Wextra -g -fsanitize=address
 # TODO: Add NO_DEAD_CODE for linux
 UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
-	MLX = -ldl -lglfw -lm
+	# -pthread is only required for the bonus, however, since we can't check
+	# wether the bonus is active or not, always use it here.
+	LDFLAGS += -lm -pthread
+	MLX = -ldl -lglfw
 else ifeq ($(UNAME_S), Darwin)
 	# TODO: change to ifdef RUBEN_LAPTOP or something like that
 	ifdef CODAM
@@ -127,7 +130,7 @@ re: fclean all
 
 submodules:
 	@git submodule update --init --recursive
-	@cd $(LIBS_DIR)/LibFt/ && git pull origin main
+	@cd $(LIBS_DIR)/LibFT/ && git pull origin main
 	@cd $(LIBS_DIR)/Get-Next-Line/ && git pull origin main
 	@cd $(LIBS_DIR)/Lib-Vec/ && git pull origin main
 	@cd $(LIBS_DIR)/MLX42/ && git pull origin master
