@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:55:24 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/09 17:44:44 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/17 15:48:16 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_color	get_pixel_color(uint32_t px, uint32_t py, t_scene *scene)
 
 	ray = get_camera_ray(px, py, &scene->camera);
 	color = get_ray_color(&ray, scene);
+	color_clamp(&color);
 	return (color);
 }
 

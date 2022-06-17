@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/27 13:36:57 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/08 13:39:06 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/17 15:45:14 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,22 @@ void	color_multiply_scalar(t_color *color, const double scalar)
 	color->r *= scalar;
 	color->g *= scalar;
 	color->b *= scalar;
+}
+
+void	color_clamp(t_color *color)
+{
+	if (color->r > 1.0f)
+	{
+		color->r = 1.0f;
+	}
+	if (color->g > 1.0f)
+	{
+		color->g = 1.0f;
+	}
+	if (color->g > 1.0f)
+	{
+		color->g = 1.0f;
+	}
 }
 
 /* converts a color to a uint32_t RGBA(what MLX42 uses) */

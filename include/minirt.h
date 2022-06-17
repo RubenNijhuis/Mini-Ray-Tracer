@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/15 14:50:06 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/17 15:45:43 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_color		get_ray_color(t_ray *ray, t_scene *scene);
 void		color_add(t_color *color, const t_color *rhs);
 void		color_multiply(t_color *color, const t_color *rhs);
 void		color_multiply_scalar(t_color *color, const double scalar);
+void		color_clamp(t_color *color);
 uint32_t	col_to_hex(const t_color col);
 
 void		render_pixel_color(uint32_t x, uint32_t y, \
