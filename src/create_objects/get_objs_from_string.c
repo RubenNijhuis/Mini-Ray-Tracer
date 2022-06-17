@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/14 19:27:51 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/17 12:29:49 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,18 @@ bool	ft_is_object(const char *object_str, const char *line)
 {
 	uint32_t	len;
 
-	if (ft_strchr(object_str, ' ') == NULL)
+	while (*object_str)
 	{
-		return (rt_objstrcmp(object_str, line));
-	}
-	else
-	{
-		while (*object_str)
+		len = get_len(object_str);
+		if (ft_strncmp(object_str, line, len) == 0
+			&& (line[len] == ' ' || line[len] == '\0'))
 		{
-			len = get_len(object_str);
-			if (ft_strncmp(object_str, line, len) == 0
-				&& (line[len] == ' ' || line[len] == '\0'))
-			{
-				return (true);
-			}
-			object_str += len;
-			while (*object_str == ' ')
-			{
-				object_str++;
-			}
+			return (true);
+		}
+		object_str += len;
+		while (*object_str == ' ')
+		{
+			object_str++;
 		}
 	}
 	return (false);

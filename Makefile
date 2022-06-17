@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/15 12:55:10 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/06/17 12:30:37 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,7 +138,7 @@ submodules:
 run: $(NAME)
 	@./$< $(INPUT_FILE)
 
-test:
+test: $(NAME)
 	@$(MAKE) run -C $(TEST_DIR)/
 
 bonus:
