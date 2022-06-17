@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/13 17:05:54 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/04 18:08:20 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/17 12:28:14 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "minirt.h"
 #include "objects.h"
 #include "libft.h"
+#include "ray.h"
+#include "libvec.h"
 
 #include <stdbool.h>
 
@@ -42,4 +44,15 @@ Test(get_color_from_string, passing)
 	cr_expect(c.r == 1.0, "expected r to be 1.0");
 	cr_expect(c.g == 0, "expected g to be 0");
 	cr_expect(c.b == 12.0 / 255.0, "expected b to be ~0.047");
+}
+
+Test(ray_at, passing)
+{
+	t_ray	ray;
+	t_vec3f	pos;
+
+	ray.origin = vec3f(2, 1, -4);
+	ray.direction = vec3f(0, 1, 0);
+	pos = ray_at(&ray, 5);
+	cr_expect(vec_eq(pos, vec3f(2, 6, -4)), "ray_at failure");
 }
