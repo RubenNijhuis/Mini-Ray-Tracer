@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/20 16:03:47 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/05/24 13:38:12 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/17 11:31:25 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ t_vec3f	ray_at(const t_ray *ray, const float t)
 {
 	t_vec3f	pos;
 
-	pos = ray->direction;
-	vec3f_multiply_scalar(&pos, t);
-	vec3f_translate(&pos, ray->origin);
+	pos = ray->direction * t + ray->origin;
 	return (pos);
 }
