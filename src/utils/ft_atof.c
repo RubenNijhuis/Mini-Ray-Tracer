@@ -1,22 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_atod.c                                          :+:    :+:            */
+/*   ft_atof.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 15:27:17 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/18 18:31:26 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/18 18:38:53 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-static void	skip_whitespace(char **str)
-{
-	while (**str == ' ' || (**str >= '\t' && **str <= '\r'))
-	{
-		(*str)++;
-	}
-}
 
 static double	atod_postdecimal(const char *str)
 {
@@ -41,7 +33,6 @@ double	ft_atof(const char *str)
 	double	result;
 	int		is_negative;
 
-	skip_whitespace((char **)&str);
 	is_negative = 0;
 	if (*str == '-')
 	{
@@ -69,7 +60,6 @@ int	is_valid_double_format(char *str)
 	char	*str_before_numberskip;
 	int		number_before_dot;
 
-	skip_whitespace(&str);
 	if (*str == '-' || *str == '+')
 		str++;
 	str_before_numberskip = str;
@@ -86,6 +76,7 @@ int	is_valid_double_format(char *str)
 		str++;
 	if (str_before_numberskip == str && !number_before_dot)
 		return (0);
-	skip_whitespace(&str);
+	while (*str == ' ')
+		str++;
 	return (*str == 0);
 }

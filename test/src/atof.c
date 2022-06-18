@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/18 18:25:01 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/18 18:34:13 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/18 18:41:14 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,14 @@
 
 Test(ft_atod, passing)
 {
-    COMP("\t\v\r    +-.2949");
-	COMP("\t\v\r    -.2949");
-	COMP("\t\v\r    +.2949");
-	COMP("\t\v\r1.000090f");
-	COMP("\t\v\r1.000090    \t");	
+    COMP("+-.2949");
+	COMP("-.2949");
+	COMP("+.2949");
+	COMP("1.000090f");
+	COMP("1.000090    ");	
 	COMP("1.");
 	COMP(".1");
 	COMP("");
-	COMP("    \v\t");
-	COMP("    \v\t.");
 	COMP(".0");
 	COMP("0.0");
 	COMP("1.0");
@@ -46,6 +44,7 @@ Test(ft_atod, passing)
 	COMP("-100.b101");
 	COMP("-10b30.101");
 	COMP("-1030....101");
-	COMP("\t\v\r    -1428.2481");
+	COMP("-1428.2481");
 	COMP("-1999428.248451");
+	cr_expect(ft_atof("    5.0") == 0, "expected preceeding spaces to not work");
 }
