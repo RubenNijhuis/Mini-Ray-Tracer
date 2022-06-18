@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/04 18:03:27 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/06/18 18:33:42 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,8 @@ SRCS :=	make_objects.c \
 		misc.c \
 		vector_utils.c \
 		parsing.c \
+		atof.c \
+
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
