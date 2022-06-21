@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/21 23:53:40 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 00:06:22 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,23 +117,11 @@ void				exit_perror(const char *msg);
 void				malloc_error(void);
 double				ft_atof(const char *str);
 int					is_valid_double_format(char *str);
-char				**get_file_content(char *file_name);
 bool				ft_is_object(const char *haystack, const char *needle);
 char				*get_shape_type_string(t_object_type obj_type);
 
 float				deg_to_rad(const float a);
 float				rad_to_deg(const float a);
-
-/*
- File parsing
-*/
-uint32_t			check_amount_generic(char **lines, char *obj_type,
-						uint32_t max, char *object_noun);
-uint32_t			check_amount_mandatory(char **lines, char *obj_type,
-						uint32_t max, char *object_noun);
-void				check_amount_lights(char **file_content);
-void				check_amount_cameras(char **file_content);
-void				check_amount_ambient_lights(char **file_content);
 
 t_color				get_pixel_color(uint32_t px, uint32_t py, \
 						t_scene *scene);
@@ -141,5 +129,4 @@ void				render_pixel(t_program_data *pd, uint32_t px, \
 						uint32_t py);
 void				put_pixel(t_program_data *pd, uint32_t px, \
 						uint32_t py, uint32_t col);
-
 #endif

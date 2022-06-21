@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/15 14:52:34 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/22 00:20:20 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minirt.h"
 #include "objects.h"
 
+#include "parsing.h"
 #include <stdbool.h>
 
 typedef struct ss_obj_type_map
@@ -38,30 +39,30 @@ int	get_obj_type(const char *str)
 	while (i < sizeof(map) / sizeof(t_obj_type_map))
 	{
 		if (rt_objstrcmp(map[i].type_str, str))
-		{
 			return (map[i].type);
-		}
 		i++;
 	}
 	return (-1);
 }
 
-void	check_input_lines(char **lines)
+void	check_input_lines(t_line *lines)
 {
-	int	obj_type;
+	int			obj_type;
+	uint32_t	current_line;
 
-	while (*lines != NULL)
+	current_line = 0;
+	while (lines[current_line].line != NULL)
 	{
-		obj_type = get_obj_type(*lines);
+		obj_type = get_obj_type(lines[current_line].line);
 		if (obj_type != -1)
-			run_object_checks(obj_type, *lines);
+			run_object_checks(obj_type, lines[current_line].line);
 		lines++;
 	}
 }
 
 // checks if the number of objects for each type are correct.
 // also sets the amount_lights and amount_shapes.
-void	is_file_correctly_formatted(t_scene *scene, char **lines)
+void	is_file_correctly_formatted(t_scene *scene, t_line *lines)
 {
 	check_amount_mandatory(lines, CAMERA, 1, "camera");
 	check_amount_mandatory(lines, AMBIENT_LIGHT, 1, "ambient light");

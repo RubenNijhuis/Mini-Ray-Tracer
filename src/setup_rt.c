@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/21 23:54:10 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 00:08:06 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	start_mlx(t_program_data *pd)
 
 void	setup_scene(t_scene *scene, char *file_name)
 {
-	char	**file_content;
+	t_line	*file_content;
 
 	file_content = get_file_content(file_name);
 	is_file_correctly_formatted(scene, file_content);
@@ -59,5 +59,5 @@ void	setup_scene(t_scene *scene, char *file_name)
 	set_lights(scene, file_content);
 	set_ambient_light(scene, file_content);
 	set_shapes(scene, file_content);
-	ft_free_2d_array(&file_content, ft_2d_arrlen(file_content));
+	free_file_content(file_content);
 }

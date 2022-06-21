@@ -6,12 +6,13 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/03 13:34:59 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 00:24:03 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minirt.h"
+#include "parsing.h"
 
 // needed ?
 #include <float.h>
@@ -76,13 +77,13 @@ bool	check_arr_values_range_int(char **items, int64_t min, int64_t max)
  * @param settings 
  * @return bool
  */
-bool	check_position(char *settings)
+bool	check_position(t_line *settings)
 {
 	char	**split_settings;
 	bool	status;
 
 	status = true;
-	split_settings = ft_split(settings, ',');
+	split_settings = ft_split(settings->line, ',');
 	// if (check_arr_values_range_float(split_settings, -FLT_MIN, FLT_MAX) == false)
 	// {
 	// 	printf("Error: position vec values out of range (-FLT_MIN - FLT_MAX)\n");
@@ -90,7 +91,7 @@ bool	check_position(char *settings)
 	// }
 	if (ft_2d_arrlen(split_settings) != 3)
 	{
-		printf("Error: position vec doesn't contain 3 values\n");
+		printf("Error: position vec on line %i doesn't contain 3 values\n", settings->file_line);
 		status = false;
 	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
@@ -105,32 +106,32 @@ bool	check_position(char *settings)
  * @param settings 
  * @return bool
  */
-bool	check_rotation(char *settings)
+bool	check_rotation(t_line *settings)
 {
 	char	**split_settings;
 	bool	status;
 
 	status = true;
-	split_settings = ft_split(settings, ',');
+	split_settings = ft_split(settings->line, ',');
 	if (ft_2d_arrlen(split_settings) != 3)
 	{
-		printf("Error: rotation vec formatted incorrectly\n");
+		printf("Error: rotation vec on line %i formatted incorrectly\n", settings->file_line);
 		status = false;
 	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 	return (status);
 }
 
-bool	check_color(char *settings)
+bool	check_color(t_line *settings)
 {
 	char	**split_settings;
 	bool	status;
 
 	status = true;
-	split_settings = ft_split(settings, ',');
+	split_settings = ft_split(settings->line, ',');
 	if (check_arr_values_range_int(split_settings, 0, 255) == false)
 	{
-		printf("Error: color vec values out of range\n");
+		printf("Error: color vec values on line %i out of range\n", settings->file_line);
 		status = false;
 	}
 	if (ft_2d_arrlen(split_settings) != 3)
@@ -144,12 +145,12 @@ bool	check_color(char *settings)
 
 // check is only num
 // check is in max float min float
-bool	check_radius(char *settings)
+bool	check_radius(t_line *settings)
 {
 	bool	status;
 
 	status = true;
-	if (ft_atof(settings) > FLT_MAX)
+	if (ft_atof(settings->line) > FLT_MAX)
 	{
 		printf("Error: radius variable formatted incorrectly\n");
 		status = false;
@@ -159,7 +160,7 @@ bool	check_radius(char *settings)
 
 // check is in max float min float
 // check is only num
-bool	check_height(char *settings)
+bool	check_height(t_line *settings)
 {
 	bool	status;
 
@@ -174,7 +175,7 @@ bool	check_height(char *settings)
 
 // check is only num
 // check if is int and nog bigger than 180 or smaller than 1
-bool	check_fov(char *settings)
+bool	check_fov(t_line *settings)
 {
 	bool	status;
 
@@ -189,7 +190,7 @@ bool	check_fov(char *settings)
 
 // check is only num
 // check is in max float min float
-bool	check_brightness(char *settings)
+bool	check_brightness(t_line *settings)
 {
 	bool	status;
 
