@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/17 15:11:00 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/21 17:38:13 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,28 @@ bool	scene_intersects(t_scene *scene, t_ray *ray, float max_dist_sq)
 	return (false);
 }
 
-t_color	get_light(t_light *light, t_scene *scene, t_object *shape, t_vec3f p, t_vec3f normal)
+t_color	get_light(t_light *light, t_scene *scene, t_object *shape, \
+	t_vec3f p, t_vec3f normal)
 {
 	t_ray	ray;
 	t_color	color;
 	float	max_dist_sq;
+	float	intensity;
 
 	ray.direction = light->position - p;
 	max_dist_sq = vec3f_len_sq(ray.direction);
 	vec3f_normalize(&ray.direction);
 	ray.origin = p + (normal / 10000.0f);
 	if (scene_intersects(scene, &ray, max_dist_sq))
-	{
 		color = make_color(0, 0, 0);
-	}
 	else
 	{
 		color = shape->base.color;
 		color_multiply_scalar(&color, light->brightness);
-		color_multiply_scalar(&color, vec3f_dot(ray.direction, normal));
+		intensity = vec3f_dot(ray.direction, normal);
+		if (intensity < 0.00001f)
+			intensity = 0;
+		color_multiply_scalar(&color, intensity);
 		color_multiply(&color, &light->color);
 	}
 	return (color);

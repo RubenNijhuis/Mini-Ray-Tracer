@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/18 18:48:38 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/21 23:53:40 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,86 +52,94 @@ typedef struct s_program_data
 	mlx_image_t	*img;
 }	t_program_data;
 
-// typedef union u_color
-// {
-// 	struct s_color
-// 	{
-// 		double r;
-// 		double g;
-// 		double b;
-// 	}	c;
-// 	double arr[3];
-// }	t_color;
 
-typedef float	(*t_intersect_func_ptr)(t_ray *, t_object *);
+typedef float	(*t_intersect_func)(t_ray *, t_object *);
 typedef t_vec3f	(*t_normal_func_ptr)(const t_ray *, const float, t_object *);
 
-t_intersect_func_ptr	lookup_intersect_function(t_object *shape);
+t_intersect_func	lookup_intersect_function(t_object *shape);
 
-// Setup mlx
-void		init_mlx(t_program_data *pd);
-void		start_mlx(t_program_data *pd);
-void		key_hook(mlx_key_data_t keydata, void *param);
+/*
+ Setup mlx
+*/
+void				init_mlx(t_program_data *pd);
+void				start_mlx(t_program_data *pd);
+void				key_hook(mlx_key_data_t keydata, void *param);
 
-// Vec from string
-t_color		get_color_from_string(char *str);
-t_vec3f		get_vec3f_from_string(char *str);
+/*
+ Vec from string
+*/
+t_color				get_color_from_string(char *str);
+t_vec3f				get_vec3f_from_string(char *str);
 
-// Render
-void		render(t_program_data *pd);
+/*
+ Render
+*/
+void				render(t_program_data *pd);
+t_ray				get_camera_ray(uint32_t xpixel, uint32_t ypixel, \
+						t_camera *cam);
 
-t_ray		get_camera_ray(uint32_t xpixel, uint32_t ypixel, t_camera *cam);
+/*
+ Intersections
+*/
+float				intersects_sphere(t_ray *ray, t_object *shape);
+float				intersects_plane(t_ray *ray, t_object *shape);
 
-// Intersections
-float		intersects_sphere(t_ray *ray, t_object *shape);
-float		intersects_plane(t_ray *ray, t_object *shape);
+t_vec3f				get_sphere_normal(const t_ray *ray, const float dist,
+						t_object *shape);
+t_vec3f				get_plane_normal(const t_ray *ray, const float dist,
+						t_object *shape);
 
-t_vec3f		get_sphere_normal(const t_ray *ray, const float dist,
-				t_object *shape);
-t_vec3f		get_plane_normal(const t_ray *ray, const float dist,
-				t_object *shape);
+/*
+ Colors
+*/
+t_color				make_color(double r, double g, double b);
+t_color				get_default_color(t_scene *scene);
+t_color				get_ray_color(t_ray *ray, t_scene *scene);
+void				color_add(t_color *color, const t_color *rhs);
+void				color_multiply(t_color *color, const t_color *rhs);
+void				color_multiply_scalar(t_color *color, \
+						const double scalar);
+void				color_clamp(t_color *color);
+uint32_t			col_to_hex(const t_color col);
 
-// Colors
-t_color		make_color(double r, double g, double b);
-t_color		get_default_color(t_scene *scene);
-t_color		get_ray_color(t_ray *ray, t_scene *scene);
-void		color_add(t_color *color, const t_color *rhs);
-void		color_multiply(t_color *color, const t_color *rhs);
-void		color_multiply_scalar(t_color *color, const double scalar);
-void		color_clamp(t_color *color);
-uint32_t	col_to_hex(const t_color col);
+void				render_pixel_color(uint32_t x, uint32_t y, \
+						t_color color, t_program_data *pd);
 
-void		render_pixel_color(uint32_t x, uint32_t y, \
-				t_color color, t_program_data *pd);
+void				ambient_mixin(t_color *col, t_scene *scene);
+t_color				lights_mixin(t_scene *scene, t_vec3f p, \
+						t_object *shape, t_vec3f normal);
 
-void		ambient_mixin(t_color *col, t_scene *scene);
-t_color		lights_mixin(t_scene *scene, t_vec3f p, t_object *shape, t_vec3f normal);
+/* 
+ Utils
+*/
+void				exit_error(const char *msg);
+void				exit_perror(const char *msg);
+void				malloc_error(void);
+double				ft_atof(const char *str);
+int					is_valid_double_format(char *str);
+char				**get_file_content(char *file_name);
+bool				ft_is_object(const char *haystack, const char *needle);
+char				*get_shape_type_string(t_object_type obj_type);
 
-// Utils
-void		exit_error(const char *msg);
-void		exit_perror(const char *msg);
-void		malloc_error(void);
-double		ft_atof(const char *str);
-int			is_valid_double_format(char *str);
-char		**get_file_content(char *file_name);
-bool		ft_is_object(const char *haystack, const char *needle);
-void		is_file_correctly_formatted(t_scene *scene, char **lines);
-char		*get_shape_type_string(t_object_type obj_type);
+float				deg_to_rad(const float a);
+float				rad_to_deg(const float a);
 
-float		deg_to_rad(const float a);
-float		rad_to_deg(const float a);
+/*
+ File parsing
+*/
+uint32_t			check_amount_generic(char **lines, char *obj_type,
+						uint32_t max, char *object_noun);
+uint32_t			check_amount_mandatory(char **lines, char *obj_type,
+						uint32_t max, char *object_noun);
+void				check_amount_lights(char **file_content);
+void				check_amount_cameras(char **file_content);
+void				check_amount_ambient_lights(char **file_content);
 
-// File parsing
-uint32_t	check_amount_generic(char **lines, char *obj_type,
-				uint32_t max, char *object_noun);
-uint32_t	check_amount_mandatory(char **lines, char *obj_type,
-				uint32_t max, char *object_noun);
-void		check_amount_lights(char **file_content);
-void		check_amount_cameras(char **file_content);
-void		check_amount_ambient_lights(char **file_content);
-
-t_color	get_pixel_color(uint32_t px, uint32_t py, t_scene *scene);
-void	render_pixel(t_program_data *pd, uint32_t px, uint32_t py);
-void	put_pixel(t_program_data *pd, uint32_t px, uint32_t py, uint32_t col);
+t_color				get_pixel_color(uint32_t px, uint32_t py, \
+						t_scene *scene);
+void				render_pixel(t_program_data *pd, uint32_t px, \
+						uint32_t py);
+void				put_pixel(t_program_data *pd, uint32_t px, \
+						uint32_t py, uint32_t col);
 
 #endif

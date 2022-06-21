@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/08 13:54:34 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/21 23:51:44 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 #include "ray.h"
 #include "minirt.h"
 
-
 #include <stdbool.h>
 #include <stddef.h>
 #include <math.h>
 
 // see e_objects_type in objects.h
-t_intersect_func_ptr	lookup_intersect_function(t_object *shape)
+t_intersect_func	lookup_intersect_function(t_object *shape)
 {
-	static const t_intersect_func_ptr	funcs[] = {
+	static const t_intersect_func	funcs[] = {
 	[sphere] = &intersects_sphere,
 	[plane] = &intersects_plane,
 	};
@@ -97,11 +96,9 @@ t_color	get_ray_color(t_ray *ray, t_scene *scene)
 		if (!update_closest_hit(&hit_dist_record, hit_dist))
 		{
 			current_shape++;
-			continue;
+			continue ;
 		}
-
 		t_vec3f	normal = (lookup_normal_function(cur_shape))(ray, hit_dist, cur_shape);
-
 		t_color	newcol = cur_shape->base.color;
 		ambient_mixin(&newcol, scene);
 		t_color	yeet = lights_mixin(scene,

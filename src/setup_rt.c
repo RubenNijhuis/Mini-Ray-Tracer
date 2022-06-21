@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   misc.c                                             :+:    :+:            */
+/*   setup_rt.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/14 19:16:13 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/21 23:54:10 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "libft.h"
+#include "parsing.h"
 #include "MLX42/MLX42.h"
 #include "MLX42/MLX42_Input.h"
 
