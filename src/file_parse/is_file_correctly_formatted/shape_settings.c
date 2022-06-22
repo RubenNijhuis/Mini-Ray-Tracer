@@ -6,13 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/03 13:32:45 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 11:21:10 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minirt.h"
 #include "objects.h"
+#include "parsing.h"
 
 #include <stdlib.h>
 #include <float.h>

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/22 00:08:06 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 10:55:46 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	pd = (t_program_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
-	{
+{
 		mlx_terminate(pd->mlx);
 		exit(0);
 	}

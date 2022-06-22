@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 00:17:08 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 12:35:56 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PARSING_H
 
 #include "minirt.h"
-
 #include <stdint.h>
 
 /**
@@ -34,6 +33,26 @@ typedef struct	s_line
 void		is_file_correctly_formatted(t_scene *scene, t_line *lines);
 t_line		*get_file_content(char *file_name);
 void		free_file_content(t_line *lines);
+
+/*
+ Setup objects
+*/
+void	set_camera(t_scene *scene, t_line *file_content);
+void	set_lights(t_scene *scene, t_line *file_content);
+void	set_shapes(t_scene *scene, t_line *file_content);
+void	set_ambient_light(t_scene *scene, t_line *file_content);
+void	setup_scene(t_scene *scene, char *file_name);
+
+/*
+ Input checking
+*/
+bool	check_position(char *settings);
+bool	check_rotation(char *settings);
+bool	check_color(char *settings);
+bool	check_radius(char *settings);
+bool	check_height(char *settings);
+bool	check_fov(char *settings);
+bool	check_brightness(char *settings);
 
 /*
  Utils

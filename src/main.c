@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/03 13:17:52 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 11:09:30 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "objects.h"
 #include "minirt.h"
 #include "libft.h"
+#include "parsing.h"
 
 // TODO: stderr
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/10 18:27:15 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/22 11:22:24 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ typedef struct s_component_list
 	t_element_component	components[10];
 }	t_component_list;
 
-typedef bool	(*t_comp_checker_func)(char *str);
-
 // Base objec3t
 typedef struct s_base
 {
@@ -135,7 +133,7 @@ typedef union u_object
 	t_cylinder	cylinder;
 }	t_object;
 
-typedef struct t_scene
+typedef struct s_scene
 {
 	t_camera		camera;
 
@@ -148,13 +146,6 @@ typedef struct t_scene
 	uint32_t		amount_shapes;
 }	t_scene;
 
-// Setup components
-void	set_camera(t_scene *scene, char **file_content);
-void	set_lights(t_scene *scene, char **file_content);
-void	set_shapes(t_scene *scene, char **file_content);
-void	set_ambient_light(t_scene *scene, char **file_content);
-void	setup_scene(t_scene *scene, char *file_name);
-
 // Create objects
 void	make_plane(t_object *obj, char *settings);
 void	make_cylinder(t_object *obj, char *settings);
@@ -162,14 +153,6 @@ void	make_sphere(t_object *obj, char *settings);
 
 // Create scene objects
 void	make_light(t_light *light, char *settings);
-
-bool	check_position(char *str);
-bool	check_rotation(char *str);
-bool	check_color(char *str);
-bool	check_radius(char *str);
-bool	check_height(char *settings);
-bool	check_fov(char *settings);
-bool	check_brightness(char *settings);
 
 void	run_object_checks(t_object_type obj_type, char *obj_settings);
 
