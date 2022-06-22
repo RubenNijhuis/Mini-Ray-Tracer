@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 00:20:20 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 13:42:15 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_input_lines(t_line *lines)
 	{
 		obj_type = get_obj_type(lines[current_line].line);
 		if (obj_type != -1)
-			run_object_checks(obj_type, lines[current_line].line);
+			run_object_checks(obj_type, lines[current_line]);
 		lines++;
 	}
 }

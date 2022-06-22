@@ -6,27 +6,30 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:43:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/15 14:50:07 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/22 13:37:17 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "objects.h"
 #include "libft.h"
+#include "parsing.h"
 
 // checks wether the file doesn't contain too many objects.
 // obj_type is the obj_type, i.e. SCENE_SHAPES or LIGHT.
 // max is the maximum allowed. object_noun is for the error message,
 // i.e. "light" for a light.
-uint32_t	check_amount_generic(char **lines, char *obj_type,
+uint32_t	check_amount_generic(t_line *lines, char *obj_type,
 	uint32_t max, char *object_noun)
 {
 	uint32_t	n;
+	uint32_t	current_line;
 
+	current_line = 0;
 	n = 0;
-	while (*lines)
+	while (lines[current_line].line != NULL)
 	{
-		if (ft_is_object(obj_type, *lines))
+		if (ft_is_object(obj_type, lines[current_line].line))
 		{
 			n++;
 			if (n > max)
@@ -45,7 +48,7 @@ uint32_t	check_amount_generic(char **lines, char *obj_type,
 
 // same as check_amount_generic, except this one checks if at least
 // one object is present.
-uint32_t	check_amount_mandatory(char **lines, char *obj_type,
+uint32_t	check_amount_mandatory(t_line *lines, char *obj_type,
 	uint32_t max, char *object_noun)
 {
 	uint32_t	n;

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 11:22:24 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 12:58:08 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,6 @@ void	make_sphere(t_object *obj, char *settings);
 
 // Create scene objects
 void	make_light(t_light *light, char *settings);
-
-void	run_object_checks(t_object_type obj_type, char *obj_settings);
 
 // Util
 int		get_obj_type(const char *str);

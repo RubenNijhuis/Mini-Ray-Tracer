@@ -6,13 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/14 19:22:52 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/22 14:44:51 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 #include "minirt.h"
 #include "libft.h"
+#include "parsing.h"
 
 typedef struct s_make_func
 {
@@ -51,23 +52,25 @@ static uint32_t	lookup_shape_function(t_object *shape, char *name)
  * @param shapes 
  * @param objects 
  */
-static void	convert_strings_to_shapes(t_object *shapes, char **object_strings)
+static void	convert_strings_to_shapes(t_object *shapes, t_line *object_strings)
 {
 	uint32_t			amount_objects;
+	uint32_t current_line;
 
 	amount_objects = 0;
-	while (*object_strings != NULL)
+	current_line = 0;
+	while (object_strings[current_line].line != NULL)
 	{
-		if (ft_is_object(SCENE_SHAPES, *object_strings))
+		if (ft_is_object(SCENE_SHAPES, object_strings[current_line].line))
 		{
 			amount_objects += lookup_shape_function(&shapes[amount_objects],
-					*object_strings);
+					object_strings[current_line].line);
 		}
 		object_strings++;
 	}
 }
 
-void	set_shapes(t_scene *scene, char **file_content)
+void	set_shapes(t_scene *scene,t_line *file_content)
 {
 	scene->shapes = ft_calloc(scene->amount_shapes, sizeof(t_object));
 	if (scene->shapes == NULL)

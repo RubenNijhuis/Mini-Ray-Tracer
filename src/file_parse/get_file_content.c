@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 00:04:03 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 13:42:07 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_line	*fill_string_array(int fd, uint32_t amount_lines_in_file)
 	uint32_t	current_line;
 
 	current_line = 0;
-	total_file = ft_calloc(amount_lines_in_file, sizeof(t_line));
+	total_file = ft_calloc(amount_lines_in_file + 1, sizeof(t_line));
 	if (total_file == NULL)
 		malloc_error();
 	while (current_line < amount_lines_in_file)
@@ -53,6 +53,7 @@ static t_line	*fill_string_array(int fd, uint32_t amount_lines_in_file)
 			exit_perror("Get Next Line had an issue returning a file line");
 		current_line++;
 	}
+	total_file[amount_lines_in_file].line = NULL;
 	return (total_file);
 }
 
@@ -60,7 +61,7 @@ t_line	*get_file_content(char *file_name)
 {
 	int32_t		fd;
 	uint32_t	amount_lines_in_file;
-	char		**full_file_string;
+	t_line		*full_file_string;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)

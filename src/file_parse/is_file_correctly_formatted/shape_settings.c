@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 11:21:10 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 13:45:58 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,16 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
  * @param obj_type 
  * @param obj_settings 
  */
-void	run_object_checks(t_object_type obj_type, char *obj_settings)
+void	run_object_checks(t_object_type obj_type, t_line line)
 {
 	t_component_list	comps;
 	char				**split_settings;
 	uint32_t			cur_check;
 	uint32_t			amount_checks;
+	bool				check_status;
 
-	split_settings = ft_split(obj_settings, ' ');
+	check_status = true;
+	split_settings = ft_split(line.line, ' ');
 	comps = get_object_component_list(obj_type);
 	cur_check = 0;
 	amount_checks = comps.amount_obj_components;
@@ -92,9 +94,11 @@ void	run_object_checks(t_object_type obj_type, char *obj_settings)
 	while (cur_check < amount_checks)
 	{
 		if ((get_elem_checker_func(comps.components[cur_check])) \
-			(split_settings[cur_check + 1]) == false)
-			exit(1);
+			(split_settings[cur_check + 1], line.file_line) == false)
+			check_status = false;
 		cur_check++;
 	}
+	if (check_status == false)
+		exit(1);
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 12:35:56 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 13:35:58 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ typedef struct	s_line
 	uint32_t	file_line;
 }	t_line;
 
+typedef bool	(*t_comp_checker_func)(char *settings, uint32_t line_pos);
+
 /*
  Main functions
 */
 void		is_file_correctly_formatted(t_scene *scene, t_line *lines);
 t_line		*get_file_content(char *file_name);
-void		free_file_content(t_line *lines);
+// void		free_file_content(t_line *lines);
 
 /*
  Setup objects
@@ -46,13 +48,15 @@ void	setup_scene(t_scene *scene, char *file_name);
 /*
  Input checking
 */
-bool	check_position(char *settings);
-bool	check_rotation(char *settings);
-bool	check_color(char *settings);
-bool	check_radius(char *settings);
-bool	check_height(char *settings);
-bool	check_fov(char *settings);
-bool	check_brightness(char *settings);
+bool	check_position(char *settings, uint32_t line_pos);
+bool	check_rotation(char *settings, uint32_t line_pos);
+bool	check_color(char *settings, uint32_t line_pos);
+bool	check_radius(char *settings, uint32_t line_pos);
+bool	check_height(char *settings, uint32_t line_pos);
+bool	check_fov(char *settings, uint32_t line_pos);
+bool	check_brightness(char *settings, uint32_t line_pos);
+
+void	run_object_checks(t_object_type obj_type, t_line line);
 
 /*
  Utils

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/22 10:55:46 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 13:40:27 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ void	setup_scene(t_scene *scene, char *file_name)
 	set_lights(scene, file_content);
 	set_ambient_light(scene, file_content);
 	set_shapes(scene, file_content);
-	free_file_content(file_content);
+	// free_file_content(file_content);
 }
