@@ -6,12 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:46:29 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/10 17:43:46 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/22 14:59:20 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <stdlib.h> /* exit */
+#include <stdio.h> /* perror */
+
+#include "ft_printf.h"
 
 /**
  * @brief 
@@ -19,10 +21,9 @@
  * exits with status code 1
  * @param msg 
  */
-// TODO: print to STDERR instead
 void	exit_error(const char *msg)
 {
-	printf("%s\n", msg);
+	ft_dprintf(2, "%s\n", msg);
 	exit(1);
 }
 
