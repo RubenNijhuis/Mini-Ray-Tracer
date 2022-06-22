@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/17 12:30:37 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/06/22 15:04:14 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 #========= General variables =========#
 #=====================================#
 
+CC := gcc
 EXEC_NAME :=	minirt
 ASSETS_DIR :=	assets
 BIN_DIR :=		bin
@@ -37,16 +38,36 @@ MLX_A 			:=	$(MLX_DIR)/libmlx42.a
 #=============== Input ===============#
 #=====================================#
 
+LIBFT_DIR		=	$(LIBS_DIR)/LibFT
+LIBFT_INC_DIR	=	$(LIBFT_DIR)/include
+LIBFT_H			=	$(LIBFT_INC_DIR)/libft.h
+LIBFT_A			=	$(LIBFT_DIR)/libft.a
+
+# ft_printf stuff
+PF_DIR			=	$(LIBS_DIR)/ft_printf
+PF_H			=	$(PF_DIR)/ft_printf.h $(PF_DIR)/pf_util.h $(LIBFT_H)
+PF_A			=	$(PF_DIR)/libftprintf.a
+PF_PDEPS		=	pf_parsing.c pf_print_hex.c pf_print_int.c \
+						pf_print_pointer.c pf_print_str_char.c pf_printing.c \
+						pf_printing_util.c ft_printf.c pf_util.c ft_uitoa.c \
+						ft_itoa_hex.c
+PF_DEPS			=	$(PF_PDEPS:%.c=$(PF_DIR)/%.c)
+PF_OBJ_DIR		=	$(PF_DIR)/obj
+PF_OBJ			=	$(PF_DEPS:$(PF_DIR)/%.c=$(PF_OBJ_DIR)/%.o)
+
 INPUT_FILE := 	$(ASSETS_DIR)/mandatory/test.rt
 
 LIBS :=			$(MLX_A) \
-				$(LIBS_DIR)/LibFT/libft.a \
+				$(LIBFT_A) \
+				$(PF_A) \
 				$(LIBS_DIR)/Lib-Vec/libvec.a \
 				$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
 
+
 LIBS_HEADERS :=	-I $(INCLUDE_DIR) \
+				-I $(PF_DIR) \
 				-I $(LIBS_DIR)/MLX42/include/ \
-				-I $(LIBS_DIR)/LibFT/include/ \
+				-I $(LIBFT_INC_DIR) \
 				-I $(LIBS_DIR)/Lib-Vec/include/ \
 				-I $(LIBS_DIR)/Get-Next-Line/include/ \
 
@@ -105,11 +126,23 @@ $(NAME): $(OBJS) $(LIBS)
 	@$(CC) $(CFLAGS) $(LDFLAGS) $(NO_DEAD_CODE) $^ -o $@ $(MLX)
 	@echo "✅ Built $(NAME)"
 
+# ft_printf stuff
+$(PF_A): $(PF_OBJ)
+	ar rcs $@ $^
+
+$(PF_OBJ_DIR)/%.o: $(PF_DIR)/%.c $(PF_H) | $(PF_OBJ_DIR)
+	$(CC) $(CFLAGS) -I$(PF_DIR) -I$(LIBFT_INC_DIR) -c -o $@ $<
+
+$(PF_OBJ_DIR):
+	mkdir $@
+
 clean:
 	@rm -rf $(OBJS_DIR)
 	@echo "🧹 Cleaning $(NAME) objects"
 
 fclean: clean
+	@rm -rf $(PF_OBJ_DIR)
+	@rm -f $(PF_A)
 	@$(MAKE) fclean -C $(LIBS_DIR)/Get-Next-Line
 	@$(MAKE) fclean -C $(LIBS_DIR)/Lib-Vec
 	@$(MAKE) fclean -C $(LIBS_DIR)/LibFT
@@ -154,6 +187,7 @@ norm:
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"
 	@-norminette $(INCLUDE_DIR)
 	@-norminette $(SRC_DIR)
+	@-norminette $(PF_DIR)
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"
 	
 	@echo
@@ -170,7 +204,7 @@ norm:
 $(MLX_A): $(MLX_H)
 	@$(MAKE) -C $(LIBS_DIR)/MLX42
 
-$(LIBS_DIR)/LibFT/libft.a:
+$(LIBFT_A): $(LIBFT_H)
 	@$(MAKE) -C $(LIBS_DIR)/LibFT
 
 $(LIBS_DIR)/Get-Next-Line/get-next-line.a:
