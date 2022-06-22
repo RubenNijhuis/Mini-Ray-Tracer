@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 14:47:22 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 15:08:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ bool	check_position(char *settings, uint32_t line_pos)
 
 /**
  * @brief 
- * Checks if the rotation vector is formatted correctly.
+ * Checks if the orientation vector is formatted correctly.
  * Returns a bool - true if correct, false otherwise
  * 
  * @param settings 
  * @return bool
  */
-bool	check_rotation(char *settings, uint32_t line_pos)
+bool	check_orientation(char *settings, uint32_t line_pos)
 {
 	char	**split_settings;
 	bool	status;
@@ -115,7 +115,7 @@ bool	check_rotation(char *settings, uint32_t line_pos)
 	split_settings = ft_split(settings, ',');
 	if (ft_2d_arrlen(split_settings) != 3)
 	{
-		printf("Error: rotation vec on line %i formatted incorrectly\n", line_pos);
+		printf("Error: orientation vec on line %i formatted incorrectly\n", line_pos);
 		status = false;
 	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));

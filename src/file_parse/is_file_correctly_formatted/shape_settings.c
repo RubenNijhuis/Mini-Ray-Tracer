@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 13:45:58 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 15:08:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ t_component_list	get_object_component_list(t_object_type type)
 {
 	static const t_component_list	components_check[] = {
 	[ambient_light] =  {2, {brightness, color}},
-	[camera] =  {3, {position, rotation, fov}},
+	[camera] =  {3, {position, orientation, fov}},
 	[light] =  {3, {position, brightness, color}},
 	[sphere] =  {3, {position, radius, color}},
-	[plane] =  {3, {position, rotation, color}},
-	[cylinder] =  {5, {position, rotation, height, radius, color}},
+	[plane] =  {3, {position, orientation, color}},
+	[cylinder] =  {5, {position, orientation, height, radius, color}},
 	};
 
 	return (components_check[type]);
@@ -56,7 +56,7 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
 {
 	static const t_comp_checker_func	funcs[] = {
 	[position] = &check_position,
-	[rotation] = &check_rotation,
+	[orientation] = &check_orientation,
 	[color] = &check_color,
 	[radius] = &check_radius,
 	[height] = &check_height,

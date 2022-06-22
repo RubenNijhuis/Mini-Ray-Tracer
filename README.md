@@ -61,7 +61,7 @@ Dependent on Criterion lib, install via brew and run make with the `CODAM=1` var
 
 ## Notes
 [Scratchapixel](https://www.scratchapixel.com/)
-[Rotation Matrix](https://en.wikipedia.org/wiki/Rotation_matrix)
+[orientation Matrix](https://en.wikipedia.org/wiki/orientation_matrix)
 
 ## Todo
 [ ] - Make wayyy more tests

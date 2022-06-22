@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 13:35:58 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 15:08:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	setup_scene(t_scene *scene, char *file_name);
  Input checking
 */
 bool	check_position(char *settings, uint32_t line_pos);
-bool	check_rotation(char *settings, uint32_t line_pos);
+bool	check_orientation(char *settings, uint32_t line_pos);
 bool	check_color(char *settings, uint32_t line_pos);
 bool	check_radius(char *settings, uint32_t line_pos);
 bool	check_height(char *settings, uint32_t line_pos);

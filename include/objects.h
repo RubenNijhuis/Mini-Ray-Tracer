@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 12:58:08 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 15:08:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_color
 typedef enum e_element_component
 {
 	position,
-	rotation,
+	orientation,
 	color,
 	radius,
 	height,
