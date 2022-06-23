@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 15:08:41 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 10:27:11 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	check_height(char *settings, uint32_t line_pos);
 bool	check_fov(char *settings, uint32_t line_pos);
 bool	check_brightness(char *settings, uint32_t line_pos);
 
-void	run_object_checks(t_object_type obj_type, t_line line);
+bool	run_object_checks(t_object_type obj_type, t_line line);
 
 /*
  Utils

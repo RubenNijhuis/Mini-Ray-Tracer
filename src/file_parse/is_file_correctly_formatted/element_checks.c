@@ -6,13 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 15:08:41 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 15:17:54 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minirt.h"
 #include "parsing.h"
+#include "ft_printf.h"
 
 // needed ?
 #include <float.h>
@@ -20,6 +21,11 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
+
+void	print_err_msg(char *data_type, char *issue, uint32_t line)
+{
+	ft_dprintf(2, "Error: %s %s on line %i\n", data_type, issue, line);
+}
 
 // It not worky
 bool	check_arr_values_range_float(char **items, float min, float max)
@@ -91,7 +97,7 @@ bool	check_position(char *settings, uint32_t line_pos)
 	// }
 	if (ft_2d_arrlen(split_settings) != 3)
 	{
-		printf("Error: position vec on line %i doesn't contain 3 values\n", line_pos);
+		print_err_msg("position vec", "doesn't contain 3 values", line_pos);
 		status = false;
 	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
@@ -115,7 +121,7 @@ bool	check_orientation(char *settings, uint32_t line_pos)
 	split_settings = ft_split(settings, ',');
 	if (ft_2d_arrlen(split_settings) != 3)
 	{
-		printf("Error: orientation vec on line %i formatted incorrectly\n", line_pos);
+		print_err_msg("orientation vec", "doesn't contain 3 values", line_pos);
 		status = false;
 	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
@@ -131,12 +137,12 @@ bool	check_color(char *settings, uint32_t line_pos)
 	split_settings = ft_split(settings, ',');
 	if (check_arr_values_range_int(split_settings, 0, 255) == false)
 	{
-		printf("Error: color vec values on line %i out of range\n", line_pos);
+		print_err_msg("color vec", "values out of range", line_pos);
 		status = false;
 	}
 	if (ft_2d_arrlen(split_settings) != 3)
 	{
-		printf("Error: color vec on line %i formatted incorrectly\n", line_pos);
+		print_err_msg("color vec", "doesn't contain 3 values", line_pos);
 		status = false;
 	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
@@ -152,7 +158,7 @@ bool	check_radius(char *settings, uint32_t line_pos)
 	status = true;
 	if (ft_atof(settings) > FLT_MAX || ft_atof(settings) < 0)
 	{
-		printf("Error: radius variable on line %i formatted incorrectly\n", line_pos);
+		print_err_msg("radius variable", "out of range", line_pos);
 		status = false;
 	}
 	return (status);
@@ -167,7 +173,7 @@ bool	check_height(char *settings, uint32_t line_pos)
 	status = true;
 	if (ft_atof(settings) > FLT_MAX || ft_atof(settings) < 0)
 	{
-		printf("Error: height variable on line %i formatted incorrectly\n", line_pos);
+		print_err_msg("height variable", "value out of range", line_pos);
 		status = false;
 	}
 	return (status);
@@ -182,7 +188,7 @@ bool	check_fov(char *settings, uint32_t line_pos)
 	status = true;
 	if (ft_atoi(settings) > 180 || ft_atoi(settings) < 0)
 	{
-		printf("Error: fov variable on line %i out of range\n", line_pos);
+		print_err_msg("fov variable", "out of range", line_pos);
 		status = false;
 	}
 	return (status);
@@ -197,7 +203,7 @@ bool	check_brightness(char *settings, uint32_t line_pos)
 	status = true;
 	if (ft_atof(settings) > FLT_MAX)
 	{
-		printf("Error: brightness variable on line %i formatted incorrectly\n", line_pos);
+		print_err_msg("brightness variable", "out of range", line_pos);
 		status = false;
 	}
 	return (status);

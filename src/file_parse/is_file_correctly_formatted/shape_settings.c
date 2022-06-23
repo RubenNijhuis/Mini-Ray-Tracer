@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 15:08:41 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 10:27:06 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
  * @param obj_type 
  * @param obj_settings 
  */
-void	run_object_checks(t_object_type obj_type, t_line line)
+bool	run_object_checks(t_object_type obj_type, t_line line)
 {
 	t_component_list	comps;
 	char				**split_settings;
@@ -98,7 +98,6 @@ void	run_object_checks(t_object_type obj_type, t_line line)
 			check_status = false;
 		cur_check++;
 	}
-	if (check_status == false)
-		exit(1);
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
+	return (check_status);
 }

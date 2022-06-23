@@ -6,15 +6,16 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 13:42:15 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 10:27:50 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minirt.h"
 #include "objects.h"
-
 #include "parsing.h"
+
+#include <stdlib.h>
 #include <stdbool.h>
 
 typedef struct ss_obj_type_map
@@ -49,15 +50,22 @@ void	check_input_lines(t_line *lines)
 {
 	int			obj_type;
 	uint32_t	current_line;
+	bool		formatted_correctly;
 
+	formatted_correctly = true;
 	current_line = 0;
 	while (lines[current_line].line != NULL)
 	{
 		obj_type = get_obj_type(lines[current_line].line);
 		if (obj_type != -1)
-			run_object_checks(obj_type, lines[current_line]);
+		{
+			if (run_object_checks(obj_type, lines[current_line]) == false)
+				formatted_correctly = false;
+		}
 		lines++;
 	}
+	if (formatted_correctly == false)
+		exit(1);
 }
 
 // checks if the number of objects for each type are correct.

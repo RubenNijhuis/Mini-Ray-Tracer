@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 11:08:40 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/22 19:10:59 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # if HEADLESS
 #  define WIN_WIDTH 10
 # else
-#  define WIN_WIDTH 1080
+#  define WIN_WIDTH 1240
 # endif
 
 # define WIN_HEIGHT (WIN_WIDTH)
