@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 19:46:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/22 10:56:49 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 13:01:47 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	set_lights(t_scene *scene, t_line *lines)
 	current_light = 0;
 	while (lines[i].line != NULL)
 	{
-		if (lines[i].line[0] == 'L')
+		if (rt_objstrcmp(LIGHT, lines[i].line))
 		{
 			make_light(&scene->lights[current_light], lines[i].line);
 			current_light++;
