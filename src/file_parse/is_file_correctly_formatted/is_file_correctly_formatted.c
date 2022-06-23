@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/23 10:27:50 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 15:02:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minirt.h"
 #include "objects.h"
 #include "parsing.h"
+#include "ft_printf.h"
 
 #include <stdlib.h>
 #include <stdbool.h>
@@ -61,6 +62,13 @@ void	check_input_lines(t_line *lines)
 		{
 			if (run_object_checks(obj_type, lines[current_line]) == false)
 				formatted_correctly = false;
+		}
+		else if (ft_strlen(lines[current_line].line) > 1)
+		{
+			ft_dprintf(2, 
+				"Error: line %i not object or non-empty line\n",
+				lines[current_line].file_line);
+			formatted_correctly = false;
 		}
 		lines++;
 	}

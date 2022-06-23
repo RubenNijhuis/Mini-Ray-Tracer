@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/08 13:08:03 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/10 13:02:10 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/23 14:53:21 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define THREADING_H
 
 // IDEA: have this detect automatically during runtime.
-# define N_THREADS (4)
+# define N_THREADS (8)
 
 # define BLOCK_SIZE (256)
 
 # include "minirt.h"
 
-# include <stdint.h> /* uint32_t */
+# include <stdint.h>
 
 # include "bonus.h"
 

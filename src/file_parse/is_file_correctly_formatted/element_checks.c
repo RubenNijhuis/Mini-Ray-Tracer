@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/23 13:12:30 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 14:43:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ bool	is_float_format(char *digit)
 		current_char++;
 	while (digit[current_char] != '\0')
 	{
-		if ((digit[current_char] < '0' || digit[current_char] > '9') && digit[current_char] != '.')
+		if ((digit[current_char] < '0' || digit[current_char] > '9') && \
+			digit[current_char] != '.')
 			format_status = false;
 		else if (digit[current_char] == '.' && has_dot == false)
 			has_dot = true;
@@ -98,7 +99,21 @@ bool	check_values_range_float(char **items, float min, float max)
 
 bool	check_floats_formatting(char **items)
 {
-	uint32_t cur_float;
+	uint32_t	cur_float;
+
+	cur_float = 0;
+	while (cur_float < 3)
+	{
+		if (is_float_format(items[cur_float]) == false)
+			return (false);
+		cur_float++;
+	}
+	return (true);
+}
+
+bool	check_ints_formatting(char **items)
+{
+	uint32_t	cur_float;
 
 	cur_float = 0;
 	while (cur_float < 3)
