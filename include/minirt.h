@@ -29,9 +29,6 @@
 #  define MAX_LIGHTS 1
 # endif
 
-// MLX Stuff
-# define WIN_RATIO 0.5625
-
 # ifndef HEADLESS
 #  define HEADLESS 0
 # endif
