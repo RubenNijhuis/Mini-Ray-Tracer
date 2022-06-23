@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 19:10:59 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 10:30:39 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_program_data
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 }	t_program_data;
-
 
 typedef float	(*t_intersect_func)(t_ray *, t_object *);
 typedef t_vec3f	(*t_normal_func_ptr)(const t_ray *, const float, t_object *);

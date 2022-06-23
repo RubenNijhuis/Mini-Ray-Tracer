@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/21 23:51:44 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 10:34:22 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ t_color	get_ray_color(t_ray *ray, t_scene *scene)
 	float		hit_dist_record;
 	float		hit_dist;
 	t_color		color;
+	t_vec3f		normal;
+	t_color		new_color;
+	t_color		yeet;
 
 	current_shape = 0;
 	color = get_default_color(scene);
@@ -98,14 +101,15 @@ t_color	get_ray_color(t_ray *ray, t_scene *scene)
 			current_shape++;
 			continue ;
 		}
-		t_vec3f	normal = (lookup_normal_function(cur_shape))(ray, hit_dist, cur_shape);
-		t_color	newcol = cur_shape->base.color;
-		ambient_mixin(&newcol, scene);
-		t_color	yeet = lights_mixin(scene,
-			ray_at(ray, hit_dist),
-			cur_shape, normal);
-		color_add(&newcol, &yeet);
-		color = newcol;
+		normal = (lookup_normal_function(cur_shape)) \
+			(ray, hit_dist, cur_shape);
+		new_color = cur_shape->base.color;
+		ambient_mixin(&new_color, scene);
+		yeet = lights_mixin(scene,
+				ray_at(ray, hit_dist),
+				cur_shape, normal);
+		color_add(&new_color, &yeet);
+		color = new_color;
 		current_shape++;
 	}
 	return (color);

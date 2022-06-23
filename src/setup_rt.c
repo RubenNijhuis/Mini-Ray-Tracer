@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/22 13:40:27 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 10:31:06 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	pd = (t_program_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
-{
+	{
 		mlx_terminate(pd->mlx);
 		exit(0);
 	}
 }
 
-// TODO: stderr
 void	init_mlx(t_program_data *pd)
 {
 	pd->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "miniRT", true);
@@ -49,6 +48,7 @@ void	start_mlx(t_program_data *pd)
 	mlx_loop(pd->mlx);
 }
 
+// TODO: free_file_content(file_content);
 void	setup_scene(t_scene *scene, char *file_name)
 {
 	t_line	*file_content;
@@ -59,5 +59,4 @@ void	setup_scene(t_scene *scene, char *file_name)
 	set_lights(scene, file_content);
 	set_ambient_light(scene, file_content);
 	set_shapes(scene, file_content);
-	// free_file_content(file_content);
 }

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/23 10:27:06 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/23 13:21:15 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minirt.h"
 #include "objects.h"
 #include "parsing.h"
+#include "ft_printf.h"
 
 #include <stdlib.h>
 #include <float.h>
@@ -30,12 +31,12 @@
 t_component_list	get_object_component_list(t_object_type type)
 {
 	static const t_component_list	components_check[] = {
-	[ambient_light] =  {2, {brightness, color}},
-	[camera] =  {3, {position, orientation, fov}},
-	[light] =  {3, {position, brightness, color}},
-	[sphere] =  {3, {position, radius, color}},
-	[plane] =  {3, {position, orientation, color}},
-	[cylinder] =  {5, {position, orientation, height, radius, color}},
+	[ambient_light] = {2, {brightness, color}},
+	[camera] = {3, {position, orientation, fov}},
+	[light] = {3, {position, brightness, color}},
+	[sphere] = {3, {position, radius, color}},
+	[plane] = {3, {position, orientation, color}},
+	[cylinder] = {5, {position, orientation, height, radius, color}},
 	};
 
 	return (components_check[type]);
@@ -67,6 +68,16 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
 	return (funcs[comp]);
 }
 
+bool	check_amount_settings(uint32_t arr_len, uint32_t amount_checks, t_line line)
+{
+	if (arr_len != amount_checks)
+	{
+		ft_dprintf(2, "Error: line %i incorrect settings\n", line.file_line);
+		return (false);
+	}
+	return (true);
+}
+
 /**
  * @brief 
  * Goes through each objects elements and runs the corresponding
@@ -89,8 +100,8 @@ bool	run_object_checks(t_object_type obj_type, t_line line)
 	comps = get_object_component_list(obj_type);
 	cur_check = 0;
 	amount_checks = comps.amount_obj_components;
-	if ((ft_2d_arrlen(split_settings) - 1) != amount_checks)
-		exit_error("Error: object line doesn't contain all mandatory settings");
+	if (check_amount_settings(ft_2d_arrlen(split_settings) - 1, amount_checks, line) == false)
+		check_status = false;
 	while (cur_check < amount_checks)
 	{
 		if ((get_elem_checker_func(comps.components[cur_check])) \
