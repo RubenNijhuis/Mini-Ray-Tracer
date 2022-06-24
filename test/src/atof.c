@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/18 18:25:01 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/18 18:49:58 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/24 13:43:13 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ Test(ft_atod, passing)
 	COMP("-1");
 	COMP("100.0");
 	COMP("1.24");
+	COMP("987971.24589575176816");
 	COMP("1.1");
 	COMP("1.14025");
 	COMP("-23451.9095");
@@ -57,6 +58,7 @@ Test(is_valid_double_format, passing)
 	COMPF("+-.2949", 0);
 	COMPF("-.2949", 1);
 	COMPF("+.2949", 1);
+	COMPF("a1.000090", 0);
 	COMPF("1.000090f", 0);
 	COMPF("1.000090    ", 1);
 	COMPF("     1.000090", 0);	
