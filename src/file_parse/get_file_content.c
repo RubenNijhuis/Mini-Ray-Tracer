@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 15:19:48 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/24 15:40:33 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ static uint32_t	get_amount_lines(int fd)
 	return (amount_lines);
 }
 
-// TODO: maybe # comments?
+/**
+ * Grabs the next string from the file and places it in a t_line struct
+ * Also trims the \n
+ */
 static t_line	*fill_string_array(int fd, uint32_t amount_lines_in_file)
 {
 	t_line		*total_file;
@@ -48,6 +51,8 @@ static t_line	*fill_string_array(int fd, uint32_t amount_lines_in_file)
 	while (current_line < amount_lines_in_file)
 	{
 		total_file[current_line].line = get_next_line(fd);
+		total_file[current_line].line[\
+			ft_strlen(total_file[current_line].line) - 1] = '\0';
 		total_file[current_line].file_line = current_line + 1;
 		if (total_file[current_line].line == NULL)
 			exit_perror("Get Next Line had an issue returning a file line");
