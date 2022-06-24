@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/23 14:43:41 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/24 16:27:20 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ bool	is_float_format(char *digit)
 	has_dot = false;
 	format_status = true;
 	current_char = 0;
-	if (ft_strlen(digit) > 14)
-		return (false);
 	if (digit[current_char] == '-')
 		current_char++;
 	while (digit[current_char] != '\0')
@@ -54,8 +52,6 @@ bool	is_integer_format(char *digit)
 
 	format_status = true;
 	current_char = 0;
-	if (ft_strlen(digit) > 14)
-		return (false);
 	if (digit[current_char] == '-')
 		current_char++;
 	while (digit[current_char] != '\0')
@@ -88,7 +84,6 @@ bool	check_values_range_float(char **items, float min, float max)
 		current_val = ft_atof(items[current_item]);
 		if (current_val < min || current_val > max)
 		{
-			printf("%f - %s\n", current_val, items[current_item]);
 			status = false;
 			break ;
 		}
@@ -100,9 +95,11 @@ bool	check_values_range_float(char **items, float min, float max)
 bool	check_floats_formatting(char **items)
 {
 	uint32_t	cur_float;
+	uint32_t	amount_items;
 
+	amount_items = ft_2d_arrlen(items);
 	cur_float = 0;
-	while (cur_float < 3)
+	while (cur_float < amount_items)
 	{
 		if (is_float_format(items[cur_float]) == false)
 			return (false);
@@ -114,11 +111,13 @@ bool	check_floats_formatting(char **items)
 bool	check_ints_formatting(char **items)
 {
 	uint32_t	cur_float;
+	uint32_t	amount_items;
 
 	cur_float = 0;
-	while (cur_float < 3)
+	amount_items = ft_2d_arrlen(items);
+	while (cur_float < amount_items)
 	{
-		if (is_float_format(items[cur_float]) == false)
+		if (is_integer_format(items[cur_float]) == false)
 			return (false);
 		cur_float++;
 	}
@@ -163,11 +162,11 @@ bool	check_position(char *settings, uint32_t line_pos)
 
 	status = true;
 	split_settings = ft_split(settings, ',');
-	// if (check_values_range_float(split_settings, -FLT_MIN, FLT_MAX) == false)
-	// {
-	// 	printf("Error: position vec values out of range (-FLT_MIN - FLT_MAX)\n");
-	// 	status = false;
-	// }
+	if (check_floats_formatting(split_settings) == false)
+	{
+		print_err_msg("orientation vec", "values formatted incorrectly", line_pos);
+		status = false;
+	}
 	if (ft_2d_arrlen(split_settings) != 3)
 	{
 		print_err_msg("position vec", "doesn't contain 3 values", line_pos);
@@ -192,6 +191,11 @@ bool	check_orientation(char *settings, uint32_t line_pos)
 
 	status = true;
 	split_settings = ft_split(settings, ',');
+	if (check_floats_formatting(split_settings) == false)
+	{
+		print_err_msg("orientation vec", "values formatted incorrectly", line_pos);
+		status = false;
+	}
 	if (check_values_range_float(split_settings, -1, 1) == false)
 	{
 		print_err_msg("orientation vec", "values out of range", line_pos);
@@ -213,6 +217,11 @@ bool	check_color(char *settings, uint32_t line_pos)
 
 	status = true;
 	split_settings = ft_split(settings, ',');
+	if (check_ints_formatting(split_settings) == false)
+	{
+		print_err_msg("color vec", "values formatted incorrectly", line_pos);
+		status = false;
+	}
 	if (check_values_range_int(split_settings, 0, 255) == false)
 	{
 		print_err_msg("color vec", "values out of range", line_pos);
