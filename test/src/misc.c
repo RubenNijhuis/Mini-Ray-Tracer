@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/13 17:05:54 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/17 12:28:14 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/24 13:39:23 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ Test(ray_at, passing)
 	ray.origin = vec3f(2, 1, -4);
 	ray.direction = vec3f(0, 1, 0);
 	pos = ray_at(&ray, 5);
-	cr_expect(vec_eq(pos, vec3f(2, 6, -4)), "ray_at failure");
+	cr_expect(vec3f_eq(pos, vec3f(2, 6, -4)), "ray_at failure");
 }
