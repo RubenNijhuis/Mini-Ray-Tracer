@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/24 15:41:32 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/24 16:27:20 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,11 +162,11 @@ bool	check_position(char *settings, uint32_t line_pos)
 
 	status = true;
 	split_settings = ft_split(settings, ',');
-	// if (check_values_range_float(split_settings, -FLT_MIN, FLT_MAX) == false)
-	// {
-	// 	printf("Error: position vec values out of range (-FLT_MIN - FLT_MAX)\n");
-	// 	status = false;
-	// }
+	if (check_floats_formatting(split_settings) == false)
+	{
+		print_err_msg("orientation vec", "values formatted incorrectly", line_pos);
+		status = false;
+	}
 	if (ft_2d_arrlen(split_settings) != 3)
 	{
 		print_err_msg("position vec", "doesn't contain 3 values", line_pos);
