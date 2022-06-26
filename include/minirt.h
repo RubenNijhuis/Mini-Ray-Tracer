@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/24 14:08:55 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/26 11:54:02 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@
 # if HEADLESS
 #  define WIN_WIDTH 10
 # else
-#  define WIN_WIDTH 2000
+#  define WIN_WIDTH 1440
 # endif
 
-# define WIN_HEIGHT (1440)
+# define WIN_HEIGHT (1200)
 
 typedef struct s_program_data
 {
@@ -80,6 +80,9 @@ t_ray				get_camera_ray(uint32_t xpixel, uint32_t ypixel, \
 float				intersects_sphere(t_ray *ray, t_object *shape);
 float				intersects_plane(t_ray *ray, t_object *shape);
 
+/*
+ Normals
+*/
 t_vec3f				get_sphere_normal(const t_ray *ray, const float dist,
 						t_object *shape);
 t_vec3f				get_plane_normal(const t_ray *ray, const float dist,
@@ -97,10 +100,8 @@ void				color_multiply_scalar(t_color *color, \
 						const double scalar);
 void				color_clamp(t_color *color);
 uint32_t			col_to_hex(const t_color col);
-
 void				render_pixel_color(uint32_t x, uint32_t y, \
 						t_color color, t_program_data *pd);
-
 void				ambient_mixin(t_color *col, t_scene *scene);
 t_color				lights_mixin(t_scene *scene, t_vec3f p, \
 						t_object *shape, t_vec3f normal);
