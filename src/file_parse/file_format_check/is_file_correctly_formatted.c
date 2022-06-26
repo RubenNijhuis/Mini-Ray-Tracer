@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/23 15:02:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/26 13:55:51 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	check_input_lines(t_line *lines)
 		}
 		else if (ft_strlen(lines[current_line].line) > 1)
 		{
-			ft_dprintf(2, 
+			ft_dprintf(2,
 				"Error: line %i not object or non-empty line\n",
 				lines[current_line].file_line);
 			formatted_correctly = false;

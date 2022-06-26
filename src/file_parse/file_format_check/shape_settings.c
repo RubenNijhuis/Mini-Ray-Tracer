@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/23 13:21:15 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/26 13:56:19 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
 	return (funcs[comp]);
 }
 
-bool	check_amount_settings(uint32_t arr_len, uint32_t amount_checks, t_line line)
+bool	check_amount_settings(uint32_t arr_len, uint32_t amount_checks, \
+	t_line line)
 {
 	if (arr_len != amount_checks)
 	{
@@ -100,7 +101,8 @@ bool	run_object_checks(t_object_type obj_type, t_line line)
 	comps = get_object_component_list(obj_type);
 	cur_check = 0;
 	amount_checks = comps.amount_obj_components;
-	if (check_amount_settings(ft_2d_arrlen(split_settings) - 1, amount_checks, line) == false)
+	if (check_amount_settings(ft_2d_arrlen(split_settings) - 1, \
+		amount_checks, line) == false)
 		check_status = false;
 	while (cur_check < amount_checks)
 	{

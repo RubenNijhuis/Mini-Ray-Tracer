@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/24 16:27:20 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/26 13:57:18 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,137 +15,9 @@
 #include "parsing.h"
 #include "ft_printf.h"
 
-// needed ?
-#include <float.h>
-
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
-
-bool	is_float_format(char *digit)
-{
-	uint32_t	current_char;
-	bool		has_dot;
-	bool		format_status;
-
-	has_dot = false;
-	format_status = true;
-	current_char = 0;
-	if (digit[current_char] == '-')
-		current_char++;
-	while (digit[current_char] != '\0')
-	{
-		if ((digit[current_char] < '0' || digit[current_char] > '9') && \
-			digit[current_char] != '.')
-			format_status = false;
-		else if (digit[current_char] == '.' && has_dot == false)
-			has_dot = true;
-		current_char++;
-	}
-	return (format_status);
-}
-
-bool	is_integer_format(char *digit)
-{
-	uint32_t	current_char;
-	bool		format_status;
-
-	format_status = true;
-	current_char = 0;
-	if (digit[current_char] == '-')
-		current_char++;
-	while (digit[current_char] != '\0')
-	{
-		if (digit[current_char] < '0' || digit[current_char] > '9')
-			format_status = false;
-		current_char++;
-	}
-	return (format_status);
-}
-
-void	print_err_msg(char *data_type, char *issue, uint32_t line)
-{
-	ft_dprintf(2, "Error: %s %s on line %i\n", data_type, issue, line);
-}
-
-// It not worky
-bool	check_values_range_float(char **items, float min, float max)
-{
-	size_t	arr_len;
-	size_t	current_item;
-	bool	status;
-	float	current_val;
-
-	status = true;
-	current_item = 0;
-	arr_len = ft_2d_arrlen(items);
-	while (current_item < arr_len)
-	{
-		current_val = ft_atof(items[current_item]);
-		if (current_val < min || current_val > max)
-		{
-			status = false;
-			break ;
-		}
-		current_item++;
-	}
-	return (status);
-}
-
-bool	check_floats_formatting(char **items)
-{
-	uint32_t	cur_float;
-	uint32_t	amount_items;
-
-	amount_items = ft_2d_arrlen(items);
-	cur_float = 0;
-	while (cur_float < amount_items)
-	{
-		if (is_float_format(items[cur_float]) == false)
-			return (false);
-		cur_float++;
-	}
-	return (true);
-}
-
-bool	check_ints_formatting(char **items)
-{
-	uint32_t	cur_float;
-	uint32_t	amount_items;
-
-	cur_float = 0;
-	amount_items = ft_2d_arrlen(items);
-	while (cur_float < amount_items)
-	{
-		if (is_integer_format(items[cur_float]) == false)
-			return (false);
-		cur_float++;
-	}
-	return (true);
-}
-
-bool	check_values_range_int(char **items, int64_t min, int64_t max)
-{
-	size_t	arr_len;
-	size_t	current_item;
-	bool	status;
-	int64_t	current_val;
-
-	status = true;
-	current_item = 0;
-	arr_len = ft_2d_arrlen(items);
-	while (current_item < arr_len)
-	{
-		current_val = ft_atoi(items[current_item]);
-		if (current_val < min || current_val > max)
-		{
-			status = false;
-			break ;
-		}
-		current_item++;
-	}
-	return (status);
-}
 
 /**
  * @brief 
@@ -164,7 +36,8 @@ bool	check_position(char *settings, uint32_t line_pos)
 	split_settings = ft_split(settings, ',');
 	if (check_floats_formatting(split_settings) == false)
 	{
-		print_err_msg("orientation vec", "values formatted incorrectly", line_pos);
+		print_err_msg("orientation vec", "values formatted incorrectly", \
+			line_pos);
 		status = false;
 	}
 	if (ft_2d_arrlen(split_settings) != 3)
@@ -193,7 +66,8 @@ bool	check_orientation(char *settings, uint32_t line_pos)
 	split_settings = ft_split(settings, ',');
 	if (check_floats_formatting(split_settings) == false)
 	{
-		print_err_msg("orientation vec", "values formatted incorrectly", line_pos);
+		print_err_msg("orientation vec", "values formatted incorrectly", \
+			line_pos);
 		status = false;
 	}
 	if (check_values_range_float(split_settings, -1, 1) == false)
@@ -210,6 +84,15 @@ bool	check_orientation(char *settings, uint32_t line_pos)
 	return (status);
 }
 
+/**
+ * @brief 
+ * Checks the color vector of an object. Only allows rgb values 
+ * (3 values between 0 - 255). Will return false if any other number 
+ * or character is found.
+ * @param settings 
+ * @param line_pos 
+ * @return bool
+ */
 bool	check_color(char *settings, uint32_t line_pos)
 {
 	char	**split_settings;
@@ -236,8 +119,14 @@ bool	check_color(char *settings, uint32_t line_pos)
 	return (status);
 }
 
-// check is only num
-// check is in max float min float
+/**
+ * @brief 
+ * Checks the radius of an object and only allows proper 
+ * float formatting.
+ * @param settings 
+ * @param line_pos 
+ * @return bool
+ */
 bool	check_radius(char *settings, uint32_t line_pos)
 {
 	bool	status;
@@ -245,10 +134,11 @@ bool	check_radius(char *settings, uint32_t line_pos)
 	status = true;
 	if (is_float_format(settings) == false)
 	{
-		print_err_msg("radius variable", "value formatted incorrectly", line_pos);
+		print_err_msg("radius variable", "value formatted incorrectly", \
+			line_pos);
 		status = false;
 	}
-	if (ft_atof(settings) > FLT_MAX || ft_atof(settings) < 0)
+	if (ft_atof(settings) < 0)
 	{
 		print_err_msg("radius variable", "value out of range", line_pos);
 		status = false;
@@ -256,8 +146,14 @@ bool	check_radius(char *settings, uint32_t line_pos)
 	return (status);
 }
 
-// check is in max float min float
-// check is only num
+/**
+ * @brief 
+ * Checks the height of the object. Only allows proper float format
+ * 
+ * @param settings 
+ * @param line_pos 
+ * @return bool
+ */
 bool	check_height(char *settings, uint32_t line_pos)
 {
 	bool	status;
@@ -265,10 +161,11 @@ bool	check_height(char *settings, uint32_t line_pos)
 	status = true;
 	if (is_float_format(settings) == false)
 	{
-		print_err_msg("height variable", "value formatted incorrectly", line_pos);
+		print_err_msg("height variable", "value formatted incorrectly", \
+			line_pos);
 		status = false;
 	}
-	if (ft_atof(settings) > FLT_MAX || ft_atof(settings) < 0)
+	if (ft_atof(settings) <= 0)
 	{
 		print_err_msg("height variable", "value out of range", line_pos);
 		status = false;
@@ -276,13 +173,24 @@ bool	check_height(char *settings, uint32_t line_pos)
 	return (status);
 }
 
-// check is only num
-// check if is int and nog bigger than 180 or smaller than 1
+/**
+ * @brief 
+ * Checks the fov variable of the camera. Only allows proper integer format
+ *
+ * @param settings 
+ * @param line_pos 
+ * @return bool
+ */
 bool	check_fov(char *settings, uint32_t line_pos)
 {
 	bool	status;
 
 	status = true;
+	if (is_integer_format(settings) == false)
+	{
+		print_err_msg("fov variable", "value formatted incorrectly", line_pos);
+		status = false;
+	}
 	if (ft_atoi(settings) > 180 || ft_atoi(settings) < 0)
 	{
 		print_err_msg("fov variable", "value out of range", line_pos);
@@ -291,8 +199,15 @@ bool	check_fov(char *settings, uint32_t line_pos)
 	return (status);
 }
 
-// check is only num
-// check is in max float min float
+/**
+ * @brief
+ * Checks the value of the brightness variable. Only allows proper float format
+ * and values in between (0, 1)
+ *
+ * @param settings
+ * @param line_pos
+ * @return bool
+ */
 bool	check_brightness(char *settings, uint32_t line_pos)
 {
 	bool	status;
@@ -300,7 +215,8 @@ bool	check_brightness(char *settings, uint32_t line_pos)
 	status = true;
 	if (is_float_format(settings) == false)
 	{
-		print_err_msg("brightness variable", "value formatted incorrectly", line_pos);
+		print_err_msg("brightness variable", "value formatted incorrectly", \
+			line_pos);
 		status = false;
 	}
 	if (ft_atof(settings) > 1 || ft_atof(settings) < 0)

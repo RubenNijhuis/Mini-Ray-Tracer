@@ -1,6 +1,5 @@
-# 🌞 Mini Ray Tracer
+# 🌞 Mini Ray Tracer - made with ❤️ and 🧠
 
-Made with ❤️ and 🌈
 <img src="assets/halllway.png">
 
 - For more images visit [The gallery](https://rubennijhuis.com/projects/minirt)
@@ -29,6 +28,7 @@ Mini-Ray-Tracer -/
   - Makefile        # Compiling && linking magic happens here
   ...
 ```
+
 ## 🗣 Command list
 ```sh
 $ make norm
