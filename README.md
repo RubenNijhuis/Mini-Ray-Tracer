@@ -14,7 +14,7 @@ If you're on Linux(Debian-like), you have to install the prerequisites for [MLX4
 ```sh
 sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
 ```
-
+       
 ## 🏗 Project structure
 ```
 Mini-Ray-Tracer -/
@@ -38,7 +38,7 @@ $ make test
 Test the functions of MiniRT using Criterion
 
 $ make run
-Run the program with a default file from the assets folder
+Run the program with a default file test from the assets folder
 
 $ make submodules
 Pulls the most recent versions of the submodules 

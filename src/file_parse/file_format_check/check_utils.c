@@ -6,9 +6,13 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/26 12:03:36 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/26 13:56:32 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/27 10:41:10 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minirt.h"
+#include "libft.h"
+#include "ft_printf.h"
 
 #include <limits.h>
 #include <stdbool.h>

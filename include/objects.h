@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 15:08:41 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/27 12:14:13 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void	make_sphere(t_object *obj, char *settings);
 void	make_light(t_light *light, char *settings);
 
 // Util
+t_color	make_color(double r, double g, double b);
 int		get_obj_type(const char *str);
 bool	rt_objstrcmp(const char *s1, const char *s2);
 
