@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/25 22:42:56 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 12:25:42 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 16:09:03 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,64 +14,91 @@
 #include "minirt.h"
 #include "objects.h"
 #include "libft.h"
+#include "parsing.h"
 
 // Testing lib
 #include <criterion/criterion.h>
 
-// /*
-//  Tests
-// */
-// void	make_sphere_from_str_test(const char *settings, float radius, t_vec3f pos, t_color col)
-// {
-// 	t_object	sphere_obj;
-// 	make_sphere(&sphere_obj, settings);
+bool	color_eq(t_color col1, t_color col2)
+{
+	bool rEq = col1.r == (double)col2.r / 255;
+	bool gEq = col1.g == (double)col2.g / 255;
+	bool bEq = col1.b == (double)col2.b / 255;
 
-// 	bool colorEq = color_eq(col, sphere_obj.base.color);
-// 	bool posEq = vec3f_eq(pos, sphere_obj.base.position);
-// 	cr_expect(sphere_obj.base.obj_type == sphere, "Expected object type to be sphere");
-// 	cr_expect(sphere_obj.sphere.radius == radius, "Expected sphere diameter to be %f but got %f", radius, sphere_obj.sphere.radius);
-// 	cr_expect(posEq == true, "Expected position to match");
-// 	cr_expect(colorEq == true, "Expected sphere color to match");
-// }
+	return (rEq && gEq && bEq);
+}
 
+/*
+ Tests
+*/
+void	make_sphere_from_str_test(char *settings, float radius, t_vec3f pos, t_color col)
+{
+	t_object	sphere_obj;
+	make_sphere(&sphere_obj, settings);
 
-// /*
-//  Suites
-// */
-// Test(make_sphere_from_string, passing) {
-// 	make_sphere_from_str_test("sp  0,0,20  20  255,0,0", 20, vec3f(0,0,20), make_color(255,0,0));
-// 	make_sphere_from_str_test("sp 0,50,20 200 255,0,10", 200, vec3f(0,50,20), make_color(255,0,10));
-// }
+	bool colorEq = color_eq(sphere_obj.base.color, col);
+	bool posEq = vec3f_eq(pos, sphere_obj.base.position);
+	cr_expect(sphere_obj.base.obj_type == sphere, "Expected object type to be sphere");
+	cr_expect(sphere_obj.sphere.radius == (float)radius / 2, "Expected sphere diameter to be %f but got %f", radius, sphere_obj.sphere.radius);
+	cr_expect(posEq == true, "Expected position to match");
+	cr_expect(colorEq == true, "Expected sphere color to match");
+}
 
-// Test(make_cylinder_from_string, passing) {
-// 	t_object	cylinder_obj;
-// 	char		*cylinder_string = "cy  50.0,0.0,20.6  0,0,1.0  14.2  21.42  10,0,255";
-// 	make_cylinder(&cylinder_obj, cylinder_string);
+void	make_cylinder_from_str_test(char *settings, t_vec3f pos, t_vec3f orientation, float radius, float height, t_color color)
+{
+	t_object	obj;
 
-// 	cr_expect(cylinder_obj.base.obj_type == cylinder, "Expected object type to be cylinder");
-// 	cr_expect(cylinder_obj.cylinder.height == 21.42f, "Expected cylinder height to be 21.42");
-// 	cr_expect(cylinder_obj.base.position[2] == 20.6f, "Expected position z to be 20.6");
-// 	cr_expect(cylinder_obj.base.color.r == (10.0 / 255.0), "Expected cylinder color r to be ~0.03");
-// }
+	make_cylinder(&obj, settings);
 
-// Test(make_light_from_string, passing) {
-// 	t_light		light;
-// 	char		*light_settings = "L  -40,0,30  0.7  255,255,255";
-// 	make_light(&light, light_settings);
+	cr_expect(obj.base.obj_type == cylinder, "Expected object type to be cylinder");
+	cr_expect(obj.cylinder.radius == radius / 2, "Expected cylinder radius to be %f but got %f", radius, obj.cylinder.radius);
+	cr_expect(obj.cylinder.height == height, "Expected cylinder height to be %f but got %f", height, obj.cylinder.height);
+	cr_expect(obj.base.position[2] == pos[2], "Expected position z to be %f but got %f", pos[2], obj.base.position[2]);
+	cr_expect(obj.base.orientation[2] == orientation[2], "Expected orientation z to be %f but got %f", orientation[2], obj.base.orientation[2]);
+	cr_expect(color_eq(obj.base.color, color), "Expected colors to match");
+}
+
+void	make_cam_from_str_test(char *settings, t_vec3f pos, t_vec3f orientation, float fov)
+{
+	t_camera	cam;
+	set_camera(&cam, settings);
 	
-// 	cr_expect(light.position[0] == -40, "Expected light position x to be 40");
-// 	cr_expect(light.brightness == 0.7f, "Expected brightness to be 0.7");
-// 	cr_expect(light.color.r == 1.0f, "Expected light color r to be 255");
-// }
+	cr_expect(cam.position[0] == pos[0], "Expected camera position x to be %f but got %f", pos[0], cam.position[0]);
+	cr_expect(cam.orientation[1] == 1, "Expected camera orientation y to be %f but got %f", orientation[1], cam.orientation[1]);
+	cr_expect(cam.fov == deg_to_rad(70), "Expected camera FOV to be %f, was %f %f", fov, deg_to_rad(cam.fov), cam.fov);
+}
 
+void	make_light_from_str_test(char *settings, t_vec3f pos, float brightness, t_color color)
+{
+	t_light		light;
+	make_light(&light, settings);
+	
+	cr_expect(light.position[0] == pos[0], "Expected light position x to be 40");
+	cr_expect(light.brightness == brightness, "Expected brightness to be 0.7");
+	cr_expect(color_eq(light.color, color) == true, "Expected light color r to be %f but got %f", (float)color.r / 255, light.color.r);
+}
+
+/*
+ Suites
+*/
+Test(make_sphere_from_string, passing) {
+	make_sphere_from_str_test("sp  0,0,20   20   255,0,0", 20,  vec3f(0,0,20),  make_color(255,0,0));
+	make_sphere_from_str_test("sp  0,50,20  200  255,0,10", 200, vec3f(0,50,20), make_color(255,0,10));
+	make_sphere_from_str_test("sp  0,0,0  0  0,0,0", 0, vec3f(0,0,0), make_color(0,0,0));
+}
+
+Test(make_cylinder_from_string, passing) {
+	make_cylinder_from_str_test("cy  50.0,0.0,20.6  0,0,1.0  14.2  21.42  10,0,255", vec3f(50,0,20.6), vec3f(0,0,1), 14.2, 21.42, make_color(10,0,255));
+}
+
+Test(make_light_from_string, passing) {
+	make_light_from_str_test("L  -40,0,30  0.7  255,255,255", vec3f(-40,0,30), 0.7, make_color(255,255,255));
+	make_light_from_str_test("L  0,0,0  0  0,0,0", vec3f(0,0,0), 0, make_color(0,0,0));
+	make_light_from_str_test("L  10,10,30  1  155,0,155", vec3f(10,10,30), 1, make_color(155,0,155));
+}
+
+// FT_STRNCMP ISSUES???
 // Test(make_camera_from_string, passing) {
-// 	t_scene		scene;
-// 	char		*cam_settings = "C   -50,0,20         0,1,0      70";
-// 	char		**file_content = ft_split(cam_settings, '\n');
-// 	set_camera(&scene, file_content);
-	
-// 	cr_expect(scene.camera.position[0] == -50, "Expected camera position x to be -50");
-// 	cr_expect(scene.camera.orientation[1] == 1, "Expected camera orientation y to be 1");
-// 	cr_expect(scene.camera.fov == deg_to_rad(70), "Expected camera FOV to be 70, was %f %f", deg_to_rad(scene.camera.fov), scene.camera.fov);
-// 	ft_free_2d_array(&file_content, ft_2d_arrlen(file_content));
+// 	make_cam_from_str_test("C   -50,0,20         0,1,0      70", vec3f(-50,0,20), vec3f(0,1,0), 70);
+// 	make_cam_from_str_test("C   -10,5,0         1,1,1      20", vec3f(-10,5,0), vec3f(1,1,1), 20);
 // }

@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/27 14:07:14 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/27 15:00:10 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "ray.h"
 
 #include <math.h> /* sqrt */
-
 #include <stdio.h> // temp
 
 # define X (0)

@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/13 17:05:54 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/27 12:27:28 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 15:49:53 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 // Testing lib
 #include <criterion/criterion.h>
 
+bool	color_eq(t_color col1, t_color col2);
+
 /*
  Test functions
 */
@@ -31,7 +33,7 @@ void	deg_to_rad_test(const float input, const float expected)
 	float output = deg_to_rad(input);
 
 	cr_assert(output == expected, \
-		"Submitted: %s and expected `deg_to_rad` to return %i", input, expected);
+		"Submitted: %f and expected `deg_to_rad` to return %f", input, expected);
 }
 
 void	rad_to_deg_test(const float input, const float expected)
@@ -39,7 +41,7 @@ void	rad_to_deg_test(const float input, const float expected)
 	float output = rad_to_deg(input);
 
 	cr_assert(output == expected, \
-		"Submitted: %s and expected `rad_to_deg` to return %i", input, expected);
+		"Submitted: %f and expected `rad_to_deg` to return %f", input, expected);
 }
 
 void	ray_at_test(t_vec3f origin, t_vec3f direction, t_vec3f expected)
@@ -53,13 +55,11 @@ void	ray_at_test(t_vec3f origin, t_vec3f direction, t_vec3f expected)
 	cr_expect(vec3f_eq(pos, expected), "Expected proper ray at function");
 }
 
-void	get_color_from_string_test(const char *str, double r, double g, double b)
+void	get_color_from_string_test(char *str, t_color col)
 {
 	t_color	c = get_color_from_string(str);
 
-	cr_expect(c.r == (double)r / 255, "Expected r to be %f but got %f", r / 255, c.r);
-	cr_expect(c.g == (double)g / 255, "Expected g to be %f but got %f", g / 255, c.g);
-	cr_expect(c.b == (double)b / 255, "Expected b to be %f but got %f", b / 255, c.b);
+	color_eq(c, col);
 }
 
 /*
@@ -81,10 +81,10 @@ Test(rad_to_deg, passing)
 
 Test(get_color_from_string, passing)
 {
-	get_color_from_string_test("255,0,12", 255.0, 0, 12.0);
-	get_color_from_string_test("0,0,0", 0, 0, 0);
-	get_color_from_string_test("255,255,255", 255, 255, 255);
-	get_color_from_string_test("7,3,52", 7, 3, 52);
+	get_color_from_string_test("255,0,12", make_color(255.0, 0, 12.0));
+	get_color_from_string_test("0,0,0", make_color(0, 0, 0));
+	get_color_from_string_test("255,255,255", make_color(255, 255, 255));
+	get_color_from_string_test("7,3,52", make_color(7, 3, 52));
 }
 
 Test(ray_at, passing)

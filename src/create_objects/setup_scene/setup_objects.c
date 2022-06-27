@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 19:46:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/23 13:01:47 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/27 15:42:29 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,51 +15,29 @@
 #include "libft.h"
 #include "parsing.h"
 
-void	set_camera(t_scene *scene, t_line *file_content)
+void	set_camera(t_camera *cam, char *settings)
 {
-	uint32_t	i;
-	char		**settings;
-	uint32_t	amount_cameras;
+	char		**split_settings;
 
-	i = 0;
-	amount_cameras = 0;
-	while (file_content[i].line != NULL)
-	{
-		if (ft_strncmp(&file_content[i].line[0], CAMERA, 1) == 0)
-		{
-			amount_cameras++;
-			settings = ft_split(file_content[i].line, ' ');
-			if (settings == NULL)
-				malloc_error();
-			scene->camera.position = get_vec3f_from_string(settings[1]);
-			scene->camera.orientation = get_vec3f_from_string(settings[2]);
-			scene->camera.fov = deg_to_rad(ft_atof(settings[3]));
-			ft_free_2d_array(&settings, ft_2d_arrlen(settings));
-		}
-		i++;
-	}
+	split_settings = ft_split(settings, ' ');
+	if (settings == NULL)
+		malloc_error();
+	cam->position = get_vec3f_from_string(split_settings[1]);
+	cam->orientation = get_vec3f_from_string(split_settings[2]);
+	cam->fov = deg_to_rad(ft_atof(split_settings[3]));
+	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
 
-void	set_ambient_light(t_scene *scene, t_line *file_content)
+void	set_ambient_light(t_ambient_light *amb, char *settings)
 {
-	uint32_t	i;
-	char		**settings;
+	char		**split_settings;
 
-	i = 0;
-	while (file_content[i].line != NULL)
-	{
-		if (ft_strncmp(&file_content[i].line[0], AMBIENT_LIGHT, 1) == 0)
-		{
-			settings = ft_split(file_content[i].line, ' ');
-			if (settings == NULL)
-				malloc_error();
-			scene->amb_light.range = ft_atof(settings[1]);
-			scene->amb_light.color = get_color_from_string(settings[2]);
-			ft_free_2d_array(&settings, ft_2d_arrlen(settings));
-			return ;
-		}
-		i++;
-	}
+	split_settings = ft_split(settings, ' ');
+	if (settings == NULL)
+		malloc_error();
+	amb->range = ft_atof(split_settings[1]);
+	amb->color = get_color_from_string(split_settings[2]);
+	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
 
 void	make_light(t_light *light, char *settings)
@@ -75,7 +53,7 @@ void	make_light(t_light *light, char *settings)
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
 
-void	set_lights(t_scene *scene, t_line *lines)
+void	set_lights(t_scene *scene, t_line *file_content)
 {
 	uint32_t	current_light;
 	uint32_t	i;
@@ -85,13 +63,27 @@ void	set_lights(t_scene *scene, t_line *lines)
 	if (scene->lights == NULL)
 		malloc_error();
 	current_light = 0;
-	while (lines[i].line != NULL)
+	while (file_content[i].line != NULL)
 	{
-		if (rt_objstrcmp(LIGHT, lines[i].line))
+		if (rt_objstrcmp(LIGHT, file_content[i].line))
 		{
-			make_light(&scene->lights[current_light], lines[i].line);
+			make_light(&scene->lights[current_light], file_content[i].line);
 			current_light++;
 		}
 		i++;
 	}
+}
+
+t_line	*find_obj_in_file(char *definition, t_line *file_content)
+{
+	uint32_t	current_line;
+
+	current_line = 0;
+	while (file_content[current_line].line != NULL)
+	{
+		if (rt_objstrcmp(definition, file_content[current_line].line))
+			return (&file_content[current_line]);
+		current_line++;
+	}
+	return (NULL);
 }

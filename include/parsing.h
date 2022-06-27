@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 11:06:38 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 15:41:11 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,17 @@ typedef bool	(*t_comp_checker_func)(char *settings, uint32_t line_pos);
 */
 void		is_file_correctly_formatted(t_scene *scene, t_line *lines);
 t_line		*get_file_content(char *file_name);
+t_line		*find_obj_in_file(char *definition, t_line *file_content);
+
 // void		free_file_content(t_line *lines);
 
 /*
  Setup objects
 */
-void		set_camera(t_scene *scene, t_line *file_content);
+void		set_camera(t_camera *cam, char *settings);
+void		set_ambient_light(t_ambient_light *amb, char *settings);
 void		set_lights(t_scene *scene, t_line *file_content);
 void		set_shapes(t_scene *scene, t_line *file_content);
-void		set_ambient_light(t_scene *scene, t_line *file_content);
 void		setup_scene(t_scene *scene, char *file_name);
 
 /*
