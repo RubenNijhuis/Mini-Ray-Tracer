@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/26 13:56:19 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/27 18:13:04 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ t_component_list	get_object_component_list(t_object_type type)
 	return (components_check[type]);
 }
 
-// { bmp_map,    &check_bpm_map},
-// { material,   &check_material},
+
+// Component checker function definition
+typedef bool	(*t_comp_checker_func)(char *settings, uint32_t line_pos);
+
 /**
  * @brief 
  * Returns a function pointer that will check whether the settings
@@ -68,12 +70,14 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
 	return (funcs[comp]);
 }
 
+
 bool	check_amount_settings(uint32_t arr_len, uint32_t amount_checks, \
 	t_line line)
 {
 	if (arr_len != amount_checks)
 	{
-		ft_dprintf(2, "Error: line %i incorrect settings\n", line.file_line);
+		ft_dprintf(2, "Error: expected %i settings but got %i on line %i\n", \
+			amount_checks, arr_len, line.file_line);
 		return (false);
 	}
 	return (true);
@@ -103,7 +107,7 @@ bool	run_object_checks(t_object_type obj_type, t_line line)
 	amount_checks = comps.amount_obj_components;
 	if (check_amount_settings(ft_2d_arrlen(split_settings) - 1, \
 		amount_checks, line) == false)
-		check_status = false;
+		exit(1);
 	while (cur_check < amount_checks)
 	{
 		if ((get_elem_checker_func(comps.components[cur_check])) \
