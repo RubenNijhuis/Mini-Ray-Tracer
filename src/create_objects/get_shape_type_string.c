@@ -6,23 +6,34 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:27:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/25 16:29:03 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 17:07:35 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 #include <stdlib.h>
 
+typedef struct s_obj_type_name
+{
+	t_object_type	obj_type;
+	char			*name;
+}	t_obj_type_name;
+
 char	*get_shape_type_string(t_object_type obj_type)
 {
-	char	*obj_type_string;
+	size_t					i;
+	const t_obj_type_name	names[] = {
+	{sphere, "Sphere"},
+	{plane, "Plane"},
+	{cylinder, "Cylinder"}
+	};
 
-	obj_type_string = NULL;
-	if (obj_type == sphere)
-		obj_type_string = "Sphere";
-	else if (obj_type == plane)
-		obj_type_string = "Plane";
-	else if (obj_type == cylinder)
-		obj_type_string = "Cylinder";
-	return (obj_type_string);
+	i = 0;
+	while (i < sizeof(names) / sizeof(t_obj_type_name))
+	{
+		if (names[i].obj_type == obj_type)
+			return (names[i].name);
+		i++;
+	}
+	return (NULL);
 }

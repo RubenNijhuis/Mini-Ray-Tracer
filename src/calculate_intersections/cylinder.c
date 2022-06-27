@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/27 15:00:10 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 17:07:02 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include <math.h> /* sqrt */
 #include <stdio.h> // temp
 
-# define X (0)
-# define Y (1)
+#define X (0)
+#define Y (1)
 
 static float sq(float n)
 {
@@ -38,9 +38,9 @@ t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_object *shape)
 
 float	intersects_cylinder(t_ray *ray, t_object *shape)
 {
-	t_cylinder	*cyl;
+	t_cylinder		*cyl;
+	float			t;
 	// t_vec3f		trans_pos;
-	float		t;
 
 	t = -1.0f;
 	cyl = &shape->cylinder;

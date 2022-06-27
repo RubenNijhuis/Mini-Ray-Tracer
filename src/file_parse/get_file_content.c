@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 16:12:54 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 16:29:27 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	replace_chars(char *line, char cur, char new)
 
 /**
  * Grabs the next string from the file and places it in a t_line struct
- * Also trims the \n
+ * Also trims the \n and replaces the \t with spaces
  */
 static t_line	*fill_string_array(int fd, uint32_t amount_lines_in_file)
 {

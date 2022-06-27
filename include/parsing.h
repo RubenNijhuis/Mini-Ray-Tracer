@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 15:41:11 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 17:13:45 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ bool		check_values_range_float(char **items, float min, float max);
 bool		is_integer_format(char *digit);
 bool		is_float_format(char *digit);
 
-
 /*
  Utils
 */
@@ -80,6 +79,5 @@ void		check_amount_lights(t_line *lines);
 void		check_amount_cameras(t_line *lines);
 void		check_amount_ambient_lights(t_line *lines);
 void		print_err_msg(char *data_type, char *issue, uint32_t line);
-
 
 #endif

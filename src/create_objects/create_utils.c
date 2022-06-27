@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_objs_from_string.c                             :+:    :+:            */
+/*   create_utils.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/17 12:29:49 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/27 16:59:23 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdbool.h>	// true false
 #include <stdint.h>		// uint32_t
 
-static uint32_t	get_len(const char *str)
+static uint32_t	get_word_len(const char *str)
 {
 	uint32_t	i;
 
@@ -37,7 +37,7 @@ bool	ft_is_object(const char *object_str, const char *line)
 
 	while (*object_str)
 	{
-		len = get_len(object_str);
+		len = get_word_len(object_str);
 		if (ft_strncmp(object_str, line, len) == 0
 			&& (line[len] == ' ' || line[len] == '\0'))
 		{
