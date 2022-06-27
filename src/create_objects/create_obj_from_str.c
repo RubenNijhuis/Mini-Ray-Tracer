@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 10:50:32 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/10 17:44:23 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/27 13:47:41 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	make_cylinder(t_object *obj, char *settings)
 	obj->cylinder.base.position = get_vec3f_from_string(split_settings[1]);
 	obj->cylinder.base.orientation = get_vec3f_from_string(split_settings[2]);
 	obj->cylinder.base.color = get_color_from_string(split_settings[5]);
-	obj->cylinder.diameter = ft_atof(split_settings[3]);
+	obj->cylinder.radius = ft_atof(split_settings[3]) / 2.0f;
 	obj->cylinder.height = ft_atof(split_settings[4]);
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 12:14:13 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 13:47:13 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
 	t_base	base;
-	float	diameter;
+	float	radius;
 	float	height;
 }	t_cylinder;
 

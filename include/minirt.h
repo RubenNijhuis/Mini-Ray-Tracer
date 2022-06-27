@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/26 11:54:02 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/27 12:47:19 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_ray				get_camera_ray(uint32_t xpixel, uint32_t ypixel, \
 */
 float				intersects_sphere(t_ray *ray, t_object *shape);
 float				intersects_plane(t_ray *ray, t_object *shape);
+float				intersects_cylinder(t_ray *ray, t_object *shape);
 
 /*
  Normals
@@ -86,6 +87,8 @@ float				intersects_plane(t_ray *ray, t_object *shape);
 t_vec3f				get_sphere_normal(const t_ray *ray, const float dist,
 						t_object *shape);
 t_vec3f				get_plane_normal(const t_ray *ray, const float dist,
+						t_object *shape);
+t_vec3f				get_cylinder_normal(const t_ray *ray, const float dist,
 						t_object *shape);
 
 /*

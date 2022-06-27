@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/29 16:00:03 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/27 13:48:17 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	print_shape_dimensions(t_object_type type, t_object shape)
 		printf("Diameter    • %6.2f\n", shape.sphere.radius * 2);
 	else if (type == cylinder)
 	{
-		printf("Diameter    • %6.2f\n", shape.cylinder.diameter);
+		printf("Diameter    • %6.2f\n", shape.cylinder.radius * 2);
 		printf("Height      • %6.2f\n", shape.cylinder.height);
 	}
 }

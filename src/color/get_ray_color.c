@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/23 10:34:22 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/27 12:46:19 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_intersect_func	lookup_intersect_function(t_object *shape)
 	static const t_intersect_func	funcs[] = {
 	[sphere] = &intersects_sphere,
 	[plane] = &intersects_plane,
+	[cylinder] = &intersects_cylinder,
 	};
 
 	return (funcs[shape->base.obj_type]);
@@ -35,27 +36,11 @@ t_normal_func_ptr	lookup_normal_function(t_object *shape)
 	static const t_normal_func_ptr	funcs[] = {
 	[sphere] = &get_sphere_normal,
 	[plane] = &get_plane_normal,
+	[cylinder] = &get_cylinder_normal,
 	};
 
 	return (funcs[shape->base.obj_type]);
 }
-
-// t_vec3f	normal = (lookup_normal_function(cur_shape))(ray,
-// 	cur_hit_dist, cur_shape);
-// if (cur_hit_dist != -1)
-// {
-// 	// surface normal
-// 	// TODO: verify and move etc. this is temporary
-// 	newcol.r = (0.5f * (normal[0] + 1.0f));
-// 	newcol.g = (0.5f * (normal[1] + 1.0f));
-// 	newcol.b = (0.5f * (normal[2] + 1.0f));
-// }
-// else if (cur_hit_dist != -1 && cur_shape->base.obj_type == plane)
-// {
-// 	newcol.r = (cur_hit_dist / 100);
-// 	newcol.g = sin(cur_hit_dist / 100);
-// 	newcol.b = cos((cur_hit_dist) / 100 + M_PI) / 1.1f;
-// }
 
 /**
  * Checks if the distance from origin to the current object is smaller
