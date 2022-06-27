@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/23 14:55:54 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/27 18:45:46 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_make_func
 	void		(*obj_func)(t_object *, char *);
 }	t_make_func;
 
-static uint32_t	lookup_shape_function(t_object *shape, char *name)
+static void	lookup_shape_function(t_object *shape, char *name)
 {
 	size_t				i;
 	const t_make_func	funcs[] = {
@@ -34,13 +34,9 @@ static uint32_t	lookup_shape_function(t_object *shape, char *name)
 	while (i < sizeof(funcs) / sizeof(t_make_func))
 	{
 		if (ft_strncmp(name, funcs[i].name, 2) == 0)
-		{
 			(*funcs[i].obj_func)(shape, name);
-			return (1);
-		}
 		i++;
 	}
-	return (0);
 }
 
 /**
@@ -63,8 +59,9 @@ static void	convert_strings_to_shapes(t_object *shapes, t_line *object_strings)
 	{
 		if (ft_is_object(SCENE_SHAPES, object_strings[current_line].line))
 		{
-			amount_objects += lookup_shape_function(&shapes[amount_objects],
-					object_strings[current_line].line);
+			lookup_shape_function(&shapes[amount_objects], \
+				object_strings[current_line].line);
+			amount_objects++;
 		}
 		object_strings++;
 	}
