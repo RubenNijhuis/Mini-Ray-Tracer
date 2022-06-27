@@ -2,7 +2,7 @@
 
 <img src="assets/halllway.png">
 
-- For more images visit [The gallery](https://rubennijhuis.com/projects/minirt)
+- For more images visit → [The Gallery](https://rubennijhuis.com/projects/minirt)
 
 ## 🏃‍♀️ Quick Start 
 ```sh
@@ -62,10 +62,10 @@ Each module has a folder and file that match name-wise. Every other file can be 
 Dependent on Criterion lib, install via brew and run make with the `CODAM=1` variable.
 
 ## 📝 Notes
-[Scratchapixel](https://www.scratchapixel.com/)
-[orientation Matrix](https://en.wikipedia.org/wiki/orientation_matrix)
+[Scratchapixel →](https://www.scratchapixel.com/)  
+[orientation Matrix →](https://en.wikipedia.org/wiki/orientation_matrix)  
 
 ## ☑️ Todo
-[ ] - Make wayyy more tests
+[ ] - Make wayyy more tests  
 [ ] - Program close on [ x ] button click  
 
