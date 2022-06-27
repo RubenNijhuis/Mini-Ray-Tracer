@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/27 15:33:08 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/06/27 17:59:46 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ CC := gcc
 EXEC_NAME :=	minirt
 ASSETS_DIR :=	assets
 BIN_DIR :=		bin
+SRC_DIR :=		
 INCLUDE_DIR :=	include
 LIBS_DIR :=		libs
 OBJS_DIR := 	objs
@@ -183,15 +184,22 @@ $(NAME).a: $(NAME)
 
 test_binary: $(NAME).a
 
+# GET SRC FILES: find src | grep "\.c$" | sed -E 's/$/ \\/'
+
 norm:
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"
 	@-norminette $(INCLUDE_DIR)
 	@-norminette $(SRC_DIR)
-	@-norminette $(PF_DIR)
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"
 	
 	@echo
 	@$(MAKE) norm -C $(LIBS_DIR)/Get-Next-Line
+	@echo
+
+	@echo "\033[92m========= ft_printf norm ========\033[0m"
+	@norminette      $(LIBS_DIR)/ft_printf
+	@echo "\033[92m========= ft_printf norm ========\033[0m"
+
 	@echo
 	@$(MAKE) norm -C $(LIBS_DIR)/Lib-Vec
 	@echo

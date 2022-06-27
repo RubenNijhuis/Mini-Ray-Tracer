@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 15:39:55 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 18:00:55 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define OBJECTS_H
 
 # include "libvec.h"
+
 # include <stdint.h>
 # include <stdbool.h>
 
@@ -146,16 +147,18 @@ typedef struct s_scene
 	uint32_t		amount_shapes;
 }	t_scene;
 
-// Create objects
+/* 
+ Create objects
+*/
 void	make_plane(t_object *obj, char *settings);
 void	make_cylinder(t_object *obj, char *settings);
 void	make_sphere(t_object *obj, char *settings);
-
-// Create scene objects
 void	make_light(t_light *light, char *settings);
 
+void	set_camera(t_camera *cam, char *settings);
+void	set_ambient_light(t_ambient_light *amb, char *settings);
+
 // Util
-t_color	make_color(double r, double g, double b);
 int		get_obj_type(const char *str);
 bool	rt_objstrcmp(const char *s1, const char *s2);
 
