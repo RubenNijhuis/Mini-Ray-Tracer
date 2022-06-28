@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/25 22:42:56 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 16:09:03 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 23:00:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	make_sphere_from_str_test(char *settings, float radius, t_vec3f pos, t_colo
 	cr_expect(colorEq == true, "Expected sphere color to match");
 }
 
-void	make_cylinder_from_str_test(char *settings, t_vec3f pos, t_vec3f orientation, float radius, float height, t_color color)
+void	make_cylinder_from_str_test(char *settings, t_vec3f pos, t_vec3f rotation, float radius, float height, t_color color)
 {
 	t_object	obj;
 
@@ -54,17 +54,17 @@ void	make_cylinder_from_str_test(char *settings, t_vec3f pos, t_vec3f orientatio
 	cr_expect(obj.cylinder.radius == radius / 2, "Expected cylinder radius to be %f but got %f", radius, obj.cylinder.radius);
 	cr_expect(obj.cylinder.height == height, "Expected cylinder height to be %f but got %f", height, obj.cylinder.height);
 	cr_expect(obj.base.position[2] == pos[2], "Expected position z to be %f but got %f", pos[2], obj.base.position[2]);
-	cr_expect(obj.base.orientation[2] == orientation[2], "Expected orientation z to be %f but got %f", orientation[2], obj.base.orientation[2]);
+	cr_expect(obj.base.rotation[2] == rotation[2], "Expected rotation z to be %f but got %f", rotation[2], obj.base.rotation[2]);
 	cr_expect(color_eq(obj.base.color, color), "Expected colors to match");
 }
 
-void	make_cam_from_str_test(char *settings, t_vec3f pos, t_vec3f orientation, float fov)
+void	make_cam_from_str_test(char *settings, t_vec3f pos, t_vec3f rotation, float fov)
 {
 	t_camera	cam;
 	set_camera(&cam, settings);
 	
 	cr_expect(cam.position[0] == pos[0], "Expected camera position x to be %f but got %f", pos[0], cam.position[0]);
-	cr_expect(cam.orientation[1] == 1, "Expected camera orientation y to be %f but got %f", orientation[1], cam.orientation[1]);
+	cr_expect(cam.rotation[1] == 1, "Expected camera rotation y to be %f but got %f", rotation[1], cam.rotation[1]);
 	cr_expect(cam.fov == deg_to_rad(70), "Expected camera FOV to be %f, was %f %f", fov, deg_to_rad(cam.fov), cam.fov);
 }
 

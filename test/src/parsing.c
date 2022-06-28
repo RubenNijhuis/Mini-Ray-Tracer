@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/04 18:03:38 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/14 19:19:42 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/28 10:43:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 Test(ft_is_object, passing)
 {
 	// TODO: WTF are these descriptions?
+	cr_expect(ft_is_object("C L A ps pl pa", "C") == true, "expected hallo not to contain a space");
 	cr_expect(ft_is_object("ps pl pa", " ") == false, "expected hallo not to contain a space");
 	cr_expect(ft_is_object("ps pl pa", "pa") == true, "expected hallo to contain 'al'");
 	cr_expect(ft_is_object("ps pl pa", "pl") == true, "expected hallo to contain l or a");

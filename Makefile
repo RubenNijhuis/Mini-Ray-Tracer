@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/27 17:59:46 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/06/28 10:02:55 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,8 @@ OBJS :=			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 #=====================================#
 
 CC = 			gcc
-CFLAGS =		-Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS =		-Wall -Werror -Wextra
+# -g -fsanitize=address
 # TODO: CLEAN UP THIS MAKEFILE
 
 # Credits -> https://github.com/codam-coding-college/MLX42

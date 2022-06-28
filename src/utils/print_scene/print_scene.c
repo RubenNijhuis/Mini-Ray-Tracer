@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/30 14:15:09 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/27 23:00:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	print_camera(t_camera camera)
 	t_vec3f	orient;
 
 	pos = camera.position;
-	orient = camera.orientation;
+	orient = camera.rotation;
 	printf(RED "============= CAMERA =============\n\n" RESET);
 	printf("Value type  •    X      Y      Z\n");
 	printf("Position    • %6.2f %6.2f %6.2f\n", pos[0], pos[1], pos[2]);
-	printf("Orientation • %6.2f %6.2f %6.2f\n", orient[0], orient[1], orient[2]);
+	printf("rotation • %6.2f %6.2f %6.2f\n", orient[0], orient[1], orient[2]);
 	printf("Fov         • %6.2f\n", camera.fov);
 	printf("\n");
 }

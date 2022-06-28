@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 18:13:04 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/28 10:56:28 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,15 @@ t_component_list	get_object_component_list(t_object_type type)
 {
 	static const t_component_list	components_check[] = {
 	[ambient_light] = {2, {brightness, color}},
-	[camera] = {3, {position, orientation, fov}},
+	[camera] = {3, {position, rotation, fov}},
 	[light] = {3, {position, brightness, color}},
 	[sphere] = {3, {position, radius, color}},
-	[plane] = {3, {position, orientation, color}},
-	[cylinder] = {5, {position, orientation, height, radius, color}},
+	[plane] = {3, {position, rotation, color}},
+	[cylinder] = {5, {position, rotation, height, radius, color}},
 	};
 
 	return (components_check[type]);
 }
-
 
 // Component checker function definition
 typedef bool	(*t_comp_checker_func)(char *settings, uint32_t line_pos);
@@ -59,7 +58,7 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
 {
 	static const t_comp_checker_func	funcs[] = {
 	[position] = &check_position,
-	[orientation] = &check_orientation,
+	[rotation] = &check_rotation,
 	[color] = &check_color,
 	[radius] = &check_radius,
 	[height] = &check_height,
@@ -69,7 +68,6 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
 
 	return (funcs[comp]);
 }
-
 
 bool	check_amount_settings(uint32_t arr_len, uint32_t amount_checks, \
 	t_line line)

@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/18 18:33:42 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/06/28 10:03:55 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,8 @@ OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 #=====================================#
 
 CC = gcc
-CFLAGS = -Wall -Wextra $(INC) -fsanitize=address -g
+CFLAGS = -Wall -Wextra $(INC)
+# -fsanitize=address -g
 LDFLAGS = $(CRITERION_DIR) -lcriterion -lm
 
 #=====================================#

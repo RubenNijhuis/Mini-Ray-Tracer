@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/27 15:43:20 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/28 10:55:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	setup_scene(t_scene *scene, char *file_name)
 		find_obj_in_file(AMBIENT_LIGHT, file_content)->line);
 	set_lights(scene, file_content);
 	set_shapes(scene, file_content);
+	free_file_content(file_content);
 }

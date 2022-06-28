@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 18:03:13 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/28 10:56:57 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include "minirt.h"
 # include <stdint.h>
+
+typedef enum s_error_type
+{
+	out_of_range,
+	format,
+	amount_values
+}	t_error_type;
 
 /**
  * Struct that gives context to a line in the file.
@@ -33,15 +40,14 @@ typedef struct s_line
 void		is_file_correctly_formatted(t_scene *scene, t_line *lines);
 t_line		*get_file_content(char *file_name);
 t_line		*find_obj_in_file(char *definition, t_line *file_content);
-
-// void		free_file_content(t_line *lines);
+void		free_file_content(t_line *lines);
 
 /*
  Setup objects
 */
-void	set_lights(t_scene *scene, t_line *file_content);
-void	set_shapes(t_scene *scene, t_line *file_content);
-void	setup_scene(t_scene *scene, char *file_name);
+void		set_lights(t_scene *scene, t_line *file_content);
+void		set_shapes(t_scene *scene, t_line *file_content);
+void		setup_scene(t_scene *scene, char *file_name);
 
 /*
  Input checking
@@ -56,7 +62,7 @@ bool		check_brightness(char *settings, uint32_t line_pos);
 
 // Vectors
 bool		check_position(char *settings, uint32_t line_pos);
-bool		check_orientation(char *settings, uint32_t line_pos);
+bool		check_rotation(char *settings, uint32_t line_pos);
 bool		check_color(char *settings, uint32_t line_pos);
 
 // Number format
@@ -84,6 +90,6 @@ void		check_amount_cameras(t_line *lines);
 void		check_amount_ambient_lights(t_line *lines);
 
 // Parse messages
-void		print_err_msg(char *data_type, char *issue, uint32_t line);
+void		print_err_msg(char *data_type, uint32_t line, t_error_type error);
 
 #endif

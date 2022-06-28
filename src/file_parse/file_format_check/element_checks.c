@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 17:11:33 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 23:11:54 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ bool	check_radius(char *settings, uint32_t line_pos)
 	status = true;
 	if (is_float_format(settings) == false)
 	{
-		print_err_msg("radius variable", "value formatted incorrectly", \
-			line_pos);
+		print_err_msg("radius variable", line_pos, format);
 		status = false;
 	}
 	if (ft_atof(settings) < 0)
 	{
-		print_err_msg("radius variable", "value out of range", line_pos);
+		print_err_msg("radius variable", line_pos, out_of_range);
 		status = false;
 	}
 	return (status);
@@ -61,13 +60,12 @@ bool	check_height(char *settings, uint32_t line_pos)
 	status = true;
 	if (is_float_format(settings) == false)
 	{
-		print_err_msg("height variable", "value formatted incorrectly", \
-			line_pos);
+		print_err_msg("height variable", line_pos, format);
 		status = false;
 	}
 	if (ft_atof(settings) <= 0)
 	{
-		print_err_msg("height variable", "value out of range", line_pos);
+		print_err_msg("height variable", line_pos, out_of_range);
 		status = false;
 	}
 	return (status);
@@ -88,12 +86,12 @@ bool	check_fov(char *settings, uint32_t line_pos)
 	status = true;
 	if (is_integer_format(settings) == false)
 	{
-		print_err_msg("fov variable", "value formatted incorrectly", line_pos);
+		print_err_msg("fov variable", line_pos, format);
 		status = false;
 	}
 	if (ft_atoi(settings) > 180 || ft_atoi(settings) < 0)
 	{
-		print_err_msg("fov variable", "value out of range", line_pos);
+		print_err_msg("fov variable", line_pos, out_of_range);
 		status = false;
 	}
 	return (status);
@@ -115,13 +113,12 @@ bool	check_brightness(char *settings, uint32_t line_pos)
 	status = true;
 	if (is_float_format(settings) == false)
 	{
-		print_err_msg("brightness variable", "value formatted incorrectly", \
-			line_pos);
+		print_err_msg("brightness variable", line_pos, format);
 		status = false;
 	}
 	if (ft_atof(settings) > 1 || ft_atof(settings) < 0)
 	{
-		print_err_msg("brightness variable", "value out of range", line_pos);
+		print_err_msg("brightness variable", line_pos, out_of_range);
 		status = false;
 	}
 	return (status);

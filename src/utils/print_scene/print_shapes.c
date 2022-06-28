@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 13:48:17 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/27 23:00:47 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static void	print_shape_base(t_base base)
 
 	color = base.color;
 	pos = base.position;
-	orient = base.orientation;
+	orient = base.rotation;
 	printf("Value type  •    X       Y       Z\n");
 	printf("Position    • %6.2f  %6.2f  %6.2f\n", pos[0], pos[1], pos[2]);
-	printf("Orientation • %6.2f  %6.2f  %6.2f\n", \
+	printf("Rotation    • %6.2f  %6.2f  %6.2f\n", \
 		orient[0], orient[1], orient[2]);
 	print_object_color(color);
 }

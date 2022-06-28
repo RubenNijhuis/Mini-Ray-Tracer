@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/26 12:03:36 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 17:12:22 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 23:12:38 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,20 @@
 #include <stdint.h>
 #include <unistd.h> 
 
-void	print_err_msg(char *data_type, char *issue, uint32_t line)
+void	print_err_msg(char *data_type, uint32_t line, t_error_type error)
 {
-	ft_dprintf(2, "Error: %s %s on line %i\n", data_type, issue, line);
+	char	*msg;
+
+	msg = NULL;
+	ft_dprintf(2, "Error: ");
+	if (error == out_of_range)
+		msg = "value out of range";
+	else if (error == format)
+		msg = "value formatted incorrectly";
+	else if (error == amount_values)
+		msg = "incorrect amount of values";
+	ft_dprintf(2, "%s %s", data_type, msg);
+	ft_dprintf(2, " on line %i\n", line);
 }
 
 bool	check_values_range_float(char **items, float min, float max)

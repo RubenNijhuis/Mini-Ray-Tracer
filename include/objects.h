@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 18:00:55 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 23:00:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_color
 typedef enum e_element_component
 {
 	position,
-	orientation,
+	rotation,
 	color,
 	radius,
 	height,
@@ -82,7 +82,7 @@ typedef struct s_base
 {
 	t_object_type	obj_type;
 	t_vec3f			position;
-	t_vec3f			orientation;
+	t_vec3f			rotation;
 	t_color			color;
 }	t_base;
 
@@ -90,7 +90,7 @@ typedef struct s_base
 typedef struct s_camera
 {
 	t_vec3f		position;
-	t_vec3f		orientation;
+	t_vec3f		rotation;
 	float		fov;
 }	t_camera;
 

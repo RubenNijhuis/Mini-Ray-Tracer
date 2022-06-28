@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 19:46:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/27 17:07:26 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/27 23:00:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	set_camera(t_camera *cam, char *settings)
 	if (settings == NULL)
 		malloc_error();
 	cam->position = get_vec3f_from_string(split_settings[1]);
-	cam->orientation = get_vec3f_from_string(split_settings[2]);
+	cam->rotation = get_vec3f_from_string(split_settings[2]);
 	cam->fov = deg_to_rad(ft_atof(split_settings[3]));
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }

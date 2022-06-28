@@ -68,7 +68,7 @@ Test the functions of MiniRT using Criterion
 
 ## 📝 — Notes
 [Scratchapixel →](https://www.scratchapixel.com/)  
-[orientation Matrix →](https://en.wikipedia.org/wiki/orientation_matrix)  
+[rotation Matrix →](https://en.wikipedia.org/wiki/rotation_matrix)  
 
 ## ☑️ — Todo
 [ ] - Make wayyy more tests  
