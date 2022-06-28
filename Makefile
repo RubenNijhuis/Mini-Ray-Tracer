@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/28 13:19:25 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/06/28 13:28:40 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,7 @@ $(OBJS_DIR)/%.o: %.c $(HEADERS)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBS)
-	@$(CC) $(CFLAGS) $(LDFLAGS) $(NO_DEAD_CODE) $^ -o $@ $(MLX)
+	$(CC) $(CFLAGS) $(NO_DEAD_CODE) $^ -o $@ $(LDFLAGS) $(MLX)
 	@echo "✅ Built $(NAME)"
 
 # ft_printf stuff
