@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/27 17:11:35 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/28 13:17:52 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/28 14:09:49 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	check_position(char *settings, uint32_t line_pos)
 	status = true;
 	split_settings = ft_split(settings, ',');
 	if (check_floats_formatting(split_settings) == false \
-		|| ft_str_occur(settings, ',') != 2)
+		&& ft_str_occur(settings, ',') != 2)
 	{
 		print_err_msg("position vec", line_pos, format);
 		status = false;
@@ -64,7 +64,7 @@ bool	check_rotation(char *settings, uint32_t line_pos)
 	status = true;
 	split_settings = ft_split(settings, ',');
 	if (check_floats_formatting(split_settings) == false \
-		|| ft_str_occur(settings, ',') != 2)
+		&& ft_str_occur(settings, ',') != 2)
 	{
 		print_err_msg("rotation vec", line_pos, format);
 		status = false;
@@ -100,7 +100,7 @@ bool	check_color(char *settings, uint32_t line_pos)
 	status = true;
 	split_settings = ft_split(settings, ',');
 	if (check_ints_formatting(split_settings) == false \
-		|| ft_str_occur(settings, ',') != 2)
+		&& ft_str_occur(settings, ',') != 2)
 	{
 		print_err_msg("color vec", line_pos, format);
 		status = false;
