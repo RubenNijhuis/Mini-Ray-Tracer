@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/28 10:02:55 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/06/28 13:19:25 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,8 @@ PF_OBJ			=	$(PF_DEPS:$(PF_DIR)/%.c=$(PF_OBJ_DIR)/%.o)
 INPUT_FILE := 	$(ASSETS_DIR)/mandatory/test.rt
 
 LIBS :=			$(MLX_A) \
-				$(LIBFT_A) \
 				$(PF_A) \
+				$(LIBFT_A) \
 				$(LIBS_DIR)/Lib-Vec/libvec.a \
 				$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
 
