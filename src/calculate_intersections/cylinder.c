@@ -32,6 +32,7 @@ t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_object *shape)
 	cyl = &shape->cylinder;
 	(void)ray;
 	(void)dist;
+	(void)cyl;
 	// TODO
 	return (vec3f(0, 0, -1));
 }
