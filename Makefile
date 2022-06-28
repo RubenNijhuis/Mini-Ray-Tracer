@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/28 13:28:40 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/06/28 13:39:48 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,7 @@ TEST_DIR :=		test
 NAME := $(BIN_DIR)/$(EXEC_NAME)
 
 # TODO: More header watching
-HEADERS :=		$(LIBS_DIR)/Lib-Vec/include/libvec.h \
-				$(wildcard $(INCLUDE_DIR)/*.h)
-
+HEADERS :=		$(wildcard $(INCLUDE_DIR)/*.h)
 
 MLX_DIR			= $(LIBS_DIR)/MLX42
 MLX_H 			:=	$(MLX_DIR)/include/MLX42/MLX42.h
@@ -44,17 +42,22 @@ LIBFT_INC_DIR	=	$(LIBFT_DIR)/include
 LIBFT_H			=	$(LIBFT_INC_DIR)/libft.h
 LIBFT_A			=	$(LIBFT_DIR)/libft.a
 
-# ft_printf stuff
+#=====================================#
+#============= ft_printf =============#
+
 PF_DIR			=	$(LIBS_DIR)/ft_printf
 PF_H			=	$(PF_DIR)/ft_printf.h $(PF_DIR)/pf_util.h $(LIBFT_H)
 PF_A			=	$(PF_DIR)/libftprintf.a
 PF_PDEPS		=	pf_parsing.c pf_print_hex.c pf_print_int.c \
-						pf_print_pointer.c pf_print_str_char.c pf_printing.c \
-						pf_printing_util.c ft_printf.c pf_util.c ft_uitoa.c \
-						ft_itoa_hex.c
+					pf_print_pointer.c pf_print_str_char.c \
+					pf_printing.c pf_printing_util.c ft_printf.c \
+					pf_util.c ft_uitoa.c ft_itoa_hex.c
 PF_DEPS			=	$(PF_PDEPS:%.c=$(PF_DIR)/%.c)
 PF_OBJ_DIR		=	$(PF_DIR)/obj
 PF_OBJ			=	$(PF_DEPS:$(PF_DIR)/%.c=$(PF_OBJ_DIR)/%.o)
+
+#============= ft_printf =============#
+#=====================================#
 
 INPUT_FILE := 	$(ASSETS_DIR)/mandatory/test.rt
 
@@ -86,7 +89,6 @@ OBJS :=			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 #========= Command arguments =========#
 #=====================================#
 
-CC = 			gcc
 CFLAGS =		-Wall -Werror -Wextra
 # -g -fsanitize=address
 # TODO: CLEAN UP THIS MAKEFILE
