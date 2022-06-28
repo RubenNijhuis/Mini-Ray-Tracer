@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 23:00:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/28 15:44:13 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	print_camera(t_camera camera)
 
 	pos = camera.position;
 	orient = camera.rotation;
-	printf(RED "============= CAMERA =============\n\n" RESET);
+	printf(RED "============== CAMERA ==============\n\n" RESET);
 	printf("Value type  •    X      Y      Z\n");
 	printf("Position    • %6.2f %6.2f %6.2f\n", pos[0], pos[1], pos[2]);
-	printf("rotation • %6.2f %6.2f %6.2f\n", orient[0], orient[1], orient[2]);
+	printf("Rotation    • %6.2f %6.2f %6.2f\n", orient[0], orient[1], orient[2]);
 	printf("Fov         • %6.2f\n", camera.fov);
 	printf("\n");
 }
 
 void	print_ambient_light(t_ambient_light ambient_light)
 {
-	printf("========= AMBIENT LIGHT ==========\n\n");
+	printf("========== AMBIENT LIGHT ===========\n\n");
 	print_object_color(ambient_light.color);
 	printf("Range       • %6.2f\n", ambient_light.range);
 	printf("\n");
@@ -47,9 +47,9 @@ void	print_lights(t_light *lights, uint32_t amount_lights)
 
 	current_light = 0;
 	if (amount_lights == 1)
-		printf(YEL "============= LIGHT ==============\n\n" RESET);
+		printf(YEL "============== LIGHT ===============\n\n" RESET);
 	else
-		printf(YEL "============= LIGHTS =============\n\n" RESET);
+		printf(YEL "============== LIGHTS ==============\n\n" RESET);
 	while (current_light < amount_lights)
 	{
 		light = &lights[current_light];

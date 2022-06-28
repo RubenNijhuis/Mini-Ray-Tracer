@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 23:00:47 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/28 15:43:50 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void	print_shapes(t_object *shapes, uint32_t amount_shapes)
 
 	current_shape = 0;
 	if (amount_shapes == 1)
-		printf(CYN "============= SHAPE ==============\n\n" RESET);
+		printf(CYN "============== SHAPE ===============\n\n" RESET);
 	else
-		printf(CYN "============= SHAPES =============\n\n" RESET);
+		printf(CYN "============== SHAPES ==============\n\n" RESET);
 	while (current_shape < amount_shapes)
 	{
 		shape_base = shapes[current_shape].base;
