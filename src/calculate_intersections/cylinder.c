@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/28 13:19:33 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static float sq(float n)
 	return (n * n);
 }
 
-t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_object *shape)
+t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_shape *shape)
 {
 	t_cylinder	*cyl;
 
@@ -37,7 +37,7 @@ t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_object *shape)
 	return (vec3f(0, 0, -1));
 }
 
-float	intersects_cylinder(t_ray *ray, t_object *shape)
+float	intersects_cylinder(t_ray *ray, t_shape *shape)
 {
 	t_cylinder		*cyl;
 	float			t;

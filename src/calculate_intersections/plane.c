@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:44:59 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/27 23:00:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 #define MAX_DISTANCE (10000.0f)
 
 /* returns the surface normal of a plane, which is actually the rotation. */
-t_vec3f	get_plane_normal(const t_ray *ray, const float dist, t_object *shape)
+t_vec3f	get_plane_normal(const t_ray *ray, const float dist, t_shape *shape)
 {
 	(void)ray;
 	(void)dist;
 	return (shape->base.rotation);
 }
 
-float	intersects_plane(t_ray *ray, t_object *shape)
+float	intersects_plane(t_ray *ray, t_shape *shape)
 {
 	t_plane	*plane;
 	float	divisor;

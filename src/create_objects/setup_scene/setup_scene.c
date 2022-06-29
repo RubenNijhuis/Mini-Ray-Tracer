@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 18:45:46 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 typedef struct s_make_func
 {
 	const char	*name;
-	void		(*obj_func)(t_object *, char *);
+	void		(*obj_func)(t_shape *, char *);
 }	t_make_func;
 
-static void	lookup_shape_function(t_object *shape, char *name)
+static void	lookup_shape_function(t_shape *shape, char *name)
 {
 	size_t				i;
 	const t_make_func	funcs[] = {
@@ -48,7 +48,7 @@ static void	lookup_shape_function(t_object *shape, char *name)
  * @param shapes 
  * @param objects 
  */
-static void	convert_strings_to_shapes(t_object *shapes, t_line *object_strings)
+static void	convert_strings_to_shapes(t_shape *shapes, t_line *object_strings)
 {
 	uint32_t	amount_objects;
 	uint32_t	current_line;
@@ -69,7 +69,7 @@ static void	convert_strings_to_shapes(t_object *shapes, t_line *object_strings)
 
 void	set_shapes(t_scene *scene, t_line *file_content)
 {
-	scene->shapes = ft_calloc(scene->amount_shapes, sizeof(t_object));
+	scene->shapes = ft_calloc(scene->amount_shapes, sizeof(t_shape));
 	if (scene->shapes == NULL)
 		malloc_error();
 	convert_strings_to_shapes(scene->shapes, file_content);

@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/29 17:34:16 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ambient_mixin(t_color *col, t_scene *scene)
 bool	scene_intersects(t_scene *scene, t_ray *ray, float max_dist_sq)
 {
 	uint32_t	i;
-	t_object	*cur_shape;
+	t_shape	*cur_shape;
 	float		dist;
 
 	i = 0;
@@ -63,7 +63,7 @@ bool	scene_intersects(t_scene *scene, t_ray *ray, float max_dist_sq)
  * @param normal 
  * @return t_color 
  */
-t_color	get_light(t_light *light, t_scene *scene, t_object *shape, \
+t_color	get_light(t_light *light, t_scene *scene, t_shape *shape, \
 	t_vec3f point, t_vec3f normal)
 {
 	t_ray	ray;
@@ -100,7 +100,7 @@ t_color	get_light(t_light *light, t_scene *scene, t_object *shape, \
  * @param normal 
  * @return t_color 
  */
-t_color	lights_mixin(t_scene *scene, t_vec3f p, t_object *shape, t_vec3f normal)
+t_color	lights_mixin(t_scene *scene, t_vec3f p, t_shape *shape, t_vec3f normal)
 {
 	t_color		light_cols;
 	t_color		cur_col;

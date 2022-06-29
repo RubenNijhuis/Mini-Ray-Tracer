@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 10:50:32 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 23:00:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libvec.h"
 #include "minirt.h"
 
-void	make_sphere(t_object *obj, char *settings)
+void	make_sphere(t_shape *obj, char *settings)
 {
 	char	**split_settings;
 
@@ -29,7 +29,7 @@ void	make_sphere(t_object *obj, char *settings)
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
 
-void	make_cylinder(t_object *obj, char *settings)
+void	make_cylinder(t_shape *obj, char *settings)
 {
 	char	**split_settings;
 
@@ -45,7 +45,7 @@ void	make_cylinder(t_object *obj, char *settings)
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
 
-void	make_plane(t_object *obj, char *settings)
+void	make_plane(t_shape *obj, char *settings)
 {
 	char	**split_settings;
 

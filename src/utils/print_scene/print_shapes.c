@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/28 15:43:50 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	print_shape_base(t_base base)
 	print_object_color(color);
 }
 
-static void	print_shape_dimensions(t_object_type type, t_object shape)
+static void	print_shape_dimensions(t_object_type type, t_shape shape)
 {
 	if (type == sphere)
 		printf("Diameter    • %6.2f\n", shape.sphere.radius * 2);
@@ -52,7 +52,7 @@ static void	print_shape_dimensions(t_object_type type, t_object shape)
 	}
 }
 
-static void	print_shape_type(t_object_type type, t_object shape)
+static void	print_shape_type(t_object_type type, t_shape shape)
 {
 	uint32_t	amount_underline;
 	uint32_t	current_line;
@@ -74,7 +74,7 @@ static void	print_shape_type(t_object_type type, t_object shape)
 	printf("\n");
 }
 
-void	print_shapes(t_object *shapes, uint32_t amount_shapes)
+void	print_shapes(t_shape *shapes, uint32_t amount_shapes)
 {
 	uint32_t	current_shape;
 	t_base		shape_base;

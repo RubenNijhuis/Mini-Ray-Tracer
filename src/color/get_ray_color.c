@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/29 17:00:25 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * @param shape 
  * @return t_intersect_func 
  */
-t_intersect_func	lookup_intersect_function(t_object *shape)
+t_intersect_func	lookup_intersect_function(t_shape *shape)
 {
 	static const t_intersect_func	funcs[] = {
 	[sphere] = &intersects_sphere,
@@ -41,7 +41,7 @@ t_intersect_func	lookup_intersect_function(t_object *shape)
  * @param shape 
  * @return t_normal_func_ptr 
  */
-t_normal_func_ptr	lookup_normal_function(t_object *shape)
+t_normal_func_ptr	lookup_normal_function(t_shape *shape)
 {
 	static const t_normal_func_ptr	funcs[] = {
 	[sphere] = &get_sphere_normal,
@@ -75,7 +75,7 @@ static bool	update_closest_hit(float *hit_dist_record, float hit_dist)
 t_color	get_ray_color(t_ray *ray, t_scene *scene)
 {
 	uint32_t	current_shape;
-	t_object	*cur_shape;
+	t_shape	*cur_shape;
 	float		hit_dist_record;
 	float		hit_dist;
 	t_color		color;
