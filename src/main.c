@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/23 10:31:31 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/29 17:35:58 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 #include "libft.h"
 #include "parsing.h"
 
+#include <stdint.h>
+
 // TODO: Remove debug or only run on debug mode
-int	main(int argc, char **argv)
+int32_t	main(int argc, char **argv)
 {
 	t_program_data	pd;
 

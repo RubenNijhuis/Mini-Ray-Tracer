@@ -6,16 +6,22 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/28 10:56:57 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/29 17:58:12 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "minirt.h"
+#include "minirt.h"
+#include "objects.h"
+
+# include <stdbool.h>
 # include <stdint.h>
 
+/*
+ Error enum
+*/
 typedef enum s_error_type
 {
 	out_of_range,
@@ -33,6 +39,11 @@ typedef struct s_line
 	char		*line;
 	uint32_t	file_line;
 }	t_line;
+
+/* 
+ Component checker function definition
+*/
+typedef bool	(*t_comp_checker_func)(char *settings, uint32_t line_pos);
 
 /*
  Main functions

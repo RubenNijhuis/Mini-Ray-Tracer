@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/28 10:03:55 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/06/29 17:22:51 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@
 #=====================================#
 
 ifdef CODAM
-	CRITERION_DIR = -L /Users/jobvan-d/.brew/Cellar/criterion/2.4.1/lib
-	CRITERION_INC = -I /Users/jobvan-d/.brew/Cellar/criterion/2.4.1/include 
+	CRITERION_DIR = -L /Users/$(USER)/.brew/Cellar/criterion/2.4.1/lib
+	CRITERION_INC = -I /Users/$(USER)/.brew/Cellar/criterion/2.4.1/include 
 else
 	CRITERION_DIR = -L /usr/local/Cellar/criterion/2.4.0_1/lib/
 	CRITERION_INC = -I /usr/local/Cellar/criterion/2.4.0_1/include
@@ -26,19 +26,19 @@ endif
 #========= General variables =========#
 #=====================================#
 
-NAME := bin/tester
-SRC_DIR := src
-OBJS_DIR := objs
+NAME :=			bin/tester
+SRC_DIR :=		src
+OBJS_DIR :=		objs
 
 #=====================================#
 #============ Input files ============#
 #=====================================#
 
-LIBS :=	../bin/minirt.a \
-		../libs/LibFT/libft.a \
-		../libs/Get-Next-Line/get-next-line.a \
-		../libs/Lib-Vec/libvec.a \
-		../libs/MLX42/libmlx42.a \
+LIBS :=			../bin/minirt.a \
+				../libs/LibFT/libft.a \
+				../libs/Get-Next-Line/get-next-line.a \
+				../libs/Lib-Vec/libvec.a \
+				../libs/MLX42/libmlx42.a \
 
 LIBS_HEADERS :=	-I ../libs/LibFT/include/ \
 				-I ../libs/Get-Next-Line/include/ \
@@ -46,31 +46,27 @@ LIBS_HEADERS :=	-I ../libs/LibFT/include/ \
 				-I ../libs/MLX42/include/ \
 				$(CRITERION_INC)
 
-INC := -I ../include/ $(LIBS_HEADERS)
+INC :=			-I ../include/ $(LIBS_HEADERS)
 
-SRCS :=	make_objects.c \
-		misc.c \
-		vector_utils.c \
-		parsing.c \
-		atof.c \
+SRCS :=			$(shell find $(SRC_DIR) -type f -name "*.c")
 
 
-OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+OBJS =			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 #=====================================#
 #========= Command arguments =========#
 #=====================================#
 
-CC = gcc
-CFLAGS = -Wall -Wextra $(INC)
+CC =			gcc
+CFLAGS =		-Wall -Wextra $(INC)
+LDFLAGS =		$(CRITERION_DIR) -lcriterion -lm
 # -fsanitize=address -g
-LDFLAGS = $(CRITERION_DIR) -lcriterion -lm
 
 #=====================================#
 #=============== Rules ===============#
 #=====================================#
 
-objs/%.o: src/*%.c
+$(OBJS_DIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(CC) -c $(CFLAGS) -o $@ $^
 	@echo "🔨 Compiling: $^"

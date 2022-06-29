@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/26 13:55:51 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/29 18:11:33 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ typedef struct ss_obj_type_map
 	const t_object_type	type;
 }	t_obj_type_map;
 
-int	get_obj_type(const char *str)
+int32_t	get_obj_type(const char *str)
 {
+	size_t						i;
 	static const t_obj_type_map	map[] = {
 	{SPHERE, sphere},
 	{PLANE, plane},
@@ -35,7 +36,6 @@ int	get_obj_type(const char *str)
 	{AMBIENT_LIGHT, ambient_light},
 	{LIGHT, light}
 	};
-	size_t						i;
 
 	i = 0;
 	while (i < sizeof(map) / sizeof(t_obj_type_map))
@@ -49,7 +49,7 @@ int	get_obj_type(const char *str)
 
 void	check_input_lines(t_line *lines)
 {
-	int			obj_type;
+	int32_t		obj_type;
 	uint32_t	current_line;
 	bool		formatted_correctly;
 

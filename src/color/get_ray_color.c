@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/27 12:46:19 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/29 17:00:25 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@
 #include <stddef.h>
 #include <math.h>
 
-// see e_objects_type in objects.h
+/**
+ * @brief 
+ * Retrieves the intersection function based on the shape object type
+ * @param shape 
+ * @return t_intersect_func 
+ */
 t_intersect_func	lookup_intersect_function(t_object *shape)
 {
 	static const t_intersect_func	funcs[] = {
@@ -30,7 +35,12 @@ t_intersect_func	lookup_intersect_function(t_object *shape)
 	return (funcs[shape->base.obj_type]);
 }
 
-// see e_objects_type in objects.h
+/**
+ * @brief 
+ * Retrieves the normal function based on the shape object type
+ * @param shape 
+ * @return t_normal_func_ptr 
+ */
 t_normal_func_ptr	lookup_normal_function(t_object *shape)
 {
 	static const t_normal_func_ptr	funcs[] = {

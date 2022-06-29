@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 17:57:34 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/29 17:37:25 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 
 # define WIN_HEIGHT (1200)
 
+/*
+ Main struct that holds all the data in the program
+*/
 typedef struct s_program_data
 {
 	t_scene		scene;
@@ -49,6 +52,9 @@ typedef struct s_program_data
 	mlx_image_t	*img;
 }	t_program_data;
 
+/*
+ Shape intersect and normal function pointer defines
+*/
 typedef float	(*t_intersect_func)(t_ray *, t_object *);
 typedef t_vec3f	(*t_normal_func_ptr)(const t_ray *, const float, t_object *);
 

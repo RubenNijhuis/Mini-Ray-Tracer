@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/06/28 13:39:48 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/06/29 17:22:25 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ CC := gcc
 EXEC_NAME :=	minirt
 ASSETS_DIR :=	assets
 BIN_DIR :=		bin
-SRC_DIR :=		
 INCLUDE_DIR :=	include
 LIBS_DIR :=		libs
 OBJS_DIR := 	objs
@@ -106,7 +105,7 @@ else ifeq ($(UNAME_S), Darwin)
 	ifdef CODAM
 		MLX = -lglfw3
 	else
-		LDFLAGS += -L /usr/local/Cellar/glawfw/3.3.7/lib
+		LDFLAGS += -L /usr/local/Cellar/glawfw/3.3.7/ib
 		MLX = -lglfw
 	endif
 	NO_DEAD_CODE :=	-O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip

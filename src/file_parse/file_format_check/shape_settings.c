@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/28 10:56:28 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/29 17:56:08 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ t_component_list	get_object_component_list(t_object_type type)
 	return (components_check[type]);
 }
 
-// Component checker function definition
-typedef bool	(*t_comp_checker_func)(char *settings, uint32_t line_pos);
-
 /**
  * @brief 
  * Returns a function pointer that will check whether the settings
@@ -74,7 +71,8 @@ bool	check_amount_settings(uint32_t arr_len, uint32_t amount_checks, \
 {
 	if (arr_len != amount_checks)
 	{
-		ft_dprintf(2, "Error: expected %i settings but got %i on line %i\n", \
+		ft_dprintf(2, 
+			"Error: expected %i settings but got %i on line %i\n", \
 			amount_checks, arr_len, line.file_line);
 		return (false);
 	}

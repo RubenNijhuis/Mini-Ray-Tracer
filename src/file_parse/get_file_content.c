@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 18:44:44 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/29 18:17:11 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ t_line	*get_file_content(char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		exit_perror("open");
+		exit_perror("Open error");
 	amount_lines_in_file = get_amount_lines(fd);
 	if (close(fd) == -1)
-		exit_perror("close");
+		exit_perror("Close error");
 	fd = open(file_name, O_RDONLY);
 	full_file_string = get_file_lines(fd, amount_lines_in_file);
 	if (full_file_string == NULL)
 		malloc_error();
 	if (close(fd) == -1)
-		exit_perror("close");
+		exit_perror("Close error");
 	return (full_file_string);
 }

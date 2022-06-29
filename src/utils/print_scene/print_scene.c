@@ -6,16 +6,27 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/28 15:44:13 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/29 17:48:24 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "objects.h"
-#include "libft.h"	// ft_strlen
-
+#include "libft.h"
 #include "colors.h"
-#include <stdio.h>	// printf
+
+#include <stdio.h>
+
+char	*get_shape_type_string(t_object_type obj_type)
+{
+	static const char	*names[] = {
+	[sphere] = "Sphere",
+	[plane] = "Plane",
+	[cylinder] = "Cylinder"
+	};
+
+	return ((char *)names[obj_type]);
+}
 
 void	print_camera(t_camera camera)
 {
