@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 20:36:47 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:01:50 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,7 @@ static void	print_shape_type(t_object_type type, t_shape shape)
 	size_t		current_line;
 
 	current_line = 0;
-	amount_underline = 0;
-	if (type == sphere)
-		amount_underline = ft_strlen("sphere");
-	else if (type == plane)
-		amount_underline = ft_strlen("plane");
-	else if (type == cylinder)
-		amount_underline = ft_strlen("cylinder");
+	amount_underline = ft_strlen(get_shape_type_string(type));
 	printf(BLU "%s\n" RESET, get_shape_type_string(shape.base.obj_type));
 	while (current_line < amount_underline)
 	{
