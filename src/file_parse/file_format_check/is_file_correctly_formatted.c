@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 20:28:59 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:15:42 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,22 @@ void	check_input_lines(t_line *lines)
 {
 	int32_t	obj_type;
 	size_t	current_line;
-	bool	formatted_correctly;
 
-	formatted_correctly = true;
 	current_line = 0;
 	while (lines[current_line].line != NULL)
 	{
 		obj_type = get_obj_type(lines[current_line].line);
 		if (obj_type != -1)
-		{
-			if (run_object_checks(obj_type, lines[current_line]) == false)
-				formatted_correctly = false;
-		}
+			run_object_checks(obj_type, lines[current_line]);
 		else if (ft_strlen(lines[current_line].line) > 1)
 		{
 			ft_dprintf(2,
 				"Error: line %i not object or non-empty line\n",
 				lines[current_line].file_line);
-			formatted_correctly = false;
+			exit(1);
 		}
 		lines++;
 	}
-	if (formatted_correctly == false)
-		exit(1);
 }
 
 // checks if the number of objects for each type are correct.
@@ -82,9 +75,5 @@ void	is_file_correctly_formatted(t_scene *scene, t_line *lines)
 {
 	check_amount_mandatory(lines, CAMERA, 1, "camera");
 	check_amount_mandatory(lines, AMBIENT_LIGHT, 1, "ambient light");
-	scene->amount_lights = check_amount_mandatory(lines, LIGHT,
-			MAX_LIGHTS, "light");
-	scene->amount_shapes = check_amount_generic(lines, SCENE_SHAPES,
-			MAX_SHAPES, "shape");
 	check_input_lines(lines);
 }

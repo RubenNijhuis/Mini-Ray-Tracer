@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 21:01:50 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:17:34 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	print_shape_type(t_object_type type, t_shape shape)
 void	print_shapes(t_shape *shapes, uint32_t amount_shapes)
 {
 	size_t	current_shape;
-	t_base		shape_base;
+	t_base	shape_base;
 
 	current_shape = 0;
 	if (amount_shapes == 1)

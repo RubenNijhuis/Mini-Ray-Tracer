@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   shape_settings.c                                   :+:    :+:            */
+/*   check_shape_settings.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 20:34:39 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:17:13 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,16 @@ t_comp_checker_func	get_elem_checker_func(t_element_component comp)
 	return (funcs[comp]);
 }
 
-bool	check_amount_settings(uint32_t arr_len, uint32_t amount_checks, \
+void	check_amount_settings(uint32_t arr_len, uint32_t amount_checks, \
 	t_line line)
 {
 	if (arr_len != amount_checks)
 	{
-		ft_dprintf(2, 
+		ft_dprintf(2,
 			"Error: expected %i settings but got %i on line %i\n", \
 			amount_checks, arr_len, line.file_line);
-		return (false);
+		exit(1);
 	}
-	return (true);
 }
 
 /**
@@ -88,29 +87,25 @@ bool	check_amount_settings(uint32_t arr_len, uint32_t amount_checks, \
  * @param obj_type 
  * @param obj_settings 
  */
-bool	run_object_checks(t_object_type obj_type, t_line line)
+void	run_object_checks(t_object_type obj_type, t_line line)
 {
 	t_component_list	comps;
 	char				**split_settings;
 	size_t				cur_check;
 	uint32_t			amount_checks;
-	bool				check_status;
 
-	check_status = true;
 	split_settings = ft_split(line.line, ' ');
 	comps = get_object_component_list(obj_type);
 	cur_check = 0;
 	amount_checks = comps.amount_obj_components;
-	if (check_amount_settings(ft_2d_arrlen(split_settings) - 1, \
-		amount_checks, line) == false)
-		exit(1);
+	check_amount_settings(ft_2d_arrlen(split_settings) - 1,
+		amount_checks, line);
 	while (cur_check < amount_checks)
 	{
 		if ((get_elem_checker_func(comps.components[cur_check])) \
 			(split_settings[cur_check + 1], line.file_line) == false)
-			check_status = false;
+			exit(1);
 		cur_check++;
 	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
-	return (check_status);
 }

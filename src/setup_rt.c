@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/30 20:30:29 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:11:21 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	check_file_name(char *file_name)
 
 	str_len = ft_strlen(file_name);
 	if (str_len < 4)
-		exit_error("Error: file name too short, this can't possibly be a real file");
-	if (ft_strncmp(ft_substr(file_name, str_len - 3, 3), ".rt", 3) != 0)
+		exit_error("Error: file name must be at least 4 characters long");
+	else if (ft_strncmp(ft_substr(file_name, str_len - 3, 3), ".rt", 3) != 0)
 		exit_error("Error: file name must end on '.rt'");
 }
 

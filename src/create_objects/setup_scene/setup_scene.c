@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 20:32:15 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:14:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 #include "libft.h"
 #include "parsing.h"
 
-typedef struct s_make_func
+typedef struct s_create_shape_func
 {
 	const char	*name;
 	void		(*obj_func)(t_shape *, char *);
-}	t_make_func;
+}	t_create_shape_func;
 
-static void	lookup_shape_function(t_shape *shape, char *name)
+static void	lookup_shape_creation_func(t_shape *shape, char *name)
 {
-	size_t				i;
-	const t_make_func	funcs[] = {
+	size_t						i;
+	const t_create_shape_func	funcs[] = {
 	{SPHERE, &make_sphere},
 	{PLANE, &make_plane},
 	{CYLINDER, &make_cylinder}
 	};
 
 	i = 0;
-	while (i < sizeof(funcs) / sizeof(t_make_func))
+	while (i < sizeof(funcs) / sizeof(t_create_shape_func))
 	{
 		if (ft_strncmp(name, funcs[i].name, 2) == 0)
 			(*funcs[i].obj_func)(shape, name);
@@ -59,7 +59,7 @@ static void	convert_strings_to_shapes(t_shape *shapes, t_line *object_strings)
 	{
 		if (ft_is_object(SCENE_SHAPES, object_strings[current_line].line))
 		{
-			lookup_shape_function(&shapes[amount_objects], \
+			lookup_shape_creation_func(&shapes[amount_objects], \
 				object_strings[current_line].line);
 			amount_objects++;
 		}

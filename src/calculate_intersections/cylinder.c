@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:18:38 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "libvec.h"
 #include "ray.h"
 
-#include <math.h> /* sqrt */
-#include <stdio.h> // temp
+#include <math.h>	/* sqrt */
+#include <stdio.h>	// temp
 
 #define X (0)
 #define Y (1)
 
-static float sq(float n)
+static float	sq(float n)
 {
 	return (n * n);
 }

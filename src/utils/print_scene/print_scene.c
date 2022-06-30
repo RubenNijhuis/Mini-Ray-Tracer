@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 20:36:32 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:17:25 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_ambient_light(t_ambient_light ambient_light)
 
 void	print_lights(t_light *lights, uint32_t amount_lights)
 {
-	size_t	current_light;
+	size_t		current_light;
 	t_light		*light;
 
 	current_light = 0;

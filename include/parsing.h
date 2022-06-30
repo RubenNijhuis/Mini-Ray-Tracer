@@ -6,15 +6,15 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/29 17:58:12 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:17:58 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-#include "minirt.h"
-#include "objects.h"
+# include "minirt.h"
+# include "objects.h"
 
 # include <stdbool.h>
 # include <stdint.h>
@@ -63,7 +63,7 @@ void		setup_scene(t_scene *scene, char *file_name);
 /*
  Input checking
 */
-bool		run_object_checks(t_object_type obj_type, t_line line);
+void		run_object_checks(t_object_type obj_type, t_line line);
 
 // Simple elements
 bool		check_radius(char *settings, uint32_t line_pos);
