@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/26 12:03:36 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/29 18:01:40 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:33:34 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 bool	check_floats_formatting(char **items)
 {
-	uint32_t	cur_float;
+	size_t		cur_float;
 	uint32_t	amount_items;
 
 	amount_items = ft_2d_arrlen(items);
@@ -38,7 +38,7 @@ bool	check_floats_formatting(char **items)
 
 bool	check_ints_formatting(char **items)
 {
-	uint32_t	cur_float;
+	size_t		cur_float;
 	uint32_t	amount_items;
 
 	cur_float = 0;

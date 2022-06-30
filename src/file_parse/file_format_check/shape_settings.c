@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/29 17:56:08 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:34:39 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ bool	run_object_checks(t_object_type obj_type, t_line line)
 {
 	t_component_list	comps;
 	char				**split_settings;
-	uint32_t			cur_check;
+	size_t				cur_check;
 	uint32_t			amount_checks;
 	bool				check_status;
 

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 16:59:23 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/30 20:32:38 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include <stdbool.h>	// true false
 #include <stdint.h>		// uint32_t
 
-static uint32_t	get_word_len(const char *str)
+size_t	get_word_len(const char *str)
 {
-	uint32_t	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] && str[i] != ' ')
@@ -33,7 +33,7 @@ static uint32_t	get_word_len(const char *str)
 // i.e. ft_is_object("sp cl pl", "pl 0,-1,0 (...)")
 bool	ft_is_object(const char *object_str, const char *line)
 {
-	uint32_t	len;
+	size_t	len;
 
 	while (*object_str)
 	{

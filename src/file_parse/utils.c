@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/28 10:55:16 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/29 18:00:24 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:35:32 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	free_file_content(t_line *file_content)
 {
-	uint32_t	cur_line;
+	size_t	cur_line;
 
 	cur_line = 0;
 	while (file_content[cur_line].line != NULL)

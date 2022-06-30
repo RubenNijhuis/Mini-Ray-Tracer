@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/29 18:17:11 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:35:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 #include <stdlib.h>	// free
 #include <fcntl.h>	// Open
 
-static uint32_t	get_amount_lines(int fd)
+static size_t	get_amount_lines(int fd)
 {
-	uint32_t	amount_lines;
-	char		*new_line;
+	size_t	amount_lines;
+	char	*new_line;
 
 	amount_lines = 0;
 	while (1)
@@ -41,8 +41,8 @@ static uint32_t	get_amount_lines(int fd)
  */
 static t_line	*get_file_lines(int fd, uint32_t amount_lines_in_file)
 {
-	t_line		*total_file;
-	uint32_t	current_line;
+	t_line	*total_file;
+	size_t	current_line;
 
 	current_line = 0;
 	total_file = ft_calloc(amount_lines_in_file + 1, sizeof(t_line));

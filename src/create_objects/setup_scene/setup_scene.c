@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:32:15 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	lookup_shape_function(t_shape *shape, char *name)
 static void	convert_strings_to_shapes(t_shape *shapes, t_line *object_strings)
 {
 	uint32_t	amount_objects;
-	uint32_t	current_line;
+	size_t		current_line;
 
 	amount_objects = 0;
 	current_line = 0;

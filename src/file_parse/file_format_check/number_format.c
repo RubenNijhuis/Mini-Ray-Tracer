@@ -6,18 +6,20 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/27 17:08:27 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/27 17:13:27 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/30 20:34:19 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdint.h>
 
+#include <stddef.h>
+
 bool	is_float_format(char *digit)
 {
-	uint32_t	current_char;
-	bool		has_dot;
-	bool		format_status;
+	size_t	current_char;
+	bool	has_dot;
+	bool	format_status;
 
 	has_dot = false;
 	format_status = true;
@@ -38,8 +40,8 @@ bool	is_float_format(char *digit)
 
 bool	is_integer_format(char *digit)
 {
-	uint32_t	current_char;
-	bool		format_status;
+	size_t	current_char;
+	bool	format_status;
 
 	format_status = true;
 	current_char = 0;

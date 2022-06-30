@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:31:45 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ static bool	update_closest_hit(float *hit_dist_record, float hit_dist)
 */
 t_color	get_ray_color(t_ray *ray, t_scene *scene)
 {
-	uint32_t	current_shape;
+	size_t	current_shape;
 	t_shape	*cur_shape;
-	float		hit_dist_record;
-	float		hit_dist;
-	t_color		color;
-	t_vec3f		normal;
-	t_color		new_color;
-	t_color		yeet;
+	float	hit_dist_record;
+	float	hit_dist;
+	t_color	color;
+	t_vec3f	normal;
+	t_color	new_color;
+	t_color	yeet;
 
 	current_shape = 0;
 	color = get_default_color(scene);

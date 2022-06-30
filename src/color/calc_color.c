@@ -6,12 +6,14 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:31:21 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 #include "minirt.h"
+
+#include <stddef.h>
 
 void	ambient_mixin(t_color *col, t_scene *scene)
 {
@@ -33,9 +35,9 @@ void	ambient_mixin(t_color *col, t_scene *scene)
  */
 bool	scene_intersects(t_scene *scene, t_ray *ray, float max_dist_sq)
 {
-	uint32_t	i;
+	size_t	i;
 	t_shape	*cur_shape;
-	float		dist;
+	float	dist;
 
 	i = 0;
 	while (i < scene->amount_shapes)
@@ -102,9 +104,9 @@ t_color	get_light(t_light *light, t_scene *scene, t_shape *shape, \
  */
 t_color	lights_mixin(t_scene *scene, t_vec3f p, t_shape *shape, t_vec3f normal)
 {
-	t_color		light_cols;
-	t_color		cur_col;
-	uint32_t	i;
+	t_color	light_cols;
+	t_color	cur_col;
+	size_t	i;
 
 	light_cols = make_color(0, 0, 0);
 	i = 0;

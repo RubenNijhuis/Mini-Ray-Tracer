@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:36:47 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	print_shape_dimensions(t_object_type type, t_shape shape)
 static void	print_shape_type(t_object_type type, t_shape shape)
 {
 	uint32_t	amount_underline;
-	uint32_t	current_line;
+	size_t		current_line;
 
 	current_line = 0;
 	amount_underline = 0;
@@ -76,7 +76,7 @@ static void	print_shape_type(t_object_type type, t_shape shape)
 
 void	print_shapes(t_shape *shapes, uint32_t amount_shapes)
 {
-	uint32_t	current_shape;
+	size_t	current_shape;
 	t_base		shape_base;
 
 	current_shape = 0;

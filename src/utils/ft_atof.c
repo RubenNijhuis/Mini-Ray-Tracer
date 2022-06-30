@@ -6,14 +6,14 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 15:27:17 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/18 18:38:53 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/30 20:36:13 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 static double	atod_postdecimal(const char *str)
 {
-	double		result;
-	double		divisor;
+	double	result;
+	double	divisor;
 
 	result = 0.0;
 	divisor = 1.0;

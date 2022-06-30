@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/29 18:11:33 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:28:59 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct ss_obj_type_map
+typedef struct s_obj_type_map
 {
 	const char			*type_str;
 	const t_object_type	type;
@@ -49,9 +49,9 @@ int32_t	get_obj_type(const char *str)
 
 void	check_input_lines(t_line *lines)
 {
-	int32_t		obj_type;
-	uint32_t	current_line;
-	bool		formatted_correctly;
+	int32_t	obj_type;
+	size_t	current_line;
+	bool	formatted_correctly;
 
 	formatted_correctly = true;
 	current_line = 0;
