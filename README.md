@@ -42,6 +42,9 @@ Mini-Ray-Tracer -/
 
 ## 🗣 — Command list
 ```sh
+$ ./bin/minirt [path-to-'.rt'-file]
+Runs the program with an example rt file
+
 $ make norm
 Outputs the norminette across the src and include folder of every project
 
@@ -78,7 +81,7 @@ Each module has a folder and file that match name-wise. Every other file can be 
 $ make test
 Test the functions of MiniRT using Criterion
 ```
-[Criterion Testing Library →](https://github.com/Snaipe/Criterion)
+[Criterion Testing Library →](https://github.com/Snaipe/Criterion)  
 
 <br>
 
@@ -93,3 +96,4 @@ Test the functions of MiniRT using Criterion
 [ ] - Program close on [ x ] button click  
 [ ] - Cylinder
 [ ] - Camera orientation
+jjj
