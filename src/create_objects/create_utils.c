@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:37:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 20:32:38 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:20:37 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "objects.h"
 #include "minirt.h"
 
-#include <stdbool.h>	// true false
-#include <stdint.h>		// uint32_t
+#include <stdbool.h>
+#include <stdint.h>
 
 size_t	get_word_len(const char *str)
 {

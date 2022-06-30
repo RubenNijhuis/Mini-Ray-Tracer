@@ -1,12 +1,10 @@
 # 🌞 Mini Ray Tracer — made with ❤️ and 🧠
 
-<img src="assets/halllway.png">
+<img src="assets/halllway.png" alt="24 balls in a hallway with multicoloured lights and color transitions">
 
-- For more images visit → [The Gallery](https://rubennijhuis.com/projects/minirt)
-
+- For more images visit [The Gallery →](https://rubennijhuis.com/projects/minirt)
 
 <br>
-
 
 ## 🏃‍♀️ —  Quick Start
 It's very important to clone recursively as this project contains submodules!
@@ -15,7 +13,7 @@ $ git clone --recursive git@github.com:RubenNijhuis/Mini-Ray-Tracer.git
 $ make run
 ```
 
-If you're on Linux(Debian-like), you have to install the prerequisites for [MLX42](https://github.com/codam-coding-college/MLX42/) first:
+If you're on Linux(Debian-like), you have to install the prerequisites for [MLX42 →](https://github.com/codam-coding-college/MLX42/) first:
 ```sh
 sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
 ```
@@ -76,7 +74,7 @@ Each module has a folder and file that match name-wise. Every other file can be 
 $ make test
 Test the functions of MiniRT using Criterion
 ```
-→ [Criterion Testing Library](https://github.com/Snaipe/Criterion)
+[Criterion Testing Library →](https://github.com/Snaipe/Criterion)
 
 <br>
 
@@ -89,4 +87,5 @@ Test the functions of MiniRT using Criterion
 ## ☑️ — Todo
 [ ] - Make wayyy more tests  
 [ ] - Program close on [ x ] button click  
-
+[ ] - Cylinder
+[ ] - Camera orientation

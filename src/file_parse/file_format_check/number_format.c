@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/27 17:08:27 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/30 20:34:19 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:19:58 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ bool	is_float_format(char *digit)
 {
 	size_t	current_char;
 	bool	has_dot;
-	bool	format_status;
 
 	has_dot = false;
-	format_status = true;
 	current_char = 0;
 	if (digit[current_char] == '-')
 		current_char++;
@@ -30,28 +28,26 @@ bool	is_float_format(char *digit)
 	{
 		if ((digit[current_char] < '0' || digit[current_char] > '9') && \
 			digit[current_char] != '.')
-			format_status = false;
+			return (true);
 		else if (digit[current_char] == '.' && has_dot == false)
 			has_dot = true;
 		current_char++;
 	}
-	return (format_status);
+	return (false);
 }
 
 bool	is_integer_format(char *digit)
 {
 	size_t	current_char;
-	bool	format_status;
 
-	format_status = true;
 	current_char = 0;
 	if (digit[current_char] == '-')
 		current_char++;
 	while (digit[current_char] != '\0')
 	{
 		if (digit[current_char] < '0' || digit[current_char] > '9')
-			format_status = false;
+			return (false);
 		current_char++;
 	}
-	return (format_status);
+	return (true);
 }
