@@ -1,5 +1,9 @@
 # 🌞 Mini Ray Tracer — made with ❤️ and 🧠
 
+<b><i>Discovering 3d graphics using hyper-realistic lighting generation</i></b>
+
+<br>
+
 <img src="assets/halllway.png" alt="24 balls in a hallway with multicoloured lights and color transitions">
 
 - For more images visit [The Gallery →](https://rubennijhuis.com/projects/minirt)
