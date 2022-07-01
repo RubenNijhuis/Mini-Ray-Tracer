@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 21:15:42 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/01 17:16:31 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,9 @@ void	is_file_correctly_formatted(t_scene *scene, t_line *lines)
 {
 	check_amount_mandatory(lines, CAMERA, 1, "camera");
 	check_amount_mandatory(lines, AMBIENT_LIGHT, 1, "ambient light");
+	scene->amount_lights = check_amount_mandatory(lines, LIGHT,
+			MAX_LIGHTS, "light");
+	scene->amount_shapes = check_amount_generic(lines, SCENE_SHAPES,
+			MAX_SHAPES, "shape");
 	check_input_lines(lines);
 }

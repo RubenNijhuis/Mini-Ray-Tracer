@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/30 21:11:21 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/01 17:16:17 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,6 @@ void	setup_scene(t_scene *scene, char *file_name)
 
 	check_file_name(file_name);
 	file_content = get_file_content(file_name);
-	scene->amount_lights = check_amount_mandatory(file_content, LIGHT,
-			MAX_LIGHTS, "light");
-	scene->amount_shapes = check_amount_generic(file_content, SCENE_SHAPES,
-			MAX_SHAPES, "shape");
 	is_file_correctly_formatted(scene, file_content);
 	set_camera(&scene->camera, find_obj_in_file(CAMERA, file_content)->line);
 	set_ambient_light(&scene->amb_light, \

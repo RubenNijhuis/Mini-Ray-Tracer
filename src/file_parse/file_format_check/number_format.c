@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/27 17:08:27 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/30 21:19:58 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/01 17:22:11 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ bool	is_float_format(char *digit)
 	{
 		if ((digit[current_char] < '0' || digit[current_char] > '9') && \
 			digit[current_char] != '.')
-			return (true);
+			return (false);
 		else if (digit[current_char] == '.' && has_dot == false)
 			has_dot = true;
 		current_char++;
 	}
-	return (false);
+	return (true);
 }
 
 bool	is_integer_format(char *digit)

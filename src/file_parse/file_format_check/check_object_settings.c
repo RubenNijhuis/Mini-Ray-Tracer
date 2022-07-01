@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   check_shape_settings.c                             :+:    :+:            */
+/*   check_object_settings.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 21:17:13 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/01 17:20:58 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ void	run_object_checks(t_object_type obj_type, t_line line)
 	{
 		if ((get_elem_checker_func(comps.components[cur_check])) \
 			(split_settings[cur_check + 1], line.file_line) == false)
-			exit(1);
+			{
+				exit(1);
+			}
 		cur_check++;
 	}
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
