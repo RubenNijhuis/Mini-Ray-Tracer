@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/27 15:43:20 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/01 17:16:17 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,22 @@ void	start_mlx(t_program_data *pd)
 	mlx_loop(pd->mlx);
 }
 
-// TODO: free_file_content(file_content);
+void	check_file_name(char *file_name)
+{
+	size_t	str_len;
+
+	str_len = ft_strlen(file_name);
+	if (str_len < 4)
+		exit_error("Error: file name must be at least 4 characters long");
+	else if (ft_strncmp(ft_substr(file_name, str_len - 3, 3), ".rt", 3) != 0)
+		exit_error("Error: file name must end on '.rt'");
+}
+
 void	setup_scene(t_scene *scene, char *file_name)
 {
 	t_line	*file_content;
 
+	check_file_name(file_name);
 	file_content = get_file_content(file_name);
 	is_file_correctly_formatted(scene, file_content);
 	set_camera(&scene->camera, find_obj_in_file(CAMERA, file_content)->line);
@@ -60,4 +71,5 @@ void	setup_scene(t_scene *scene, char *file_name)
 		find_obj_in_file(AMBIENT_LIGHT, file_content)->line);
 	set_lights(scene, file_content);
 	set_shapes(scene, file_content);
+	free_file_content(file_content);
 }

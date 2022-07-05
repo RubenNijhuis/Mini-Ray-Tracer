@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/23 14:55:54 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 21:14:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,28 @@
 #include "libft.h"
 #include "parsing.h"
 
-typedef struct s_make_func
+typedef struct s_create_shape_func
 {
 	const char	*name;
-	void		(*obj_func)(t_object *, char *);
-}	t_make_func;
+	void		(*obj_func)(t_shape *, char *);
+}	t_create_shape_func;
 
-static uint32_t	lookup_shape_function(t_object *shape, char *name)
+static void	lookup_shape_creation_func(t_shape *shape, char *name)
 {
-	size_t				i;
-	const t_make_func	funcs[] = {
+	size_t						i;
+	const t_create_shape_func	funcs[] = {
 	{SPHERE, &make_sphere},
 	{PLANE, &make_plane},
 	{CYLINDER, &make_cylinder}
 	};
 
 	i = 0;
-	while (i < sizeof(funcs) / sizeof(t_make_func))
+	while (i < sizeof(funcs) / sizeof(t_create_shape_func))
 	{
 		if (ft_strncmp(name, funcs[i].name, 2) == 0)
-		{
 			(*funcs[i].obj_func)(shape, name);
-			return (1);
-		}
 		i++;
 	}
-	return (0);
 }
 
 /**
@@ -52,10 +48,10 @@ static uint32_t	lookup_shape_function(t_object *shape, char *name)
  * @param shapes 
  * @param objects 
  */
-static void	convert_strings_to_shapes(t_object *shapes, t_line *object_strings)
+static void	convert_strings_to_shapes(t_shape *shapes, t_line *object_strings)
 {
 	uint32_t	amount_objects;
-	uint32_t	current_line;
+	size_t		current_line;
 
 	amount_objects = 0;
 	current_line = 0;
@@ -63,8 +59,9 @@ static void	convert_strings_to_shapes(t_object *shapes, t_line *object_strings)
 	{
 		if (ft_is_object(SCENE_SHAPES, object_strings[current_line].line))
 		{
-			amount_objects += lookup_shape_function(&shapes[amount_objects],
-					object_strings[current_line].line);
+			lookup_shape_creation_func(&shapes[amount_objects], \
+				object_strings[current_line].line);
+			amount_objects++;
 		}
 		object_strings++;
 	}
@@ -72,7 +69,7 @@ static void	convert_strings_to_shapes(t_object *shapes, t_line *object_strings)
 
 void	set_shapes(t_scene *scene, t_line *file_content)
 {
-	scene->shapes = ft_calloc(scene->amount_shapes, sizeof(t_object));
+	scene->shapes = ft_calloc(scene->amount_shapes, sizeof(t_shape));
 	if (scene->shapes == NULL)
 		malloc_error();
 	convert_strings_to_shapes(scene->shapes, file_content);

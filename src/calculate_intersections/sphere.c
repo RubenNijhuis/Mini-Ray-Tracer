@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:36:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/03 14:20:57 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 /* gets the surface normal of a sphere.
  * TODO: verify if correct. */
-t_vec3f	get_sphere_normal(const t_ray *ray, const float dist, t_object *shape)
+t_vec3f	get_sphere_normal(const t_ray *ray, const float dist, t_shape *shape)
 {
 	t_vec3f	intersect_point;
 	t_vec3f	normal;
@@ -43,7 +43,7 @@ static float	get_sphere_intersection(float radius, float distance_to_so_sq, \
 
 // TODO: return closest value but only if not negatives
 // see also: https://www.khanacademy.org/computer-programming/c/5311392656179200
-float	intersects_sphere(t_ray *ray, t_object *shape)
+float	intersects_sphere(t_ray *ray, t_shape *shape)
 {
 	t_sphere	*sphere;
 	t_vec3f		relpos;

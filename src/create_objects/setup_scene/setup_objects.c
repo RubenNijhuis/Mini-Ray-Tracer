@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 19:46:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/27 17:07:26 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/30 20:32:01 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	set_camera(t_camera *cam, char *settings)
 	if (settings == NULL)
 		malloc_error();
 	cam->position = get_vec3f_from_string(split_settings[1]);
-	cam->orientation = get_vec3f_from_string(split_settings[2]);
+	cam->rotation = get_vec3f_from_string(split_settings[2]);
 	cam->fov = deg_to_rad(ft_atof(split_settings[3]));
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
@@ -55,8 +55,8 @@ void	make_light(t_light *light, char *settings)
 
 void	set_lights(t_scene *scene, t_line *file_content)
 {
-	uint32_t	current_light;
-	uint32_t	i;
+	size_t	current_light;
+	size_t	i;
 
 	i = 0;
 	scene->lights = ft_calloc(scene->amount_lights, sizeof(t_light));
@@ -76,7 +76,7 @@ void	set_lights(t_scene *scene, t_line *file_content)
 
 t_line	*find_obj_in_file(char *definition, t_line *file_content)
 {
-	uint32_t	current_line;
+	size_t	current_line;
 
 	current_line = 0;
 	while (file_content[current_line].line != NULL)

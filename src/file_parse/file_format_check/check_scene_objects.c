@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:43:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/22 13:37:17 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/30 20:32:52 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ uint32_t	check_amount_generic(t_line *lines, char *obj_type,
 	uint32_t max, char *object_noun)
 {
 	uint32_t	n;
-	uint32_t	current_line;
+	size_t		current_line;
 
 	current_line = 0;
 	n = 0;

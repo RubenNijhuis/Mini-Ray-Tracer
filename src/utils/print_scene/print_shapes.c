@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 13:48:17 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/30 21:17:34 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ static void	print_shape_base(t_base base)
 
 	color = base.color;
 	pos = base.position;
-	orient = base.orientation;
+	orient = base.rotation;
 	printf("Value type  •    X       Y       Z\n");
 	printf("Position    • %6.2f  %6.2f  %6.2f\n", pos[0], pos[1], pos[2]);
-	printf("Orientation • %6.2f  %6.2f  %6.2f\n", \
+	printf("Rotation    • %6.2f  %6.2f  %6.2f\n", \
 		orient[0], orient[1], orient[2]);
 	print_object_color(color);
 }
 
-static void	print_shape_dimensions(t_object_type type, t_object shape)
+static void	print_shape_dimensions(t_object_type type, t_shape shape)
 {
 	if (type == sphere)
 		printf("Diameter    • %6.2f\n", shape.sphere.radius * 2);
@@ -52,19 +52,13 @@ static void	print_shape_dimensions(t_object_type type, t_object shape)
 	}
 }
 
-static void	print_shape_type(t_object_type type, t_object shape)
+static void	print_shape_type(t_object_type type, t_shape shape)
 {
 	uint32_t	amount_underline;
-	uint32_t	current_line;
+	size_t		current_line;
 
 	current_line = 0;
-	amount_underline = 0;
-	if (type == sphere)
-		amount_underline = ft_strlen("sphere");
-	else if (type == plane)
-		amount_underline = ft_strlen("plane");
-	else if (type == cylinder)
-		amount_underline = ft_strlen("cylinder");
+	amount_underline = ft_strlen(get_shape_type_string(type));
 	printf(BLU "%s\n" RESET, get_shape_type_string(shape.base.obj_type));
 	while (current_line < amount_underline)
 	{
@@ -74,16 +68,16 @@ static void	print_shape_type(t_object_type type, t_object shape)
 	printf("\n");
 }
 
-void	print_shapes(t_object *shapes, uint32_t amount_shapes)
+void	print_shapes(t_shape *shapes, uint32_t amount_shapes)
 {
-	uint32_t	current_shape;
-	t_base		shape_base;
+	size_t	current_shape;
+	t_base	shape_base;
 
 	current_shape = 0;
 	if (amount_shapes == 1)
-		printf(CYN "============= SHAPE ==============\n\n" RESET);
+		printf(CYN "============== SHAPE ===============\n\n" RESET);
 	else
-		printf(CYN "============= SHAPES =============\n\n" RESET);
+		printf(CYN "============== SHAPES ==============\n\n" RESET);
 	while (current_shape < amount_shapes)
 	{
 		shape_base = shapes[current_shape].base;

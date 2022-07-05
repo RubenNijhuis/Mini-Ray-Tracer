@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 18:00:55 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:37 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_color
 typedef enum e_element_component
 {
 	position,
-	orientation,
+	rotation,
 	color,
 	radius,
 	height,
@@ -82,7 +82,7 @@ typedef struct s_base
 {
 	t_object_type	obj_type;
 	t_vec3f			position;
-	t_vec3f			orientation;
+	t_vec3f			rotation;
 	t_color			color;
 }	t_base;
 
@@ -90,7 +90,7 @@ typedef struct s_base
 typedef struct s_camera
 {
 	t_vec3f		position;
-	t_vec3f		orientation;
+	t_vec3f		rotation;
 	float		fov;
 }	t_camera;
 
@@ -126,13 +126,13 @@ typedef struct s_cylinder
 	float	height;
 }	t_cylinder;
 
-typedef union u_object
+typedef union u_shape
 {
 	t_base		base;
 	t_sphere	sphere;
 	t_plane		plane;
 	t_cylinder	cylinder;
-}	t_object;
+}	t_shape;
 
 typedef struct s_scene
 {
@@ -143,16 +143,16 @@ typedef struct s_scene
 	t_light			*lights;
 	uint32_t		amount_lights;
 
-	t_object		*shapes;
+	t_shape			*shapes;
 	uint32_t		amount_shapes;
 }	t_scene;
 
 /* 
  Create objects
 */
-void	make_plane(t_object *obj, char *settings);
-void	make_cylinder(t_object *obj, char *settings);
-void	make_sphere(t_object *obj, char *settings);
+void	make_plane(t_shape *obj, char *settings);
+void	make_cylinder(t_shape *obj, char *settings);
+void	make_sphere(t_shape *obj, char *settings);
 void	make_light(t_light *light, char *settings);
 
 void	set_camera(t_camera *cam, char *settings);
@@ -162,7 +162,7 @@ void	set_ambient_light(t_ambient_light *amb, char *settings);
 int		get_obj_type(const char *str);
 bool	rt_objstrcmp(const char *s1, const char *s2);
 
-void	print_shapes(t_object *shapes, uint32_t amount_shapes);
+void	print_shapes(t_shape *shapes, uint32_t amount_shapes);
 void	print_lights(t_light *lights, uint32_t amount_lights);
 void	print_camera(t_camera camvec3iera);
 void	print_scene_elements(t_scene *scene);

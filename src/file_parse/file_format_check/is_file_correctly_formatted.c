@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/26 13:55:51 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/01 17:16:31 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct ss_obj_type_map
+typedef struct s_obj_type_map
 {
 	const char			*type_str;
 	const t_object_type	type;
 }	t_obj_type_map;
 
-int	get_obj_type(const char *str)
+int32_t	get_obj_type(const char *str)
 {
+	size_t						i;
 	static const t_obj_type_map	map[] = {
 	{SPHERE, sphere},
 	{PLANE, plane},
@@ -35,7 +36,6 @@ int	get_obj_type(const char *str)
 	{AMBIENT_LIGHT, ambient_light},
 	{LIGHT, light}
 	};
-	size_t						i;
 
 	i = 0;
 	while (i < sizeof(map) / sizeof(t_obj_type_map))
@@ -49,31 +49,24 @@ int	get_obj_type(const char *str)
 
 void	check_input_lines(t_line *lines)
 {
-	int			obj_type;
-	uint32_t	current_line;
-	bool		formatted_correctly;
+	int32_t	obj_type;
+	size_t	current_line;
 
-	formatted_correctly = true;
 	current_line = 0;
 	while (lines[current_line].line != NULL)
 	{
 		obj_type = get_obj_type(lines[current_line].line);
 		if (obj_type != -1)
-		{
-			if (run_object_checks(obj_type, lines[current_line]) == false)
-				formatted_correctly = false;
-		}
+			run_object_checks(obj_type, lines[current_line]);
 		else if (ft_strlen(lines[current_line].line) > 1)
 		{
 			ft_dprintf(2,
 				"Error: line %i not object or non-empty line\n",
 				lines[current_line].file_line);
-			formatted_correctly = false;
+			exit(1);
 		}
 		lines++;
 	}
-	if (formatted_correctly == false)
-		exit(1);
 }
 
 // checks if the number of objects for each type are correct.

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/27 12:46:19 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/30 20:31:45 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@
 #include <stddef.h>
 #include <math.h>
 
-// see e_objects_type in objects.h
-t_intersect_func	lookup_intersect_function(t_object *shape)
+/**
+ * @brief 
+ * Retrieves the intersection function based on the shape object type
+ * @param shape 
+ * @return t_intersect_func 
+ */
+t_intersect_func	lookup_intersect_function(t_shape *shape)
 {
 	static const t_intersect_func	funcs[] = {
 	[sphere] = &intersects_sphere,
@@ -30,8 +35,13 @@ t_intersect_func	lookup_intersect_function(t_object *shape)
 	return (funcs[shape->base.obj_type]);
 }
 
-// see e_objects_type in objects.h
-t_normal_func_ptr	lookup_normal_function(t_object *shape)
+/**
+ * @brief 
+ * Retrieves the normal function based on the shape object type
+ * @param shape 
+ * @return t_normal_func_ptr 
+ */
+t_normal_func_ptr	lookup_normal_function(t_shape *shape)
 {
 	static const t_normal_func_ptr	funcs[] = {
 	[sphere] = &get_sphere_normal,
@@ -64,14 +74,14 @@ static bool	update_closest_hit(float *hit_dist_record, float hit_dist)
 */
 t_color	get_ray_color(t_ray *ray, t_scene *scene)
 {
-	uint32_t	current_shape;
-	t_object	*cur_shape;
-	float		hit_dist_record;
-	float		hit_dist;
-	t_color		color;
-	t_vec3f		normal;
-	t_color		new_color;
-	t_color		yeet;
+	size_t	current_shape;
+	t_shape	*cur_shape;
+	float	hit_dist_record;
+	float	hit_dist;
+	t_color	color;
+	t_vec3f	normal;
+	t_color	new_color;
+	t_color	yeet;
 
 	current_shape = 0;
 	color = get_default_color(scene);

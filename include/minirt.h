@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 17:57:34 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 
 # define WIN_HEIGHT (1200)
 
+/*
+ Main struct that holds all the data in the program
+*/
 typedef struct s_program_data
 {
 	t_scene		scene;
@@ -49,10 +52,13 @@ typedef struct s_program_data
 	mlx_image_t	*img;
 }	t_program_data;
 
-typedef float	(*t_intersect_func)(t_ray *, t_object *);
-typedef t_vec3f	(*t_normal_func_ptr)(const t_ray *, const float, t_object *);
+/*
+ Shape intersect and normal function pointer defines
+*/
+typedef float	(*t_intersect_func)(t_ray *, t_shape *);
+typedef t_vec3f	(*t_normal_func_ptr)(const t_ray *, const float, t_shape *);
 
-t_intersect_func	lookup_intersect_function(t_object *shape);
+t_intersect_func	lookup_intersect_function(t_shape *shape);
 
 /*
  Setup mlx
@@ -77,19 +83,19 @@ t_ray				get_camera_ray(uint32_t xpixel, uint32_t ypixel, \
 /*
  Intersections
 */
-float				intersects_sphere(t_ray *ray, t_object *shape);
-float				intersects_plane(t_ray *ray, t_object *shape);
-float				intersects_cylinder(t_ray *ray, t_object *shape);
+float				intersects_sphere(t_ray *ray, t_shape *shape);
+float				intersects_plane(t_ray *ray, t_shape *shape);
+float				intersects_cylinder(t_ray *ray, t_shape *shape);
 
 /*
  Normals
 */
 t_vec3f				get_sphere_normal(const t_ray *ray, const float dist,
-						t_object *shape);
+						t_shape *shape);
 t_vec3f				get_plane_normal(const t_ray *ray, const float dist,
-						t_object *shape);
+						t_shape *shape);
 t_vec3f				get_cylinder_normal(const t_ray *ray, const float dist,
-						t_object *shape);
+						t_shape *shape);
 
 /*
  Colors
@@ -107,7 +113,7 @@ void				render_pixel_color(uint32_t x, uint32_t y, \
 						t_color color, t_program_data *pd);
 void				ambient_mixin(t_color *col, t_scene *scene);
 t_color				lights_mixin(t_scene *scene, t_vec3f p, \
-						t_object *shape, t_vec3f normal);
+						t_shape *shape, t_vec3f normal);
 
 /* 
  Utils

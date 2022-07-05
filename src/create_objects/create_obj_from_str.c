@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 10:50:32 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 13:47:41 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libvec.h"
 #include "minirt.h"
 
-void	make_sphere(t_object *obj, char *settings)
+void	make_sphere(t_shape *obj, char *settings)
 {
 	char	**split_settings;
 
@@ -29,7 +29,7 @@ void	make_sphere(t_object *obj, char *settings)
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
 
-void	make_cylinder(t_object *obj, char *settings)
+void	make_cylinder(t_shape *obj, char *settings)
 {
 	char	**split_settings;
 
@@ -38,14 +38,14 @@ void	make_cylinder(t_object *obj, char *settings)
 		malloc_error();
 	obj->cylinder.base.obj_type = cylinder;
 	obj->cylinder.base.position = get_vec3f_from_string(split_settings[1]);
-	obj->cylinder.base.orientation = get_vec3f_from_string(split_settings[2]);
+	obj->cylinder.base.rotation = get_vec3f_from_string(split_settings[2]);
 	obj->cylinder.base.color = get_color_from_string(split_settings[5]);
 	obj->cylinder.radius = ft_atof(split_settings[3]) / 2.0f;
 	obj->cylinder.height = ft_atof(split_settings[4]);
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
 
-void	make_plane(t_object *obj, char *settings)
+void	make_plane(t_shape *obj, char *settings)
 {
 	char	**split_settings;
 
@@ -54,8 +54,8 @@ void	make_plane(t_object *obj, char *settings)
 		malloc_error();
 	obj->plane.base.obj_type = plane;
 	obj->plane.base.position = get_vec3f_from_string(split_settings[1]);
-	obj->plane.base.orientation = get_vec3f_from_string(split_settings[2]);
-	vec3f_normalize(&obj->plane.base.orientation);
+	obj->plane.base.rotation = get_vec3f_from_string(split_settings[2]);
+	vec3f_normalize(&obj->plane.base.rotation);
 	obj->plane.base.color = get_color_from_string(split_settings[3]);
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }

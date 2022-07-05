@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/27 17:07:02 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/06/30 21:18:38 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,30 @@
 #include "libvec.h"
 #include "ray.h"
 
-#include <math.h> /* sqrt */
-#include <stdio.h> // temp
+#include <math.h>	/* sqrt */
+#include <stdio.h>	// temp
 
 #define X (0)
 #define Y (1)
 
-static float sq(float n)
+static float	sq(float n)
 {
 	return (n * n);
 }
 
-t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_object *shape)
+t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_shape *shape)
 {
 	t_cylinder	*cyl;
 
 	cyl = &shape->cylinder;
 	(void)ray;
 	(void)dist;
+	(void)cyl;
 	// TODO
 	return (vec3f(0, 0, -1));
 }
 
-float	intersects_cylinder(t_ray *ray, t_object *shape)
+float	intersects_cylinder(t_ray *ray, t_shape *shape)
 {
 	t_cylinder		*cyl;
 	float			t;
