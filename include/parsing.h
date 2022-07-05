@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 21:17:58 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/05 16:31:00 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ bool		check_color(char *settings, uint32_t line_pos);
 
 // Number format
 bool		is_integer_format(char *digit);
-bool		is_float_format(char *digit);
+bool		is_valid_double_format(const char *str);
 bool		check_ints_formatting(char **items);
 bool		check_floats_formatting(char **items);
 

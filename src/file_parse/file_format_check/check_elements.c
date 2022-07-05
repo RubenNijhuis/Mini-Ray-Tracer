@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   element_checks.c                                   :+:    :+:            */
+/*   check_elements.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 23:11:54 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/05 14:33:34 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	check_radius(char *settings, uint32_t line_pos)
 	bool	status;
 
 	status = true;
-	if (is_float_format(settings) == false)
+	if (is_valid_double_format(settings) == false)
 	{
 		print_err_msg("radius variable", line_pos, format);
 		status = false;
@@ -58,7 +58,7 @@ bool	check_height(char *settings, uint32_t line_pos)
 	bool	status;
 
 	status = true;
-	if (is_float_format(settings) == false)
+	if (is_valid_double_format(settings) == false)
 	{
 		print_err_msg("height variable", line_pos, format);
 		status = false;
@@ -111,7 +111,7 @@ bool	check_brightness(char *settings, uint32_t line_pos)
 	bool	status;
 
 	status = true;
-	if (is_float_format(settings) == false)
+	if (is_valid_double_format(settings) == false)
 	{
 		print_err_msg("brightness variable", line_pos, format);
 		status = false;

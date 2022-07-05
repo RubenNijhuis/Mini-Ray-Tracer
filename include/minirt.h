@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 00:03:23 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/05 16:32:11 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ void				exit_error(const char *msg);
 void				exit_perror(const char *msg);
 void				malloc_error(void);
 double				ft_atof(const char *str);
-int					is_valid_double_format(char *str);
 bool				ft_is_object(const char *haystack, const char *needle);
 char				*get_shape_type_string(t_object_type obj_type);
 

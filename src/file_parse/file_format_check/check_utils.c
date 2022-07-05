@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/26 12:03:36 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 20:33:34 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/05 14:41:26 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	check_floats_formatting(char **items)
 	cur_float = 0;
 	while (cur_float < amount_items)
 	{
-		if (is_float_format(items[cur_float]) == false)
+		if (is_valid_double_format(items[cur_float]) == false)
 			return (false);
 		cur_float++;
 	}

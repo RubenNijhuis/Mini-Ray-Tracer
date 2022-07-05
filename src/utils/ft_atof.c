@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 15:27:17 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/30 20:36:13 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/05 16:29:59 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,4 @@ double	ft_atof(const char *str)
 	if (is_negative)
 		result = -result;
 	return (result);
-}
-
-int	is_valid_double_format(char *str)
-{
-	char	*str_before_numberskip;
-	int		number_before_dot;
-
-	if (*str == '-' || *str == '+')
-		str++;
-	str_before_numberskip = str;
-	while (*str >= '0' && *str <= '9')
-		str++;
-	number_before_dot = str_before_numberskip < str;
-	if (*str == 0 && number_before_dot)
-		return (1);
-	if (*str != '.')
-		return (0);
-	str++;
-	str_before_numberskip = str;
-	while (*str >= '0' && *str <= '9')
-		str++;
-	if (str_before_numberskip == str && !number_before_dot)
-		return (0);
-	while (*str == ' ')
-		str++;
-	return (*str == 0);
 }

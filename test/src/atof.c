@@ -6,15 +6,14 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/18 18:25:01 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/24 13:43:13 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/05 16:33:51 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "parsing.h"
 
 #include <criterion/criterion.h>
-
-#include <stdlib.h>
 
 #define COMP(s) cr_expect(ft_atof((s)) == atof((s)), "%s not parsing correctly(got %f, expected %f)", (s), ft_atof((s)), atof((s)))
 

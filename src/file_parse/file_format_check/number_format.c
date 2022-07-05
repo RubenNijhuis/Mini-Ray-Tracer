@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/27 17:08:27 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/01 17:22:11 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/05 16:33:12 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,30 @@
 
 #include <stddef.h>
 
-bool	is_float_format(char *digit)
+bool	is_valid_double_format(const char *str)
 {
-	size_t	current_char;
-	bool	has_dot;
+	const char	*str_before_numberskip;
+	int			number_before_dot;
 
-	has_dot = false;
-	current_char = 0;
-	if (digit[current_char] == '-')
-		current_char++;
-	while (digit[current_char] != '\0')
-	{
-		if ((digit[current_char] < '0' || digit[current_char] > '9') && \
-			digit[current_char] != '.')
-			return (false);
-		else if (digit[current_char] == '.' && has_dot == false)
-			has_dot = true;
-		current_char++;
-	}
-	return (true);
+	if (*str == '-' || *str == '+')
+		str++;
+	str_before_numberskip = str;
+	while (*str >= '0' && *str <= '9')
+		str++;
+	number_before_dot = str_before_numberskip < str;
+	if (*str == 0 && number_before_dot)
+		return (true);
+	if (*str != '.')
+		return (false);
+	str++;
+	str_before_numberskip = str;
+	while (*str >= '0' && *str <= '9')
+		str++;
+	if (str_before_numberskip == str && !number_before_dot)
+		return (false);
+	while (*str == ' ')
+		str++;
+	return (*str == 0);
 }
 
 bool	is_integer_format(char *digit)
