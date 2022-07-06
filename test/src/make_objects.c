@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/25 22:42:56 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/27 23:00:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/05 20:31:39 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	color_eq(t_color col1, t_color col2)
 */
 void	make_sphere_from_str_test(char *settings, float radius, t_vec3f pos, t_color col)
 {
-	t_object	sphere_obj;
+	t_shape	sphere_obj;
 	make_sphere(&sphere_obj, settings);
 
 	bool colorEq = color_eq(sphere_obj.base.color, col);
@@ -46,7 +46,7 @@ void	make_sphere_from_str_test(char *settings, float radius, t_vec3f pos, t_colo
 
 void	make_cylinder_from_str_test(char *settings, t_vec3f pos, t_vec3f rotation, float radius, float height, t_color color)
 {
-	t_object	obj;
+	t_shape	obj;
 
 	make_cylinder(&obj, settings);
 

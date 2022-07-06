@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 21:17:34 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/06 14:54:50 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 void	print_object_color(t_color color)
 {
+	printf("\nValue type  •    R       G       B\n");
 	printf("Color       • ");
 	printf(RED "%6.2f" RESET, color.r);
 	printf(GRN "%8.2f" RESET, color.g);
@@ -85,7 +86,10 @@ void	print_shapes(t_shape *shapes, uint32_t amount_shapes)
 		print_shape_base(shape_base);
 		print_shape_dimensions(shape_base.obj_type, shapes[current_shape]);
 		if (current_shape != amount_shapes - 1)
-			printf("\n");
+		{
+			printf("-----\n\n");
+
+		}
 		current_shape++;
 	}
 }
