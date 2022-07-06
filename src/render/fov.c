@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/30 14:08:16 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/06 17:03:16 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/06 17:49:38 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <math.h> // tEngenS
 
+t_vec3f	rotate_x(t_vec3f dir, float angle);
+t_vec3f	rotate_y(t_vec3f dir, float angle);
 t_vec3f	rotate_z(t_vec3f dir, float angle);
 
 // TODO: verify
@@ -28,8 +30,11 @@ t_ray	get_camera_ray(uint32_t xpixel, uint32_t ypixel, t_camera *cam)
 		* (((double)xpixel - (double)(WIN_WIDTH / 2)) / (double)WIN_WIDTH);
 	ray.direction[1] = (tan(cam->fov * 0.5f) * inv_aspect)
 		* (((double)ypixel - (double)(WIN_HEIGHT / 2)) / (double)WIN_HEIGHT);
+	ray.direction[2] = 0;
+	ray.direction = rotate_x(ray.direction, deg_to_rad(45));
+	ray.direction = rotate_y(ray.direction, deg_to_rad(0));
 	ray.direction[2] = 1;
-	ray.direction = rotate_z(ray.direction, deg_to_rad(45));
+	// ray.direction = rotate_z(ray.direction, deg_to_rad(10));
 	vec3f_normalize(&ray.direction);
 	return (ray);
 }

@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/27 15:57:36 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/06 17:01:19 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/06 17:35:29 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vec3f	vec3f_mult_mat3(t_vec3f v, const t_mat3 m)
 	return (v);
 }
 
+
 t_vec3f	rotate_z(t_vec3f dir, float angle)
 {
 	t_mat3 mat_rot_z = {
@@ -33,10 +34,32 @@ t_vec3f	rotate_z(t_vec3f dir, float angle)
 		[2] = {0,0,1},
 	};
 
-	// printf("\n");
-	// printf("%f %f %f\n", mat_rot_z[0][0], mat_rot_z[0][1], mat_rot_z[0][2]);
-	// printf("%f %f %f\n", mat_rot_z[1][0], mat_rot_z[1][1], mat_rot_z[1][2]);
-	// printf("%f %f %f\n", mat_rot_z[2][0], mat_rot_z[2][1], mat_rot_z[2][2]);
+	dir = vec3f_mult_mat3(dir, mat_rot_z);
+	return (dir);
+}
+	
+t_vec3f	rotate_x(t_vec3f dir, float angle)
+{
+
+	//y
+	t_mat3 mat_rot_z = {
+		[0] = {cos(angle),0,-sin(angle)},
+		[1] = {0,1,0},
+		[2] = {sin(angle),0,cos(angle)},
+	};
+
+	dir = vec3f_mult_mat3(dir, mat_rot_z);
+	return (dir);
+}
+
+t_vec3f	rotate_y(t_vec3f dir, float angle)
+{
+	t_mat3 mat_rot_z = {
+		[0] = {1, 0, 0},
+		[1] = {0, cos(angle), sin(angle)},
+		[2] = {0, -1.0 * sin(angle), cos(angle)},
+	};
+
 	dir = vec3f_mult_mat3(dir, mat_rot_z);
 	return (dir);
 }

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/06 14:54:50 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/06 17:48:44 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	print_shape_base(t_base base)
 	printf("Position    • %6.2f  %6.2f  %6.2f\n", pos[0], pos[1], pos[2]);
 	printf("Rotation    • %6.2f  %6.2f  %6.2f\n", \
 		orient[0], orient[1], orient[2]);
-	print_object_color(color);
 }
 
 static void	print_shape_dimensions(t_object_type type, t_shape shape)
@@ -85,10 +84,11 @@ void	print_shapes(t_shape *shapes, uint32_t amount_shapes)
 		print_shape_type(shape_base.obj_type, shapes[current_shape]);
 		print_shape_base(shape_base);
 		print_shape_dimensions(shape_base.obj_type, shapes[current_shape]);
+		print_object_color(shape_base.color);
 		if (current_shape != amount_shapes - 1)
 		{
-			printf("-----\n\n");
-
+			printf("-----");
+			printf("\n\n");
 		}
 		current_shape++;
 	}
