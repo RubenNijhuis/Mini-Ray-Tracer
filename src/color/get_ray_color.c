@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/30 20:31:45 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/07 12:56:15 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_intersect_func	lookup_intersect_function(t_shape *shape)
 	[sphere] = &intersects_sphere,
 	[plane] = &intersects_plane,
 	[cylinder] = &intersects_cylinder,
+	[disc] = &intersects_disc,
 	};
 
 	return (funcs[shape->base.obj_type]);
@@ -47,6 +48,7 @@ t_normal_func_ptr	lookup_normal_function(t_shape *shape)
 	[sphere] = &get_sphere_normal,
 	[plane] = &get_plane_normal,
 	[cylinder] = &get_cylinder_normal,
+	[disc] = &get_plane_normal, // <-- intentional! same as plane.
 	};
 
 	return (funcs[shape->base.obj_type]);

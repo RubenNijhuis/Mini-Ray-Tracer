@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/01 17:16:31 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/07 13:14:35 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int32_t	get_obj_type(const char *str)
 	{CYLINDER, cylinder},
 	{CAMERA, camera},
 	{AMBIENT_LIGHT, ambient_light},
-	{LIGHT, light}
+	{LIGHT, light},
+	{DISC, disc},
 	};
 
 	i = 0;

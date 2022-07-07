@@ -6,13 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 00:03:37 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/07 13:32:35 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
+# include "bonus.h"
 # include "libvec.h"
 
 # include <stdint.h>
@@ -26,9 +27,15 @@
 # define PLANE "pl"
 # define SPHERE "sp"
 # define CYLINDER "cy"
+# define DISC "di"
 
 # define SCENE_ELEMENTS "C A L"
-# define SCENE_SHAPES "pl sp cy"
+
+# if BONUS
+#  define SCENE_SHAPES "pl sp cy di"
+# else
+#  define SCENE_SHAPES "pl sp cy"
+# endif
 
 typedef struct s_color
 {
@@ -68,6 +75,7 @@ typedef enum e_object_type
 	sphere,
 	plane,
 	cylinder,
+	disc,
 	amount_objects
 }	t_object_type;
 
@@ -126,12 +134,17 @@ typedef struct s_cylinder
 	float	height;
 }	t_cylinder;
 
+// The sphere shares everything similar with a disc.
+// therefore, just copy the type instead.
+typedef t_sphere t_disc;
+
 typedef union u_shape
 {
 	t_base		base;
 	t_sphere	sphere;
 	t_plane		plane;
 	t_cylinder	cylinder;
+	t_disc		disc;
 }	t_shape;
 
 typedef struct s_scene
@@ -153,6 +166,7 @@ typedef struct s_scene
 void	make_plane(t_shape *obj, char *settings);
 void	make_cylinder(t_shape *obj, char *settings);
 void	make_sphere(t_shape *obj, char *settings);
+void	make_disc(t_shape *obj, char *settings);
 void	make_light(t_light *light, char *settings);
 
 void	set_camera(t_camera *cam, char *settings);
