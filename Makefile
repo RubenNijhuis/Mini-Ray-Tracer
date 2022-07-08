@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/08 12:54:29 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/07/08 17:42:32 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ PF_OBJ			=	$(PF_DEPS:$(PF_DIR)/%.c=$(PF_OBJ_DIR)/%.o)
 #============= ft_printf =============#
 #=====================================#
 
-INPUT_FILE := 		$(ASSETS_DIR)/mandatory/test.rt
+INPUT_FILE := 	$(ASSETS_DIR)/mandatory/cyl_test.rt
 
 LIBS :=				$(MLX_A) \
 					$(PF_A) \
