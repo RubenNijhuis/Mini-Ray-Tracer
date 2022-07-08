@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/30 14:08:16 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/08 10:22:11 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/08 13:28:08 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <math.h> // tEngenS
 
 // TODO: verify
+// Test
 t_ray	get_camera_ray(uint32_t xpixel, uint32_t ypixel, t_camera *cam)
 {
 	const double	inv_aspect = (double)WIN_HEIGHT / (double)WIN_WIDTH;
