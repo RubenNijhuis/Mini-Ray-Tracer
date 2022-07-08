@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/07 13:15:15 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/07/08 12:54:29 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,21 +14,21 @@
 #========= General variables =========#
 #=====================================#
 
-CC := gcc
-EXEC_NAME :=	minirt
-ASSETS_DIR :=	assets
-BIN_DIR :=		bin
-INCLUDE_DIR :=	include
-LIBS_DIR :=		libs
-OBJS_DIR := 	objs
-SRC_DIR :=		src
-TEST_DIR :=		test
-NAME := $(BIN_DIR)/$(EXEC_NAME)
+CC := 				gcc
+EXEC_NAME :=		minirt
+ASSETS_DIR :=		assets
+BIN_DIR :=			bin
+INCLUDE_DIR :=		include
+LIBS_DIR :=			libs
+OBJS_DIR := 		objs
+SRC_DIR :=			src
+TEST_DIR :=			test
+NAME :=				 $(BIN_DIR)/$(EXEC_NAME)
 
 # TODO: More header watching
-HEADERS :=		$(wildcard $(INCLUDE_DIR)/*.h)
+HEADERS :=			$(wildcard $(INCLUDE_DIR)/*.h)
 
-MLX_DIR			= $(LIBS_DIR)/MLX42
+MLX_DIR			= 	$(LIBS_DIR)/MLX42
 MLX_H 			:=	$(MLX_DIR)/include/MLX42/MLX42.h
 MLX_A 			:=	$(MLX_DIR)/libmlx42.a
 
@@ -58,42 +58,42 @@ PF_OBJ			=	$(PF_DEPS:$(PF_DIR)/%.c=$(PF_OBJ_DIR)/%.o)
 #============= ft_printf =============#
 #=====================================#
 
-INPUT_FILE := 	$(ASSETS_DIR)/mandatory/test.rt
+INPUT_FILE := 		$(ASSETS_DIR)/mandatory/test.rt
 
-LIBS :=			$(MLX_A) \
-				$(PF_A) \
-				$(LIBFT_A) \
-				$(LIBS_DIR)/Lib-Vec/libvec.a \
-				$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
+LIBS :=				$(MLX_A) \
+					$(PF_A) \
+					$(LIBFT_A) \
+					$(LIBS_DIR)/Lib-Vec/libvec.a \
+					$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
 
 
-LIBS_HEADERS :=	-I $(INCLUDE_DIR) \
-				-I $(PF_DIR) \
-				-I $(LIBS_DIR)/MLX42/include/ \
-				-I $(LIBFT_INC_DIR) \
-				-I $(LIBS_DIR)/Lib-Vec/include/ \
-				-I $(LIBS_DIR)/Get-Next-Line/include/ \
+LIBS_HEADERS :=		-I $(INCLUDE_DIR) \
+					-I $(PF_DIR) \
+					-I $(LIBS_DIR)/MLX42/include/ \
+					-I $(LIBFT_INC_DIR) \
+					-I $(LIBS_DIR)/Lib-Vec/include/ \
+					-I $(LIBS_DIR)/Get-Next-Line/include/ \
 
 PROJECT_HEADERS :=	$(LIBS_DIR)/colors.h \
 					$(LIBS_DIR)/minirt.h \
 					$(LIBS_DIR)/objects.h \
 
-INC :=			$(LIBS_HEADERS)
+INC :=				$(LIBS_HEADERS)
 
-SRCS :=			 $(shell find $(SRC_DIR) -type f -name "*.c")
+SRCS :=				$(shell find $(SRC_DIR) -type f -name "*.c")
 
-OBJS :=			$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+OBJS :=				$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 #=====================================#
 #========= Command arguments =========#
 #=====================================#
 
-CFLAGS =		-Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS =			-Wall -Werror -Wextra -g -fsanitize=address
 # TODO: CLEAN UP THIS MAKEFILE
 
 # Credits -> https://github.com/codam-coding-college/MLX42
 # TODO: Add NO_DEAD_CODE for linux
-UNAME_S = $(shell uname -s)
+UNAME_S =			 $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	# -pthread is only required for the bonus, however, since we can't check
 	# wether the bonus is active or not, always use it here.
@@ -104,7 +104,7 @@ else ifeq ($(UNAME_S), Darwin)
 	ifdef CODAM
 		MLX = -lglfw3
 	else
-		LDFLAGS += -L /usr/local/Cellar/glawfw/3.3.7/ib
+		LDFLAGS += -L /usr/local/Cellar/glfw/3.3.7/lib
 		MLX = -lglfw
 	endif
 	NO_DEAD_CODE :=	-O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip
@@ -166,11 +166,7 @@ re: fclean all
 #=====================================#
 
 submodules:
-	@git submodule update --init --recursive
-	@cd $(LIBS_DIR)/LibFT/ && git pull origin main
-	@cd $(LIBS_DIR)/Get-Next-Line/ && git pull origin main
-	@cd $(LIBS_DIR)/Lib-Vec/ && git pull origin main
-	@cd $(LIBS_DIR)/MLX42/ && git pull origin master
+	@git submodule update --init --recursive --remote
 	
 run: $(NAME)
 	@./$< $(INPUT_FILE)
