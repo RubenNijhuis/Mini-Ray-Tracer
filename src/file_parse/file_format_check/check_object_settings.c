@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/08 10:21:08 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/08 10:24:23 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_component_list	get_object_component_list(t_object_type type)
 	[sphere] = {3, {position, radius, color}},
 	[plane] = {3, {position, rotation, color}},
 	[cylinder] = {5, {position, rotation, height, radius, color}},
+	[disc] = {4, {position, rotation, radius, color}},
 	};
 
 	return (components_check[type]);

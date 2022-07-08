@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:35:59 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/06 17:48:44 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/07 13:26:20 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	print_shape_base(t_base base)
 
 static void	print_shape_dimensions(t_object_type type, t_shape shape)
 {
-	if (type == sphere)
+	if (type == sphere || type == disc)
 		printf("Diameter    • %6.2f\n", shape.sphere.radius * 2);
 	else if (type == cylinder)
 	{

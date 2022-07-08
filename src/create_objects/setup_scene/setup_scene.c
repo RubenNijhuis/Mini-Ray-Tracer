@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 21:14:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/07 13:30:03 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	lookup_shape_creation_func(t_shape *shape, char *name)
 	const t_create_shape_func	funcs[] = {
 	{SPHERE, &make_sphere},
 	{PLANE, &make_plane},
-	{CYLINDER, &make_cylinder}
+	{CYLINDER, &make_cylinder},
+	{DISC, &make_disc}
 	};
 
 	i = 0;

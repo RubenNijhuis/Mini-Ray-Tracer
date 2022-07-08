@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:14:12 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 21:17:25 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/07 13:30:42 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*get_shape_type_string(t_object_type obj_type)
 	static const char	*names[] = {
 	[sphere] = "Sphere",
 	[plane] = "Plane",
-	[cylinder] = "Cylinder"
+	[cylinder] = "Cylinder",
+	[disc] = "Disc",
 	};
 
 	return ((char *)names[obj_type]);
