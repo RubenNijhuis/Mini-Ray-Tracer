@@ -28,11 +28,9 @@ void	print_object_color(t_color color)
 
 static void	print_shape_base(t_base base)
 {
-	t_color	color;
 	t_vec3f	pos;
 	t_vec3f	orient;
 
-	color = base.color;
 	pos = base.position;
 	orient = base.rotation;
 	printf("Value type  •    X       Y       Z\n");
