@@ -65,12 +65,37 @@ static void	rotate_ray(t_ray *ray, t_vec3f default_dir, t_vec3f desired_dir)
 	ray->origin = vec3f_rotate_axis(ray->origin, rotation_axis, angle);
 }
 
+static float	check_caps(t_ray *ray, float t, t_cylinder *cyl)
+{
+	t_disc	disc;
+	float	y;
+
+	if (t >= 0.0f)
+	{
+		y = ray_at(ray, t)[1];
+		disc.base.position = vec3f(0, cyl->height / 2, 0);
+		disc.base.rotation = cylinder_default_direction();
+		disc.radius = cyl->radius;
+		if (y >= cyl->height / 2)
+		{
+			return (intersects_disc(ray, (t_shape *)&disc));
+		}
+		else if (y <= -cyl->height / 2)
+		{
+			disc.base.position = -disc.base.position;
+			disc.base.rotation = -disc.base.rotation;
+			return (intersects_disc(ray, (t_shape *)&disc));
+		}
+	}
+	return (t);
+}
+
 float	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
 {
-	t_cylinder		*cyl;
-	t_vec3f			center;
-	t_ray			ray;
-	float			t;
+	t_cylinder	*cyl;
+	t_vec3f		center;
+	t_ray		ray;
+	float		t;
 
 	t = -1.0f;
 	cyl = &shape->cylinder;
@@ -92,23 +117,5 @@ float	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
 		t = (-b - sqrt(discriminant)) / (2.0f * a);
 	}
 
-	float y = ray_at(&ray, t)[1];
-	if (y >= cyl->height / 2)
-	{
-		t_disc	disc;
-		disc.base.position = vec3f(0, cyl->height / 2, 0);
-		disc.base.rotation = vec3f(0, 1, 0);
-		disc.radius = cyl->radius;
-		return (intersects_disc(&ray, (t_shape *)&disc));
-	}
-	else if (y <= -cyl->height / 2)
-	{
-		t_disc	disc;
-		disc.base.position = vec3f(0, -cyl->height / 2, 0);
-		disc.base.rotation = vec3f(0, -1, 0);
-		disc.radius = cyl->radius;
-		return (intersects_disc(&ray, (t_shape *)&disc));
-	}
-
-	return (t);
+	return (check_caps(&ray, t, cyl));
 }
