@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/07 12:59:10 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/11 18:24:51 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,24 @@ typedef struct s_program_data
 }	t_program_data;
 
 /*
+ This is what intersection functions return.
+ t being the distance from the start of the ray to the intersection point,
+ normal is the surface normal of the intersection point.
+*/
+typedef struct s_interesect
+{
+	t_vec3f	normal;
+	float	t;
+}	t_intersect;
+
+/*
  Shape intersect and normal function pointer defines
 */
-typedef float	(*t_intersect_func)(t_ray *, t_shape *);
-typedef t_vec3f	(*t_normal_func_ptr)(const t_ray *, const float, t_shape *);
+typedef t_intersect	(*t_intersect_func)(t_ray *, t_shape *);
 
 t_intersect_func	lookup_intersect_function(t_shape *shape);
+t_intersect			no_intersect(void);
+t_intersect			init_intersect(const float distance, const t_vec3f normal);
 
 /*
  Setup mlx
@@ -83,20 +95,10 @@ t_ray				get_camera_ray(uint32_t xpixel, uint32_t ypixel, \
 /*
  Intersections
 */
-float				intersects_sphere(t_ray *ray, t_shape *shape);
-float				intersects_plane(t_ray *ray, t_shape *shape);
-float				intersects_cylinder(t_ray *ray, t_shape *shape);
-float				intersects_disc(t_ray *ray, t_shape *shape);
-
-/*
- Normals
-*/
-t_vec3f				get_sphere_normal(const t_ray *ray, const float dist,
-						t_shape *shape);
-t_vec3f				get_plane_normal(const t_ray *ray, const float dist,
-						t_shape *shape);
-t_vec3f				get_cylinder_normal(const t_ray *ray, const float dist,
-						t_shape *shape);
+t_intersect			intersects_sphere(t_ray *ray, t_shape *shape);
+t_intersect			intersects_plane(t_ray *ray, t_shape *shape);
+t_intersect			intersects_cylinder(t_ray *ray, t_shape *shape);
+t_intersect			intersects_disc(t_ray *ray, t_shape *shape);
 
 /*
  Colors

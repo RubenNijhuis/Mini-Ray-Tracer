@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/11 17:44:16 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/11 18:30:40 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,16 @@ static float	sq(float n)
 	return (n * n);
 }
 
-t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_shape *shape)
+static t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist,
+	t_cylinder *cyl)
 {
-	t_cylinder	*cyl;
 	t_vec3f		p;
 	t_vec3f		center;
 
-	cyl = &shape->cylinder;
 	center = cyl->base.position;
 	p = ray_at(ray, dist);
 	p[1] = 0.0f;
 	center[1] = 0.0f;
-
 	return (p - center);
 }
 
@@ -56,41 +54,42 @@ t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_shape *shape)
 // ray is modified, so better make a copy of it.
 static void	rotate_ray(t_ray *ray, t_vec3f default_dir, t_vec3f desired_dir)
 {
-	float 	angle;
+	float	angle;
 	t_vec3f	rotation_axis;
-	
+
 	angle = vec3f_unit_get_angle(default_dir, desired_dir);
 	rotation_axis = vec3f_cross(default_dir, desired_dir);
 	ray->direction = vec3f_rotate_axis(ray->direction, rotation_axis, angle);
 	ray->origin = vec3f_rotate_axis(ray->origin, rotation_axis, angle);
 }
 
-static float	check_caps(t_ray *ray, float t, t_cylinder *cyl)
+// TODO: fix caps..?
+static t_intersect	check_caps(t_ray *ray, float t, t_cylinder *cyl)
 {
 	t_disc	disc;
 	float	y;
 
 	// if (t >= 0.0f)
 	// {
-		y = ray_at(ray, t)[1];
-		disc.base.position = vec3f(0, cyl->height / 2, 0);
-		disc.base.rotation = cylinder_default_direction();
-		disc.radius = cyl->radius;
-		if (y >= cyl->height / 2)
-		{
-			return (intersects_disc(ray, (t_shape *)&disc));
-		}
-		else if (y <= -cyl->height / 2)
-		{
-			disc.base.position = -disc.base.position;
-			disc.base.rotation = -disc.base.rotation;
-			return (intersects_disc(ray, (t_shape *)&disc));
-		}
+	y = ray_at(ray, t)[1];
+	disc.base.position = vec3f(0, cyl->height / 2, 0);
+	disc.base.rotation = cylinder_default_direction();
+	disc.radius = cyl->radius;
+	if (y >= cyl->height / 2)
+	{
+		return (intersects_disc(ray, (t_shape *)&disc));
+	}
+	else if (y <= -cyl->height / 2)
+	{
+		disc.base.position = -disc.base.position;
+		disc.base.rotation = -disc.base.rotation;
+		return (intersects_disc(ray, (t_shape *)&disc));
+	}
 	// }
-	return (t);
+	return (init_intersect(t, get_cylinder_normal(ray, t, cyl)));
 }
 
-float	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
+t_intersect	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
 {
 	t_cylinder	*cyl;
 	t_vec3f		center;
