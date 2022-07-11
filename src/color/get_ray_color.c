@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/07 12:56:15 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/11 18:23:11 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,50 +19,14 @@
 #include <math.h>
 
 /**
- * @brief 
- * Retrieves the intersection function based on the shape object type
- * @param shape 
- * @return t_intersect_func 
- */
-t_intersect_func	lookup_intersect_function(t_shape *shape)
-{
-	static const t_intersect_func	funcs[] = {
-	[sphere] = &intersects_sphere,
-	[plane] = &intersects_plane,
-	[cylinder] = &intersects_cylinder,
-	[disc] = &intersects_disc,
-	};
-
-	return (funcs[shape->base.obj_type]);
-}
-
-/**
- * @brief 
- * Retrieves the normal function based on the shape object type
- * @param shape 
- * @return t_normal_func_ptr 
- */
-t_normal_func_ptr	lookup_normal_function(t_shape *shape)
-{
-	static const t_normal_func_ptr	funcs[] = {
-	[sphere] = &get_sphere_normal,
-	[plane] = &get_plane_normal,
-	[cylinder] = &get_cylinder_normal,
-	[disc] = &get_plane_normal, // <-- intentional! same as plane.
-	};
-
-	return (funcs[shape->base.obj_type]);
-}
-
-/**
  * Checks if the distance from origin to the current object is smaller
  * than the current record. If so -> update the record and update the color
 */
-static bool	update_closest_hit(float *hit_dist_record, float hit_dist)
+static bool	update_closest_hit(t_intersect *closest, t_intersect *cur)
 {
-	if (hit_dist > 0 && hit_dist <= *hit_dist_record)
+	if (cur->t > 0 && cur->t <= closest->t)
 	{
-		*hit_dist_record = hit_dist;
+		*closest = *cur;
 		return (true);
 	}
 	return (false);
@@ -72,41 +36,36 @@ static bool	update_closest_hit(float *hit_dist_record, float hit_dist)
  * Loops through the shapes array and checks if the ray intersects
  * If it intersects it returns the current hit distance and applies
  * color if needed
- * NOTE: Uses a function roulette to acces the correct intersection func
 */
 t_color	get_ray_color(t_ray *ray, t_scene *scene)
 {
+	t_intersect	cur_i;
+	t_intersect	closest_i;
 	size_t	current_shape;
 	t_shape	*cur_shape;
-	float	hit_dist_record;
-	float	hit_dist;
 	t_color	color;
-	t_vec3f	normal;
-	t_color	new_color;
 	t_color	yeet;
 
 	current_shape = 0;
 	color = get_default_color(scene);
-	hit_dist_record = INFINITY;
+	closest_i.normal = vec3f(0, 0, 0);
+	closest_i.t = INFINITY;
 	while (current_shape < scene->amount_shapes)
 	{
 		cur_shape = &scene->shapes[current_shape];
-		hit_dist = (lookup_intersect_function(cur_shape)) \
+		cur_i = (lookup_intersect_function(cur_shape)) \
 			(ray, cur_shape);
-		if (!update_closest_hit(&hit_dist_record, hit_dist))
+		if (!update_closest_hit(&closest_i, &cur_i))
 		{
 			current_shape++;
 			continue ;
 		}
-		normal = (lookup_normal_function(cur_shape)) \
-			(ray, hit_dist, cur_shape);
-		new_color = cur_shape->base.color;
-		ambient_mixin(&new_color, scene);
+		color = cur_shape->base.color;
+		ambient_mixin(&color, scene);
 		yeet = lights_mixin(scene,
-				ray_at(ray, hit_dist),
-				cur_shape, normal);
-		color_add(&new_color, &yeet);
-		color = new_color;
+				ray_at(ray, closest_i.t),
+				cur_shape, closest_i.normal);
+		color_add(&color, &yeet);
 		current_shape++;
 	}
 	return (color);

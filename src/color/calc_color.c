@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/30 20:31:21 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/11 18:19:31 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ void	ambient_mixin(t_color *col, t_scene *scene)
  */
 bool	scene_intersects(t_scene *scene, t_ray *ray, float max_dist_sq)
 {
-	size_t	i;
-	t_shape	*cur_shape;
-	float	dist;
+	size_t		i;
+	t_shape		*cur_shape;
+	t_intersect	intersect;
 
 	i = 0;
 	while (i < scene->amount_shapes)
 	{
 		cur_shape = &scene->shapes[i];
-		dist = (lookup_intersect_function(cur_shape))(ray, cur_shape);
-		if (dist > 0.0 && dist * dist <= max_dist_sq)
+		intersect = (lookup_intersect_function(cur_shape))(ray, cur_shape);
+		if (intersect.t > 0.0 && intersect.t * intersect.t <= max_dist_sq)
 		{
 			return (true);
 		}
