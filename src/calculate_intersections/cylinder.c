@@ -28,13 +28,16 @@ static float	sq(float n)
 t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist, t_shape *shape)
 {
 	t_cylinder	*cyl;
+	t_vec3f		p;
+	t_vec3f		center;
 
 	cyl = &shape->cylinder;
-	(void)ray;
-	(void)dist;
-	(void)cyl;
-	// TODO
-	return (vec3f(0, 0, -1));
+	center = cyl->base.position;
+	p = ray_at(ray, dist);
+	p[1] = 0.0f;
+	center[1] = 0.0f;
+
+	return (p - center);
 }
 
 float	intersects_cylinder(t_ray *ray, t_shape *shape)
