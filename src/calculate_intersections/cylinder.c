@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/11 13:52:45 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/11 17:44:16 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static float	check_caps(t_ray *ray, float t, t_cylinder *cyl)
 	t_disc	disc;
 	float	y;
 
-	if (t >= 0.0f)
-	{
+	// if (t >= 0.0f)
+	// {
 		y = ray_at(ray, t)[1];
 		disc.base.position = vec3f(0, cyl->height / 2, 0);
 		disc.base.rotation = cylinder_default_direction();
@@ -86,7 +86,7 @@ static float	check_caps(t_ray *ray, float t, t_cylinder *cyl)
 			disc.base.rotation = -disc.base.rotation;
 			return (intersects_disc(ray, (t_shape *)&disc));
 		}
-	}
+	// }
 	return (t);
 }
 
