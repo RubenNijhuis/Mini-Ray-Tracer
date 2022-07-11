@@ -14,6 +14,8 @@
 #include "libvec.h"
 #include "ray.h"
 
+#include "minirt.h"
+
 #include <math.h>	/* sqrt */
 #include <stdio.h>	// temp
 
@@ -88,6 +90,24 @@ float	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
 	if (discriminant > 0)
 	{
 		t = (-b - sqrt(discriminant)) / (2.0f * a);
+	}
+
+	float y = ray_at(&ray, t)[1];
+	if (y >= cyl->height / 2)
+	{
+		t_disc	disc;
+		disc.base.position = vec3f(0, cyl->height / 2, 0);
+		disc.base.rotation = vec3f(0, 1, 0);
+		disc.radius = cyl->radius;
+		return (intersects_disc(&ray, (t_shape *)&disc));
+	}
+	else if (y <= -cyl->height / 2)
+	{
+		t_disc	disc;
+		disc.base.position = vec3f(0, -cyl->height / 2, 0);
+		disc.base.rotation = vec3f(0, -1, 0);
+		disc.radius = cyl->radius;
+		return (intersects_disc(&ray, (t_shape *)&disc));
 	}
 
 	return (t);
