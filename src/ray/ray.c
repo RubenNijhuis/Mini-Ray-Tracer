@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/20 16:03:47 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/12 12:33:54 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/12 14:17:01 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ray_rotate(t_ray *ray, t_vec3f default_dir, t_vec3f desired_dir)
 	t_vec3f	rotation_axis;
 
 	angle = vec3f_unit_get_angle(default_dir, desired_dir);
-	rotation_axis = vec3f_cross(default_dir, desired_dir);
+	rotation_axis = vec3f_cross(desired_dir, default_dir);
 	ray->direction = vec3f_rotate_axis(ray->direction, rotation_axis, angle);
 	ray->origin = vec3f_rotate_axis(ray->origin, rotation_axis, angle);
 }
