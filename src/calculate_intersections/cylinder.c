@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/12 12:34:11 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/12 15:19:28 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ static float	sq(float n)
 	return (n * n);
 }
 
+// this function is to rotate a normal from object space back to world space.
+static t_vec3f	rotate_cyl_point(t_vec3f p, t_cylinder *cyl)
+{
+	t_vec3f	default_dir;
+	t_vec3f	rotation_axis;
+	float	angle;
+
+	default_dir = cylinder_default_direction();
+	angle = vec3f_unit_get_angle(default_dir, cyl->base.rotation);
+	rotation_axis = vec3f_cross(cyl->base.rotation, default_dir);
+	return (vec3f_rotate_axis(p, rotation_axis, -angle));
+}
+
 static t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist,
 	t_cylinder *cyl)
 {
@@ -42,14 +55,15 @@ static t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist,
 	p = ray_at(ray, dist);
 	p[1] = 0.0f;
 	center[1] = 0.0f;
-	return (p - center);
+	return (rotate_cyl_point(p - center, cyl));
 }
 
 // TODO: fix caps..?
 static t_intersect	check_caps(t_ray *ray, float t, t_cylinder *cyl)
 {
-	t_disc	disc;
-	float	y;
+	t_disc		disc;
+	t_intersect	i;
+	float		y;
 
 	// if (t >= 0.0f)
 	// {
@@ -59,15 +73,21 @@ static t_intersect	check_caps(t_ray *ray, float t, t_cylinder *cyl)
 	disc.radius = cyl->radius;
 	if (y >= cyl->height / 2)
 	{
-		return (intersects_disc(ray, (t_shape *)&disc));
+		i = intersects_disc(ray, (t_shape *)&disc);
+		i.normal = cyl->base.rotation;
+		return (i);
 	}
 	else if (y <= -cyl->height / 2)
 	{
 		disc.base.position = -disc.base.position;
 		disc.base.rotation = -disc.base.rotation;
-		return (intersects_disc(ray, (t_shape *)&disc));
+		i = intersects_disc(ray, (t_shape *)&disc);
+		i.normal = -cyl->base.rotation;
+		return (i);
 	}
 	// }
+	if (t <= 0)
+		return (no_intersect());
 	return (init_intersect(t, get_cylinder_normal(ray, t, cyl)));
 }
 
