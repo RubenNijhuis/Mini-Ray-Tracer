@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/07 13:32:35 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/12 15:49:56 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef struct s_cylinder
 
 // The sphere shares everything similar with a disc.
 // therefore, just copy the type instead.
-typedef t_sphere t_disc;
+typedef t_sphere	t_disc;
 
 typedef union u_shape
 {
