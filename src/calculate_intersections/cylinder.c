@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/11 18:30:40 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/12 12:34:11 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,6 @@ static t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist,
 	p[1] = 0.0f;
 	center[1] = 0.0f;
 	return (p - center);
-}
-
-// rotates a ray so that it matches the direciton.
-// All vectors should be unit vectors.
-// IMPORTANT: Assumes the ray has been translated by the object's position in
-// question. i.e. obj at (2,0,2) and ray origin at (3,0,5) results in
-// ray origin (1,0,3)
-// his is easier and it makes that the ray can be properly rotated.
-// ray is modified, so better make a copy of it.
-static void	rotate_ray(t_ray *ray, t_vec3f default_dir, t_vec3f desired_dir)
-{
-	float	angle;
-	t_vec3f	rotation_axis;
-
-	angle = vec3f_unit_get_angle(default_dir, desired_dir);
-	rotation_axis = vec3f_cross(default_dir, desired_dir);
-	ray->direction = vec3f_rotate_axis(ray->direction, rotation_axis, angle);
-	ray->origin = vec3f_rotate_axis(ray->origin, rotation_axis, angle);
 }
 
 // TODO: fix caps..?
@@ -102,7 +84,7 @@ t_intersect	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
 	ray = *initial_ray;
 	ray.origin -= cyl->base.position; // translate ray so that cylinder is at (0,0,0)
 
-	rotate_ray(&ray, cylinder_default_direction(), cyl->base.rotation);
+	ray_rotate(&ray, cylinder_default_direction(), cyl->base.rotation);
 
 	center = ray.origin;
 
