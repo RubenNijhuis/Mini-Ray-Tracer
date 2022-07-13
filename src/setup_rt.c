@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/01 17:16:17 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/13 14:01:26 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_file_name(char *file_name)
 	str_len = ft_strlen(file_name);
 	if (str_len < 4)
 		exit_error("Error: file name must be at least 4 characters long");
-	else if (ft_strncmp(ft_substr(file_name, str_len - 3, 3), ".rt", 3) != 0)
+	else if (ft_strncmp(file_name + str_len - 3, ".rt", 3) != 0)
 		exit_error("Error: file name must end on '.rt'");
 }
 
