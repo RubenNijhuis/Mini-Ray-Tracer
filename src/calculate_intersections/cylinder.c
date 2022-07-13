@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/12 15:19:28 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/13 17:27:16 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ static t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist,
 	p = ray_at(ray, dist);
 	p[1] = 0.0f;
 	center[1] = 0.0f;
-	return (rotate_cyl_point(p - center, cyl));
+	p = p - center;
+	vec3f_normalize(&p);
+	return (rotate_cyl_point(p, cyl));
 }
 
 // TODO: fix caps..?
