@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/30 14:08:16 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/13 14:15:57 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/13 14:19:46 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_ray	get_camera_ray(uint32_t xpixel, uint32_t ypixel, t_camera *cam)
 	);
 	t_vec3f	pos_x = vec3f_cross(vec3f(0, 1, 0), cam->rotation);
 	t_vec3f	neg_y = vec3f_cross(cam->rotation, pos_x);
-	pos_x *= -init_pos[0];
+	pos_x *= init_pos[0];
 	neg_y *= init_pos[1];
 	ray.direction = pos_x + neg_y + cam->rotation;
 	vec3f_normalize(&ray.direction);
