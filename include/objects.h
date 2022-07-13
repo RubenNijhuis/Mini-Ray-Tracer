@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/13 14:16:12 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/13 15:11:37 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,15 @@ typedef struct s_base
 }	t_base;
 
 // Scene elements
+// the camera. Last three values are cached calculations.
 typedef struct s_camera
 {
 	t_vec3f		position;
 	t_vec3f		rotation;
 	float		fov;
 	float		fov_tan;
+	t_vec3f		pos_x;
+	t_vec3f		neg_y;
 }	t_camera;
 
 typedef struct s_ambient_light
@@ -171,6 +174,7 @@ void	make_disc(t_shape *obj, char *settings);
 void	make_light(t_light *light, char *settings);
 
 void	set_camera(t_camera *cam, char *settings);
+void	camera_rotation_setup(t_camera *cam); // in fov.c
 void	set_ambient_light(t_ambient_light *amb, char *settings);
 
 // Util
