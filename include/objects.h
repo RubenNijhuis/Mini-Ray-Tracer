@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/24 19:24:23 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/12 15:49:56 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/13 14:16:12 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_camera
 	t_vec3f		position;
 	t_vec3f		rotation;
 	float		fov;
+	float		fov_tan;
 }	t_camera;
 
 typedef struct s_ambient_light

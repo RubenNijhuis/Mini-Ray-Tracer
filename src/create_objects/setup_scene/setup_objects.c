@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 19:46:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/30 20:32:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/13 14:15:45 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "minirt.h"
 #include "libft.h"
 #include "parsing.h"
+
+#include <math.h> // tan
 
 void	set_camera(t_camera *cam, char *settings)
 {
@@ -24,7 +26,9 @@ void	set_camera(t_camera *cam, char *settings)
 		malloc_error();
 	cam->position = get_vec3f_from_string(split_settings[1]);
 	cam->rotation = get_vec3f_from_string(split_settings[2]);
+	vec3f_normalize(&cam->rotation);
 	cam->fov = deg_to_rad(ft_atof(split_settings[3]));
+	cam->fov_tan = tan(cam->fov);
 	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
 }
 
