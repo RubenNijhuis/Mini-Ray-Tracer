@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/27 17:11:35 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/28 14:09:49 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/13 16:58:01 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+
+bool	check_vec_normalization(char **settings)
+{
+	return (ft_atof(settings[0]) == 0
+		&& ft_atof(settings[0]) == 0
+		&& ft_atof(settings[0]) == 0);
+}
 
 /**
  * @brief 
@@ -69,7 +76,8 @@ bool	check_rotation(char *settings, uint32_t line_pos)
 		print_err_msg("rotation vec", line_pos, format);
 		status = false;
 	}
-	if (check_values_range_float(split_settings, -1, 1) == false)
+	if (check_values_range_float(split_settings, -1, 1) == false
+		|| check_vec_normalization(split_settings) == false)
 	{
 		print_err_msg("rotation vec", line_pos, out_of_range);
 		status = false;
