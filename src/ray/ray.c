@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/20 16:03:47 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/12 14:17:01 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/13 21:35:49 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,20 @@ void	ray_rotate(t_ray *ray, t_vec3f default_dir, t_vec3f desired_dir)
 	rotation_axis = vec3f_cross(desired_dir, default_dir);
 	ray->direction = vec3f_rotate_axis(ray->direction, rotation_axis, angle);
 	ray->origin = vec3f_rotate_axis(ray->origin, rotation_axis, angle);
+}
+
+// returns the closest point on the ray to p to ray. As in, you have p,
+// which is the "closest approach" to the line/ray, the point on the line
+// which is perpendicular to that point is returned.
+// first the p is translated. Since vec3f_dot == cos(angle) |a||b|,
+// we "project" p onto ray. then we have the distance, so a simple ray_at
+// finishes the job. see also:
+// https://www.khanacademy.org/computer-programming/c/5311392656179200
+t_vec3f	ray_closest_point(t_ray *ray, t_vec3f p)
+{
+	float	dist;
+
+	p -= ray->origin;
+	dist = vec3f_dot(ray->direction, p);
+	return (ray_at(ray, dist));
 }

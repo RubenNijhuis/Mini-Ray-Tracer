@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/13 17:05:54 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/27 15:49:53 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/13 21:30:24 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,15 @@ Test(get_color_from_string, passing)
 Test(ray_at, passing)
 {
 	ray_at_test(vec3f(2, 1, -4), vec3f(0, 1, 0), vec3f(2, 6, -4));
+}
+
+Test(ray_closest_point, passing)
+{
+	t_ray	ray;
+	t_vec3f	p;
+
+	ray.origin = vec3f(2, -2, 2);
+	ray.direction = vec3f(0, 1, 0);
+	p = vec3f(-1, 5, 3);
+	cr_assert(vec3f_eq(ray_closest_point(&ray, p), vec3f(2, 5, 2)), "wrong ray closest point");
 }
