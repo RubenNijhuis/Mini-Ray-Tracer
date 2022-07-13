@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:36:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/11 18:26:29 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/13 15:17:34 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 #include <math.h> // sqrt
 #include <stdbool.h>
 
-/* gets the surface normal of a sphere. */
+/* gets the surface normal of a sphere.
+ * it's just the intersection point minus the sphere's origin. */
 static t_vec3f	get_sphere_normal(const t_ray *ray,
 	const float dist, t_sphere *shape)
 {
