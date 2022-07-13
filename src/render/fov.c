@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/30 14:08:16 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/13 15:12:59 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/13 16:35:47 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 void	camera_rotation_setup(t_camera *cam)
 {
 	cam->fov_tan = tan(cam->fov);
-	if (cam->rotation[0] < __FLT_EPSILON__ && cam->rotation[2] < __FLT_EPSILON__)
+	if (cam->rotation[0] >= 0.0f && cam->rotation[0] < __FLT_EPSILON__
+		&& cam->rotation[2] >= 0.0f && cam->rotation[2] < __FLT_EPSILON__)
 	{
 		cam->pos_x = vec3f(1, 0, 0);
 	}
