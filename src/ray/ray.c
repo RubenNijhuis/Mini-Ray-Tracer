@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/20 16:03:47 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/13 21:35:49 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/14 13:02:05 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,13 @@ t_vec3f	ray_closest_point(t_ray *ray, t_vec3f p)
 	p -= ray->origin;
 	dist = vec3f_dot(ray->direction, p);
 	return (ray_at(ray, dist));
+}
+
+t_ray	ray_init(t_vec3f origin, t_vec3f direction)
+{
+	t_ray	new_ray;
+
+	new_ray.origin = origin;
+	new_ray.direction = direction;
+	return (new_ray);
 }

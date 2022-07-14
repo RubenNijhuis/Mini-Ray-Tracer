@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/13 17:27:16 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/14 13:57:25 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,36 +32,35 @@ static float	sq(float n)
 	return (n * n);
 }
 
-// this function is to rotate a normal from object space back to world space.
-static t_vec3f	rotate_cyl_point(t_vec3f p, t_cylinder *cyl)
+t_vec3f get_closest_p_on_line(t_cylinder *cyl, t_vec3f p)
 {
-	t_vec3f	default_dir;
-	t_vec3f	rotation_axis;
-	float	angle;
+	t_ray	ray = ray_init(cyl->base.position, cyl->base.rotation);
 
-	default_dir = cylinder_default_direction();
-	angle = vec3f_unit_get_angle(default_dir, cyl->base.rotation);
-	rotation_axis = vec3f_cross(cyl->base.rotation, default_dir);
-	return (vec3f_rotate_axis(p, rotation_axis, -angle));
+	float	origin_to_intersect = vec3f_len_sq(p - ray.origin);
+
+	float distance_to_closest_point = sqrt(origin_to_intersect - cyl->radius * cyl->radius);
+
+	t_vec3f intersect_point = ray_at(&ray, distance_to_closest_point);
+
+	return (intersect_point);
 }
 
 static t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist,
 	t_cylinder *cyl)
 {
 	t_vec3f		p;
-	t_vec3f		center;
+	t_vec3f		closest_point;
+	t_ray		cylray = ray_init(cyl->base.position, cyl->base.rotation);
 
-	center = cyl->base.position;
 	p = ray_at(ray, dist);
-	p[1] = 0.0f;
-	center[1] = 0.0f;
-	p = p - center;
+	closest_point = ray_closest_point(&cylray, p);
+	p = p - closest_point;
 	vec3f_normalize(&p);
-	return (rotate_cyl_point(p, cyl));
+	return (p);
 }
 
 // TODO: fix caps..?
-static t_intersect	check_caps(t_ray *ray, float t, t_cylinder *cyl)
+static t_intersect	check_caps(t_ray *initial_ray, t_ray *ray, float t, t_cylinder *cyl)
 {
 	t_disc		disc;
 	t_intersect	i;
@@ -90,7 +89,7 @@ static t_intersect	check_caps(t_ray *ray, float t, t_cylinder *cyl)
 	// }
 	if (t <= 0)
 		return (no_intersect());
-	return (init_intersect(t, get_cylinder_normal(ray, t, cyl)));
+	return (init_intersect(t, get_cylinder_normal(initial_ray, t, cyl)));
 }
 
 t_intersect	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
@@ -120,5 +119,5 @@ t_intersect	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
 		t = (-b - sqrt(discriminant)) / (2.0f * a);
 	}
 
-	return (check_caps(&ray, t, cyl));
+	return (check_caps(initial_ray, &ray, t, cyl));
 }
