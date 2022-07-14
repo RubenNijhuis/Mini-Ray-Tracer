@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:44:59 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/11 18:22:01 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/14 16:57:36 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@
 
 // Maximum render distance of the plane.
 #define MAX_DISTANCE (10000.0f)
+
+// the normal is equal to the plane's direction, however,
+// when hit from the back you need to flip it.
+static t_vec3f	plane_normal(t_ray *ray, t_plane *plane)
+{
+	t_vec3f	normal;
+	float	angle;
+
+	normal = plane->base.rotation;
+	angle = vec3f_dot(ray->direction, normal);
+	if (angle > 0.0f)
+	{
+		normal = -normal;
+	}
+	return (normal);
+}
 
 t_intersect	intersects_plane(t_ray *ray, t_shape *shape)
 {
@@ -42,5 +58,5 @@ t_intersect	intersects_plane(t_ray *ray, t_shape *shape)
 	{
 		return (no_intersect());
 	}
-	return (init_intersect(t, plane->base.rotation));
+	return (init_intersect(t, plane_normal(ray, plane)));
 }
