@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/30 14:08:16 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/13 16:35:47 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/19 17:13:50 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	camera_rotation_setup(t_camera *cam)
 {
-	cam->fov_tan = tan(cam->fov);
+	cam->fov_tan = tan(cam->fov * 0.5f);
 	if (cam->rotation[0] >= 0.0f && cam->rotation[0] < __FLT_EPSILON__
 		&& cam->rotation[2] >= 0.0f && cam->rotation[2] < __FLT_EPSILON__)
 	{
@@ -39,10 +39,10 @@ t_ray	get_camera_ray(uint32_t xpixel, uint32_t ypixel, t_camera *cam)
 	float			y;
 
 	ray.origin = cam->position;
-	x = cam->fov_tan
-		* (((double)xpixel - (double)(WIN_WIDTH / 2)) / (double)WIN_WIDTH);
-	y = (cam->fov_tan * inv_aspect)
-		* (((double)ypixel - (double)(WIN_HEIGHT / 2)) / (double)WIN_HEIGHT);
+	x = ((2.0f * cam->fov_tan) * ((double)xpixel / (double)WIN_WIDTH))
+		- cam->fov_tan;
+	y = inv_aspect * (((2.0f * cam->fov_tan)
+				* ((double)ypixel / (double)WIN_HEIGHT)) - cam->fov_tan);
 	ray.direction = cam->pos_x * x + cam->neg_y * y + cam->rotation;
 	vec3f_normalize(&ray.direction);
 	return (ray);
