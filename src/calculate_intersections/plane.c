@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:44:59 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/14 16:57:36 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/20 18:33:29 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 // the normal is equal to the plane's direction, however,
 // when hit from the back you need to flip it.
-static t_vec3f	plane_normal(t_ray *ray, t_plane *plane)
+t_vec3f	get_plane_normal(t_ray *ray, t_plane *plane)
 {
 	t_vec3f	normal;
 	float	angle;
@@ -58,5 +58,5 @@ t_intersect	intersects_plane(t_ray *ray, t_shape *shape)
 	{
 		return (no_intersect());
 	}
-	return (init_intersect(t, plane_normal(ray, plane)));
+	return (init_intersect(t, get_plane_normal(ray, plane)));
 }

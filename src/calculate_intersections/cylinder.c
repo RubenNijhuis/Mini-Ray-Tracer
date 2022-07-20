@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/20 16:40:14 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/20 18:46:31 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,42 @@ static float	sq(float n)
 }
 
 static t_intersect	check_caps(t_ray *initial_ray, t_ray *ray, float t,
-	t_cylinder *cyl)
+	t_cylinder *cyl, bool *flip_normals)
 {
 	t_disc		disc;
 	t_intersect	i;
-	float		y;
+	t_intersect	ti;
 
-	y = ray_at(ray, t)[1];
 	disc.base.position = vec3f(0, cyl->height / 2, 0);
 	disc.base.rotation = cylinder_default_direction();
 	disc.radius = cyl->radius;
-	if (y >= cyl->height / 2)
+	i = init_intersect(t, get_cylinder_normal(initial_ray, t, cyl));
+	float y = ray_at(ray, t)[1];
+	if (y <= -cyl->height * 0.5f || y >= cyl->height * 0.5f)
 	{
-		i = intersects_disc(ray, (t_shape *)&disc);
-		i.normal = cyl->base.rotation;
-		return (i);
+		i.t = INFINITY;
 	}
-	else if (y <= -cyl->height / 2)
+	ti = intersects_disc(ray, (t_shape *)&disc);
+	ti.normal = cyl->base.rotation;
+	disc.base.rotation = cyl->base.rotation;
+	ti.normal = get_plane_normal(initial_ray, (t_plane *)&disc.base);
+	if (ti.t > 0.0f && ti.t < i.t)
 	{
-		disc.base.position = -disc.base.position;
-		disc.base.rotation = -disc.base.rotation;
-		i = intersects_disc(ray, (t_shape *)&disc);
-		i.normal = -cyl->base.rotation;
-		return (i);
+		*flip_normals = false;
+		i = ti;
 	}
-	if (t <= 0)
-		return (no_intersect());
-	return (init_intersect(t, get_cylinder_normal(initial_ray, t, cyl)));
+	disc.base.position = -disc.base.position;
+	disc.base.rotation = -cylinder_default_direction();
+	ti = intersects_disc(ray, (t_shape *)&disc);
+	ti.normal = -cyl->base.rotation;
+	disc.base.rotation = cyl->base.rotation;
+	ti.normal = get_plane_normal(initial_ray, (t_plane *)&disc.base);
+	if (ti.t > 0.0f && ti.t < i.t)
+	{
+		*flip_normals = false;
+		i = ti;
+	}
+	return (i);
 }
 
 // solves an ABC formula equation. The flip normals is when there's a
@@ -106,8 +115,10 @@ t_intersect	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
 				+ (center[Z] * ray.direction[Z])),
 			sq(center[X]) + sq(center[Z]) - sq(cyl->radius),
 			&flip_normals);
-	i = check_caps(initial_ray, &ray, t, cyl);
+	i = check_caps(initial_ray, &ray, t, cyl, &flip_normals);
 	if (flip_normals)
+	{
 		i.normal *= -1.0f;
+	}
 	return (i);
 }

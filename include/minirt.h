@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/20 16:38:02 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/20 18:28:37 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ t_intersect			intersects_disc(t_ray *ray, t_shape *shape);
 // Normals
 t_vec3f				get_cylinder_normal(const t_ray *ray, const float dist,
 						t_cylinder *cyl);
+t_vec3f				get_plane_normal(t_ray *ray, t_plane *plane);
 
 /*
  Colors
