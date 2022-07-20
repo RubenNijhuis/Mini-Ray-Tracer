@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/05 16:31:00 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/20 13:39:19 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ typedef enum s_error_type
 	amount_values
 }	t_error_type;
 
+/*
+ Line type enum
+*/
+typedef enum s_line_type
+{
+	comment
+}	t_line_type;
+
 /**
  * Struct that gives context to a line in the file.
  * Keeps track of it's actual position in the file
@@ -37,6 +45,7 @@ typedef enum s_error_type
 typedef struct s_line
 {
 	char		*line;
+	t_line_type	type;
 	uint32_t	file_line;
 }	t_line;
 

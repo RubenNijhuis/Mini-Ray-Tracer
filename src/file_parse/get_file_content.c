@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/06/30 20:35:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/20 13:44:36 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,22 @@ static size_t	get_amount_lines(int fd)
 	return (amount_lines);
 }
 
+void	create_lines_context(t_line *lines)
+{
+	size_t	cur_line;
+
+	cur_line = 0;
+	while (lines[cur_line].line != NULL)
+	{
+		ft_repl_chr(lines[cur_line].line, '\n', '\0');
+		ft_repl_chr(lines[cur_line].line, '\t', ' ');
+		if (lines[cur_line].line[0] == '#')
+			lines[cur_line].type = comment;
+		lines[cur_line].file_line = cur_line + 1;
+		cur_line++;
+	}
+}
+
 /**
  * Grabs the next string from the file and places it in a t_line struct
  * Also trims the \n and replaces the \t with spaces
@@ -51,10 +67,6 @@ static t_line	*get_file_lines(int fd, uint32_t amount_lines_in_file)
 	while (current_line < amount_lines_in_file)
 	{
 		total_file[current_line].line = get_next_line(fd);
-		total_file[current_line].line[\
-			ft_strlen(total_file[current_line].line) - 1] = '\0';
-		ft_repl_chr(total_file[current_line].line, '\t', ' ');
-		total_file[current_line].file_line = current_line + 1;
 		if (total_file[current_line].line == NULL)
 			exit_perror("Get Next Line had an issue returning a file line");
 		current_line++;
@@ -67,7 +79,7 @@ t_line	*get_file_content(char *file_name)
 {
 	int32_t		fd;
 	uint32_t	amount_lines_in_file;
-	t_line		*full_file_string;
+	t_line		*file_content;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
@@ -76,10 +88,11 @@ t_line	*get_file_content(char *file_name)
 	if (close(fd) == -1)
 		exit_perror("Close error");
 	fd = open(file_name, O_RDONLY);
-	full_file_string = get_file_lines(fd, amount_lines_in_file);
-	if (full_file_string == NULL)
+	file_content = get_file_lines(fd, amount_lines_in_file);
+	if (file_content == NULL)
 		malloc_error();
+	create_lines_context(file_content);
 	if (close(fd) == -1)
 		exit_perror("Close error");
-	return (full_file_string);
+	return (file_content);
 }

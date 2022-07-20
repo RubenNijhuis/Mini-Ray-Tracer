@@ -94,6 +94,5 @@ Test the functions of MiniRT using Criterion
 ## ☑️ — Todo
 [ ] - Make wayyy more tests  
 [ ] - Program close on [ x ] button click  
-[ ] - Cylinder
-[ ] - Camera orientation
-jjj
+[ ] - Cylinder  
+[ ] - Camera orientation  
