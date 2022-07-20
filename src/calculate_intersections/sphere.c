@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:36:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/18 18:30:58 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/20 17:16:21 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ static t_intersect	get_sphere_intersection(t_ray *ray, t_sphere *sphere,
 	distance_from_origin_to_ray
 		= sqrt(sphere->radius * sphere->radius - distance_to_so_sq);
 	i.t = distance_to_closest_point - distance_from_origin_to_ray;
-	i.normal = get_sphere_normal(ray, i.t, sphere);
 	if (i.t < 0)
 	{
 		i.t = distance_to_closest_point + distance_from_origin_to_ray;
+		i.normal = -get_sphere_normal(ray, i.t, sphere);
+	}
+	else
+	{
+		i.normal = get_sphere_normal(ray, i.t, sphere);
 	}
 	return (i);
 }
