@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 23:52:37 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/07 13:14:35 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/20 16:50:23 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	check_input_lines(t_line *lines)
 		obj_type = get_obj_type(lines[current_line].line);
 		if (obj_type != -1)
 			run_object_checks(obj_type, lines[current_line]);
-		else if (ft_strlen(lines[current_line].line) > 1)
+		else if (ft_strlen(lines[current_line].line) > 1
+			&& lines[current_line].type != comment)
 		{
 			ft_dprintf(2,
 				"Error: line %i not object or non-empty line\n",

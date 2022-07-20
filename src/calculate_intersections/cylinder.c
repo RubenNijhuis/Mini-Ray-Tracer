@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/20 13:56:53 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/20 16:40:14 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,6 @@ static t_vec3f	cylinder_default_direction(void)
 static float	sq(float n)
 {
 	return (n * n);
-}
-
-static t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist,
-	t_cylinder *cyl)
-{
-	t_vec3f		p;
-	t_vec3f		closest_point;
-	t_ray		cyl_ray;
-
-	cyl_ray = ray_init(cyl->base.position, cyl->base.rotation);
-	p = ray_at(ray, dist);
-	closest_point = ray_closest_point(&cyl_ray, p);
-	p = p - closest_point;
-	vec3f_normalize(&p);
-	return (p);
 }
 
 static t_intersect	check_caps(t_ray *initial_ray, t_ray *ray, float t,

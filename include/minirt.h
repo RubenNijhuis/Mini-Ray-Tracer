@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/19 17:12:41 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/20 16:38:02 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_program_data
  t being the distance from the start of the ray to the intersection point,
  normal is the surface normal of the intersection point.
 */
-typedef struct s_interesect
+typedef struct s_intersect
 {
 	t_vec3f	normal;
 	float	t;
@@ -99,6 +99,10 @@ t_intersect			intersects_sphere(t_ray *ray, t_shape *shape);
 t_intersect			intersects_plane(t_ray *ray, t_shape *shape);
 t_intersect			intersects_cylinder(t_ray *ray, t_shape *shape);
 t_intersect			intersects_disc(t_ray *ray, t_shape *shape);
+
+// Normals
+t_vec3f				get_cylinder_normal(const t_ray *ray, const float dist,
+						t_cylinder *cyl);
 
 /*
  Colors
