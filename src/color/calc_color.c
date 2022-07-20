@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/20 13:32:54 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/20 17:39:32 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,15 @@ bool	scene_intersects(t_scene *scene, t_ray *ray, float max_dist_sq)
 	return (false);
 }
 
+typedef struct s_light_data
+{
+	t_light	*light;
+	t_scene	*scene;
+	t_shape	*shape;
+	t_vec3f	point;
+	t_vec3f	normal;
+}	t_light_data;
+
 /**
  * @brief 
  * Add the color of a light to a point. Checks if the ray from point to light
@@ -65,29 +74,28 @@ bool	scene_intersects(t_scene *scene, t_ray *ray, float max_dist_sq)
  * @param normal 
  * @return t_color 
  */
-t_color	get_light(t_light *light, t_scene *scene, t_shape *shape, \
-	t_vec3f point, t_vec3f normal)
+t_color	get_light(t_light_data *lighting)
 {
 	t_ray	ray;
 	t_color	color;
 	float	max_dist_sq;
 	float	intensity;
 
-	ray.direction = light->position - point;
+	ray.direction = lighting->light->position - lighting->point;
 	max_dist_sq = vec3f_len_sq(ray.direction);
 	vec3f_normalize(&ray.direction);
-	ray.origin = point + (normal * (1.0f / 5000.0f));
-	if (scene_intersects(scene, &ray, max_dist_sq))
+	ray.origin = lighting->point + (lighting->normal * (1.0f / 5000.0f));
+	if (scene_intersects(lighting->scene, &ray, max_dist_sq))
 		color = make_color(0, 0, 0);
 	else
 	{
-		color = shape->base.color;
-		color_multiply_scalar(&color, light->brightness);
-		intensity = vec3f_dot(ray.direction, normal);
+		color = lighting->shape->base.color;
+		color_multiply_scalar(&color, lighting->light->brightness);
+		intensity = vec3f_dot(ray.direction, lighting->normal);
 		if (intensity < 0.00001f)
 			intensity = 0;
 		color_multiply_scalar(&color, intensity);
-		color_multiply(&color, &light->color);
+		color_multiply(&color, &lighting->light->color);
 	}
 	return (color);
 }
@@ -104,15 +112,21 @@ t_color	get_light(t_light *light, t_scene *scene, t_shape *shape, \
  */
 t_color	lights_mixin(t_scene *scene, t_vec3f p, t_shape *shape, t_vec3f normal)
 {
-	t_color	light_cols;
-	t_color	cur_col;
-	size_t	i;
+	t_color			light_cols;
+	t_color			cur_col;
+	size_t			i;
+	t_light_data	lighting;
 
 	light_cols = make_color(0, 0, 0);
 	i = 0;
+	lighting.scene = scene;
+	lighting.shape = shape;
+	lighting.normal = normal;
+	lighting.point = p;
 	while (i < scene->amount_lights)
 	{
-		cur_col = get_light(&scene->lights[i], scene, shape, p, normal);
+		lighting.light = &scene->lights[i];
+		cur_col = get_light(&lighting);
 		color_add(&light_cols, &cur_col);
 		i++;
 	}
