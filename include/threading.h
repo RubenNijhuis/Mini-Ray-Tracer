@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/08 13:08:03 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/23 14:53:21 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/21 16:21:18 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define THREADING_H
 
 // IDEA: have this detect automatically during runtime.
-# define N_THREADS (8)
+# ifndef N_THREADS
+#  define N_THREADS (4)
+# endif
 
 # define BLOCK_SIZE (256)
 
