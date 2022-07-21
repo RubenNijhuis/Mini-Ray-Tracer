@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/30 10:50:32 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/13 21:38:57 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/21 18:48:35 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 #include "libft.h"
 #include "libvec.h"
 #include "minirt.h"
+
+/* makes sure that -1,-1,-1 becomes 1,1,1 etc. */
+static void	ensure_vec_positive(t_vec3f *vec)
+{
+	if ((*vec)[0] < __FLT_EPSILON__
+		&& (*vec)[1] < __FLT_EPSILON__
+		&& (*vec)[2] < __FLT_EPSILON__)
+	{
+		*vec *= -1.0f;
+	}
+}
 
 void	make_sphere(t_shape *obj, char *settings)
 {
@@ -40,6 +51,7 @@ void	make_cylinder(t_shape *obj, char *settings)
 	obj->cylinder.base.position = get_vec3f_from_string(split_settings[1]);
 	obj->cylinder.base.rotation = get_vec3f_from_string(split_settings[2]);
 	vec3f_normalize(&obj->cylinder.base.rotation);
+	ensure_vec_positive(&obj->cylinder.base.rotation);
 	obj->cylinder.base.color = get_color_from_string(split_settings[5]);
 	obj->cylinder.radius = ft_atof(split_settings[3]) / 2.0f;
 	obj->cylinder.height = ft_atof(split_settings[4]);
