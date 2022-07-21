@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/20 16:35:08 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/21 17:58:06 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist,
 	t_cylinder *cyl)
 {
-	t_vec3f		p;
-	t_vec3f		closest_point;
-	t_ray		cyl_ray;
+	t_vec3f	p;
+	t_vec3f	closest_point;
+	t_ray	cyl_ray;
 
 	cyl_ray = ray_init(cyl->base.position, cyl->base.rotation);
 	p = ray_at(ray, dist);
