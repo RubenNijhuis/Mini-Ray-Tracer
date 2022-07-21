@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/20 13:44:36 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/21 17:19:42 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ static size_t	get_amount_lines(int fd)
 void	create_lines_context(t_line *lines)
 {
 	size_t	cur_line;
+	char	*trimmed_str;
 
 	cur_line = 0;
 	while (lines[cur_line].line != NULL)
 	{
-		ft_repl_chr(lines[cur_line].line, '\n', '\0');
+		trimmed_str = ft_strtrim(lines[cur_line].line, "\t\n ");
+		free(lines[cur_line].line);
+		lines[cur_line].line = trimmed_str;
 		ft_repl_chr(lines[cur_line].line, '\t', ' ');
 		if (lines[cur_line].line[0] == '#')
 			lines[cur_line].type = comment;
