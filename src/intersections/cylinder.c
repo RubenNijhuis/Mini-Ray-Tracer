@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/21 15:13:16 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/22 16:42:31 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@
 
 #define X (0) // macro to simplify reading of axes
 #define Z (2) // change them to change the cylinders direction(will break)
-
-static t_vec3f	cylinder_default_direction(void)
-{
-	return (vec3f(0, 1, 0));
-}
-
-static float	sq(float n)
-{
-	return (n * n);
-}
 
 // solves an ABC formula equation. The flip normals is when there's a
 // later intersect, it implies that the ray origin is inside the object,
@@ -55,24 +45,16 @@ static float	abc_solve(float a, float b, float c, bool *flip_normals)
 	return (t);
 }
 
-static t_intersect	get_cap_intersect(t_ray *obj_ray, t_cylinder *cyl)
+// returns true if cap intersect is closer than cyl intersect.
+// overwrites cyl intersect if this is is the case.
+static bool	check_cap_intersect(t_intersect cap, t_intersect *cyl)
 {
-	t_disc		disc;
-	t_intersect	i;
-	float		prev_t;
-
-	disc.base.rotation = cylinder_default_direction();
-	disc.base.position = disc.base.rotation * (cyl->height * 0.5f);
-	disc.radius = cyl->radius;
-	i = intersects_disc(obj_ray, (t_shape *)&disc);
-	prev_t = i.t;
-	disc.base.position = -disc.base.position;
-	i = intersects_disc(obj_ray, (t_shape *)&disc);
-	if (i.t <= 0.0f || (prev_t >= 0.0f && prev_t < i.t))
+	if (cyl->t < 0.0f || (cap.t >= 0.0f && cap.t < cyl->t))
 	{
-		i.t = prev_t;
+		*cyl = cap;
+		return (true);
 	}
-	return (i);
+	return (false);
 }
 
 static t_intersect	get_cylinder_intersect(t_ray *obj_ray,
@@ -93,30 +75,15 @@ static t_intersect	get_cylinder_intersect(t_ray *obj_ray,
 	return (i);
 }
 
-// returns true if cap intersect is closer than cyl intersect.
-// overwrites cyl intersect if this is is the case.
-static bool	check_cap_intersect(t_intersect cap, t_intersect *cyl)
-{
-	if (cyl->t < 0.0f || (cap.t >= 0.0f && cap.t < cyl->t))
-	{
-		*cyl = cap;
-		return (true);
-	}
-	return (false);
-}
-
-// the ray.origin -= cyl->base.position is so that the cylinder is at (0,0,0)
-// damn you norm!!
-t_intersect	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
+// Get the tyfus norm - we won – big W
+t_intersect	intersects_cylinder_body(t_ray *initial_ray, t_cylinder *cyl)
 {
 	t_intersect	i;
-	t_cylinder	*cyl;
 	t_vec3f		center;
 	t_ray		ray;
 	float		t;
 	bool		inside_cyl;
 
-	cyl = &shape->cylinder;
 	ray = *initial_ray;
 	ray.origin -= cyl->base.position;
 	ray_rotate(&ray, cylinder_default_direction(), cyl->base.rotation);
@@ -128,18 +95,19 @@ t_intersect	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
 			&inside_cyl);
 	i = get_cylinder_intersect(&ray, cyl, t);
 	if (check_cap_intersect(get_cap_intersect(&ray, cyl), &i))
-	{
-		t_plane	plane;
-		plane.base.rotation = cyl->base.rotation;
-		i.normal = get_plane_normal(initial_ray, &plane);
-	}
+		i.normal = get_plane_normal(initial_ray, (t_plane *)&cyl->base);
 	else
 	{
 		i.normal = get_cylinder_normal(initial_ray, t, cyl);
 		if (inside_cyl)
-		{
 			i.normal *= -1.0f;
-		}
 	}
 	return (i);
+}
+
+// the ray.origin -= cyl->base.position is so that the cylinder is at (0,0,0)
+// damn you norm!!
+t_intersect	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
+{
+	return (intersects_cylinder_body(initial_ray, &shape->cylinder));
 }

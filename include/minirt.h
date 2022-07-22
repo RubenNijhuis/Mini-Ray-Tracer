@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/20 18:28:37 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/22 16:34:49 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ t_intersect			intersects_plane(t_ray *ray, t_shape *shape);
 t_intersect			intersects_cylinder(t_ray *ray, t_shape *shape);
 t_intersect			intersects_disc(t_ray *ray, t_shape *shape);
 
+t_intersect			get_cap_intersect(t_ray *obj_ray, t_cylinder *cyl);
+t_vec3f				cylinder_default_direction(void);
+
 // Normals
 t_vec3f				get_cylinder_normal(const t_ray *ray, const float dist,
 						t_cylinder *cyl);
@@ -142,4 +145,8 @@ void				render_pixel(t_program_data *pd, uint32_t px, \
 						uint32_t py);
 void				put_pixel(t_program_data *pd, uint32_t px, \
 						uint32_t py, uint32_t col);
+
+// Math
+float				sq(const float n);
+
 #endif

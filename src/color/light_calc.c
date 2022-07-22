@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/21 13:05:07 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/22 16:27:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_color	get_light(t_light_data *lighting)
 	ray.direction = lighting->light->position - lighting->point;
 	max_dist_sq = vec3f_len_sq(ray.direction);
 	vec3f_normalize(&ray.direction);
-	ray.origin = lighting->point + (lighting->normal * (1.0f / 5000.0f));
+	ray.origin = lighting->point + (lighting->normal * (1.0f / 3250.0f));
 	if (scene_intersects(lighting->scene, &ray, max_dist_sq))
 		color = make_color(0, 0, 0);
 	else
