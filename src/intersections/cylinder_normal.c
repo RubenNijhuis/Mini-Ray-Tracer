@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/21 17:58:06 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/22 14:21:26 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libvec.h"
 #include "ray.h"
 
+/* returns a normal for an infinite cylinder */
 t_vec3f	get_cylinder_normal(const t_ray *ray, const float dist,
 	t_cylinder *cyl)
 {
