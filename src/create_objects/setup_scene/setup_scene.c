@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/22 17:05:25 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/22 19:02:25 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ static void	convert_strings_to_shapes(t_shape *shapes, t_line *lines)
 	current_line = 0;
 	while (lines[current_line].line != NULL)
 	{
-		if (ft_is_object(SCENE_SHAPES, lines[current_line].line))
+		if (lines[current_line].type == comment)
+		{
+		}
+		else if (ft_is_object(SCENE_SHAPES, lines[current_line].line))
 		{
 			lookup_shape_creation_func(&shapes[amount_objects], \
 				lines[current_line].line);
