@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/22 16:42:31 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/22 16:43:06 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static t_intersect	get_cylinder_intersect(t_ray *obj_ray,
 }
 
 // Get the tyfus norm - we won – big W
+// the ray.origin -= cyl->base.position is so that the cylinder is at (0,0,0)
 t_intersect	intersects_cylinder_body(t_ray *initial_ray, t_cylinder *cyl)
 {
 	t_intersect	i;
@@ -105,7 +106,6 @@ t_intersect	intersects_cylinder_body(t_ray *initial_ray, t_cylinder *cyl)
 	return (i);
 }
 
-// the ray.origin -= cyl->base.position is so that the cylinder is at (0,0,0)
 // damn you norm!!
 t_intersect	intersects_cylinder(t_ray *initial_ray, t_shape *shape)
 {
