@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/22 17:18:41 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/07/22 19:35:36 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,23 +14,23 @@
 #========= General variables =========#
 #=====================================#
 
-CC := 				gcc
-EXEC_NAME :=		minirt
-ASSETS_DIR :=		assets
-BIN_DIR :=			bin
-INCLUDE_DIR :=		include
-LIBS_DIR :=			libs
-OBJS_DIR := 		objs
-SRC_DIR :=			src
-TEST_DIR :=			test
-NAME :=				$(BIN_DIR)/$(EXEC_NAME)
-BONUS :=			0
-DEBUG :=			0
+CC				:=	gcc
+EXEC_NAME		:=	minirt
+ASSETS_DIR		:=	assets
+BIN_DIR			:=	bin
+INCLUDE_DIR		:=	include
+LIBS_DIR		:=	libs
+OBJS_DIR		:= 	objs
+SRC_DIR			:=	src
+TEST_DIR		:=	test
+NAME			:=	$(BIN_DIR)/$(EXEC_NAME)
+BONUS			:=	0
+DEBUG			:=	0
 
 # TODO: More header watching
-HEADERS :=			$(wildcard $(INCLUDE_DIR)/*.h)
+HEADERS			:=	$(wildcard $(INCLUDE_DIR)/*.h)
 
-MLX_DIR			= 	$(LIBS_DIR)/MLX42
+MLX_DIR			:= 	$(LIBS_DIR)/MLX42
 MLX_H 			:=	$(MLX_DIR)/include/MLX42/MLX42.h
 MLX_A 			:=	$(MLX_DIR)/libmlx42.a
 
@@ -60,43 +60,42 @@ PF_OBJ			=	$(PF_DEPS:$(PF_DIR)/%.c=$(PF_OBJ_DIR)/%.o)
 #============= ft_printf =============#
 #=====================================#
 
-INPUT_FILE := 	$(ASSETS_DIR)/mandatory/cyl_test.rt
+INPUT_FILE		:=	$(ASSETS_DIR)/mandatory/cyl_test.rt
 
-LIBS :=				$(MLX_A) \
+LIBS			:=	$(MLX_A) \
 					$(PF_A) \
 					$(LIBFT_A) \
 					$(LIBS_DIR)/Lib-Vec/libvec.a \
 					$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
 
 
-LIBS_HEADERS :=		-I $(INCLUDE_DIR) \
+LIBS_HEADERS	:=	-I $(INCLUDE_DIR) \
 					-I $(PF_DIR) \
 					-I $(LIBS_DIR)/MLX42/include/ \
 					-I $(LIBFT_INC_DIR) \
 					-I $(LIBS_DIR)/Lib-Vec/include/ \
 					-I $(LIBS_DIR)/Get-Next-Line/include/ \
 
-PROJECT_HEADERS :=	$(LIBS_DIR)/colors.h \
+PROJECT_HEADERS	:=	$(LIBS_DIR)/colors.h \
 					$(LIBS_DIR)/minirt.h \
 					$(LIBS_DIR)/objects.h \
 
-INC :=				$(LIBS_HEADERS)
+INC				:=	$(LIBS_HEADERS)
 
-SRCS :=				$(shell find $(SRC_DIR) -type f -name "*.c")
+SRCS 			:=	$(shell find $(SRC_DIR) -type f -name "*.c")
 
-OBJS :=				$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+OBJS			:=	$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 #=====================================#
 #========= Command arguments =========#
 #=====================================#
 
-SWITCHES =			-D BONUS=$(BONUS) -D DEBUG=$(DEBUG)
-CFLAGS =			-Wall -Werror -Wextra -g -fsanitize=address
-# TODO: CLEAN UP THIS MAKEFILE
+SWITCHES		:=	-D BONUS=$(BONUS) -D DEBUG=$(DEBUG)
+CFLAGS			:=	-Wall -Werror -Wextra -g -fsanitize=address
 
 # Credits -> https://github.com/codam-coding-college/MLX42
 # TODO: Add NO_DEAD_CODE for linux
-UNAME_S =			 $(shell uname -s)
+UNAME_S			:=	$(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	# -pthread is only required for the bonus, however, since we can't check
 	# wether the bonus is active or not, always use it here.
@@ -186,7 +185,8 @@ $(NAME).a: $(NAME)
 
 test_binary: $(NAME).a
 
-# GET SRC FILES: find src | grep "\.c$" | sed -E 's/$/ \\/'
+# Command to get a formatted list of all the .c files
+# find src | grep "\.c$" | sed -E 's/$/ \\/'
 
 norm:
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"
