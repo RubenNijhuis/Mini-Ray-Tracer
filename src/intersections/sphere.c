@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:36:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/20 17:16:21 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/22 19:04:19 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ static t_intersect	get_sphere_intersection(t_ray *ray, t_sphere *sphere,
 	t_intersect	i;
 	float		distance_from_origin_to_ray;
 
-	distance_from_origin_to_ray
-		= sqrt(sphere->radius * sphere->radius - distance_to_so_sq);
+	distance_from_origin_to_ray = sqrt(sq(sphere->radius) - distance_to_so_sq);
 	i.t = distance_to_closest_point - distance_from_origin_to_ray;
 	if (i.t < 0)
 	{
@@ -67,7 +66,7 @@ t_intersect	intersects_sphere(t_ray *ray, t_shape *shape)
 	distance_to_closest_point = vec3f_dot(relpos, ray->direction);
 	closest_point = ray_at(ray, distance_to_closest_point);
 	distance_to_so_sq = vec3f_len_sq(sphere->base.position - closest_point);
-	if (distance_to_so_sq <= sphere->radius * sphere->radius)
+	if (distance_to_so_sq <= sq(sphere->radius))
 	{
 		return (get_sphere_intersection(ray, sphere,
 				distance_to_so_sq, distance_to_closest_point));

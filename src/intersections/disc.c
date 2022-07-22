@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 12:54:10 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/11 18:06:48 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/22 19:05:01 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_intersect	intersects_disc(t_ray *ray, t_shape *shape)
 	{
 		intersect_point = ray_at(ray, i.t);
 		if (vec3f_len_sq(intersect_point - disc->base.position)
-			> disc->radius * disc->radius)
+			> sq(disc->radius))
 		{
 			i.t = -1.0f;
 		}
