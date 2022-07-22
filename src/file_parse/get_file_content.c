@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/21 17:19:42 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/22 14:16:36 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static size_t	get_amount_lines(int fd)
 	return (amount_lines);
 }
 
-void	create_lines_context(t_line *lines)
+static void	create_lines_context(t_line *lines)
 {
 	size_t	cur_line;
 	char	*trimmed_str;

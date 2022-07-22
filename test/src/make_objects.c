@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/25 22:42:56 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/05 20:31:39 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/22 14:15:28 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,21 @@ void	make_sphere_from_str_test(char *settings, float radius, t_vec3f pos, t_colo
 	cr_expect(colorEq == true, "Expected sphere color to match");
 }
 
+/*
+ Tests
+*/
+void	make_plane_from_str_test(char *settings, t_vec3f pos, t_color col)
+{
+	t_shape	plane_obj;
+	make_sphere(&plane_obj, settings);
+
+	bool colorEq = color_eq(plane_obj.base.color, col);
+	bool posEq = vec3f_eq(pos, plane_obj.base.position);
+	cr_expect(plane_obj.base.obj_type == plane, "Expected object type to be plane");
+	cr_expect(posEq == true, "Expected position to match");
+	cr_expect(colorEq == true, "Expected sphere color to match");
+}
+
 void	make_cylinder_from_str_test(char *settings, t_vec3f pos, t_vec3f rotation, float radius, float height, t_color color)
 {
 	t_shape	obj;
@@ -61,11 +76,13 @@ void	make_cylinder_from_str_test(char *settings, t_vec3f pos, t_vec3f rotation, 
 void	make_cam_from_str_test(char *settings, t_vec3f pos, t_vec3f rotation, float fov)
 {
 	t_camera	cam;
+
 	set_camera(&cam, settings);
-	
+	vec3f_normalize(&rotation);
+
 	cr_expect(cam.position[0] == pos[0], "Expected camera position x to be %f but got %f", pos[0], cam.position[0]);
-	cr_expect(cam.rotation[1] == 1, "Expected camera rotation y to be %f but got %f", rotation[1], cam.rotation[1]);
-	cr_expect(cam.fov == deg_to_rad(70), "Expected camera FOV to be %f, was %f %f", fov, deg_to_rad(cam.fov), cam.fov);
+	cr_expect(cam.rotation[1] == rotation[1], "Expected camera rotation y to be %f but got %f", rotation[1], cam.rotation[1]);
+	cr_expect(cam.fov == deg_to_rad(fov), "Expected camera FOV to be %f, was %f %f", fov, deg_to_rad(cam.fov), cam.fov);
 }
 
 void	make_light_from_str_test(char *settings, t_vec3f pos, float brightness, t_color color)
@@ -82,7 +99,7 @@ void	make_light_from_str_test(char *settings, t_vec3f pos, float brightness, t_c
  Suites
 */
 Test(make_sphere_from_string, passing) {
-	make_sphere_from_str_test("sp  0,0,20   20   255,0,0", 20,  vec3f(0,0,20),  make_color(255,0,0));
+	make_sphere_from_str_test("sp  0,0,20   20   255,0,0", 20, vec3f(0,0,20), make_color(255,0,0));
 	make_sphere_from_str_test("sp  0,50,20  200  255,0,10", 200, vec3f(0,50,20), make_color(255,0,10));
 	make_sphere_from_str_test("sp  0,0,0  0  0,0,0", 0, vec3f(0,0,0), make_color(0,0,0));
 }
@@ -97,8 +114,7 @@ Test(make_light_from_string, passing) {
 	make_light_from_str_test("L  10,10,30  1  155,0,155", vec3f(10,10,30), 1, make_color(155,0,155));
 }
 
-// FT_STRNCMP ISSUES???
-// Test(make_camera_from_string, passing) {
-// 	make_cam_from_str_test("C   -50,0,20         0,1,0      70", vec3f(-50,0,20), vec3f(0,1,0), 70);
-// 	make_cam_from_str_test("C   -10,5,0         1,1,1      20", vec3f(-10,5,0), vec3f(1,1,1), 20);
-// }
+Test(make_camera_from_string, passing) {
+	make_cam_from_str_test("C  -50,0,20  0,1,0      70", vec3f(-50,0,20), vec3f(0,1,0), 70);
+	make_cam_from_str_test("C  -10,5,0  1,1,1      20", vec3f(-10,5,0), vec3f(1,1,1), 20);
+}
