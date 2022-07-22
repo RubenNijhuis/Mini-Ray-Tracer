@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/13 17:05:54 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/13 21:30:24 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/22 18:45:17 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,32 @@ Test(ray_closest_point, passing)
 	ray.direction = vec3f(0, 1, 0);
 	p = vec3f(-1, 5, 3);
 	cr_assert(vec3f_eq(ray_closest_point(&ray, p), vec3f(2, 5, 2)), "wrong ray closest point");
+}
+
+void	print_vec(t_vec3f v)
+{
+	printf("%f, %f, %f\n", v[0], v[1], v[2]);
+}
+
+Test(get_cylinder_normal, passing)
+{
+	t_cylinder	cyl;
+	t_ray		ray;
+	float		t;
+	const float	y = -20.0f;
+
+	ray.direction = vec3f(1, 0, 0);
+	ray.origin = vec3f(-4 + y, 4 + y, 2);
+	cyl.base.position = vec3f(3, 2, 2);
+	cyl.base.rotation = vec3f(1, 1, 0);
+	vec3f_normalize(&cyl.base.rotation);
+
+	t = 8.0f;
+	t_vec3f norm = get_cylinder_normal(&ray, t, &cyl);
+	// print_vec(norm);
+	norm *= 10000.0f;
+	vec3f_round(&norm);
+	norm /= 10000.0f;
+
+	cr_assert(vec3f_eq(norm, vec3f(-0.7071, 0.7071, 0)), "invalid cylinder normal");
 }
