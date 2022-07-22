@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/26 09:55:21 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/08 10:24:23 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/22 17:07:39 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	run_object_checks(t_object_type obj_type, t_line line)
 	uint32_t			amount_checks;
 
 	split_settings = ft_split(line.line, ' ');
+	if (split_settings == NULL)
+		malloc_error();
 	comps = get_object_component_list(obj_type);
 	cur_check = 0;
 	amount_checks = comps.amount_obj_components;

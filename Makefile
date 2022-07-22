@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/08 17:42:32 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/07/22 17:18:41 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ LIBS_DIR :=			libs
 OBJS_DIR := 		objs
 SRC_DIR :=			src
 TEST_DIR :=			test
-NAME :=				 $(BIN_DIR)/$(EXEC_NAME)
+NAME :=				$(BIN_DIR)/$(EXEC_NAME)
+BONUS :=			0
+DEBUG :=			0
 
 # TODO: More header watching
 HEADERS :=			$(wildcard $(INCLUDE_DIR)/*.h)
@@ -88,6 +90,7 @@ OBJS :=				$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 #========= Command arguments =========#
 #=====================================#
 
+SWITCHES =			-D BONUS=$(BONUS) -D DEBUG=$(DEBUG)
 CFLAGS =			-Wall -Werror -Wextra -g -fsanitize=address
 # TODO: CLEAN UP THIS MAKEFILE
 
@@ -119,7 +122,7 @@ endif
 
 $(OBJS_DIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(dir $@)
-	@$(CC) -c $(CFLAGS) $(INC) -o $@ $<
+	@$(CC) -c $(CFLAGS) $(INC) $(SWITCHES) -o $@ $<
 	@echo "🔨 Compiling: $<"
 	
 all: $(NAME)

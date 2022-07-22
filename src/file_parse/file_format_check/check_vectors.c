@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/27 17:11:35 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/20 13:54:31 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/22 17:19:08 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
+
+bool	vec3f_valid(char **str_floats)
+{
+	return (!(ft_atof(str_floats[0]) == 0.0f &&
+			  ft_atof(str_floats[1]) == 0.0f &&
+			  ft_atof(str_floats[2]) == 0.0f));
+}
 
 /**
  * @brief 
@@ -33,8 +41,10 @@ bool	check_position(char *settings, uint32_t line_pos)
 
 	status = true;
 	split_settings = ft_split(settings, ',');
+	if (split_settings == NULL)
+		malloc_error();
 	if (check_floats_formatting(split_settings) == false \
-		&& ft_str_occur(settings, ',') != 2)
+		|| ft_str_occur(settings, ',') != 2)
 	{
 		print_err_msg("position vec", line_pos, format);
 		status = false;
@@ -63,13 +73,16 @@ bool	check_rotation(char *settings, uint32_t line_pos)
 
 	status = true;
 	split_settings = ft_split(settings, ',');
+	if (split_settings == NULL)
+		malloc_error();
 	if (check_floats_formatting(split_settings) == false \
-		&& ft_str_occur(settings, ',') != 2)
+		|| ft_str_occur(settings, ',') != 2)
 	{
 		print_err_msg("rotation vec", line_pos, format);
 		status = false;
 	}
-	if (check_values_range_float(split_settings, -1, 1) == false)
+	if (check_values_range_float(split_settings, -1, 1) == false
+		|| vec3f_valid(split_settings) == false)
 	{
 		print_err_msg("rotation vec", line_pos, out_of_range);
 		status = false;
@@ -99,6 +112,8 @@ bool	check_color(char *settings, uint32_t line_pos)
 
 	status = true;
 	split_settings = ft_split(settings, ',');
+	if (split_settings == NULL)
+		malloc_error();
 	if (check_ints_formatting(split_settings) == false \
 		&& ft_str_occur(settings, ',') != 2)
 	{

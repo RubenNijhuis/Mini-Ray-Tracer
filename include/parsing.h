@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/20 13:39:19 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/22 16:53:53 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef enum s_error_type
 */
 typedef enum s_line_type
 {
-	comment
+	not_comment,
+	comment,
 }	t_line_type;
 
 /**

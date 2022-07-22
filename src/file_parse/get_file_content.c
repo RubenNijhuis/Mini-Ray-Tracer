@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/22 14:16:36 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/22 17:08:45 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include <stdlib.h>	// free
 #include <fcntl.h>	// Open
+#include <stdio.h>
 
 static size_t	get_amount_lines(int fd)
 {
@@ -47,8 +48,11 @@ static void	create_lines_context(t_line *lines)
 		free(lines[cur_line].line);
 		lines[cur_line].line = trimmed_str;
 		ft_repl_chr(lines[cur_line].line, '\t', ' ');
-		if (lines[cur_line].line[0] == '#')
-			lines[cur_line].type = comment;
+		if (BONUS)
+		{
+			if (lines[cur_line].line[0] == '#')
+				lines[cur_line].type = comment;
+		}
 		lines[cur_line].file_line = cur_line + 1;
 		cur_line++;
 	}

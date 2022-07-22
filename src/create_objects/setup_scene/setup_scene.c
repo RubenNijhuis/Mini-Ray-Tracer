@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/01 11:20:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/07 13:30:03 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/22 17:05:25 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "minirt.h"
 #include "libft.h"
 #include "parsing.h"
+#include "ft_printf.h"
+
+#include <stdlib.h>
 
 typedef struct s_create_shape_func
 {
@@ -49,22 +52,29 @@ static void	lookup_shape_creation_func(t_shape *shape, char *name)
  * @param shapes 
  * @param objects 
  */
-static void	convert_strings_to_shapes(t_shape *shapes, t_line *object_strings)
+static void	convert_strings_to_shapes(t_shape *shapes, t_line *lines)
 {
 	uint32_t	amount_objects;
 	size_t		current_line;
 
 	amount_objects = 0;
 	current_line = 0;
-	while (object_strings[current_line].line != NULL)
+	while (lines[current_line].line != NULL)
 	{
-		if (ft_is_object(SCENE_SHAPES, object_strings[current_line].line))
+		if (ft_is_object(SCENE_SHAPES, lines[current_line].line))
 		{
 			lookup_shape_creation_func(&shapes[amount_objects], \
-				object_strings[current_line].line);
+				lines[current_line].line);
 			amount_objects++;
 		}
-		object_strings++;
+		else if (!ft_is_object(SCENE_ELEMENTS, lines[current_line].line)
+			&& lines[current_line].line[0] != '\0')
+		{
+			ft_dprintf(2, "Error: unrecognized object on line %u\n",
+				lines[current_line].file_line);
+			exit(1);
+		}
+		lines++;
 	}
 }
 

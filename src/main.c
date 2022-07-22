@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/06 17:01:08 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/22 17:17:35 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 #include <stdint.h>
 
-// TODO: Remove debug or only run on debug mode
 int32_t	main(int argc, char **argv)
 {
 	t_program_data	pd;
@@ -26,7 +25,10 @@ int32_t	main(int argc, char **argv)
 		exit_error("Usage: minirt [path-to-file]\n");
 	ft_memset(&pd, 0, sizeof(t_program_data));
 	setup_scene(&pd.scene, argv[1]);
-	print_scene_elements(&pd.scene);
+	if (DEBUG)
+	{
+		print_scene_elements(&pd.scene);
+	}
 	init_mlx(&pd);
 	render(&pd);
 	start_mlx(&pd);
