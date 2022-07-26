@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/29 16:20:14 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/05 14:33:34 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/26 17:52:31 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,36 @@ bool	check_height(char *settings, uint32_t line_pos)
 	return (status);
 }
 
+#if BONUS
+
+/**
+ * @brief 
+ * Checks the fov variable of the camera. For bonus, also allows float format.
+ *
+ * @param settings 
+ * @param line_pos 
+ * @return bool
+ */
+bool	check_fov(char *settings, uint32_t line_pos)
+{
+	bool	status;
+
+	status = true;
+	if (is_valid_double_format(settings) == false)
+	{
+		print_err_msg("fov variable", line_pos, format);
+		status = false;
+	}
+	if (ft_atof(settings) >= 180.0f || ft_atof(settings) <= 0.0f)
+	{
+		print_err_msg("fov variable", line_pos, out_of_range);
+		status = false;
+	}
+	return (status);
+}
+
+#else
+
 /**
  * @brief 
  * Checks the fov variable of the camera. Only allows proper integer format
@@ -89,13 +119,15 @@ bool	check_fov(char *settings, uint32_t line_pos)
 		print_err_msg("fov variable", line_pos, format);
 		status = false;
 	}
-	if (ft_atoi(settings) > 180 || ft_atoi(settings) < 0)
+	if (ft_atoi(settings) >= 180 || ft_atoi(settings) <= 0)
 	{
 		print_err_msg("fov variable", line_pos, out_of_range);
 		status = false;
 	}
 	return (status);
 }
+
+#endif
 
 /**
  * @brief
