@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/30 14:08:16 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/19 17:13:50 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/26 17:34:16 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ void	camera_rotation_setup(t_camera *cam)
 
 t_ray	get_camera_ray(uint32_t xpixel, uint32_t ypixel, t_camera *cam)
 {
-	const double	inv_aspect = (double)WIN_HEIGHT / (double)WIN_WIDTH;
+	const double	aspect = (double)WIN_WIDTH / (double)WIN_HEIGHT;
 	t_ray			ray;
 	float			x;
 	float			y;
 
 	ray.origin = cam->position;
-	x = ((2.0f * cam->fov_tan) * ((double)xpixel / (double)WIN_WIDTH))
+	x = aspect * (((2.0f * cam->fov_tan) * ((double)xpixel / (double)WIN_WIDTH))
+			- cam->fov_tan);
+	y = ((2.0f * cam->fov_tan) * ((double)ypixel / (double)WIN_HEIGHT))
 		- cam->fov_tan;
-	y = inv_aspect * (((2.0f * cam->fov_tan)
-				* ((double)ypixel / (double)WIN_HEIGHT)) - cam->fov_tan);
 	ray.direction = cam->pos_x * x + cam->neg_y * y + cam->rotation;
 	vec3f_normalize(&ray.direction);
 	return (ray);
