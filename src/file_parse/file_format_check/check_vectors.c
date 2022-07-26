@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/27 17:11:35 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/22 17:19:08 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/26 16:02:19 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 bool	vec3f_valid(char **str_floats)
 {
-	return (!(ft_atof(str_floats[0]) == 0.0f &&
-			  ft_atof(str_floats[1]) == 0.0f &&
-			  ft_atof(str_floats[2]) == 0.0f));
+	return (!(ft_atof(str_floats[0]) == 0.0f
+			&& ft_atof(str_floats[1]) == 0.0f
+			&& ft_atof(str_floats[2]) == 0.0f));
 }
 
 /**
@@ -68,31 +68,30 @@ bool	check_position(char *settings, uint32_t line_pos)
  */
 bool	check_rotation(char *settings, uint32_t line_pos)
 {
-	char	**split_settings;
+	char	**splt_settings;
 	bool	status;
 
 	status = true;
-	split_settings = ft_split(settings, ',');
-	if (split_settings == NULL)
+	splt_settings = ft_split(settings, ',');
+	if (splt_settings == NULL)
 		malloc_error();
-	if (check_floats_formatting(split_settings) == false \
+	if (!check_floats_formatting(splt_settings)
 		|| ft_str_occur(settings, ',') != 2)
 	{
 		print_err_msg("rotation vec", line_pos, format);
 		status = false;
 	}
-	if (check_values_range_float(split_settings, -1, 1) == false
-		|| vec3f_valid(split_settings) == false)
+	if (!check_range_float(splt_settings, -1, 1) || !vec3f_valid(splt_settings))
 	{
 		print_err_msg("rotation vec", line_pos, out_of_range);
 		status = false;
 	}
-	if (ft_2d_arrlen(split_settings) != 3)
+	if (ft_2d_arrlen(splt_settings) != 3)
 	{
 		print_err_msg("rotation vec", line_pos, amount_values);
 		status = false;
 	}
-	ft_free_2d_array(&split_settings, ft_2d_arrlen(split_settings));
+	ft_free_2d_array(&splt_settings, ft_2d_arrlen(splt_settings));
 	return (status);
 }
 
@@ -120,7 +119,7 @@ bool	check_color(char *settings, uint32_t line_pos)
 		print_err_msg("color vec", line_pos, format);
 		status = false;
 	}
-	if (check_values_range_int(split_settings, 0, 255) == false)
+	if (check_range_int(split_settings, 0, 255) == false)
 	{
 		print_err_msg("color vec", line_pos, out_of_range);
 		status = false;

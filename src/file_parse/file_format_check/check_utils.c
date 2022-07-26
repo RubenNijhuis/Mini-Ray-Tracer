@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/26 12:03:36 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/05 14:41:26 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/26 16:00:11 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	check_ints_formatting(char **items)
 	return (true);
 }
 
-bool	check_values_range_int(char **items, int64_t min, int64_t max)
+bool	check_range_int(char **items, int64_t min, int64_t max)
 {
 	size_t	arr_len;
 	size_t	current_item;
@@ -70,7 +70,7 @@ bool	check_values_range_int(char **items, int64_t min, int64_t max)
 	return (true);
 }
 
-bool	check_values_range_float(char **items, float min, float max)
+bool	check_range_float(char **items, float min, float max)
 {
 	size_t	arr_len;
 	size_t	current_item;
