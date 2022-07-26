@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/26 16:05:54 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/07/26 16:11:20 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,13 @@ OBJS			:=	$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 #=====================================#
 
 SWITCHES		:=	-D BONUS=$(BONUS) -D DEBUG=$(DEBUG) -D N_THREADS=$(THREADS)
-CFLAGS			:=	-Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS			:=	-Wall -Werror -Wextra
+
+ifeq ($(DEBUG), 1)
+	CFLAGS += -g -fsanitize=address
+else
+	CFLAGS += -Ofast -march=native -mtune=native 
+endif
 
 # Credits -> https://github.com/codam-coding-college/MLX42
 # TODO: Add NO_DEAD_CODE for linux
@@ -111,7 +117,7 @@ else ifeq ($(UNAME_S), Darwin)
 		LDFLAGS += -L /usr/local/Cellar/glfw/3.3.7/lib
 		MLX = -lglfw
 	endif
-	NO_DEAD_CODE :=	-O1 -Os -fdata-sections -ffunction-sections -Wl, -dead_strip
+	NO_DEAD_CODE :=	-fdata-sections -ffunction-sections -Wl, -dead_strip
 	MLX += -framework Cocoa -framework OpenGL -framework IOKit
 else
 	$(error OS is not supported(uname -s: $(UNAME_S))!)
