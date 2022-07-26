@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/26 16:15:55 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/07/26 16:20:35 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,12 @@ NAME			:=	$(BIN_DIR)/$(EXEC_NAME)
 
 BONUS			:=	1
 DEBUG			:=	0
-THREADS			:=  4 # TODO: automate
+THREADS			:=	4 # TODO: automate
 
 # TODO: More header watching
 HEADERS			:=	$(wildcard $(INCLUDE_DIR)/*.h)
 
-MLX_DIR			:= 	$(LIBS_DIR)/MLX42
+MLX_DIR			:=	$(LIBS_DIR)/MLX42
 MLX_H 			:=	$(MLX_DIR)/include/MLX42/MLX42.h
 MLX_A 			:=	$(MLX_DIR)/libmlx42.a
 
@@ -132,8 +132,6 @@ $(OBJS_DIR)/%.o: %.c $(HEADERS)
 	@$(CC) -c $(CFLAGS) $(INC) $(SWITCHES) -o $@ $<
 	@echo "🔨 Compiling: $<"
 	
-all: $(NAME)
-
 $(NAME): $(OBJS) $(LIBS) | $(BIN_DIR)
 	@$(CC) $(CFLAGS) $(NO_DEAD_CODE) $^ -o $@ $(LDFLAGS) $(MLX)
 	@echo "✅ Built $(NAME)"
@@ -152,6 +150,8 @@ $(BIN_DIR):
 
 $(PF_OBJ_DIR):
 	@mkdir $@
+
+all: $(NAME)
 
 clean:
 	@rm -rf $(OBJS_DIR)
@@ -178,6 +178,9 @@ re: fclean all
 #=========== Special Rules ===========#
 #=====================================#
 
+# Command to get a formatted list of all the .c files
+# find src | grep "\.c$" | sed -E 's/$/ \\/'
+
 submodules:
 	@git submodule update --init --recursive --remote
 	
@@ -196,9 +199,6 @@ $(NAME).a: $(NAME)
 	@echo "✅ Built test binary $@ \n"
 
 test_binary: $(NAME).a
-
-# Command to get a formatted list of all the .c files
-# find src | grep "\.c$" | sed -E 's/$/ \\/'
 
 norm:
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"
