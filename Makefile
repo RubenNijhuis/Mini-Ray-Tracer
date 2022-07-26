@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/26 16:29:19 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/07/26 16:31:12 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_DIR			:=	src
 TEST_DIR		:=	test
 NAME			:=	$(BIN_DIR)/$(EXEC_NAME)
 
-BONUS			:=	1
+BONUS			:=	0
 DEBUG			:=	0
 THREADS			:=	4 # TODO: automate
 
