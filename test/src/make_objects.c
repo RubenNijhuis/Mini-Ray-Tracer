@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/25 22:42:56 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/22 14:15:28 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/26 16:21:09 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	make_cylinder_from_str_test(char *settings, t_vec3f pos, t_vec3f rotation, 
 	cr_expect(obj.cylinder.radius == radius / 2, "Expected cylinder radius to be %f but got %f", radius, obj.cylinder.radius);
 	cr_expect(obj.cylinder.height == height, "Expected cylinder height to be %f but got %f", height, obj.cylinder.height);
 	cr_expect(obj.base.position[2] == pos[2], "Expected position z to be %f but got %f", pos[2], obj.base.position[2]);
-	cr_expect(obj.base.rotation[2] == rotation[2], "Expected rotation z to be %f but got %f", rotation[2], obj.base.rotation[2]);
+	cr_expect(obj.base.rotation[2] - rotation[2] < __FLT_EPSILON__
+		&& obj.base.rotation[2] - rotation[2] >= -__FLT_EPSILON__, "Expected rotation z to be %f but got %f", rotation[2], obj.base.rotation[2]);
 	cr_expect(color_eq(obj.base.color, color), "Expected colors to match");
 }
 
