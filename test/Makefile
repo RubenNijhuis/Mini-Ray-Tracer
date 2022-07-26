@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/13 21:29:46 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/07/26 16:09:09 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ $(OBJS_DIR)/%.o: %.c $(HEADERS)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBS)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -o $(NAME)
 	@echo "✅ Built $(NAME)"
 

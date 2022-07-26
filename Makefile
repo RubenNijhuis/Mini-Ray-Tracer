@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/26 15:56:44 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/07/26 16:05:54 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,6 +129,7 @@ $(OBJS_DIR)/%.o: %.c $(HEADERS)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBS)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(NO_DEAD_CODE) $^ -o $@ $(LDFLAGS) $(MLX)
 	@echo "✅ Built $(NAME)"
 
@@ -182,6 +183,7 @@ bonus:
 	@$(MAKE) -C -D BONUS=1
 
 $(NAME).a: $(NAME)
+	@mkdir -p $(dir $@)
 	@ar -cr $@ $(OBJS)
 	@echo "✅ Built test binary $@ \n"
 

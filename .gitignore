@@ -10,3 +10,5 @@
 
 # Visual Studio Code
 .vscode/
+/bin
+bin/
