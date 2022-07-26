@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/22 19:35:36 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/07/26 15:56:44 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,10 @@ OBJS_DIR		:= 	objs
 SRC_DIR			:=	src
 TEST_DIR		:=	test
 NAME			:=	$(BIN_DIR)/$(EXEC_NAME)
-BONUS			:=	0
+
+BONUS			:=	1
 DEBUG			:=	0
+THREADS			:=  4 # TODO: automate
 
 # TODO: More header watching
 HEADERS			:=	$(wildcard $(INCLUDE_DIR)/*.h)
@@ -90,7 +92,7 @@ OBJS			:=	$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 #========= Command arguments =========#
 #=====================================#
 
-SWITCHES		:=	-D BONUS=$(BONUS) -D DEBUG=$(DEBUG)
+SWITCHES		:=	-D BONUS=$(BONUS) -D DEBUG=$(DEBUG) -D N_THREADS=$(THREADS)
 CFLAGS			:=	-Wall -Werror -Wextra -g -fsanitize=address
 
 # Credits -> https://github.com/codam-coding-college/MLX42
