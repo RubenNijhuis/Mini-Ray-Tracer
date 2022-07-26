@@ -1,6 +1,7 @@
 # 🌞 Mini Ray Tracer — made with ❤️ and 🧠
 
-<b><i>Discovering 3d graphics using hyper-realistic lighting generation</i></b>
+<b><i>Discovering 3d graphics using hyper-realistic lighting generation</i></b>  
+• Built by [Job van der Zweep](https://github.com/joppiesaus) and [Ruben Nijhuis](https://github.com/rubennijhuis)
 
 <br>
 
@@ -87,12 +88,4 @@ Test the functions of MiniRT using Criterion
 
 ## 📝 — Notes
 [Scratchapixel →](https://www.scratchapixel.com/)  
-[rotation Matrix →](https://en.wikipedia.org/wiki/rotation_matrix)  
-
-<br>
-
-## ☑️ — Todo
-[ ] - Make wayyy more tests  
-[ ] - Program close on [ x ] button click  
-[ ] - Cylinder  
-[ ] - Camera orientation  
+[Ray tracing in a weekend →](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
