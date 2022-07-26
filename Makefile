@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/26 16:11:20 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/07/26 16:15:55 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,8 +134,7 @@ $(OBJS_DIR)/%.o: %.c $(HEADERS)
 	
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBS)
-	@mkdir -p $(dir $@)
+$(NAME): $(OBJS) $(LIBS) | $(BIN_DIR)
 	@$(CC) $(CFLAGS) $(NO_DEAD_CODE) $^ -o $@ $(LDFLAGS) $(MLX)
 	@echo "✅ Built $(NAME)"
 
@@ -147,6 +146,9 @@ $(PF_A): $(PF_OBJ)
 $(PF_OBJ_DIR)/%.o: $(PF_DIR)/%.c $(PF_H) | $(PF_OBJ_DIR)
 	@$(CC) $(CFLAGS) -I$(PF_DIR) -I$(LIBFT_INC_DIR) -c -o $@ $<
 	@echo "🔨 Compiling: $<"
+
+$(BIN_DIR):
+	@mkdir $@
 
 $(PF_OBJ_DIR):
 	@mkdir $@
