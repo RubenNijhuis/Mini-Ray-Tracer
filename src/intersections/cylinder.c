@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/24 17:00:04 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/22 16:43:06 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/22 17:44:36 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_intersect	intersects_cylinder_body(t_ray *initial_ray, t_cylinder *cyl)
 		i.normal = get_plane_normal(initial_ray, (t_plane *)&cyl->base);
 	else
 	{
-		i.normal = get_cylinder_normal(initial_ray, t, cyl);
+		i.normal = get_cylinder_normal(initial_ray, i.t, cyl);
 		if (inside_cyl)
 			i.normal *= -1.0f;
 	}
