@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 23:23:47 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/22 16:53:53 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/26 16:00:11 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ bool		check_ints_formatting(char **items);
 bool		check_floats_formatting(char **items);
 
 // Range checking
-bool		check_values_range_int(char **items, int64_t min, int64_t max);
-bool		check_values_range_float(char **items, float min, float max);
+bool		check_range_int(char **items, int64_t min, int64_t max);
+bool		check_range_float(char **items, float min, float max);
 
 /*
  Utils
