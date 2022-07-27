@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/26 15:51:05 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/27 13:51:51 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 void	init_mlx(t_program_data *pd)
 {
 	pd->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT,
-			"miniRT by rnijhuis & jobvan-d", false);
+			"miniRT by jobvan-d && rnijhuis", false);
 	if (!pd->mlx)
 		exit_error("Error: couldn't start mlx");
 	pd->img = mlx_new_image(pd->mlx, WIN_WIDTH, WIN_HEIGHT);

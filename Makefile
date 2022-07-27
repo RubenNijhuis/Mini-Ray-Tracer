@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/26 16:31:12 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/07/27 13:51:19 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,20 @@ SRC_DIR			:=	src
 TEST_DIR		:=	test
 NAME			:=	$(BIN_DIR)/$(EXEC_NAME)
 
+INPUT_FILE		:=	$(ASSETS_DIR)/mandatory/cyl_test.rt
+
 BONUS			:=	0
 DEBUG			:=	0
-THREADS			:=	4 # TODO: automate
+THREADS			:=	4
 
-# TODO: More header watching
-HEADERS			:=	$(wildcard $(INCLUDE_DIR)/*.h)
+HEADERS			:=	$(INCLUDE_DIR)/bonus.h \
+					$(INCLUDE_DIR)/colors.h \
+					$(INCLUDE_DIR)/minirt.h \
+					$(INCLUDE_DIR)/objects.h \
+					$(INCLUDE_DIR)/parsing.h \
+					$(INCLUDE_DIR)/ray.h \
+					$(INCLUDE_DIR)/threading.h \
+
 
 MLX_DIR			:=	$(LIBS_DIR)/MLX42
 MLX_H 			:=	$(MLX_DIR)/include/MLX42/MLX42.h
@@ -62,8 +70,6 @@ PF_OBJ			=	$(PF_DEPS:$(PF_DIR)/%.c=$(PF_OBJ_DIR)/%.o)
 #============= ft_printf =============#
 #=====================================#
 
-INPUT_FILE		:=	$(ASSETS_DIR)/mandatory/cyl_test.rt
-
 LIBS			:=	$(MLX_A) \
 					$(PF_A) \
 					$(LIBFT_A) \
@@ -84,7 +90,46 @@ PROJECT_HEADERS	:=	$(LIBS_DIR)/colors.h \
 
 INC				:=	$(LIBS_HEADERS)
 
-SRCS 			:=	$(shell find $(SRC_DIR) -type f -name "*.c")
+SRCS 			:=	src/color/color.c \
+					src/color/color_utils.c \
+					src/color/get_ray_color.c \
+					src/color/light_calc.c \
+					src/create_objects/create_obj_from_str.c \
+					src/create_objects/create_utils.c \
+					src/create_objects/get_vec_from_string.c \
+					src/create_objects/setup_scene/setup_objects.c \
+					src/create_objects/setup_scene/setup_scene.c \
+					src/file_parse/file_format_check/check_elements.c \
+					src/file_parse/file_format_check/check_object_settings.c \
+					src/file_parse/file_format_check/check_scene_objects.c \
+					src/file_parse/file_format_check/check_utils.c \
+					src/file_parse/file_format_check/check_vectors.c \
+					src/file_parse/file_format_check/is_file_correctly_formatted.c \
+					src/file_parse/file_format_check/number_format.c \
+					src/file_parse/file_format_check/rt_objstrcmp.c \
+					src/file_parse/get_file_content.c \
+					src/file_parse/utils.c \
+					src/intersections/cylinder.c \
+					src/intersections/cylinder_caps.c \
+					src/intersections/cylinder_normal.c \
+					src/intersections/disc.c \
+					src/intersections/intersection.c \
+					src/intersections/plane.c \
+					src/intersections/sphere.c \
+					src/main.c \
+					src/ray/ray.c \
+					src/render/fov.c \
+					src/render/render.c \
+					src/render/render_block.c \
+					src/render/thread_routines.c \
+					src/render/threads.c \
+					src/setup_rt.c \
+					src/utils/angles.c \
+					src/utils/exit_error.c \
+					src/utils/ft_atof.c \
+					src/utils/math.c \
+					src/utils/print_scene/print_scene.c \
+					src/utils/print_scene/print_shapes.c \
 
 OBJS			:=	$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
