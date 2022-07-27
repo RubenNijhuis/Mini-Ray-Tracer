@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:00 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/27 13:31:12 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/07/27 13:32:10 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "parsing.h"
 
-int32_t	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_program_data	pd;
 
