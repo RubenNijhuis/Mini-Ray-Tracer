@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/28 14:13:33 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/07/28 17:00:55 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ NAME			:=	$(BIN_DIR)/$(EXEC_NAME)
 
 INPUT_FILE		:=	$(ASSETS_DIR)/mandatory/amogus.rt
 
-BONUS			:=	0
+BONUS			:=	1
 DEBUG			:=	0
 THREADS			:=	4
 
@@ -151,7 +151,10 @@ UNAME_S			:=	$(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	# -pthread is only required for the bonus, however, since we can't check
 	# wether the bonus is active or not, always use it here.
-	LDFLAGS += -lm -pthread
+	LDFLAGS += -lm
+	ifeq ($(BONUS), 1)
+		LDFLAGS += -pthread
+	endif
 	MLX = -ldl -lglfw
 else ifeq ($(UNAME_S), Darwin)
 	# TODO: change to ifdef RUBEN_LAPTOP or something like that
