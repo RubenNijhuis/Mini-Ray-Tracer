@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/27 13:51:19 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/07/28 14:13:33 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 #=====================================#
 
 CC				:=	gcc
-EXEC_NAME		:=	minirt
+EXEC_NAME		:=	miniRT
 ASSETS_DIR		:=	assets
 BIN_DIR			:=	bin
 INCLUDE_DIR		:=	include
@@ -25,7 +25,7 @@ SRC_DIR			:=	src
 TEST_DIR		:=	test
 NAME			:=	$(BIN_DIR)/$(EXEC_NAME)
 
-INPUT_FILE		:=	$(ASSETS_DIR)/mandatory/cyl_test.rt
+INPUT_FILE		:=	$(ASSETS_DIR)/mandatory/amogus.rt
 
 BONUS			:=	0
 DEBUG			:=	0
