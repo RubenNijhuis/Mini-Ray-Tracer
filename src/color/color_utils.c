@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/27 13:36:57 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/06/23 10:32:29 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/28 14:14:12 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	color_clamp(t_color *color)
 	{
 		color->g = 1.0f;
 	}
-	if (color->g > 1.0f)
+	if (color->b > 1.0f)
 	{
-		color->g = 1.0f;
+		color->b = 1.0f;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/22 17:08:45 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/28 14:25:04 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 #include <stdlib.h>	// free
 #include <fcntl.h>	// Open
-#include <stdio.h>
 
 static size_t	get_amount_lines(int fd)
 {
@@ -46,6 +45,10 @@ static void	create_lines_context(t_line *lines)
 	{
 		trimmed_str = ft_strtrim(lines[cur_line].line, "\t\n ");
 		free(lines[cur_line].line);
+		if (trimmed_str == NULL)
+		{
+			malloc_error();
+		}
 		lines[cur_line].line = trimmed_str;
 		ft_repl_chr(lines[cur_line].line, '\t', ' ');
 		if (BONUS)
@@ -95,6 +98,8 @@ t_line	*get_file_content(char *file_name)
 	if (close(fd) == -1)
 		exit_perror("Close error");
 	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+		exit_perror("Open error");
 	file_content = get_file_lines(fd, amount_lines_in_file);
 	if (file_content == NULL)
 		malloc_error();
