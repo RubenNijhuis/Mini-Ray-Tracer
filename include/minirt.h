@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/22 16:34:49 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/28 16:53:16 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,7 @@
 #  define MAX_LIGHTS 1
 # endif
 
-# ifndef HEADLESS
-#  define HEADLESS 0
-# endif
-
-// If rendering without window
-# if HEADLESS
-#  define WIN_WIDTH 10
-# else
-#  define WIN_WIDTH 1440
-# endif
+# define WIN_WIDTH (1440)
 
 # define WIN_HEIGHT (1200)
 
@@ -136,9 +127,6 @@ double				ft_atof(const char *str);
 bool				ft_is_object(const char *haystack, const char *needle);
 char				*get_shape_type_string(t_object_type obj_type);
 
-float				deg_to_rad(const float a);
-float				rad_to_deg(const float a);
-
 t_color				get_pixel_color(uint32_t px, uint32_t py, \
 						t_scene *scene);
 void				render_pixel(t_program_data *pd, uint32_t px, \
@@ -148,5 +136,7 @@ void				put_pixel(t_program_data *pd, uint32_t px, \
 
 // Math
 float				sq(const float n);
+float				deg_to_rad(const float a);
+float				rad_to_deg(const float a);
 
 #endif
