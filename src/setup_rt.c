@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/02 11:26:51 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/27 13:51:51 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/28 14:16:50 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,17 @@ void	init_mlx(t_program_data *pd)
 	if (!pd->mlx)
 		exit_error("Error: couldn't start mlx");
 	pd->img = mlx_new_image(pd->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (pd->img == NULL)
+	{
+		malloc_error();
+	}
 	ft_memset(pd->img->pixels, 0,
 		pd->img->width * pd->img->height * sizeof(int));
 	mlx_key_hook(pd->mlx, &key_hook, pd);
-	mlx_image_to_window(pd->mlx, pd->img, 0, 0);
+	if (mlx_image_to_window(pd->mlx, pd->img, 0, 0) == -1)
+	{
+		exit_error("mlx_image_to_window failed");
+	}
 }
 
 /* starts rendering of the window and such */

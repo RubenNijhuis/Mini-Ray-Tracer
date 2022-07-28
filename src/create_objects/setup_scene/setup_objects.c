@@ -20,7 +20,7 @@ void	set_camera(t_camera *cam, char *settings)
 	char		**split_settings;
 
 	split_settings = ft_split(settings, ' ');
-	if (settings == NULL)
+	if (split_settings == NULL)
 		malloc_error();
 	cam->position = get_vec3f_from_string(split_settings[1]);
 	cam->rotation = get_vec3f_from_string(split_settings[2]);
@@ -35,7 +35,7 @@ void	set_ambient_light(t_ambient_light *amb, char *settings)
 	char		**split_settings;
 
 	split_settings = ft_split(settings, ' ');
-	if (settings == NULL)
+	if (split_settings == NULL)
 		malloc_error();
 	amb->range = ft_atof(split_settings[1]);
 	amb->color = get_color_from_string(split_settings[2]);
