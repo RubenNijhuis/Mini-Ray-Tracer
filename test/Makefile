@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/26 16:09:09 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/07/29 17:28:18 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ OBJS_DIR :=		objs
 #============ Input files ============#
 #=====================================#
 
-LIBS :=			../bin/minirt.a \
+LIBS :=			../bin/miniRT.a \
 				../libs/LibFT/libft.a \
 				../libs/Get-Next-Line/get-next-line.a \
 				../libs/Lib-Vec/libvec.a \
@@ -90,7 +90,7 @@ re: fclean all run
 #=========== Special Rules ===========#
 #=====================================#
 
-../bin/minirt.a:
+../bin/miniRT.a:
 	@make test_binary -C ../
 
 run: $(NAME) $(LIBS)
