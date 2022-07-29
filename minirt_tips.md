@@ -2,7 +2,7 @@
 
 This is a list with tips, what I wish I had when I started miniRT. It isn't a great tutorial but maybe it has a few useful links/tips. Don't forget to ask your peers!
 
-If your math isn't great, writing a small raytracer is going to be hard but a lot of fun. Take your time. It's going to be overwhelming in the beginning, but you'll get there. Take a deep breath. Believe me, at some point it stars to make sense(most of it, anyways). One of my favorite projects.
+If your math isn't great, writing a small raytracer is going to be hard but a lot of fun. Take your time. It's going to be overwhelming in the beginning, but you'll get there. Take a deep breath. Believe me, at some point it starts to make sense(most of it, anyways). One of my favorite projects.
 
 Have fun, -jobvan-d
 
@@ -14,15 +14,15 @@ Have fun, -jobvan-d
 ## basics:
 Make sure you at least know some basic linear algebra, you can learn that at [khanacademy.org](https://www.khanacademy.org) for free.
 ALSO maybe watch daniels masterclass(not online yet, but slides are [here](https://github.com/GroteGnoom/codam_presentation/blob/main/vizualizing_math.pdf))
-the dot product, very useful and used a lot. Make sure you also have a gisp of cosine:
+the dot product, very useful and used a lot. Make sure you also have a grasp of cosine:
 - https://www.mathsisfun.com/algebra/vectors-dot-product.html
 - https://www.mathsisfun.com/algebra/vectors-cross-product.html
 
 As for the vectors, do yourself a favor, and use [vector extentions](https://gcc.gnu.org/onlinedocs/gcc/Vector-Extensions.html). this will save A LOT of time.
 
-Also: *don't forget to normalize your vectors*(ray direction, normals, orientation, etc.). Forgetting this can cause a lot of weird bugs, and miniRT is a headache to debug.
+Also: *don't forget to normalize your vectors* (ray direction, normals, orientation, etc.). Forgetting this can cause a lot of weird bugs, and miniRT is a headache to debug.
 
-## sphere interesection:
+## phere interesection:
 We didn't bother doing it with the quadratic formula, rather we did an geometric approach, at the time it was less overwhelming, even though you have to use it later on.
 here the code with explanations:
 https://www.khanacademy.org/computer-programming/c/5311392656179200
@@ -33,7 +33,7 @@ Just go to [wikipedia](https://en.wikipedia.org/wiki/Line%E2%80%93plane_intersec
 
 
 ## lights:
-idk, some scratchapixel article. Basically, on intersect, you draw a ray to every light. If there's something(an intersection) in between, it's in the shadow. Else, it's in light.
+idk, some scratchapixel article. Basically, on intersect, you draw a ray to every light. If there's something (an intersection) in between, it's in the shadow. Else, it's in light.
 That's all. Make sure not to check beyond the distance to the light(we had this bug which was took more than a week to fix).
 useful: http://www.cs.cornell.edu/courses/cs4620/2011fa/lectures/08raytracingWeb.pdf
 
