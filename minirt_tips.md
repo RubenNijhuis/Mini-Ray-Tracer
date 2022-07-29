@@ -18,13 +18,13 @@ the dot product, very useful and used a lot. Make sure you also have a grasp of 
 - https://www.mathsisfun.com/algebra/vectors-dot-product.html
 - https://www.mathsisfun.com/algebra/vectors-cross-product.html
 
-As for the vectors, do yourself a favor, and use [vector extentions](https://gcc.gnu.org/onlinedocs/gcc/Vector-Extensions.html). this will save A LOT of time.
+As for the vectors, do yourself a favor, and use [vector extentions](https://gcc.gnu.org/onlinedocs/gcc/Vector-Extensions.html). This will save A LOT of time.
 
 Also: *don't forget to normalize your vectors* (ray direction, normals, orientation, etc.). Forgetting this can cause a lot of weird bugs, and miniRT is a headache to debug.
 
-## phere interesection:
+## sphere interesection:
 We didn't bother doing it with the quadratic formula, rather we did an geometric approach, at the time it was less overwhelming, even though you have to use it later on.
-here the code with explanations:
+Here the code with explanations:
 https://www.khanacademy.org/computer-programming/c/5311392656179200
 
 
@@ -52,5 +52,5 @@ now just rotate the ray(both position and direction ofcourse), et voila.
 
 as for the caps, they're just planes with a radius.
 
-##### Special thanks:
+#### Special thanks:
 mjoosten, abba, dnoom, sde-rijk, jkoers, lde-la-h
