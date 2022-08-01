@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/28 16:53:16 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/01 18:57:12 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_vec3f				get_vec3f_from_string(char *str);
  Render
 */
 void				render(t_program_data *pd);
-t_ray				get_camera_ray(uint32_t xpixel, uint32_t ypixel, \
+t_ray				get_camera_ray(float xpixel, float ypixel, \
 						t_camera *cam);
 
 /*

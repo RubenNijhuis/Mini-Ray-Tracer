@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:55:24 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/06/17 15:48:16 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/01 19:09:31 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,34 @@
 # include <stdlib.h> // free
 #endif
 
+typedef float	t_vec2f[2];
+
 t_color	get_pixel_color(uint32_t px, uint32_t py, t_scene *scene)
 {
-	t_ray	ray;
-	t_color	color;
+	static const t_vec2f	aa[] = {
+	{0.25f, 0.25f},
+	{0.25f, 0.75f},
+	{0.75f, 0.25f},
+	{0.75f, 0.75f},
+	};
+	t_ray					ray;
+	t_color					color;
+	t_color					temp_col;
+	unsigned int			i;
 
-	ray = get_camera_ray(px, py, &scene->camera);
-	color = get_ray_color(&ray, scene);
-	color_clamp(&color);
+	i = 0;
+	color = make_color(0, 0, 0);
+	while (i < sizeof(aa) / sizeof(t_vec3f))
+	{
+		ray = get_camera_ray((float)px + aa[i][0], (float)py + aa[i][1],
+				&scene->camera);
+		temp_col = get_ray_color(&ray, scene);
+		color_clamp(&temp_col);
+		color_add(&color, &temp_col);
+		i++;
+	}
+	color_multiply_scalar(&color,
+		1.0 / (double)(sizeof(aa) / sizeof(t_vec3f)));
 	return (color);
 }
 

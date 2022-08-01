@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/30 14:08:16 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/26 17:34:16 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/01 18:54:22 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	camera_rotation_setup(t_camera *cam)
 	cam->neg_y = vec3f_cross(cam->rotation, cam->pos_x);
 }
 
-t_ray	get_camera_ray(uint32_t xpixel, uint32_t ypixel, t_camera *cam)
+t_ray	get_camera_ray(float xpixel, float ypixel, t_camera *cam)
 {
 	const double	aspect = (double)WIN_WIDTH / (double)WIN_HEIGHT;
 	t_ray			ray;
