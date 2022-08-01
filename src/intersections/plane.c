@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:44:59 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/20 18:33:29 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/01 13:23:32 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ t_vec3f	get_plane_normal(t_ray *ray, t_plane *plane)
 	return (normal);
 }
 
+// because we already do that angle calculation in the intersect calculation,
+// we can skip that here and reuse that here speed up the normal calculation.
+static t_vec3f	get_plane_normal_fast(t_plane *plane, const float angle)
+{
+	t_vec3f	normal;
+
+	normal = plane->base.rotation;
+	if (angle > 0.0f)
+	{
+		normal = -normal;
+	}
+	return (normal);
+}
+
 t_intersect	intersects_plane(t_ray *ray, t_shape *shape)
 {
 	t_plane		*plane;
@@ -58,5 +72,5 @@ t_intersect	intersects_plane(t_ray *ray, t_shape *shape)
 	{
 		return (no_intersect());
 	}
-	return (init_intersect(t, get_plane_normal(ray, plane)));
+	return (init_intersect(t, get_plane_normal_fast(plane, divisor)));
 }
