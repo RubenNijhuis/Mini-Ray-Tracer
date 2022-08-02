@@ -11,4 +11,4 @@
 [submodule "libs/MLX42"]
 	path = libs/MLX42
 	url = git@github.com:joppiesaus/MLX42.git
-	branch = master
+	branch = minirt
