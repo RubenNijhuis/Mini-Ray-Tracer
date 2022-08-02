@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/25 22:41:11 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/29 17:28:18 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/08/02 13:29:44 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,13 +35,13 @@ OBJS_DIR :=		objs
 #=====================================#
 
 LIBS :=			../bin/miniRT.a \
+				../libs/ft_printf/libftprintf.a \
 				../libs/LibFT/libft.a \
-				../libs/Get-Next-Line/get-next-line.a \
 				../libs/Lib-Vec/libvec.a \
 				../libs/MLX42/libmlx42.a \
 
 LIBS_HEADERS :=	-I ../libs/LibFT/include/ \
-				-I ../libs/Get-Next-Line/include/ \
+				-I ../libs/ft_printf/ \
 				-I ../libs/Lib-Vec/include/ \
 				-I ../libs/MLX42/include/ \
 				$(CRITERION_INC)
