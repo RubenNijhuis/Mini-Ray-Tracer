@@ -3,6 +3,8 @@
 <b><i>Discovering 3d graphics using hyper-realistic lighting generation</i></b>  
 • Built by [Job van der Zweep](https://github.com/joppiesaus) and [Ruben Nijhuis](https://github.com/rubennijhuis)
 
+[![CI compile & run test](https://github.com/RubenNijhuis/Mini-Ray-Tracer/actions/workflows/c_compile.yml/badge.svg)](https://github.com/RubenNijhuis/Mini-Ray-Tracer/actions/workflows/c_compile.yml)
+
 <br>
 
 <img src="assets/images/halllway.png" alt="24 balls in a hallway with multicoloured lights and color transitions">
