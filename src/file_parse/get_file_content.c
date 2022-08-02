@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:44:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/28 17:59:42 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/02 12:12:36 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@
 static size_t	get_amount_lines(int fd)
 {
 	size_t	amount_lines;
+	ssize_t	status;
 	char	*new_line;
 
 	amount_lines = 0;
 	while (1)
 	{
-		new_line = get_next_line(fd);
-		if (new_line == NULL)
+		new_line = get_next_line(fd, &status);
+		if (status == -1)
+			exit_perror("get_next_line");
+		else if (new_line == NULL)
 			break ;
 		free(new_line);
 		amount_lines++;
@@ -69,6 +72,7 @@ static t_line	*get_file_lines(int fd, uint32_t amount_lines_in_file)
 {
 	t_line	*total_file;
 	size_t	current_line;
+	ssize_t	status;
 
 	current_line = 0;
 	total_file = ft_calloc(amount_lines_in_file + 1, sizeof(t_line));
@@ -76,8 +80,10 @@ static t_line	*get_file_lines(int fd, uint32_t amount_lines_in_file)
 		malloc_error();
 	while (current_line < amount_lines_in_file)
 	{
-		total_file[current_line].line = get_next_line(fd);
-		if (total_file[current_line].line == NULL)
+		total_file[current_line].line = get_next_line(fd, &status);
+		if (status == -1)
+			exit_perror("get_next_line");
+		else if (total_file[current_line].line == NULL)
 			exit_perror("Get Next Line had an issue returning a file line");
 		current_line++;
 	}

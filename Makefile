@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/07/28 17:00:55 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/08/02 12:19:45 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,6 @@ LIBS			:=	$(MLX_A) \
 					$(PF_A) \
 					$(LIBFT_A) \
 					$(LIBS_DIR)/Lib-Vec/libvec.a \
-					$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
 
 
 LIBS_HEADERS	:=	-I $(INCLUDE_DIR) \
@@ -82,7 +81,6 @@ LIBS_HEADERS	:=	-I $(INCLUDE_DIR) \
 					-I $(LIBS_DIR)/MLX42/include/ \
 					-I $(LIBFT_INC_DIR) \
 					-I $(LIBS_DIR)/Lib-Vec/include/ \
-					-I $(LIBS_DIR)/Get-Next-Line/include/ \
 
 PROJECT_HEADERS	:=	$(LIBS_DIR)/colors.h \
 					$(LIBS_DIR)/minirt.h \
@@ -90,46 +88,48 @@ PROJECT_HEADERS	:=	$(LIBS_DIR)/colors.h \
 
 INC				:=	$(LIBS_HEADERS)
 
-SRCS 			:=	src/color/color.c \
-					src/color/color_utils.c \
-					src/color/get_ray_color.c \
-					src/color/light_calc.c \
-					src/create_objects/create_obj_from_str.c \
-					src/create_objects/create_utils.c \
-					src/create_objects/get_vec_from_string.c \
-					src/create_objects/setup_scene/setup_objects.c \
-					src/create_objects/setup_scene/setup_scene.c \
-					src/file_parse/file_format_check/check_elements.c \
-					src/file_parse/file_format_check/check_object_settings.c \
-					src/file_parse/file_format_check/check_scene_objects.c \
-					src/file_parse/file_format_check/check_utils.c \
-					src/file_parse/file_format_check/check_vectors.c \
-					src/file_parse/file_format_check/is_file_correctly_formatted.c \
-					src/file_parse/file_format_check/number_format.c \
-					src/file_parse/file_format_check/rt_objstrcmp.c \
-					src/file_parse/get_file_content.c \
-					src/file_parse/utils.c \
-					src/intersections/cylinder.c \
-					src/intersections/cylinder_caps.c \
-					src/intersections/cylinder_normal.c \
+SRCS 			:=	src/intersections/sphere.c \
 					src/intersections/disc.c \
 					src/intersections/intersection.c \
 					src/intersections/plane.c \
-					src/intersections/sphere.c \
-					src/main.c \
+					src/intersections/cylinder_normal.c \
+					src/intersections/cylinder.c \
+					src/intersections/cylinder_caps.c \
+					src/gnl/get_next_line_utils.c \
+					src/gnl/get_next_line.c \
+					src/file_parse/utils.c \
+					src/file_parse/get_file_content.c \
+					src/file_parse/file_format_check/check_scene_objects.c \
+					src/file_parse/file_format_check/check_elements.c \
+					src/file_parse/file_format_check/is_file_correctly_formatted.c \
+					src/file_parse/file_format_check/check_vectors.c \
+					src/file_parse/file_format_check/check_utils.c \
+					src/file_parse/file_format_check/number_format.c \
+					src/file_parse/file_format_check/check_object_settings.c \
+					src/file_parse/file_format_check/rt_objstrcmp.c \
 					src/ray/ray.c \
 					src/render/fov.c \
-					src/render/render.c \
-					src/render/render_block.c \
 					src/render/thread_routines.c \
+					src/render/render_block.c \
+					src/render/render.c \
 					src/render/threads.c \
-					src/setup_rt.c \
-					src/utils/angles.c \
 					src/utils/exit_error.c \
 					src/utils/ft_atof.c \
+					src/utils/angles.c \
 					src/utils/math.c \
-					src/utils/print_scene/print_scene.c \
 					src/utils/print_scene/print_shapes.c \
+					src/utils/print_scene/print_scene.c \
+					src/color/get_ray_color.c \
+					src/color/color.c \
+					src/color/color_utils.c \
+					src/color/light_calc.c \
+					src/create_objects/get_vec_from_string.c \
+					src/create_objects/create_obj_from_str.c \
+					src/create_objects/create_utils.c \
+					src/create_objects/setup_scene/setup_objects.c \
+					src/create_objects/setup_scene/setup_scene.c \
+					src/setup_rt.c \
+					src/main.c \
 
 OBJS			:=	$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
@@ -211,7 +211,6 @@ clean:
 fclean: clean
 	@rm -rf $(PF_OBJ_DIR)
 	@rm -f $(PF_A)
-	@$(MAKE) fclean -C $(LIBS_DIR)/Get-Next-Line
 	@$(MAKE) fclean -C $(LIBS_DIR)/Lib-Vec
 	@$(MAKE) fclean -C $(LIBS_DIR)/LibFT
 	@$(MAKE) fclean -C $(LIBS_DIR)/MLX42
@@ -256,10 +255,6 @@ norm:
 	@-norminette $(INCLUDE_DIR)
 	@-norminette $(SRC_DIR)
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"
-	
-	@echo
-	@$(MAKE) norm -C $(LIBS_DIR)/Get-Next-Line
-	@echo
 
 	@echo "\033[92m========= ft_printf norm ========\033[0m"
 	@norminette      $(LIBS_DIR)/ft_printf
@@ -279,9 +274,6 @@ $(MLX_A): $(MLX_H)
 
 $(LIBFT_A): $(LIBFT_H)
 	@$(MAKE) -C $(LIBS_DIR)/LibFT
-
-$(LIBS_DIR)/Get-Next-Line/get-next-line.a:
-	@$(MAKE) -C $(LIBS_DIR)/Get-Next-Line
 
 $(LIBS_DIR)/Lib-Vec/libvec.a: $(LIBS_DIR)/Lib-Vec/include/libvec.h
 	@$(MAKE) -C $(LIBS_DIR)/Lib-Vec
