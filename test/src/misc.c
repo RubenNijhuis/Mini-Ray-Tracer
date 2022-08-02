@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/13 17:05:54 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/07/22 18:45:17 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/02 13:30:58 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ Test(ray_closest_point, passing)
 	cr_assert(vec3f_eq(ray_closest_point(&ray, p), vec3f(2, 5, 2)), "wrong ray closest point");
 }
 
-void	print_vec(t_vec3f v)
-{
-	printf("%f, %f, %f\n", v[0], v[1], v[2]);
-}
+// void	print_vec(t_vec3f v)
+// {
+// 	printf("%f, %f, %f\n", v[0], v[1], v[2]);
+// }
 
 Test(get_cylinder_normal, passing)
 {
