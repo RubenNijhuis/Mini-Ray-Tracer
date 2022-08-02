@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/08/02 12:19:45 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/08/02 12:34:09 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ INPUT_FILE		:=	$(ASSETS_DIR)/mandatory/amogus.rt
 
 BONUS			:=	1
 DEBUG			:=	0
-THREADS			:=	4
+# amount of threads to use for multithread rendering when bonus is on.
+# set to 0 for auto detection.
+THREADS			:=	0
 
 HEADERS			:=	$(INCLUDE_DIR)/bonus.h \
 					$(INCLUDE_DIR)/colors.h \
@@ -155,6 +157,10 @@ ifeq ($(UNAME_S), Linux)
 	ifeq ($(BONUS), 1)
 		LDFLAGS += -pthread
 	endif
+
+	ifeq ($(THREADS), 0)
+		THREADS = $(shell nproc --all)
+	endif
 	MLX = -ldl -lglfw
 else ifeq ($(UNAME_S), Darwin)
 	# TODO: change to ifdef RUBEN_LAPTOP or something like that
@@ -167,7 +173,9 @@ else ifeq ($(UNAME_S), Darwin)
 	NO_DEAD_CODE :=	-fdata-sections -ffunction-sections -Wl, -dead_strip
 	MLX += -framework Cocoa -framework OpenGL -framework IOKit
 
-	THREADS = $(shell sysctl -n hw.logicalcpu)
+	ifeq ($(THREADS), 0)
+		THREADS = $(shell sysctl -n hw.logicalcpu)
+	endif
 else
 	$(error OS is not supported(uname -s: $(UNAME_S))!)
 endif
