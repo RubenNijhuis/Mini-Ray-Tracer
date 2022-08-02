@@ -1,0 +1,25 @@
+name: C compile check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: download submodules
+      run: git submodule update --init --quiet
+    - name: download MLX42 deps
+      run: sudo apt install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev -y
+    - name: make
+      run: make
+    - name: download Criterion testing deps
+      run: sudo install -y libcriterion-dev
+    - name: make test
+      run: make test
