@@ -1,4 +1,4 @@
-name: C compile check
+name: compile & run test
 
 on:
   push:
@@ -9,17 +9,17 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v3
     - name: download submodules
       run: git submodule update --init --quiet
     - name: download MLX42 deps
-      run: sudo apt-get install --quiet -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
+      run: sudo apt-get -qq install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
     - name: make
       run: make
     - name: download Criterion testing deps
-      run: sudo apt-get install --quiet -y libcriterion-dev
+      run: sudo apt-get -qq install -y libcriterion-dev
     - name: make test
       run: make test
