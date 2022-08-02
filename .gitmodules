@@ -1,14 +1,14 @@
 [submodule "libs/LibFT"]
 	path = libs/LibFT
-	url = git@github.com:RubenNijhuis/LibFT
+	url = https://github.com/RubenNijhuis/LibFT
 	branch = main
 
 [submodule "libs/Lib-Vec"]
 	path = libs/Lib-Vec
-	url = git@github.com:RubenNijhuis/Lib-Vec.git
+	url = https://github.com/RubenNijhuis/Lib-Vec.git
 	branch = main
 
 [submodule "libs/MLX42"]
 	path = libs/MLX42
-	url = git@github.com:joppiesaus/MLX42.git
+	url = https://github.com/joppiesaus/MLX42.git
 	branch = minirt
