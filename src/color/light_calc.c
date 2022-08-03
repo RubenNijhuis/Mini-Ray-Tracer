@@ -6,23 +6,14 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/08/01 19:18:26 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/03 20:09:58 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "objects.h"
 #include "minirt.h"
+#include "shading.h"
 
 #include <stddef.h>
-
-void	ambient_mixin(t_color *col, t_scene *scene)
-{
-	t_color	amb;
-
-	amb = scene->amb_light.color;
-	color_multiply_scalar(&amb, scene->amb_light.range);
-	color_multiply(col, &amb);
-}
 
 /**
  * @brief 
@@ -53,15 +44,6 @@ bool	scene_intersects(t_scene *scene, t_ray *ray, float max_dist_sq)
 	return (false);
 }
 
-typedef struct s_light_data
-{
-	t_light	*light;
-	t_scene	*scene;
-	t_shape	*shape;
-	t_vec3f	point;
-	t_vec3f	normal;
-}	t_light_data;
-
 /**
  * @brief 
  * Add the color of a light to a point. Checks if the ray from point to light
@@ -79,7 +61,6 @@ t_color	get_light(t_light_data *lighting)
 	t_ray	ray;
 	t_color	color;
 	float	max_dist_sq;
-	float	intensity;
 
 	ray.direction = lighting->light->position - lighting->point;
 	max_dist_sq = vec3f_len_sq(ray.direction);
@@ -87,16 +68,12 @@ t_color	get_light(t_light_data *lighting)
 	ray.origin = lighting->point + (ray.direction * 0.0001f)
 		+ (lighting->normal * 0.0002f);
 	if (scene_intersects(lighting->scene, &ray, max_dist_sq))
+	{
 		color = make_color(0, 0, 0);
+	}
 	else
 	{
-		color = lighting->shape->base.color;
-		color_multiply_scalar(&color, lighting->light->brightness);
-		intensity = vec3f_dot(ray.direction, lighting->normal);
-		if (intensity < 0.00001f)
-			intensity = 0;
-		color_multiply_scalar(&color, intensity);
-		color_multiply(&color, &lighting->light->color);
+		shade(&color, lighting, &ray);
 	}
 	return (color);
 }

@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/04/24 20:14:42 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/08/02 12:34:09 by jobvan-d      ########   odam.nl          #
+#    Updated: 2022/08/03 20:01:11 by jobvan-d      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,13 +33,7 @@ DEBUG			:=	0
 # set to 0 for auto detection.
 THREADS			:=	0
 
-HEADERS			:=	$(INCLUDE_DIR)/bonus.h \
-					$(INCLUDE_DIR)/colors.h \
-					$(INCLUDE_DIR)/minirt.h \
-					$(INCLUDE_DIR)/objects.h \
-					$(INCLUDE_DIR)/parsing.h \
-					$(INCLUDE_DIR)/ray.h \
-					$(INCLUDE_DIR)/threading.h \
+HEADERS			:=	$(wildcard $(INCLUDE_DIR)/*.h)
 
 
 MLX_DIR			:=	$(LIBS_DIR)/MLX42
@@ -90,48 +84,7 @@ PROJECT_HEADERS	:=	$(LIBS_DIR)/colors.h \
 
 INC				:=	$(LIBS_HEADERS)
 
-SRCS 			:=	src/intersections/sphere.c \
-					src/intersections/disc.c \
-					src/intersections/intersection.c \
-					src/intersections/plane.c \
-					src/intersections/cylinder_normal.c \
-					src/intersections/cylinder.c \
-					src/intersections/cylinder_caps.c \
-					src/gnl/get_next_line_utils.c \
-					src/gnl/get_next_line.c \
-					src/file_parse/utils.c \
-					src/file_parse/get_file_content.c \
-					src/file_parse/file_format_check/check_scene_objects.c \
-					src/file_parse/file_format_check/check_elements.c \
-					src/file_parse/file_format_check/is_file_correctly_formatted.c \
-					src/file_parse/file_format_check/check_vectors.c \
-					src/file_parse/file_format_check/check_utils.c \
-					src/file_parse/file_format_check/number_format.c \
-					src/file_parse/file_format_check/check_object_settings.c \
-					src/file_parse/file_format_check/rt_objstrcmp.c \
-					src/ray/ray.c \
-					src/render/fov.c \
-					src/render/thread_routines.c \
-					src/render/render_block.c \
-					src/render/render.c \
-					src/render/threads.c \
-					src/utils/exit_error.c \
-					src/utils/ft_atof.c \
-					src/utils/angles.c \
-					src/utils/math.c \
-					src/utils/print_scene/print_shapes.c \
-					src/utils/print_scene/print_scene.c \
-					src/color/get_ray_color.c \
-					src/color/color.c \
-					src/color/color_utils.c \
-					src/color/light_calc.c \
-					src/create_objects/get_vec_from_string.c \
-					src/create_objects/create_obj_from_str.c \
-					src/create_objects/create_utils.c \
-					src/create_objects/setup_scene/setup_objects.c \
-					src/create_objects/setup_scene/setup_scene.c \
-					src/setup_rt.c \
-					src/main.c \
+SRCS 			:=	$(shell find $(SRC_DIR) -type f -name "*.c")
 
 OBJS			:=	$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
