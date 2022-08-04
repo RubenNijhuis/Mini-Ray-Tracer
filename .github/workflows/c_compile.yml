@@ -15,6 +15,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: download submodules
       run: git submodule update --init --quiet
+    - name: apt-get update
+      run: sudo apt-get -qq update
     - name: download MLX42 deps
       run: sudo apt-get -qq install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
     - name: make
