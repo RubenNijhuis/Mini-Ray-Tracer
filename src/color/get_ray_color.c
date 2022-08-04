@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/08/04 16:08:04 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/04 17:07:21 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,28 @@ static t_color	calc_color(t_scene *scene, t_shape *shape, t_ray *ray,
 */
 t_color	get_ray_color(t_ray *ray, t_scene *scene)
 {
-	size_t		current_shape;
-	t_shape		*cur_shape;
+	int64_t		closest_index;
 	t_intersect	cur_i;
 	t_intersect	closest_i;
 	t_color		color;
+	uint32_t	i;
 
-	current_shape = 0;
+	i = 0;
+	closest_index = -1;
 	color = get_default_color(scene);
-	closest_i.normal = vec3f(0, 0, 0);
 	closest_i.t = INFINITY;
-	while (current_shape < scene->amount_shapes)
+	while (i < scene->amount_shapes)
 	{
-		cur_shape = &scene->shapes[current_shape];
-		cur_i = (lookup_intersect_function(cur_shape))(ray, cur_shape);
-		if (!update_closest_hit(&closest_i, &cur_i))
-		{
-			current_shape++;
-			continue ;
-		}
-		color = calc_color(scene, cur_shape, ray, &cur_i);
-		current_shape++;
+		cur_i = (lookup_intersect_function(&scene->shapes[i]))
+			(ray, &scene->shapes[i]);
+		if (update_closest_hit(&closest_i, &cur_i))
+			closest_index = i;
+		i++;
+	}
+	if (closest_index > -1)
+	{
+		color = calc_color(scene, &scene->shapes[closest_index],
+				ray, &closest_i);
 	}
 	return (color);
 }
