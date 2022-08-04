@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/08/04 16:12:34 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/04 16:25:45 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,9 @@ t_color	get_light(t_light_data *lighting)
  */
 void	lights_mixin(t_color *color, t_light_data *light_data)
 {
-	t_color		light_cols;
 	t_color		cur_col;
 	uint32_t	i;
 
-	light_cols = make_color(0, 0, 0);
 	i = 0;
 	while (i < light_data->scene->amount_lights)
 	{
