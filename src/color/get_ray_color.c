@@ -6,13 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/25 18:49:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/12 15:45:16 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/04 16:08:04 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libvec.h"
 #include "ray.h"
 #include "minirt.h"
+#include "shading.h"
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -35,13 +36,17 @@ static bool	update_closest_hit(t_intersect *closest, t_intersect *cur)
 static t_color	calc_color(t_scene *scene, t_shape *shape, t_ray *ray,
 	t_intersect *i)
 {
-	t_color	color;
-	t_color	temp;
+	t_color			color;
+	t_light_data	light_data;
 
 	color = shape->base.color;
+	light_data.scene = scene;
+	light_data.shape = shape;
+	light_data.normal = i->normal;
+	light_data.orig_ray = *ray;
+	light_data.point = ray_at(ray, i->t);
 	ambient_mixin(&color, scene);
-	temp = lights_mixin(scene, ray_at(ray, i->t), shape, i->normal);
-	color_add(&color, &temp);
+	lights_mixin(&color, &light_data);
 	return (color);
 }
 

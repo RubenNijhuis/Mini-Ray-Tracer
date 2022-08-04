@@ -6,7 +6,7 @@
 /*   By: jobvan-d <jobvan-d@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/02 15:13:07 by jobvan-d      #+#    #+#                 */
-/*   Updated: 2022/08/03 20:09:58 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/04 16:12:34 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,31 +82,22 @@ t_color	get_light(t_light_data *lighting)
  * @brief 
  * Goes through the lights array to calculate 
  * the color value of a pixel
- * @param scene 
- * @param p 
- * @param shape 
- * @param normal 
- * @return t_color 
+ * @param color
+ * @param light_data
  */
-t_color	lights_mixin(t_scene *scene, t_vec3f p, t_shape *shape, t_vec3f normal)
+void	lights_mixin(t_color *color, t_light_data *light_data)
 {
-	t_color			light_cols;
-	t_color			cur_col;
-	size_t			i;
-	t_light_data	lighting;
+	t_color		light_cols;
+	t_color		cur_col;
+	uint32_t	i;
 
 	light_cols = make_color(0, 0, 0);
 	i = 0;
-	lighting.scene = scene;
-	lighting.shape = shape;
-	lighting.normal = normal;
-	lighting.point = p;
-	while (i < scene->amount_lights)
+	while (i < light_data->scene->amount_lights)
 	{
-		lighting.light = &scene->lights[i];
-		cur_col = get_light(&lighting);
-		color_add(&light_cols, &cur_col);
+		light_data->light = &light_data->scene->lights[i];
+		cur_col = get_light(light_data);
+		color_add(color, &cur_col);
 		i++;
 	}
-	return (light_cols);
 }

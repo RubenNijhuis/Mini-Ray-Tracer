@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/13 16:38:43 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/07/28 16:53:16 by jobvan-d      ########   odam.nl         */
+/*   Updated: 2022/08/04 16:09:32 by jobvan-d      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,6 @@ void				color_clamp(t_color *color);
 uint32_t			col_to_hex(const t_color col);
 void				render_pixel_color(uint32_t x, uint32_t y, \
 						t_color color, t_program_data *pd);
-void				ambient_mixin(t_color *col, t_scene *scene);
-t_color				lights_mixin(t_scene *scene, t_vec3f p, \
-						t_shape *shape, t_vec3f normal);
 
 /* 
  Utils
