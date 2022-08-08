@@ -16,7 +16,7 @@
 ## 🏃‍♀️ —  Quick Start
 It's very important to clone recursively as this project contains submodules!
 ```sh
-$ git clone --recursive git@github.com:RubenNijhuis/Mini-Ray-Tracer.git
+$ git clone --recursive https://github.com/RubenNijhuis/Mini-Ray-Tracer.git
 $ make run
 ```
 
@@ -27,19 +27,12 @@ sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
 
 <br>
 
-## 🏗 — Project structure
-```
-Mini-Ray-Tracer -/
-  - 🖼 assets -/    # All types of assets, output img
-  - 📦 bin -/       # Mini-Ray-Tracer output
-  - 👀 include -/   # The .h files of the project
-  - 📚 libs -/      # Our custom and vendor libraries
-  - ⛲️ src -/       # Source files
-  - 🧪 test -/      # Testing directory
-  - .gitmodules     # Describes what submodules are installed
-  - Makefile        # Compiling && linking magic happens here
-  ...
-```
+## Features
+- Phong shading
+- Sphere, cylinder, plane and disc geometries
+- Camera & object rotations
+- Multi & colored spot light support
+- Multithreaded rendering with squares to see progress
 
 <br>
 
@@ -60,6 +53,22 @@ Run the program with a default file test from the assets folder
 $ make submodules
 Pulls the most recent versions of the submodules 
 !! BEWARE !! this could import breaking changes
+```
+
+<br>
+
+## 🏗 — Project structure
+```
+Mini-Ray-Tracer -/
+  - 🖼 assets -/    # All types of assets, output img
+  - 📦 bin -/       # Mini-Ray-Tracer output
+  - 👀 include -/   # The .h files of the project
+  - 📚 libs -/      # Our custom and vendor libraries
+  - ⛲️ src -/       # Source files
+  - 🧪 test -/      # Testing directory
+  - .gitmodules     # Describes what submodules are installed
+  - Makefile        # Compiling && linking magic happens here
+  ...
 ```
 
 <br>
