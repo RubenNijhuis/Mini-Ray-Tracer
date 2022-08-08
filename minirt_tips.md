@@ -7,8 +7,8 @@ If your math isn't great, writing a small raytracer is going to be hard but a lo
 Have fun, -jobvan-d
 
 ## great general resources:
-- https://raytracing.github.io/books/RayTracingInOneWeekend.html
-- https://www.scratchapixel.com/
+- [Scratchapixel.com](https://www.scratchapixel.com/)  
+- [Ray tracing in a weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
 
 
 ## basics:
