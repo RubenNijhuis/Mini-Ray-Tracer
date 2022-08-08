@@ -34,7 +34,7 @@ Just go to [wikipedia](https://en.wikipedia.org/wiki/Line%E2%80%93plane_intersec
 
 ## lights:
 idk, some scratchapixel article. Basically, on intersect, you draw a ray to every light. If there's something (an intersection) in between, it's in the shadow. Else, it's in light.
-That's all. Make sure not to check beyond the distance to the light(we had this bug which was took more than a week to fix).
+That's all. Make sure _not_ to check beyond the distance to the light(we had this bug which was took more than a week to fix), and to start a little bit off the surface, otherwise the light might intersect with the originating object itself.
 useful: http://www.cs.cornell.edu/courses/cs4620/2011fa/lectures/08raytracingWeb.pdf
 
 As for colors, I recommend using a float/double RGB vector, with `(0.0, 0.0, 0.0)` being black and `(1.0, 1.0, 1.0)` being white.
@@ -47,10 +47,10 @@ We ended up using rodriguez rotation(cuz matrices 2hard4me). An outstanding tuto
 
 Instead of rotating the cylinder, we rotate the ray, which is defacto the same thing.
 We get the angle between the default orientation(i.e. 0,1,0) and the actual orientation.
-simply do a cross product(the right hand rule) with these vectors and you've got the axis. (DON'T FORGET TO NORMALIZE!)
-now just rotate the ray(both position and direction ofcourse), et voila.
+Simply do a cross product(the right hand rule) with these vectors and you've got the axis. (DON'T FORGET TO NORMALIZE!)
+Now just rotate the ray(both position and direction ofcourse), et voila.
 
-as for the caps, they're just planes with a radius.
+As for the caps, they're just planes with a radius.
 
 #### Special thanks:
 mjoosten, abba, dnoom, sde-rijk, jkoers, lde-la-h
