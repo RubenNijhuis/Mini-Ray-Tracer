@@ -98,5 +98,4 @@ Test the functions of MiniRT using Criterion
 <br>
 
 ## 📝 — Notes
-[Scratchapixel →](https://www.scratchapixel.com/)  
-[Ray tracing in a weekend →](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
+[Our tips to write your own raytracer →](https://github.com/RubenNijhuis/Mini-Ray-Tracer/blob/main/minirt_tips.md)
